@@ -1,0 +1,13 @@
+[text] 공식 ONNX 다운로드: https://hailo-model-zoo.s3.eu-west-2.amazonaws.com/ZeroShotClassification/clip/clip_vit_base_patch16_224/text_encoder/pretrained/2024-12-04/clip_text_encoder_vitb_16_sim.zip
+[text] ONNX 입력: [{'name': 'onnx::Add_150', 'elem_type': 1, 'shape': ['batch_size', 77, 512]}] 
+[text] 시작: {'name': 'Add_1', 'found': True, 'op': 'Add', 'inputs': ['onnx::Add_150', 'positional_embedding'], 'outputs': ['onnx::Transpose_151'], 'inputs_const': [False, True], 'input_producers': ['graph_input/initializer', 'graph_input/initializer']} 
+[text] 끝: {'name': 'Add_1515', 'found': True, 'op': 'Add', 'inputs': ['onnx::Add_1712', 'ln_final.bias'], 'outputs': ['onnx::Cast_1713'], 'inputs_const': [False, True], 'input_producers': ['Mul', 'graph_input/initializer']} 
+[text] 끝 뒤 연산: []
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[text] numpy 후처리 vs open_clip encode_text: 최소 코사인 1.000000
+[text] Hailo 입력 판정: {'onnx_input': 'float 77x512', 'end_vs_open_clip_min_cos_by_candidate': {'tok': 0.3078518509864807, 'tok_plus_pos': 0.2878759801387787}, 'choice': 'tok'}
+!! Hailo 입력 형식을 open_clip 과 맞추지 못했습니다. logs/dfc/text_prep.json 확인
+[text] 저장: /mnt/d/halio_data/hailo/text/prep.npz (캘리브 946개, 확인 500개). 검증 실패
+✘ 텍스트 준비 실패
+rc=1

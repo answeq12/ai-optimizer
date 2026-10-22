@@ -1,0 +1,109 @@
+# 인수인계 — halio project (2026-10-06 19:35 KST 기준)
+
+다른 Claude 세션이 이어받기 위한 문서. 프로젝트 개요(개정 2026-09-21)와 `README.md`, `docs/PROTOCOL.md`를 먼저 읽을 것.
+진행 상황이 바뀌면 이 파일 맨 아래 "갱신 기록"에 한 줄씩 추가한다.
+
+## 0. 환경 요약
+
+- PC00 데스크톱, i9-14900KF (AVX2, AVX-VNNI), RAM 23.5GB(WSL), GPU는 DFC에서 잡히지 않음(`tf_gpus: []`) → DFC도 CPU로 돎
+- 프로젝트 폴더: `C:\Users\PC00\Desktop\dongchan\halio project` (WSL: `/mnt/c/Users/PC00/Desktop/dongchan/halio project`)
+- 큰 파일(데이터·모델·HEF): `D:\halio_data` (= `/mnt/d/halio_data`). **Cowork 셸(device_bash)에서는 D 드라이브가 안 보인다**
+- 파이썬 환경: 파일럿 `~/venvs/halio` (torch 2.14.1+cpu, onnx 1.23.1, ORT 1.23.2, numpy 2.2.6, open_clip 3.3.0) / DFC `~/venvs/hailo` (DFC 5.4.0, TF 2.19.1, numpy 1.26.4, onnx 1.17, ORT 1.18). 둘을 섞지 않는다
+- **Cowork 셸(device_bash)은 WSL이 아니다.** 파일 읽기·쓰기만 되고 실험 실행은 안 된다 → 아래 작업 대기소로 실행한다
+
+## 1. 실험 실행 방법: 작업 대기소
+
+- 사용자가 `0_JOB_RUNNER.bat`을 한 번 켜두면(창 유지), `jobs/*.sh`를 이름 순서대로 하나씩 WSL에서 실행한다
+- 작업 넣기: `jobs/YYYYMMDD_HHMM_<이름>.sh` 파일 생성 (작업 폴더는 프로젝트 루트). 예: `bash setup_and_run.sh sens`
+- 상태 확인: `jobs/running.txt`(실행 중), `jobs/.heartbeat`(epoch초, 15초마다 갱신 — 오래됐으면 대기소 꺼짐), `jobs/logs/<이름>.log`(마지막 줄 `rc=`), 끝난 작업은 `jobs/done/`
+- 멈추기: `jobs/STOP` 생성 (현재 작업 끝난 뒤 종료)
+- **한 번에 하나만 돈다. ORT 실험과 DFC 컴파일을 동시에 돌리지 않기 위함 (메모리 23.5GB)**
+- 번호 bat(1~8)도 그대로 동작하지만, 대기소와 동시에 같은 작업을 돌리지 말 것
+- `jobs/cancelled/20261006_1920_sens_stage1.sh` 는 중복 방지로 뺀 것 (사용자가 8번 bat으로 직접 실행 중)
+
+## 2. 지금까지 결과
+
+### 갈래 A — ONNX Runtime (검증셋 CIFAR-100 train 분리 10,000장, 스레드 4, 배치 1)
+
+| 구성 | 정의 | top-1 | Δ | p50 |
+|---|---|---|---|---|
+| A0 | FP32 | 68.80% | — | 64ms |
+| A1 | 동적 INT8 (가중치 MatMul 49개) | **65.02%** | −3.78 | **23.5ms** |
+| A2 | 정적, ORT 기본 대상(Softmax·Add·Mul까지) | 2.09% | 붕괴 | 24.3ms |
+| A2m | 정적, 가중치 MatMul 49개만 (A1과 같은 대상), MinMax, per-tensor, COCO 64 s0 | 53.55% | −15.25 | 25.6ms |
+| A2m-pc | + per-channel | 56.34% | −12.46 | 26.3ms |
+| A2m-pct | + percentile 99.9 | 14.90% | −53.90 | 25.5ms |
+
+- P1 통과: PyTorch↔ONNX 최대 절대오차 1.03e-5, 최소 코사인 0.99999988 (`logs/p1_parity.json`)
+- **A2 위의 탐침 7종(P-*)·캘리브레이션 A/B 5종(AB-*)은 전부 1.5~4.8%로 무효.** 원인이 대상 범위(Softmax 등 양자화)였기 때문. 삭제하지 않고 "효과 없던 시도"로 보고서에 남긴다. A/B와 entropy는 A2m 기준으로 다시 해야 한다
+- 현재 결론: **동적(A1)이 정적보다 정확도·속도 모두 우세.** "정적이 이긴다"는 미성립
+- 결과 파일: `results/all_runs.md`, `results/coverage.md`, `results/latency*.csv`, `results/preds/*.npz`(이미지별, 짝지은 비교용)
+
+### 갈래 B — Hailo DFC 5.4.0, Hailo-10H
+
+| 실행 | 캘리브레이션 | 에뮬레이터 300장 | HEF |
+|---|---|---|---|
+| 10/6 15:33 | COCO 64 s0 (공식 재현) | FP 70% → 62%, 코사인 평균 0.925 | 79.3MB, sha 78148b…, **13 컨텍스트** |
+| 10/6 16:48 (`--tag cifar64_s0`) | CIFAR train 64 s0 | FP 70% → 66%, 코사인 평균 0.939 | 79.7MB, sha 41c388…, 13 컨텍스트 |
+
+- 로그: `logs/dfc/smoke_*.json`, `logs/dfc/setup_*.log`. HEF/HAR은 `D:\halio_data\hailo\`
+- 입력은 uint8 0~255 NHWC (`normalize_in_net: true`, 정규화는 네트워크 안)
+- 300장 오차 ±2.7%p → 62 vs 66은 판정 불가. 이미지별 예측은 저장 안 됨(짝지은 비교 불가)
+- 1회 소요: optimize 4~7분, 에뮬레이션 3.5분, compile 15~19분 (CPU)
+
+## 3. 지금 진행 중 (2026-10-06 19:19 시작)
+
+**레이어 민감도 1단계** — `8_run_sensitivity.bat` (= `bash setup_and_run.sh sens` → `run_sensitivity.sh`)
+- A2m에서 한 묶음만 FP32로 남기고 정확도 회복량을 잰다. 바뀌는 변수는 제외 노드 하나
+- 구성: S-qkv, S-out, S-fc1, S-fc2, S-proj, S-d0-3, S-d4-7, S-d8-11 (구성당 약 6분, 20:10경 종료 예상)
+- 결과: `results/sensitivity.md` (구성 하나 끝날 때마다 갱신), 로그 `logs/run_20261006_191914_sens.log`
+- 분류: `results/sensitivity/groups.json` — qkv=`/transformer/resblocks.N/attn/MatMul`(768→2304), out=`.../attn/Gemm`(768→768), fc1=`.../mlp/c_fc/MatMul`, fc2=`.../mlp/c_proj/MatMul`(3072→768), proj=`/MatMul`(768→512)
+- 중간 결과: **S-qkv 54.29% (A2m 대비 +0.74%p, 회복률 5%, McNemar p=0.059)** → qkv는 주범 아님
+- 2단계(종류 하나를 블록 12개로): `KIND=fc2 bash run_sensitivity.sh block` — 1단계 결과를 본 뒤 결정
+
+오늘 추가·수정한 코드: `src/sensitivity.py`(신규), `run_sensitivity.sh`(신규), `8_run_sensitivity.bat`(신규), `job_runner.sh`·`0_JOB_RUNNER.bat`(신규), `src/quantize_ort.py`(`--exclude-nodes-file` 추가), `setup_and_run.sh`(`sens` 모드 추가). 원본은 `*.bak_20261006b`
+
+## 4. 다음 할 일 (우선순위)
+
+1. 민감도 1단계 해석 → 필요하면 2단계 (가설: fc2가 민감. GELU 직후 비대칭 분포. **미검증**)
+2. A2m 기준 재실험: 캘리브레이션 A/B(COCO vs CIFAR, s0~s2), entropy, 크기 64/256/1024
+3. 혼합 정밀도 후보(A3b) 구성 → 속도 측정 → A1과 정면 비교
+4. Hailo 두 HAR을 같은 2,000장으로 평가 + 이미지별 예측 저장 → 짝지은 비교 (각 약 23분, 스크립트 수정 필요: `dfc/smoke_test.py`의 `--eval-n`, 예측 저장 추가)
+5. 셀프테스트 수정: `VAL_PER_CLASS=100`인데 가짜 데이터가 클래스당 30장이라 `split_val`에서 실패. 타 PC 재현 검증 전 필수
+6. 최종 후보만 ImageNetV2 / Flickr30k, 이후 테스트셋 개봉(W5), 보고서·재현 패키지(W6)
+
+## 5. 팀 결정 필요
+
+- **본실험 범위 확정** (원래 W2 과제, 아직 미확정) — 민감도 결과를 근거로
+- 최종 구성이 동적 INT8이 될 경우: ORT 최종 구성(동적)과 Hailo 이식 구성(정적만 지원)이 달라지는 점을 보고서에서 어떻게 서술할지
+
+## 6. 일정 위치
+
+오늘은 **W3(10/5~10/11, 본실험 1차) 둘째 날**. 파일럿(W1 목표)은 10/5 완료로 약 1주 지연, 대신 DFC 컴파일(W4 목표)은 앞당겨 완료. 제출 마감 11/1 23:59.
+
+## 7. 지켜야 할 규칙 (요약)
+
+- 테스트셋은 최종 구성 확정 전 열지 않는다 (`--eval-set test --i-know-final`)
+- 속도는 정밀도 구성이 바뀌는 경우만 잰다. 캘리브레이션·범위 추정 조건은 정확도만
+- ORT 개선량을 Hailo 개선량으로 옮겨 말하지 않는다. Hailo-8/8L 자료를 10H 근거로 쓰지 않는다
+- 사실/가설/추측 구분. 실패한 실험도 지우지 않는다. 조건 이름에 결론을 넣지 않는다
+- 사용자는 한국어 설명, 코드 전문을 인라인으로 받는 것을 선호
+
+## 갱신 기록
+
+- 2026-10-06 19:35 최초 작성 (민감도 1단계 2/8 진행 중)
+- 2026-10-06 20:20 민감도 1단계 완료(`results/sensitivity.md`): **S-fc2 68.85%(회복 100%), S-d4-7 69.16%(102%)**, S-fc1 +1.7, S-d8-11 +2.2, 나머지 ≈0. → 주범은 블록 4~7 의 fc2(`mlp/c_proj`). 2단계(fc2 블록별 12개) 대기소에 넣음: `jobs/20261006_2020_sens_fc2_blocks.sh` (`setup_and_run.sh sens2` 모드 추가)
+- 2026-10-06 21:40 2단계 완료: 블록별 fc2 회복률 b7 75%(64.94%), b6 49%(61.08%), b5 15%, 나머지 ≤7%. 합이 100%를 넘어 효과가 겹침. 3단계(조합 b7 / b6,7 / b5,6,7 / b4~7, 정확도만) 대기소 투입 `jobs/20261006_2140_sens_combo.sh` (`blocks:` 선택자, `sens3` 모드 추가). 다음: 최적 조합을 A3b 후보로 속도 측정 — **다른 학습 없을 때만**
+- 2026-10-06 22:00 3단계 완료: fc2 FP32 유지 b6,7 → 67.38% / b5,6,7 → 68.25% / b4~7 → 68.41% (A1 동적 65.02% 처음 추월). 다음: 이 후보들 속도·메모리 측정(다른 작업 없을 때). 팀 공유용 진행 정리 문서(Claude Docs) 작성: https://claude.ai/code/artifact/ecda3e67-890f-42a4-abcb-52252ea13173
+- 2026-10-06 22:17 A3b 속도 측정(`jobs/logs/20261006_2215_bench_a3b.log`, `results/latency_a3b.csv`): p50 A0 63.48 / A1 23.82 / A2m 26.05 / S-b7 27.18 / **S-c67 28.69 (67.38%)** / **S-c567 29.14 (68.25%)** ms, RSS 209~248MB, 파일 89→103/110MB. 결론: 혼합 정밀도는 A1보다 +2.4~3.2%p 정확하지만 약 20% 느림(FP32 대비는 2.2배 빠름). A2m 자체도 A1보다 느림 → ORT CPU에서 정적 QDQ 오버헤드(Q/DQ 92~98개 잔존, 정수 커널 시간 48~58%). 파레토: 속도=A1, 정확도=S-c567. 정적+fc2 혼합은 Hailo(정적만 지원)로 옮길 수 있는 전략이라는 점이 핵심
+- 2026-10-07 01:00 **Hailo 이식 성공**. 에뮬레이터 같은 2000장 짝지은 비교(`logs/dfc/compare_preds.md`): FP 70.45% / 공식(COCO64) 63.65% / CIFAR64 65.75% (p=0.013) / **COCO64 + 블록5·6·7 fc2(conv25,29,33) a16_w16: 69.55% (FP −0.9%p, 기준 대비 +5.9%p, p=3.5e-14)**. Hailo-10H 컴파일 성공, HEF 87.36MB(기존 79.3), **컨텍스트 15개(기존 13)** — 실기기 속도 비용 가능성, 본선에서 확인. 층 이름은 형상(3072→768) 순서로 찾고 LN 순서로 검증. smoke_test.py에 `--fc2-16bit-blocks`, `--from-har`, `--save-preds` 추가, `dfc/compare_preds.py` 신규
+- 2026-10-07 00:00 대기소 투입: (a) fc2 b6,7만 16비트(COCO) (b) CIFAR 캘리브레이션 + fc2 b5,6,7 (c) 5구성 비교+컨텍스트 수 → `logs/dfc/compare_preds.md`. 약 1시간 45분
+- 2026-10-07 02:00 추가 Hailo 결과(같은 2000장): **COCO + fc2 b6,7: 69.55% (b5,6,7과 동일), HEF 84.77MB, 컨텍스트 15** / CIFAR + fc2 b5,6,7: 68.85%, 코사인 0.9636(최고), 컨텍스트 15. → fc2 16비트는 2개만 넣어도 컨텍스트 13→15 (개수와 무관하게 늘어남). 개선은 더해지지 않음. 본선 후보: COCO64 + fc2 b6,7 (`coco64_fc2b67.hailo10h.hef`). 미해결: 컨텍스트 15개의 실기기 속도 비용(본선), 컨텍스트를 13개로 되돌릴 방법(a16_w8, 또는 resources_param 조정)
+- 2026-10-07 대기소 투입: (a) fc2 b6,7 **a16_w8** (`--fc2-precision` 옵션 추가), 끝에 3구성 비교 — 마지막 줄 컨텍스트 수 출력은 잘못된 grep이라 무시, `grep -c "Compiling kernels of" jobs/logs/20261007_0930_a_*.log`로 셀 것 (b) 셀프테스트 재실행. 셀프테스트 수정: `tests/make_fake_data.py` train 클래스당 30 → VAL_PER_CLASS+10 (원본 .bak_20261007)
+- 2026-10-07 02:30 결과: (b) **셀프테스트 통과** (가짜 데이터 수정 효과 확인). (a) **fc2 a16_w8 실패**: optimize의 Create HW Params 단계에서 DFC 내부 오류 `ValueError: arange: cannot compute length` (hailo_conv_a16_mercury.py:202 log2 RuntimeWarning invalid value → element_wise_add_op feed_repeat 계산). 우리 코드가 아니라 DFC 5.4.0의 a16_w8 conv(Hailo-10H) 경로 문제로 보임(추정). 원인 분류: "원하는 설정 미지원". 로그 `logs/dfc/smoke_*a16w8*.json`. 본선 후보는 그대로 a16_w16 fc2 b6,7 (컨텍스트 15)
+- 2026-10-07 대기소 투입: (a) `src/act_stats.py` 신규 — 49개 가중치 행렬곱 입력 활성값 분포(absmax, p99.9, bulk_levels 등) → `results/act_stats.md`, `_cifar.md` (b) A2m 기준 캘리브레이션 A/B 재실험(AB2-*), A2m-ent, S-c67-cifar → `results/all_runs.md`
+- 2026-10-07 밤샘 투입: (c) S-c67 견고성(COCO s1,s2) (d,e) Hailo 기준선/본선 후보를 5000장 평가(10000장은 입력 배열 6GB라 메모리 위험해 5000) (f) 비교 → `logs/dfc/compare_preds_n5000.md`. 전체 약 3시간 반
+- 2026-10-07 09:00 밤샘 결과 전부 정상(rc=0).
+  - **가설 확인(act_stats)**: fc2 입력 absmax/bulk_levels — b5 17/18.0, b6 26/12.2, b7 42/8.9 (다른 블록 fc2 4~17 / 43~71칸, 다른 종류 25~78칸). 이상치 채널 3~4개에 집중. CIFAR 캘리브레이션도 동일 패턴. 민감도 순서(b7>b6>b5)와 일치
+  - **캘리브레이션(A2m 기준)**: COCO s0/s1/s2 53.55/52.65/55.44 (묶음 따라 2.8%p 흔들림), CIFAR s0/s1/s2 57.06/57.09/57.62 (안정, 평균 +3.3%p), entropy 55.20. 혼합 후보 S-c67: COCO s0/s1/s2 67.38/67.59/67.92, CIFAR 67.96 → fc2 처리 후엔 캘리브레이션 영향 0.6%p 이내
+  - **Hailo 5000장**: FP 68.68 / 공식 62.66 (−6.02) / fc2 b6,7 a16_w16 **68.34 (−0.34)**, McNemar p=1.1e-30

@@ -1,0 +1,10 @@
+{
+  "code": "S-b7-fc2",
+  "spec": "block:7/fc2",
+  "n_nodes": 1,
+  "nodes": [
+    "/transformer/resblocks.7/mlp/c_proj/MatMul"
+  ],
+  "base": "A2m",
+  "timestamp": "2026-10-06T21:04:31+0900"
+}

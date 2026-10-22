@@ -1,0 +1,161 @@
+"""COCO 밖 확인: Flickr30k 1K test 텍스트→이미지 검색 (E33 보조, 사후 추가 탐색).
+
+  python -m src.flickr_eval prepare     # Hugging Face 공개 사본에서 1,000장 + 캡션 5,000개 받기
+  python -m src.flickr_eval text        # FP32 텍스트 인코더로 캡션 임베딩
+  python -m src.flickr_eval eval A0=path.onnx SPL=... DA-A0=... DA-SPL=...
+  python -m src.flickr_eval table --ref A0 --codes A0 SPL-b567-k32 DA-A0 DA-SPL
+
+출처 후보(차례로 시도): nlphuji/flickr_1k_test_image_text_retrieval, clip-benchmark/wds_flickr30k(test). 둘 다 Karpathy test 1,000장.
+평가 방식은 COCO 와 같음(C.preprocess, 캡션 원문, 이미지 단위 평균, 이미지 단위 부트스트랩).
+"""
+from __future__ import annotations
+
+import io
+import json
+import sys
+import tarfile
+import zipfile
+from pathlib import Path
+
+import numpy as np
+from PIL import Image
+
+from . import common as C
+from .coco_retrieval import per_image, ranks
+
+DIR = C.DATA / "flickr1k"
+CAPS = DIR / "captions.json"
+OUT = C.RESULTS / "flickr"
+
+
+def _try_nlphuji():
+    from huggingface_hub import hf_hub_download, list_repo_files
+    repo = "nlphuji/flickr_1k_test_image_text_retrieval"
+    files = list_repo_files(repo, repo_type="dataset"); print("[flickr] nlphuji 파일:", files)
+    csvs = [f for f in files if f.endswith(".csv")]; zips = [f for f in files if f.endswith(".zip")]
+    pq = [f for f in files if f.endswith(".parquet")]
+    out = {}
+    if csvs and zips:
+        import pandas as pd
+        df = pd.read_csv(hf_hub_download(repo, csvs[0], repo_type="dataset")); print("[flickr] csv 열:", list(df.columns))
+        with zipfile.ZipFile(hf_hub_download(repo, zips[0], repo_type="dataset")) as z:
+            names = {Path(n).name: n for n in z.namelist() if n.lower().endswith((".jpg", ".jpeg", ".png"))}
+            for _, r in df.iterrows():
+                fn = Path(str(r["filename"])).name
+                caps = json.loads(r["raw"]) if "raw" in df.columns else [r["caption"]]
+                (DIR / "images" / fn).write_bytes(z.read(names[fn])); out[fn] = [str(c) for c in caps]
+    elif pq:
+        import pandas as pd
+        for f in pq:
+            df = pd.read_parquet(hf_hub_download(repo, f, repo_type="dataset")); print("[flickr] parquet 열:", list(df.columns))
+            for _, r in df.iterrows():
+                im = r["image"]; fn = Path(str(r.get("filename", im.get("path") or f"{len(out)}.jpg"))).name
+                caps = r["caption"] if "caption" in df.columns else json.loads(r["raw"])
+                (DIR / "images" / fn).write_bytes(im["bytes"]); out[fn] = [str(c) for c in list(caps)]
+    return out
+
+
+def _try_clipbench():
+    from huggingface_hub import hf_hub_download, list_repo_files
+    repo = "clip-benchmark/wds_flickr30k"
+    files = [f for f in list_repo_files(repo, repo_type="dataset") if f.startswith("test/") and f.endswith(".tar")]
+    print("[flickr] clip-benchmark test tar:", files)
+    out = {}
+    for f in files:
+        with tarfile.open(hf_hub_download(repo, f, repo_type="dataset")) as t:
+            recs = {}
+            for m in t.getmembers():
+                if not m.isfile():
+                    continue
+                key, ext = m.name.rsplit(".", 1)
+                recs.setdefault(key, {})[ext] = t.extractfile(m).read()
+            for key, r in recs.items():
+                img = next((r[e] for e in ("jpg", "jpeg", "png", "webp") if e in r), None)
+                if img is None or "txt" not in r:
+                    continue
+                fn = Path(key).name + ".jpg"
+                Image.open(io.BytesIO(img)).convert("RGB").save(DIR / "images" / fn, quality=95)
+                out[fn] = [c.strip() for c in r["txt"].decode().split("\n") if c.strip()]
+    return out
+
+
+def cmd_prepare():
+    if CAPS.exists():
+        print("[flickr] 이미 있음"); return
+    (DIR / "images").mkdir(parents=True, exist_ok=True)
+    out = {}
+    for fn in (_try_nlphuji, _try_clipbench):
+        try:
+            out = fn()
+            if len(out) >= 1000:
+                src = fn.__name__; break
+        except Exception as e:
+            print(f"[flickr] {fn.__name__} 실패: {e!r}")
+    if len(out) < 1000:
+        sys.exit(f"[flickr] 사진 {len(out)}장만 확보 → 중단")
+    CAPS.write_text(json.dumps({"source": src, "captions": out}, ensure_ascii=False))
+    print(f"[flickr] {len(out)}장, 캡션 {sum(map(len, out.values()))}개 ({src})")
+
+
+def load():
+    d = json.loads(CAPS.read_text())["captions"]
+    files = sorted(d)
+    img_of = np.array([k for k, f in enumerate(files) for _ in d[f]], dtype=np.int64)
+    caps = [c for f in files for c in d[f]]
+    return files, img_of, caps
+
+
+def cmd_text():
+    import open_clip, torch
+    p = C.STORE / "models" / "flickr1k_text.npy"
+    if p.exists():
+        return
+    _, _, caps = load()
+    m = open_clip.create_model(C.MODEL_NAME, pretrained=C.PRETRAINED, force_quick_gelu=True, cache_dir=str(C.CACHE)).eval()
+    tok = open_clip.get_tokenizer(C.MODEL_NAME); out = []
+    with torch.no_grad():
+        for i in range(0, len(caps), 256):
+            e = m.encode_text(tok(caps[i:i + 256])).float().numpy(); out.append(e / np.linalg.norm(e, axis=1, keepdims=True))
+    np.save(p, np.concatenate(out)); print(f"[flickr] 캡션 임베딩 {len(caps)}개")
+
+
+def cmd_eval(pairs):
+    from .backends import OnnxBackend
+    files, img_of, _ = load()
+    txt = np.load(C.STORE / "models" / "flickr1k_text.npy")
+    OUT.mkdir(parents=True, exist_ok=True)
+    for pr in pairs:
+        code, path = pr.split("=", 1)
+        if (OUT / f"{code}.npz").exists():
+            continue
+        be = OnnxBackend(path, code)
+        emb = np.stack([be.encode_image(C.preprocess(Image.open(DIR / "images" / f))[None]) for f in files])
+        emb /= np.linalg.norm(emb, axis=1, keepdims=True)
+        r = ranks(emb.astype(np.float32), txt, img_of)
+        np.savez_compressed(OUT / f"{code}.npz", ranks=r, img_of=img_of)
+        print(f"[flickr] {code}: R@1 {per_image(r, img_of, len(files), 1).mean():.2%}", flush=True)
+
+
+def cmd_table(ref, codes):
+    D = {c: np.load(OUT / f"{c}.npz") for c in codes}
+    img_of = D[ref]["img_of"]; n = int(img_of.max() + 1)
+    idx = np.random.default_rng(0).integers(0, n, size=(2000, n))
+    base = per_image(D[ref]["ranks"], img_of, n, 1)
+    L = [f"# Flickr30k 1K test 텍스트→이미지 (COCO 밖 확인, 갤러리 {n}장 / 캡션 {len(img_of)}개)", "",
+         "이미지 평균 R@K, 95% CI = 이미지 단위 짝지은 부트스트랩 2000회. 사후 추가 탐색 (E33 보조)", "",
+         f"| 구성 | R@1 | R@5 | R@10 | R@1 차이 vs {ref} [95% CI] |", "|---|---|---|---|---|"]
+    for c in codes:
+        pk = {k: per_image(D[c]["ranks"], img_of, n, k) for k in (1, 5, 10)}
+        d = pk[1] - base; lo, hi = np.percentile(d[idx].mean(1) * 100, [2.5, 97.5])
+        L.append(f"| {c} | {pk[1].mean():.2%} | {pk[5].mean():.2%} | {pk[10].mean():.2%} | {d.mean() * 100:+.2f} [{lo:+.2f}, {hi:+.2f}] |")
+    (C.RESULTS / "flickr1k.md").write_text("\n".join(L) + "\n"); print("\n".join(L))
+
+
+if __name__ == "__main__":
+    cmd = sys.argv[1]
+    if cmd == "prepare": cmd_prepare()
+    elif cmd == "text": cmd_text()
+    elif cmd == "eval": cmd_eval(sys.argv[2:])
+    elif cmd == "table":
+        a = sys.argv[2:]; ref = a[a.index("--ref") + 1]; codes = a[a.index("--codes") + 1:]
+        cmd_table(ref, codes)

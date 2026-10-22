@@ -1,0 +1,14 @@
+{
+  "run_id": "RM-n3-s8-val",
+  "top1_acc": 0.2457,
+  "std_err": 0.004305014634121468,
+  "n": 10000,
+  "agree_with_fp32": 0.281,
+  "mean_cosine_to_fp32": 0.798241138458252,
+  "min_cosine_to_fp32": 0.610421895980835,
+  "mcnemar_vs_fp32": {
+    "a_only": 4634,
+    "b_only": 211,
+    "p_value": 0.0
+  }
+}

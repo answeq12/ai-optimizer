@@ -1,0 +1,14 @@
+{
+  "run_id": "A2m-pc-val",
+  "top1_acc": 0.5634,
+  "std_err": 0.004959641519303588,
+  "n": 10000,
+  "agree_with_fp32": 0.6502,
+  "mean_cosine_to_fp32": 0.9040447473526001,
+  "min_cosine_to_fp32": 0.7568833231925964,
+  "mcnemar_vs_fp32": {
+    "a_only": 1661,
+    "b_only": 415,
+    "p_value": 7.373264879485347e-176
+  }
+}

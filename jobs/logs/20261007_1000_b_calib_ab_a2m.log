@@ -1,0 +1,217 @@
+[quant] 가중치 MatMul 만 양자화: 49개 (A1 동적은 49개)
+[quant] coco_s1.onnx: 89.03 MB (static, minmax)
+[eval] AB2-coco-s1-val: /mnt/d/halio_data/models/ab2/coco_s1.onnx / val 10000장
+  500/10000  (15s)
+  1000/10000  (28s)
+  1500/10000  (42s)
+  2000/10000  (55s)
+  2500/10000  (68s)
+  3000/10000  (82s)
+  3500/10000  (95s)
+  4000/10000  (109s)
+  4500/10000  (122s)
+  5000/10000  (135s)
+  5500/10000  (150s)
+  6000/10000  (163s)
+  6500/10000  (177s)
+  7000/10000  (191s)
+  7500/10000  (204s)
+  8000/10000  (218s)
+  8500/10000  (231s)
+  9000/10000  (246s)
+  9500/10000  (259s)
+  10000/10000  (272s)
+[eval] AB2-coco-s1-val: top-1 52.65% (표준오차 ±0.50%p, n=10000), FP32 대비 일치율 60.47%, 평균 코사인 0.8886
+[quant] 가중치 MatMul 만 양자화: 49개 (A1 동적은 49개)
+[quant] coco_s2.onnx: 89.03 MB (static, minmax)
+[eval] AB2-coco-s2-val: /mnt/d/halio_data/models/ab2/coco_s2.onnx / val 10000장
+  500/10000  (15s)
+  1000/10000  (28s)
+  1500/10000  (42s)
+  2000/10000  (55s)
+  2500/10000  (68s)
+  3000/10000  (83s)
+  3500/10000  (95s)
+  4000/10000  (110s)
+  4500/10000  (123s)
+  5000/10000  (136s)
+  5500/10000  (151s)
+  6000/10000  (164s)
+  6500/10000  (178s)
+  7000/10000  (191s)
+  7500/10000  (204s)
+  8000/10000  (219s)
+  8500/10000  (232s)
+  9000/10000  (247s)
+  9500/10000  (260s)
+  10000/10000  (273s)
+[eval] AB2-coco-s2-val: top-1 55.44% (표준오차 ±0.50%p, n=10000), FP32 대비 일치율 63.45%, 평균 코사인 0.8935
+[quant] 가중치 MatMul 만 양자화: 49개 (A1 동적은 49개)
+[quant] cifar_s0.onnx: 89.03 MB (static, minmax)
+[eval] AB2-cifar-s0-val: /mnt/d/halio_data/models/ab2/cifar_s0.onnx / val 10000장
+  500/10000  (15s)
+  1000/10000  (28s)
+  1500/10000  (41s)
+  2000/10000  (55s)
+  2500/10000  (68s)
+  3000/10000  (83s)
+  3500/10000  (96s)
+  4000/10000  (109s)
+  4500/10000  (123s)
+  5000/10000  (137s)
+  5500/10000  (151s)
+  6000/10000  (164s)
+  6500/10000  (178s)
+  7000/10000  (192s)
+  7500/10000  (205s)
+  8000/10000  (220s)
+  8500/10000  (233s)
+  9000/10000  (246s)
+  9500/10000  (261s)
+  10000/10000  (274s)
+[eval] AB2-cifar-s0-val: top-1 57.06% (표준오차 ±0.49%p, n=10000), FP32 대비 일치율 65.75%, 평균 코사인 0.9066
+[quant] 가중치 MatMul 만 양자화: 49개 (A1 동적은 49개)
+[quant] cifar_s1.onnx: 89.03 MB (static, minmax)
+[eval] AB2-cifar-s1-val: /mnt/d/halio_data/models/ab2/cifar_s1.onnx / val 10000장
+  500/10000  (14s)
+  1000/10000  (27s)
+  1500/10000  (41s)
+  2000/10000  (55s)
+  2500/10000  (68s)
+  3000/10000  (82s)
+  3500/10000  (95s)
+  4000/10000  (108s)
+  4500/10000  (123s)
+  5000/10000  (136s)
+  5500/10000  (150s)
+  6000/10000  (163s)
+  6500/10000  (176s)
+  7000/10000  (191s)
+  7500/10000  (204s)
+  8000/10000  (218s)
+  8500/10000  (231s)
+  9000/10000  (244s)
+  9500/10000  (259s)
+  10000/10000  (272s)
+[eval] AB2-cifar-s1-val: top-1 57.09% (표준오차 ±0.49%p, n=10000), FP32 대비 일치율 66.48%, 평균 코사인 0.9093
+[quant] 가중치 MatMul 만 양자화: 49개 (A1 동적은 49개)
+[quant] cifar_s2.onnx: 89.03 MB (static, minmax)
+[eval] AB2-cifar-s2-val: /mnt/d/halio_data/models/ab2/cifar_s2.onnx / val 10000장
+  500/10000  (15s)
+  1000/10000  (28s)
+  1500/10000  (41s)
+  2000/10000  (55s)
+  2500/10000  (68s)
+  3000/10000  (83s)
+  3500/10000  (96s)
+  4000/10000  (109s)
+  4500/10000  (124s)
+  5000/10000  (136s)
+  5500/10000  (151s)
+  6000/10000  (164s)
+  6500/10000  (177s)
+  7000/10000  (192s)
+  7500/10000  (205s)
+  8000/10000  (219s)
+  8500/10000  (232s)
+  9000/10000  (245s)
+  9500/10000  (260s)
+  10000/10000  (273s)
+[eval] AB2-cifar-s2-val: top-1 57.62% (표준오차 ±0.49%p, n=10000), FP32 대비 일치율 66.22%, 평균 코사인 0.9040
+[quant] 가중치 MatMul 만 양자화: 49개 (A1 동적은 49개)
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Finding optimal threshold for each tensor using 'entropy' algorithm ...
+Number of tensors : 170
+Number of histogram bins : 128 (The number may increase depends on the data it collects)
+Number of quantized bins : 128
+[quant] a2m_entropy.onnx: 89.03 MB (static, entropy)
+[eval] A2m-ent-val: /mnt/d/halio_data/models/ab2/a2m_entropy.onnx / val 10000장
+  500/10000  (13s)
+  1000/10000  (27s)
+  1500/10000  (40s)
+  2000/10000  (55s)
+  2500/10000  (68s)
+  3000/10000  (81s)
+  3500/10000  (95s)
+  4000/10000  (108s)
+  4500/10000  (123s)
+  5000/10000  (135s)
+  5500/10000  (148s)
+  6000/10000  (163s)
+  6500/10000  (176s)
+  7000/10000  (191s)
+  7500/10000  (204s)
+  8000/10000  (216s)
+  8500/10000  (231s)
+  9000/10000  (244s)
+  9500/10000  (259s)
+  10000/10000  (271s)
+[eval] A2m-ent-val: top-1 55.20% (표준오차 ±0.50%p, n=10000), FP32 대비 일치율 62.95%, 평균 코사인 0.8949
+[quant] 가중치 MatMul 만 양자화: 47개 (A1 동적은 49개)
+[quant] c67_cifar_s0.onnx: 103.19 MB (static, minmax, 제외 2개)
+[eval] S-c67-cifar-val: /mnt/d/halio_data/models/ab2/c67_cifar_s0.onnx / val 10000장
+  500/10000  (16s)
+  1000/10000  (30s)
+  1500/10000  (45s)
+  2000/10000  (59s)
+  2500/10000  (75s)
+  3000/10000  (89s)
+  3500/10000  (104s)
+  4000/10000  (119s)
+  4500/10000  (133s)
+  5000/10000  (149s)
+  5500/10000  (163s)
+  6000/10000  (178s)
+  6500/10000  (192s)
+  7000/10000  (208s)
+  7500/10000  (222s)
+  8000/10000  (236s)
+  8500/10000  (252s)
+  9000/10000  (266s)
+  9500/10000  (281s)
+  10000/10000  (295s)
+[eval] S-c67-cifar-val: top-1 67.96% (표준오차 ±0.47%p, n=10000), FP32 대비 일치율 82.25%, 평균 코사인 0.9652
+== 결과
+| A2m | 53.55% | -15.25%p | 61.43% | 26.05 | 27.16 | 235 | 89.0 | 66.2% |
+| A2m-pc | 56.34% | -12.46%p | 65.02% | 26.30 | 27.37 | 234 | 89.5 | - |
+| A2m-pct | 14.90% | -53.90%p | 15.37% | 25.46 | 27.08 | 198 | 89.0 | - |
+| S-c67-fc2 | 67.38% | -1.42%p | 82.75% | 28.69 | 30.14 | 248 | 103.2 | 63.5% |
+| AB2-coco-s1 | 52.65% | -16.15%p | 60.47% | - | - | - | - | - |
+| AB2-coco-s2 | 55.44% | -13.36%p | 63.45% | - | - | - | - | - |
+| AB2-cifar-s0 | 57.06% | -11.74%p | 65.75% | - | - | - | - | - |
+| AB2-cifar-s1 | 57.09% | -11.71%p | 66.48% | - | - | - | - | - |
+| AB2-cifar-s2 | 57.62% | -11.18%p | 66.22% | - | - | - | - | - |
+| A2m-ent | 55.20% | -13.60%p | 62.95% | - | - | - | - | - |
+| S-c67-cifar | 67.96% | -0.84%p | 82.25% | - | - | - | - | - |
+rc=0

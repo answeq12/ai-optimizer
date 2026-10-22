@@ -1,0 +1,151 @@
+{
+ "timestamp": "2026-10-16T19:42:39+0900",
+ "args": {
+  "blocks": "7",
+  "k": 64,
+  "tag": "spl_b7_k64",
+  "hw_arch": "hailo10h",
+  "calib_list": "/mnt/c/Users/PC00/Desktop/dongchan/halio project/splits/calib_coco_64_s0.txt",
+  "skip_compile": false
+ },
+ "stages": {
+  "build_onnx": {
+   "ok": true,
+   "seconds": 10.2
+  },
+  "parse": {
+   "ok": true,
+   "seconds": 13.9
+  },
+  "model_script": {
+   "ok": true,
+   "seconds": 0.1
+  },
+  "optimize": {
+   "ok": true,
+   "seconds": 230.3
+  },
+  "compile": {
+   "ok": false,
+   "seconds": 356.9,
+   "error": "BackendAllocatorException: Compilation failed with unexpected crash",
+   "traceback": "Traceback (most recent call last):\n  File \"/mnt/c/Users/PC00/Desktop/dongchan/halio project/dfc/split_hailo.py\", line 150, in stage\n    out = fn(); rec[\"stages\"][name] = {\"ok\": True, \"seconds\": round(time.time() - t0, 1)}; save()\n  File \"/mnt/c/Users/PC00/Desktop/dongchan/halio project/dfc/split_hailo.py\", line 202, in do_compile\n    hef = runner.compile()\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_sdk_client/runner/client_runner.py\", line 1112, in compile\n    return self._compile()\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_sdk_common/states/states.py\", line 16, in wrapped_func\n    return func(self, *args, **kwargs)\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_sdk_client/runner/client_runner.py\", line 1297, in _compile\n    hef = self._sdk_backend.compile(fps, self.model_script, mapping_timeout)\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_sdk_client/sdk_backend/sdk_backend.py\", line 2002, in compile\n    hef, mapped_graph_file = self._compile(fps, allocator_script, mapping_timeout)\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_sdk_client/sdk_backend/sdk_backend.py\", line 1993, in _compile\n    hef_data, mapped_graph_file, auto_alls = self.hef_full_build(\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_sdk_client/sdk_backend/sdk_backend.py\", line 1968, in hef_full_build\n    auto_alls, hef_data, self._integrated_hw_graph = allocator.create_mapping_and_full_build_hef(\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_sdk_client/allocator/hailo_tools_runner.py\", line 980, in create_mapping_and_full_build_hef\n    self.call_builder(\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_sdk_client/allocator/hailo_tools_runner.py\", line 911, in call_builder\n    self.run_builder(network_graph_path, output_path, **kwargs)\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_sdk_client/allocator/hailo_tools_runner.py\", line 773, in run_builder\n    raise e.internal_exception(\"Compilation failed with unexpected crash\") from None\nhailo_sdk_client.sdk_backend.sdk_backend_exceptions.BackendAllocatorException: Compilation failed with unexpected crash\n"
+  }
+ },
+ "build": {
+  "layers": [
+   {
+    "block": 7,
+    "fc1": "MatMul_570",
+    "fc2": "MatMul_576",
+    "k": 64,
+    "hot_channels": [
+     48,
+     191,
+     203,
+     244,
+     246,
+     294,
+     471,
+     558,
+     581,
+     678,
+     724,
+     725,
+     747,
+     753,
+     794,
+     843,
+     1026,
+     1062,
+     1078,
+     1101,
+     1362,
+     1387,
+     1435,
+     1471,
+     1612,
+     1661,
+     1786,
+     1826,
+     1830,
+     1906,
+     1929,
+     1991,
+     2007,
+     2078,
+     2092,
+     2093,
+     2145,
+     2165,
+     2273,
+     2301,
+     2312,
+     2348,
+     2394,
+     2423,
+     2459,
+     2582,
+     2629,
+     2663,
+     2681,
+     2704,
+     2729,
+     2739,
+     2753,
+     2778,
+     2786,
+     2829,
+     2915,
+     2922,
+     2950,
+     2955,
+     2975,
+     2992,
+     3015,
+     3033
+    ],
+    "hot_absmax_top8": [
+     42.34,
+     40.66,
+     31.11,
+     28.13,
+     17.64,
+     5.8,
+     5.6,
+     5.44
+    ],
+    "rest_absmax": 3.96,
+    "absmax_before": 42.34,
+    "slice_axis": 2
+   }
+  ],
+  "equivalence_min_cosine": 0.9999999403953552,
+  "onnx": "/mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.spl_b7_k64.onnx",
+  "size_mb": 344.84
+ },
+ "alls": {
+  "hot_16bit_layers": [
+   "conv33"
+  ],
+  "slice_layers": [
+   [
+    "slice1",
+    [
+     "Gather_861",
+     "Cast_862"
+    ]
+   ]
+  ],
+  "cls_slice": [
+   "slice1"
+  ],
+  "source": "hailo_model_zoo-5.4.0-py3-none-any.whl: cfg/alls/generic/clip_vit_b_16_image_encoder.alls + hot a16_w16"
+ },
+ "calib": {
+  "list": "calib_coco_64_s0.txt",
+  "n": 64,
+  "sha256": "486acf8775d9013bbcdfaaa31580eadbbe86fed8bdb9d3acbed478555e8ba467"
+ },
+ "failed_stage": "compile"
+}

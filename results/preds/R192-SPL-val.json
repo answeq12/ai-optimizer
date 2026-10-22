@@ -1,0 +1,14 @@
+{
+  "run_id": "R192-SPL-val",
+  "top1_acc": 0.6954,
+  "std_err": 0.004602378080949022,
+  "n": 10000,
+  "agree_with_fp32": 0.7925,
+  "mean_cosine_to_fp32": 0.9578456282615662,
+  "min_cosine_to_fp32": 0.8070300817489624,
+  "mcnemar_vs_fp32": {
+    "a_only": 551,
+    "b_only": 625,
+    "p_value": 0.03323303983403294
+  }
+}

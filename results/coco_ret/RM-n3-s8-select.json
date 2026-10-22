@@ -1,0 +1,13 @@
+{
+  "code": "RM-n3-s8",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.19343581221437475,
+  "R@5": 0.4378063980058164,
+  "R@10": 0.5765683423348567,
+  "median_rank": 7.0,
+  "timestamp": "2026-10-18T13:25:10+0900",
+  "model": "/mnt/d/halio_data/models/rm/clip_vitb16_rm_n3_s8.onnx",
+  "backend": "onnxruntime-cpu"
+}

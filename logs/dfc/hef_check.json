@@ -1,0 +1,131 @@
+{
+ "H-official (공식)": {
+  "layers": 336,
+  "types": {
+   "const_input": 2,
+   "input_layer": 1,
+   "activation": 26,
+   "normalization": 2,
+   "space_to_depth": 1,
+   "conv": 74,
+   "concat": 1,
+   "ew_add": 25,
+   "reduce_mean": 26,
+   "ew_sub": 38,
+   "feature_multiplier": 26,
+   "reduce_sum": 38,
+   "ew_mult": 38,
+   "matmul": 24,
+   "reduce_max": 12,
+   "slice": 1,
+   "output_layer": 1
+  },
+  "inputs": {
+   "clip_vit_b_16_image_encoder/input_layer1": [
+    [
+     -1,
+     224,
+     224,
+     3
+    ]
+   ]
+  },
+  "outputs": {
+   "clip_vit_b_16_image_encoder/output_layer1": [
+    [
+     -1,
+     1,
+     1,
+     512
+    ]
+   ]
+  },
+  "suspicious": []
+ },
+ "H-splf-b7-k32 (동결)": {
+  "layers": 339,
+  "types": {
+   "const_input": 2,
+   "input_layer": 1,
+   "activation": 26,
+   "normalization": 2,
+   "space_to_depth": 1,
+   "conv": 76,
+   "concat": 1,
+   "ew_add": 26,
+   "reduce_mean": 26,
+   "ew_sub": 38,
+   "feature_multiplier": 26,
+   "reduce_sum": 38,
+   "ew_mult": 38,
+   "matmul": 24,
+   "reduce_max": 12,
+   "slice": 1,
+   "output_layer": 1
+  },
+  "inputs": {
+   "clip_vit_b_16_image_encoder/input_layer1": [
+    [
+     -1,
+     224,
+     224,
+     3
+    ]
+   ]
+  },
+  "outputs": {
+   "clip_vit_b_16_image_encoder/output_layer1": [
+    [
+     -1,
+     1,
+     1,
+     512
+    ]
+   ]
+  },
+  "suspicious": []
+ },
+ "H-fc2b7 (참고)": {
+  "layers": 335,
+  "types": {
+   "const_input": 2,
+   "input_layer": 1,
+   "activation": 26,
+   "normalization": 2,
+   "space_to_depth": 1,
+   "conv": 74,
+   "concat": 1,
+   "ew_add": 24,
+   "reduce_mean": 26,
+   "ew_sub": 38,
+   "feature_multiplier": 26,
+   "reduce_sum": 38,
+   "ew_mult": 38,
+   "matmul": 24,
+   "reduce_max": 12,
+   "slice": 1,
+   "output_layer": 1
+  },
+  "inputs": {
+   "clip_vit_b_16_image_encoder/input_layer1": [
+    [
+     -1,
+     224,
+     224,
+     3
+    ]
+   ]
+  },
+  "outputs": {
+   "clip_vit_b_16_image_encoder/output_layer1": [
+    [
+     -1,
+     1,
+     1,
+     512
+    ]
+   ]
+  },
+  "suspicious": []
+ }
+}

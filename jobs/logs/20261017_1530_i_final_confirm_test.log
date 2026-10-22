@@ -1,0 +1,138 @@
+== ORT 2026-10-17 15:23:50
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[coco-ret] coco_ret_text_select.npy 이미 있음
+[coco-ret] coco_ret_text_confirm.npy 이미 있음
+  500/2406 (42s)
+  1000/2406 (85s)
+  1500/2406 (127s)
+  2000/2406 (169s)
+[coco-ret] A0 (confirm, 이미지 2406 / 캡션 12033): R@1 41.79%  R@5 68.09%  R@10 78.53%
+  500/2406 (17s)
+  1000/2406 (35s)
+  1500/2406 (52s)
+  2000/2406 (70s)
+[coco-ret] SPL-b567-k32 (confirm, 이미지 2406 / 캡션 12033): R@1 40.84%  R@5 66.78%  R@10 77.91%
+[eval] A0-test: /mnt/d/halio_data/models/clip_vitb16_image_fp32.onnx / test 10000장
+  500/10000  (33s)
+  1000/10000  (65s)
+  1500/10000  (98s)
+  2000/10000  (131s)
+  2500/10000  (164s)
+  3000/10000  (197s)
+  3500/10000  (229s)
+  4000/10000  (262s)
+  4500/10000  (295s)
+  5000/10000  (328s)
+  5500/10000  (362s)
+  6000/10000  (395s)
+  6500/10000  (428s)
+  7000/10000  (461s)
+  7500/10000  (495s)
+  8000/10000  (527s)
+  8500/10000  (560s)
+  9000/10000  (593s)
+  9500/10000  (626s)
+  10000/10000  (659s)
+[eval] A0-test: top-1 68.01% (표준오차 ±0.47%p, n=10000)
+[eval] SPL-b567-k32-test: /mnt/d/halio_data/models/imp/SPL-b567-k32.onnx / test 10000장
+  500/10000  (14s)
+  1000/10000  (29s)
+  1500/10000  (44s)
+  2000/10000  (58s)
+  2500/10000  (73s)
+  3000/10000  (88s)
+  3500/10000  (102s)
+  4000/10000  (117s)
+  4500/10000  (131s)
+  5000/10000  (146s)
+  5500/10000  (160s)
+  6000/10000  (175s)
+  6500/10000  (189s)
+  7000/10000  (204s)
+  7500/10000  (219s)
+  8000/10000  (233s)
+  8500/10000  (247s)
+  9000/10000  (262s)
+  9500/10000  (277s)
+  10000/10000  (291s)
+[eval] SPL-b567-k32-test: top-1 68.66% (표준오차 ±0.46%p, n=10000), FP32 대비 일치율 86.86%, 평균 코사인 0.9739
+== Hailo 2026-10-17 15:44:47
+[info] Hailo HW architecture: hailo10h
+[final] COCO-confirm 이미지 2406장 / 캡션 12033개
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1792219548.475182 2363929 service.cc:152] XLA service 0x55e80aac9290 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+I0000 00:00:1792219548.475217 2363929 service.cc:160]   StreamExecutor device (0): Host, Default Version
+I0000 00:00:1792219570.171256 2363929 device_compiler.h:188] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+[coco-ret] H-official (confirm, 이미지 2406 / 캡션 12033): R@1 38.64%  R@5 64.84%  R@10 76.25%
+[coco-ret] H-FP (confirm, 이미지 2406 / 캡션 12033): R@1 41.79%  R@5 68.09%  R@10 78.53%
+[final] CIFAR-100 test 10000장
+[final] H-official CIFAR test top-1 61.96% (3437s)
+[final] H-FP CIFAR test top-1 68.01% (581s)
+[info] Hailo HW architecture: hailo10h
+[final] COCO-confirm 이미지 2406장 / 캡션 12033개
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1792224737.822720 2364359 service.cc:152] XLA service 0x5717a498b800 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+I0000 00:00:1792224737.822816 2364359 service.cc:160]   StreamExecutor device (0): Host, Default Version
+I0000 00:00:1792224760.940136 2364359 device_compiler.h:188] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+[coco-ret] H-splf-b7-k32 (confirm, 이미지 2406 / 캡션 12033): R@1 38.76%  R@5 65.88%  R@10 77.08%
+[final] CIFAR-100 test 10000장
+[final] H-splf-b7-k32 CIFAR test top-1 65.58% (3555s)
+== 표 2026-10-17 18:26:39
+# COCO 텍스트→이미지 검색 (confirm, 갤러리 2406장 / 질의 캡션 12033개)
+
+자체 COCO val2017 분할. 이미지별 성적(캡션 hit@K 평균)의 평균. 95% CI = 이미지 단위 짝지은 bootstrap 2000회.
+비열등 = FP32(A0) 대비 R@1 차이의 CI 하한 ≥ −2.0%p (선택 규칙 초안, 값은 팀이 확정).
+
+| 구성 | R@1 [95% CI] | R@5 | R@10 | R@1 차이 vs A0 [95% CI] | R@5 차이 | R@10 차이 | 비열등(−2.0%p) |
+|---|---|---|---|---|---|---|---|
+| A0 | 41.80% [40.42%, 43.23%] | 68.10% | 78.54% | +0.00 [+0.00, +0.00] | +0.00 [+0.00, +0.00] | +0.00 [+0.00, +0.00] | — |
+| SPL-b567-k32 | 40.85% [39.43%, 42.26%] | 66.80% | 77.92% | -0.96 [-1.56, -0.35] | -1.30 [-1.87, -0.73] | -0.62 [-1.09, -0.15] | 예 |
+
+- 텍스트 인코더는 FP32 고정, 이미지 인코더만 구성별로 다르다. 차이 단위는 %p
+- 자체 분할 결과라 공개 COCO 1K/5K 검색 수치와 직접 비교하지 않는다
+# COCO 텍스트→이미지 검색 (confirm, 갤러리 2406장 / 질의 캡션 12033개)
+
+자체 COCO val2017 분할. 이미지별 성적(캡션 hit@K 평균)의 평균. 95% CI = 이미지 단위 짝지은 bootstrap 2000회.
+비열등 = FP32(H-FP) 대비 R@1 차이의 CI 하한 ≥ −2.0%p (선택 규칙 초안, 값은 팀이 확정).
+
+| 구성 | R@1 [95% CI] | R@5 | R@10 | R@1 차이 vs H-FP [95% CI] | R@5 차이 | R@10 차이 | 비열등(−2.0%p) |
+|---|---|---|---|---|---|---|---|
+| H-FP | 41.80% [40.42%, 43.23%] | 68.10% | 78.54% | +0.00 [+0.00, +0.00] | +0.00 [+0.00, +0.00] | +0.00 [+0.00, +0.00] | — |
+| H-official | 38.65% [37.25%, 39.99%] | 64.85% | 76.26% | -3.16 [-4.02, -2.28] | -3.25 [-4.06, -2.39] | -2.29 [-3.05, -1.49] | 아니오 |
+| H-splf-b7-k32 | 38.77% [37.40%, 40.14%] | 65.89% | 77.09% | -3.03 [-3.82, -2.27] | -2.21 [-2.99, -1.47] | -1.46 [-2.15, -0.81] | 아니오 |
+
+- 텍스트 인코더는 FP32 고정, 이미지 인코더만 구성별로 다르다. 차이 단위는 %p
+- 자체 분할 결과라 공개 COCO 1K/5K 검색 수치와 직접 비교하지 않는다
+results/coco_ret_confirm_final_hailo.md
+results/coco_ret_confirm_final_ort.md
+# COCO 텍스트→이미지 검색 (confirm, 갤러리 2406장 / 질의 캡션 12033개)
+
+자체 COCO val2017 분할. 이미지별 성적(캡션 hit@K 평균)의 평균. 95% CI = 이미지 단위 짝지은 bootstrap 2000회.
+비열등 = FP32(H-FP) 대비 R@1 차이의 CI 하한 ≥ −2.0%p (선택 규칙 초안, 값은 팀이 확정).
+
+| 구성 | R@1 [95% CI] | R@5 | R@10 | R@1 차이 vs H-FP [95% CI] | R@5 차이 | R@10 차이 | 비열등(−2.0%p) |
+|---|---|---|---|---|---|---|---|
+| H-FP | 41.80% [40.42%, 43.23%] | 68.10% | 78.54% | +0.00 [+0.00, +0.00] | +0.00 [+0.00, +0.00] | +0.00 [+0.00, +0.00] | — |
+| H-official | 38.65% [37.25%, 39.99%] | 64.85% | 76.26% | -3.16 [-4.02, -2.28] | -3.25 [-4.06, -2.39] | -2.29 [-3.05, -1.49] | 아니오 |
+| H-splf-b7-k32 | 38.77% [37.40%, 40.14%] | 65.89% | 77.09% | -3.03 [-3.82, -2.27] | -2.21 [-2.99, -1.47] | -1.46 [-2.15, -0.81] | 아니오 |
+
+- 텍스트 인코더는 FP32 고정, 이미지 인코더만 구성별로 다르다. 차이 단위는 %p
+- 자체 분할 결과라 공개 COCO 1K/5K 검색 수치와 직접 비교하지 않는다
+# COCO 텍스트→이미지 검색 (confirm, 갤러리 2406장 / 질의 캡션 12033개)
+
+자체 COCO val2017 분할. 이미지별 성적(캡션 hit@K 평균)의 평균. 95% CI = 이미지 단위 짝지은 bootstrap 2000회.
+비열등 = FP32(A0) 대비 R@1 차이의 CI 하한 ≥ −2.0%p (선택 규칙 초안, 값은 팀이 확정).
+
+| 구성 | R@1 [95% CI] | R@5 | R@10 | R@1 차이 vs A0 [95% CI] | R@5 차이 | R@10 차이 | 비열등(−2.0%p) |
+|---|---|---|---|---|---|---|---|
+| A0 | 41.80% [40.42%, 43.23%] | 68.10% | 78.54% | +0.00 [+0.00, +0.00] | +0.00 [+0.00, +0.00] | +0.00 [+0.00, +0.00] | — |
+| SPL-b567-k32 | 40.85% [39.43%, 42.26%] | 66.80% | 77.92% | -0.96 [-1.56, -0.35] | -1.30 [-1.87, -0.73] | -0.62 [-1.09, -0.15] | 예 |
+
+- 텍스트 인코더는 FP32 고정, 이미지 인코더만 구성별로 다르다. 차이 단위는 %p
+- 자체 분할 결과라 공개 COCO 1K/5K 검색 수치와 직접 비교하지 않는다
+CIFAR test | A0 68.01% | SPL-b567-k32 68.66% | 차이 +0.65%p | McNemar (315, 380, 0.015136905161144949)
+CIFAR test | H-FP 68.01% | H-official 61.96% | 차이 -6.05%p | McNemar (1069, 464, 4.061053236549811e-55)
+CIFAR test | H-FP 68.01% | H-splf-b7-k32 65.58% | 차이 -2.43%p | McNemar (739, 496, 4.911537433302919e-12)
+== 끝 2026-10-17 18:26:40
+rc=0

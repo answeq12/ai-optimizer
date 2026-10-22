@@ -1,0 +1,139 @@
+# 재현 가이드 (다른 PC에서 ORT 최종 결과 다시 만들기)
+
+> 대상: 팀원 PC 검증, 학술부 재현. **GPU 필요 없음.** 원 실험도 전부 CPU로 했다.
+> 재현하는 것: COCO-confirm 검색(R@1/5/10)과 CIFAR-100 test 정확도 (A0 FP32, A1 동적, SPL-b567-k32 최종), PC CPU 속도.
+> 판정 기준: **정확도는 제출값과 ±0.2%p 안이면 일치.** 속도는 CPU 마다 달라서 FP32 대비 배율만 본다.
+
+## 0. 필요한 것과 저장 공간
+
+| 항목 | 크기 (대략) | 둘 곳 |
+|---|---|---|
+| WSL Ubuntu 22.04 | 약 2 GB | C 드라이브 (자동) |
+| 파이썬 환경 (torch CPU판 포함) | 약 2 GB | C (WSL 홈 `~/venvs/halio`) |
+| 코드 패키지 | 약 3 MB | C (WSL 홈 `~/halio_project`) |
+| 데이터·모델 (COCO val2017 + 캡션, CIFAR-100, CLIP 가중치, ONNX 4개) | 약 4~5 GB | **하드디스크 권장** (`HALIO_DATA_DIR`) |
+
+- C 에 여유 10 GB, 데이터 드라이브에 여유 10 GB 면 충분하다
+- 메모리 16 GB 이상 권장 (WSL 은 기본으로 PC 메모리의 절반을 쓴다)
+- 인터넷 필요 (COCO·CIFAR·CLIP 가중치·파이썬 패키지 다운로드 약 3 GB)
+- **Windows 절전을 "안 함"으로.** 측정 중 절전에 들어가면 실패한다
+
+## 1. WSL 설치 (처음 한 번, 약 10분)
+
+PowerShell 을 **관리자로** 열고:
+
+```powershell
+wsl --install -d Ubuntu-22.04
+```
+
+재부팅 → 시작 메뉴에서 "Ubuntu 22.04" 실행 → 사용자 이름·비밀번호 만들기. 이미 WSL 이 있으면 `wsl -l -v` 로 Ubuntu-22.04 가 있는지 확인.
+
+## 2. 패키지 풀기
+
+`halio_repro_YYYYMMDD.zip` 을 이 PC 의 아무 곳(예: 다운로드 폴더)에 둔다. Ubuntu 창에서:
+
+```bash
+sudo apt update && sudo apt install -y python3.10-venv unzip
+cd ~ && unzip /mnt/c/Users/<윈도우사용자이름>/Downloads/halio_repro_*.zip
+cd ~/halio_project
+```
+
+프로젝트는 WSL 홈(`~`)에 두는 게 빠르다. `/mnt/c` 아래에 두어도 동작은 한다.
+
+## 3. 파이썬 환경 (약 10분)
+
+```bash
+python3 -m venv ~/venvs/halio
+source ~/venvs/halio/bin/activate
+pip install --upgrade pip
+pip install -r requirements.lock.txt --extra-index-url https://download.pytorch.org/whl/cpu
+```
+
+`python3 -m venv` 에서 `ensurepip is not available` 오류가 나면 `sudo apt install -y python3-venv` 를 한 뒤 다시 한다 (원 실험 PC 에서도 한 번 겪음).
+
+`--extra-index-url` 은 torch CPU 판(2.14.1+cpu)을 받기 위해 필요하다. 이게 없으면 GPU 판 6 GB 를 받거나 설치가 실패한다.
+
+## 4. 데이터 둘 곳 정하기
+
+하드디스크가 D 드라이브라면:
+
+```bash
+echo 'export HALIO_DATA_DIR=/mnt/d/halio_data' >> ~/.bashrc && source ~/.bashrc
+```
+
+(드라이브 문자가 다르면 `/mnt/e/...` 처럼 바꾼다. 설정하지 않아도 D 드라이브가 보이면 `/mnt/d/halio_data` 를 자동으로 쓴다)
+
+## 5. 다운로드 없는 점검 (2~3분)
+
+```bash
+SELFTEST=1 bash run_pilot.sh
+```
+
+가짜 데이터로 전 과정을 돌아본다. 끝에 표가 나오면 환경은 정상(수치는 무의미).
+
+## 6. 재현 실행 (약 2~4시간)
+
+```bash
+bash reproduce.sh
+```
+
+| 단계 | 내용 | 시간 (대략) |
+|---|---|---|
+| 1 | 데이터 다운로드 | 인터넷 속도에 따라 10~40분 |
+| 2 | 분할 재생성 → 제출본 `splits/` 와 sha256 비교 | 1분 |
+| 3 | FP32 ONNX export + P1 게이트(PyTorch 와 출력 일치) | 5분 |
+| 4 | 양자화: A1 동적, SPL-b567-k32 (이상치 채널 분리 + 정적 INT8) | 5~10분 |
+| 5 | COCO-confirm 검색 3구성 + CIFAR-100 test 3구성 | 1~2시간 |
+| 6 | 속도·메모리 (다른 프로그램을 끄세요) | 10분 |
+| 7 | 기대값과 비교 표 출력 | 즉시 |
+
+- 정확도만 먼저 보려면 `SKIP_BENCH=1 bash reproduce.sh`
+- 중간에 끊겨도 다시 실행하면 이미 끝난 단계는 건너뛴다
+- 재현 결과는 `RP-` 가 붙은 이름으로 저장되어 제출본 결과를 덮어쓰지 않는다
+
+## 7. 결과 보기
+
+마지막에 이런 표가 나온다:
+
+```
+구성           항목                       제출값    재현값  판정
+A0             COCO-confirm R@1           41.79%   41.79%  일치
+SPL-b567-k32   COCO-confirm R@1           40.84%   40.84%  일치
+...
+속도 (이 PC, p50 ms) — 절대값은 CPU 마다 다름. FP32 대비 배율을 본다
+  RP-SPL-b567-k32   xx.xx ms   FP32 대비 2.xx배
+종합: 정확도 재현 성공
+```
+
+함께 생기는 파일: `results/coco_ret_confirm_repro.md`(신뢰구간 포함 표), `results/latency_repro.csv`, `logs/reproduce_*.log`.
+
+**팀원 검증이면 `logs/reproduce_*.log` 와 `results/coco_ret_confirm_repro.md` 를 보내 주세요.**
+
+### 재현 점검 기록
+
+| 날짜 | 어디서 | 방법 | 결과 |
+|---|---|---|---|
+| 10/18 | 원 실험 PC (PC00) | 빈 데이터 폴더에서 `SKIP_BENCH=1 bash reproduce.sh` (기존 파이썬 환경, 프로젝트 폴더에서 실행) | 8개 값 모두 제출값과 일치, 분할 sha256 일치 |
+| 10/18 | 원 실험 PC | zip 을 새 폴더(WSL 홈)에 풀고 모델 폴더를 비운 채 같은 명령 (양자화부터 zip 코드로 다시 생성) + 새 터미널 조건 SELFTEST | 8개 값 모두 일치, SELFTEST 통과 (run_pilot.sh 환경 자동 켜기 수정 후) |
+| 10/19 | 다른 PC (DESKTOP-J7OICDS, i9-12900, 새 WSL·새 파이썬 환경, 데이터 새로 다운로드) | 이 가이드 1~7단계 그대로, 속도 포함 | **8개 값 모두 제출값과 일치** (신뢰구간까지 동일), 분할 sha256 일치, P1 통과. 속도 p50 FP32 82.34 → SPL 34.81 ms (**2.37배**, PC00 2.28배), A1 2.97배. 로그 `logs/reproduce_20261019_0039.log`, 표 `results/coco_ret_confirm_repro_otherPC.md` |
+
+## 8. 막혔을 때
+
+| 증상 | 확인할 것 |
+|---|---|
+| `pip install` 에서 torch 를 못 찾음 | 3단계의 `--extra-index-url` 을 붙였는지 |
+| 다운로드가 멈춤·실패 | 다시 실행하면 이어 받는다. COCO 서버가 느릴 때가 있음 |
+| `Killed` 또는 메모리 부족 | 다른 프로그램 종료. `C:\Users\<이름>\.wslconfig` 에 `[wsl2]` / `memory=12GB` |
+| `$'\r': command not found` | 스크립트를 Windows 편집기로 열어 줄바꿈이 바뀜. 원본 zip 에서 다시 풀기 |
+| 분할 불일치 경고 | COCO 파일이 일부 빠졌을 수 있음. `src.download_data` 출력의 장수(5000장) 확인 |
+| 정확도가 ±0.2%p 넘게 다름 | `logs/reproduce_*.log` 첫 줄의 라이브러리 버전이 `requirements.lock.txt` 와 같은지 |
+
+## 9. Hailo 부분 (선택)
+
+- Hailo DFC 5.4.0 은 Hailo 개발자 사이트(로그인 필요)에서 받는다. **재배포 금지라 이 패키지에 넣지 않았다**
+- 설치 방법: `실행파일_bat/1-3`, `1-4` 와 `dfc/setup_and_smoke.sh`. DFC 는 `~/venvs/hailo` 에 따로 설치하고 `export CUDA_VISIBLE_DEVICES=''` 로 CPU 만 쓴다 (**GPU 가 있으면 반드시 끌 것.** DFC 가 GPU 를 잡으면 최적화 단계가 달라져 결과가 바뀔 수 있다)
+- 컴파일된 HEF 와 양자화 HAR 은 용량 때문에 별도 전달. HAR 이 있으면 `python -m dfc.final_eval --har <파일> --code RP-H-... --i-know-final` 로 에뮬레이터 평가만 재현할 수 있다
+
+## 환경 기록 (원 실험, PC00)
+
+i9-14900KF (AVX2·AVX-VNNI), RAM 23.5 GB (WSL), Windows + WSL Ubuntu 22.04, Python 3.10, torch 2.14.1+cpu, onnxruntime 1.23.2, onnx 1.23.1, numpy 2.2.6, open_clip_torch 3.3.0, CPU 4스레드, 배치 1. 전체 목록은 `requirements.lock.txt`.

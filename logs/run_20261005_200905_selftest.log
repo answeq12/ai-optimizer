@@ -1,0 +1,18 @@
+== 모드: selftest / 시각: 2026-10-05 20:09:05 / 로그: logs/run_20261005_200905_selftest.log
+== 시스템: Ubuntu 26.04.1 LTS / 커널 6.18.33.2-microsoft-standard-WSL2
+== CPU: Intel(R) Core(TM) i9-14900KF / 논리 코어 16 / 메모리 23GB
+== 디스크 여유: 홈 915G, 이 폴더 27G, D 드라이브 1.3T
+== 파이썬: Python 3.14.4
+== 파이썬 환경 만들기: /home/hongoh/venvs/halio
+The virtual environment was not created successfully because ensurepip is not
+available.  On Debian/Ubuntu systems, you need to install the python3-venv
+package using the following command.
+
+    apt install python3.14-venv
+
+You may need to use sudo with that command.  After installing the python3-venv
+package, recreate your virtual environment.
+
+Failing command: /home/hongoh/venvs/halio/bin/python3
+
+

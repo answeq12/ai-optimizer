@@ -1,0 +1,14 @@
+{
+  "run_id": "S-b5-fc2-val",
+  "top1_acc": 0.5578,
+  "std_err": 0.0049664792358369925,
+  "n": 10000,
+  "agree_with_fp32": 0.6409,
+  "mean_cosine_to_fp32": 0.9006165266036987,
+  "min_cosine_to_fp32": 0.7153647541999817,
+  "mcnemar_vs_fp32": {
+    "a_only": 1699,
+    "b_only": 397,
+    "p_value": 4.190779300139356e-191
+  }
+}

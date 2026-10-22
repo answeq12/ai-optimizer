@@ -1,0 +1,33 @@
+[qat] 블록 7 출력 텐서: /transformer/resblocks.7/Add_1_output_0
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[qat] FP32 ONNX 블록7 = torch front: 최대 오차 1.12e-03 (최대값 대비 1.3e-05)
+[qat] noisy 1000/10000 (54s)
+[qat] noisy 2000/10000 (104s)
+[qat] noisy 3000/10000 (162s)
+[qat] noisy 4000/10000 (217s)
+[qat] noisy 5000/10000 (268s)
+[qat] noisy 6000/10000 (321s)
+[qat] noisy 7000/10000 (371s)
+[qat] noisy 8000/10000 (422s)
+[qat] noisy 9000/10000 (474s)
+[qat] noisy 10000/10000 (524s)
+[qat] 블록7 양자화 오차(앞 200장, base=da): 상대 오차 0.3541  ※ base=da 면 clean 저장분이 원본 front 와 같다(블록 0~7 동일)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[qat] 명시 계산 = open_clip: 최대 오차 1.43e-06
+[qat] 학습 전: INT8 흉내 출력과 FP32 의 평균 코사인(보류 500장) 0.99333
+[qat] ep0 step 1/444 1-cos 0.00627 경과 0.1분
+[qat] ep0 step 2/444 1-cos 0.00602 경과 0.1분
+[qat] ep0 step 25/444 1-cos 0.00569 경과 1.7분
+[qat] ep0 step 50/444 1-cos 0.00571 경과 3.5분
+[qat] ep0 step 75/444 1-cos 0.00547 경과 5.2분
+[qat] ep0 step 100/444 1-cos 0.00528 경과 7.0분
+[qat] ep0 step 125/444 1-cos 0.00575 경과 8.7분
+[qat] ep1 step 150/444 1-cos 0.00467 경과 10.5분
+[qat] ep1 step 175/444 1-cos 0.00441 경과 12.3분
+[qat] ep1 step 200/444 1-cos 0.00429 경과 14.0분
+[qat] ep1 step 225/444 1-cos 0.00417 경과 15.8분
+[qat] ep1 step 250/444 1-cos 0.00435 경과 17.5분
+[qat] ep1 step 275/444 1-cos 0.00459 경과 19.3분
+[qat] ep2 step 300/444 1-cos 0.00372 경과 21.0분

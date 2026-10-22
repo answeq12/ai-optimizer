@@ -1,0 +1,22 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 14665.53it/s]
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/mnt/c/Users/PC00/Desktop/dongchan/halio project/src/coco_retrieval.py", line 275, in <module>
+    main()
+  File "/mnt/c/Users/PC00/Desktop/dongchan/halio project/src/coco_retrieval.py", line 269, in main
+    {"prepare": lambda: cmd_prepare(), "text": lambda: cmd_text(),
+  File "/mnt/c/Users/PC00/Desktop/dongchan/halio project/src/coco_retrieval.py", line 271, in <lambda>
+    "check": lambda: cmd_check(), "statslist": lambda: cmd_statslist()}[a.cmd]()
+  File "/mnt/c/Users/PC00/Desktop/dongchan/halio project/src/coco_retrieval.py", line 225, in cmd_check
+    ci.append(float(a @ b))
+ValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (n?,k),(k,m?)->(n?,m?) (size 197 is different from 512)
+!! HF 정합성 확인 실패
+[coco-ret] stats_coco_select_64.txt (64장, 측정 전용 — 캘리브레이션에 쓰지 않음)
+splits/stats_coco_select_64.txt: 캘리브레이션 사진 64장이 COCO-select 평가 사진과 겹칩니다 (예: ['000000000724.jpg', '000000000872.jpg', '000000000885.jpg']). 캘리브레이션은 coco_ret_exclude.txt 안의 사진이나 COCO train2017 에서만 뽑으세요.
+calib_coco_64_s0.txt b4: max 7 / p99.9 1.16 / 44.1칸 / hot 35 | b5: max 17 / p99.9 1.24 / 18.0칸 / hot 4 | b6: max 26 / p99.9 1.28 / 12.2칸 / hot 3 | b7: max 42 / p99.9 1.49 / 8.9칸 / hot 4 | b8: max 9 / p99.9 2.07 / 57.9칸 / hot 204
+calib_cifar_64_s0.txt b4: max 8 / p99.9 1.33 / 40.4칸 / hot 8 | b5: max 18 / p99.9 1.25 / 17.6칸 / hot 4 | b6: max 24 / p99.9 1.13 / 11.8칸 / hot 3 | b7: max 42 / p99.9 1.33 / 8.1칸 / hot 4 | b8: max 9 / p99.9 1.85 / 50.7칸 / hot 51
+rc=0

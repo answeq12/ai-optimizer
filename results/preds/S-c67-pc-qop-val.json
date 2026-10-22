@@ -1,0 +1,14 @@
+{
+  "run_id": "S-c67-pc-qop-val",
+  "top1_acc": 0.6909,
+  "std_err": 0.004621224837637745,
+  "n": 10000,
+  "agree_with_fp32": 0.8544,
+  "mean_cosine_to_fp32": 0.9704551696777344,
+  "min_cosine_to_fp32": 0.8401311635971069,
+  "mcnemar_vs_fp32": {
+    "a_only": 394,
+    "b_only": 423,
+    "p_value": 0.32728765290295525
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "run_id": "A2m-ent-val",
+  "top1_acc": 0.552,
+  "std_err": 0.004972886485734416,
+  "n": 10000,
+  "agree_with_fp32": 0.6295,
+  "mean_cosine_to_fp32": 0.8949029445648193,
+  "min_cosine_to_fp32": 0.7131788730621338,
+  "mcnemar_vs_fp32": {
+    "a_only": 1786,
+    "b_only": 426,
+    "p_value": 3.542543602704534e-197
+  }
+}

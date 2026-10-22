@@ -1,0 +1,13 @@
+{
+  "code": "R176-A1-c67-pc",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.39385126713751556,
+  "R@5": 0.6639800581636892,
+  "R@10": 0.7728292480265891,
+  "median_rank": 2.0,
+  "timestamp": "2026-10-16T10:51:52+0900",
+  "model": "/mnt/d/halio_data/models/res/r176_a1_c67_pc.onnx",
+  "backend": "onnxruntime-cpu"
+}

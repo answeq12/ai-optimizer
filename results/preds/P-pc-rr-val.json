@@ -1,0 +1,14 @@
+{
+  "run_id": "P-pc-rr-val",
+  "top1_acc": 0.02,
+  "std_err": 0.0014,
+  "n": 10000,
+  "agree_with_fp32": 0.0203,
+  "mean_cosine_to_fp32": 0.4795818328857422,
+  "min_cosine_to_fp32": 0.15273386240005493,
+  "mcnemar_vs_fp32": {
+    "a_only": 6715,
+    "b_only": 35,
+    "p_value": 0.0
+  }
+}

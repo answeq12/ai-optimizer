@@ -1,0 +1,129 @@
+"""E33: 뒤쪽 4블록(8~11) + ln_post + proj 대조 학습. 설정은 docs/02 E33 사전 등록값 고정.
+
+  python -m src.da_train --n 2000 --max-steps 30     # 파일럿(속도·메모리만)
+  python -m src.da_train --n 30000                   # 본 학습 (2에폭)
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import math
+import resource
+import time
+
+import numpy as np
+
+from . import common as C
+from . import da_common as D
+
+
+def main():
+    import torch
+    import torch.nn.functional as F
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--n", type=int, default=30000)
+    ap.add_argument("--epochs", type=int, default=2)
+    ap.add_argument("--batch", type=int, default=128)
+    ap.add_argument("--lr", type=float, default=1e-5)
+    ap.add_argument("--wd", type=float, default=0.1)
+    ap.add_argument("--warmup", type=int, default=100)
+    ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--chunk", type=int, default=4096)
+    ap.add_argument("--threads", type=int, default=16)
+    ap.add_argument("--tag", default="", help="저장 이름 꼬리표 (예: e35a → da_tail_e35a_ep2.pt). 비우면 E33 이름")
+    ap.add_argument("--bank", type=int, default=0, help="이미지→텍스트 손실에 추가하는 무작위 캡션 오답 수 (텍스트 고정이라 계산 거의 없음)")
+    ap.add_argument("--multipos", action="store_true", help="사진의 모든 캡션을 정답으로 (이미지→텍스트 쪽)")
+    ap.add_argument("--max-steps", type=int, default=0, help="파일럿: 이 스텝만 돌고 시간만 기록(가중치 저장 안 함)")
+    a = ap.parse_args()
+    torch.manual_seed(a.seed)
+    torch.set_num_threads(a.threads)
+    rng = np.random.default_rng(a.seed)
+
+    feat, meta = D.open_feat(f"train_{a.n}")
+    E = torch.from_numpy(np.load(D.FEAT_DIR / f"train_{a.n}_text.npy"))
+    cimg = np.load(D.FEAT_DIR / f"train_{a.n}_text_img.npy")
+    start = np.searchsorted(cimg, np.arange(a.n)); cnt = np.bincount(cimg, minlength=a.n)
+    assert (cnt > 0).all(), "캡션 없는 사진이 있음"
+    n = a.n
+
+    m = D.load_clip()
+    for p in m.parameters():
+        p.requires_grad_(False)
+    tail = D.make_tail(m.visual)
+    params = [p for p in tail.parameters()]
+    for p in params:
+        p.requires_grad_(True)
+    scale = float(m.logit_scale.exp())
+    D.DA_DIR.mkdir(parents=True, exist_ok=True)
+    tg = f"_{a.tag}" if a.tag else ""
+    if not a.max_steps and not (D.DA_DIR / "da_tail_init.pt").exists():
+        torch.save(D.tail_state(tail), D.DA_DIR / "da_tail_init.pt")
+    steps_per_epoch = n // a.batch
+    total = steps_per_epoch * a.epochs
+    opt = torch.optim.AdamW(params, lr=a.lr, weight_decay=a.wd, betas=(0.9, 0.98), eps=1e-6)
+    sched = torch.optim.lr_scheduler.LambdaLR(
+        opt, lambda s: (s + 1) / a.warmup if s < a.warmup else 0.5 * (1 + math.cos(math.pi * (s - a.warmup) / max(1, total - a.warmup))))
+    tail.train()
+    log, step, t0 = [], 0, time.time()
+    print(f"[da-train] 사진 {n}, 캡션 {len(cimg)}, 배치 {a.batch}, 에폭 {a.epochs} ({total}스텝), 온도 1/{scale:.1f}, 학습 파라미터 {sum(p.numel() for p in params) / 1e6:.1f}M", flush=True)
+    for ep in range(a.epochs):
+        order = rng.permutation((n + a.chunk - 1) // a.chunk)
+        run_loss, run_n = 0.0, 0
+        for ci in order:
+            s0, s1 = ci * a.chunk, min(n, (ci + 1) * a.chunk)
+            X = torch.from_numpy(np.asarray(feat[s0:s1], dtype=np.float32))
+            perm = rng.permutation(s1 - s0)
+            for b in range(0, len(perm) - a.batch + 1, a.batch):
+                ids = perm[b:b + a.batch]
+                g = s0 + ids
+                cap = start[g] + rng.integers(0, cnt[g])
+                ts = time.time()
+                img = F.normalize(tail(X[ids]), dim=-1)
+                txt = E[cap]
+                logits = scale * img @ txt.T
+                lab = torch.arange(len(ids))
+                if a.bank or a.multipos:
+                    # 이미지→텍스트: 열 = (배치 사진들의 캡션: multipos 면 전부, 아니면 뽑은 1개) + 무작위 캡션 bank
+                    if a.multipos:
+                        own = np.concatenate([np.full(cnt[x], k) for k, x in enumerate(g)])
+                        cidx = np.concatenate([np.arange(start[x], start[x] + cnt[x]) for x in g])
+                    else:
+                        own, cidx = np.arange(len(g)), cap
+                    if a.bank:
+                        bk = rng.integers(0, len(cimg), a.bank)
+                        bk = bk[~np.isin(cimg[bk], g)]          # 배치 사진의 캡션은 오답에서 뺀다
+                        own = np.concatenate([own, np.full(len(bk), -1)]); cidx = np.concatenate([cidx, bk])
+                    li = scale * img @ E[cidx].T
+                    pos = torch.from_numpy(own[None, :] == np.arange(len(g))[:, None])
+                    l_i2t = (torch.logsumexp(li, 1) - torch.logsumexp(li.masked_fill(~pos, float("-inf")), 1)).mean()
+                    loss = (l_i2t + F.cross_entropy(logits.T, lab)) / 2
+                else:
+                    loss = (F.cross_entropy(logits, lab) + F.cross_entropy(logits.T, lab)) / 2
+                opt.zero_grad(set_to_none=True)
+                loss.backward()
+                opt.step(); sched.step(); step += 1
+                run_loss += loss.item(); run_n += 1
+                if step % 20 == 0 or step <= 3:
+                    rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024
+                    el = time.time() - t0
+                    print(f"[da-train] ep{ep} step {step}/{total} loss {run_loss / run_n:.4f} "
+                          f"{(time.time() - ts) * 1000:.0f} ms/step, 경과 {el / 60:.1f}분, 예상 남은 {el / step * (total - step) / 60:.0f}분, 최대 메모리 {rss:.0f} MB", flush=True)
+                    log.append({"step": step, "loss": run_loss / run_n, "lr": sched.get_last_lr()[0], "elapsed_s": el})
+                    run_loss, run_n = 0.0, 0
+                if a.max_steps and step >= a.max_steps:
+                    el = time.time() - t0
+                    res = {"steps": step, "sec_per_step": el / step, "est_epoch_min_30k": el / step * (30000 // a.batch) / 60,
+                           "maxrss_mb": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024}
+                    (C.LOGS / "da_train_pilot.json").write_text(json.dumps(res, indent=2))
+                    print(f"[da-train] 파일럿: {res}", flush=True)
+                    return
+        if not a.max_steps:
+            torch.save(D.tail_state(tail), D.DA_DIR / f"da_tail{tg}_ep{ep + 1}.pt")
+        print(f"[da-train] 에폭 {ep + 1} 저장", flush=True)
+    (C.LOGS / f"da_train_log{tg}.json").write_text(json.dumps(
+        {"args": vars(a), "steps": step, "minutes": (time.time() - t0) / 60, "log": log}, indent=2))
+    print(f"[da-train] 완료 {step}스텝, {(time.time() - t0) / 60:.1f}분", flush=True)
+
+
+if __name__ == "__main__":
+    main()

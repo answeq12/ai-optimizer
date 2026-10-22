@@ -1,0 +1,16 @@
+run_id,config_code,backend,model_name,model_path,quant_mode,calib_method,per_channel,reduce_range,excluded_nodes,calib_source,calib_size,calib_seed,eval_set,eval_n,top1_acc,recall_at_1,recall_at_5,latency_p50_ms,latency_p95_ms,n_threads,max_rss_mb,model_size_mb,quantized_op_ratio,env_hash,timestamp,repeat_idx
+SPL-b567-k32-bench,SPL-b567-k32,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/imp/SPL-b567-k32.onnx,,,,,,,,,,,,,,28.157,29.578,4,233.9,89.82,,934e571a17,2026-10-21T05:31:58+0900,0
+A1-bench,A1,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/a1_dynamic.onnx,,,,,,,,,,,,,,22.767,24.069,4,194.7,89.0,,934e571a17,2026-10-21T05:32:06+0900,0
+A0-bench,A0,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/clip_vitb16_image_fp32.onnx,,,,,,,,,,,,,,63.689,66.023,4,499.9,344.88,,934e571a17,2026-10-21T05:32:30+0900,0
+DA-SPL-bench,DA-SPL,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models_da/imp/SPL-b567-k32.onnx,,,,,,,,,,,,,,27.722,28.861,4,200.1,89.82,,934e571a17,2026-10-21T05:32:40+0900,0
+QAT-SPL-bench,QAT-SPL,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models_qat_orig/imp/SPL-b567-k32.onnx,,,,,,,,,,,,,,27.951,28.936,4,211.2,89.82,,934e571a17,2026-10-21T05:32:49+0900,0
+A0-bench,A0,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/clip_vitb16_image_fp32.onnx,,,,,,,,,,,,,,63.971,65.56,4,481.8,344.88,,934e571a17,2026-10-21T05:33:13+0900,1
+SPL-b567-k32-bench,SPL-b567-k32,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/imp/SPL-b567-k32.onnx,,,,,,,,,,,,,,28.183,29.411,4,197.8,89.82,,934e571a17,2026-10-21T05:33:23+0900,1
+A1-bench,A1,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/a1_dynamic.onnx,,,,,,,,,,,,,,24.151,25.298,4,211.5,89.0,,934e571a17,2026-10-21T05:33:32+0900,1
+QAT-SPL-bench,QAT-SPL,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models_qat_orig/imp/SPL-b567-k32.onnx,,,,,,,,,,,,,,28.151,29.094,4,234.5,89.82,,934e571a17,2026-10-21T05:33:42+0900,1
+DA-SPL-bench,DA-SPL,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models_da/imp/SPL-b567-k32.onnx,,,,,,,,,,,,,,27.791,28.734,4,232.3,89.82,,934e571a17,2026-10-21T05:33:51+0900,1
+A1-bench,A1,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/a1_dynamic.onnx,,,,,,,,,,,,,,24.148,25.026,4,211.4,89.0,,934e571a17,2026-10-21T05:34:00+0900,2
+A0-bench,A0,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/clip_vitb16_image_fp32.onnx,,,,,,,,,,,,,,63.222,65.286,4,475.0,344.88,,934e571a17,2026-10-21T05:34:23+0900,2
+DA-SPL-bench,DA-SPL,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models_da/imp/SPL-b567-k32.onnx,,,,,,,,,,,,,,27.64,28.939,4,232.3,89.82,,934e571a17,2026-10-21T05:34:33+0900,2
+SPL-b567-k32-bench,SPL-b567-k32,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/imp/SPL-b567-k32.onnx,,,,,,,,,,,,,,27.636,29.13,4,239.2,89.82,,934e571a17,2026-10-21T05:34:44+0900,2
+QAT-SPL-bench,QAT-SPL,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models_qat_orig/imp/SPL-b567-k32.onnx,,,,,,,,,,,,,,27.53,29.11,4,234.6,89.82,,934e571a17,2026-10-21T05:34:53+0900,2

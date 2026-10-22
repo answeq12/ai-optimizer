@@ -1,0 +1,21 @@
+data/
+models/
+__pycache__/
+*.pyc
+*.part
+results/preds/*.npz
+logs/_prof_*
+
+# Hailo 계정으로 받은 설치 파일. 재배포 금지이므로 저장소에 올리지 않는다
+*.whl
+
+# GitHub 업로드용 (10/22): 100MB 초과 파일은 GitHub Release 로 따로 올림
+dist/
+repro/weights/*.pt
+# 다시 만들 수 있는 예측값·작업 로그·설치 파일
+results/**/*.npz
+hailo_sdk*.log
+allocator.log
+logs/_prof_*
+logs/profile_*.json
+installers/

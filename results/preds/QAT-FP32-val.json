@@ -1,0 +1,14 @@
+{
+  "run_id": "QAT-FP32-val",
+  "top1_acc": 0.6934,
+  "std_err": 0.004610818148658652,
+  "n": 10000,
+  "agree_with_fp32": 0.9497,
+  "mean_cosine_to_fp32": 0.9956248998641968,
+  "min_cosine_to_fp32": 0.9876882433891296,
+  "mcnemar_vs_fp32": {
+    "a_only": 107,
+    "b_only": 161,
+    "p_value": 0.0011655835720364102
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "run_id": "R192-A0-val",
+  "top1_acc": 0.6932,
+  "std_err": 0.004611656535346057,
+  "n": 10000,
+  "agree_with_fp32": 0.8232,
+  "mean_cosine_to_fp32": 0.9825763702392578,
+  "min_cosine_to_fp32": 0.903143048286438,
+  "mcnemar_vs_fp32": {
+    "a_only": 468,
+    "b_only": 520,
+    "p_value": 0.10464293693934273
+  }
+}

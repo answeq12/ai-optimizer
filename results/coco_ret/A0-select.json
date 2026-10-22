@@ -1,0 +1,13 @@
+{
+  "code": "A0",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.408890735355214,
+  "R@5": 0.6855006231823847,
+  "R@10": 0.7927710843373494,
+  "median_rank": 2.0,
+  "timestamp": "2026-10-13T21:32:21+0900",
+  "model": "/mnt/d/halio_data/models/clip_vitb16_image_fp32.onnx",
+  "backend": "onnxruntime-cpu"
+}

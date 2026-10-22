@@ -1,0 +1,13 @@
+{
+  "code": "RM-n2-s9",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.3123390112172829,
+  "R@5": 0.5885334441213128,
+  "R@10": 0.7120897382633984,
+  "median_rank": 3.0,
+  "timestamp": "2026-10-18T13:13:35+0900",
+  "model": "/mnt/d/halio_data/models/rm/clip_vitb16_rm_n2_s9.onnx",
+  "backend": "onnxruntime-cpu"
+}

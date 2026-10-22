@@ -1,0 +1,6 @@
+{
+  "max_abs_err_split_vs_full": 0.0,
+  "min_cos_fp16_cache": 0.9999997615814209,
+  "block7_absmax": 86.02684020996094,
+  "pass": true
+}

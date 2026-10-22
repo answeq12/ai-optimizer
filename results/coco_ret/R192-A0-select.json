@@ -1,0 +1,13 @@
+{
+  "code": "R192-A0",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.40174491067719154,
+  "R@5": 0.6736186123805568,
+  "R@10": 0.7843788948899044,
+  "median_rank": 2.0,
+  "timestamp": "2026-10-16T10:36:52+0900",
+  "model": "/mnt/d/halio_data/models/res/clip_vitb16_image_fp32_r192.onnx",
+  "backend": "onnxruntime-cpu"
+}

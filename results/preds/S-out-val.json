@@ -1,0 +1,14 @@
+{
+  "run_id": "S-out-val",
+  "top1_acc": 0.5418,
+  "std_err": 0.004982496964374389,
+  "n": 10000,
+  "agree_with_fp32": 0.627,
+  "mean_cosine_to_fp32": 0.9028090834617615,
+  "min_cosine_to_fp32": 0.6952505111694336,
+  "mcnemar_vs_fp32": {
+    "a_only": 1854,
+    "b_only": 392,
+    "p_value": 1.8163940283163267e-226
+  }
+}

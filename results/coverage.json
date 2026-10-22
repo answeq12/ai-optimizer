@@ -1,0 +1,1198 @@
+{
+  "A0": {
+    "model_path": "/mnt/d/halio_data/models/clip_vitb16_image_fp32.onnx",
+    "file_ops": {
+      "Conv": 1,
+      "Reshape": 109,
+      "Transpose": 97,
+      "Concat": 1,
+      "Add": 61,
+      "LayerNormalization": 26,
+      "MatMul": 61,
+      "Squeeze": 12,
+      "Gather": 37,
+      "Mul": 48,
+      "Softmax": 12,
+      "Gemm": 12,
+      "Sigmoid": 12
+    },
+    "runtime_ops": {
+      "Conv": 1,
+      "ReorderOutput": 1,
+      "Reshape": 169,
+      "Transpose": 85,
+      "Concat": 1,
+      "Add": 24,
+      "LayerNormalization": 25,
+      "Gemm": 48,
+      "Squeeze": 48,
+      "Split": 12,
+      "FusedMatMul": 12,
+      "Softmax": 12,
+      "MatMul": 13,
+      "QuickGelu": 12,
+      "SkipLayerNormalization": 1,
+      "Gather": 1
+    },
+    "runtime_matmul_split": {
+      "MatMul": {
+        "weight": 1,
+        "activation": 12
+      }
+    },
+    "compute_nodes_int": 0,
+    "compute_nodes_float": 74,
+    "quantized_op_ratio": 0.0,
+    "int_kernel_time_share": 0.0,
+    "patch_embed_conv_quantized": false,
+    "qdq_left_at_runtime": 0,
+    "top_ops_by_time": [
+      {
+        "op": "Gemm",
+        "share": 0.8655,
+        "int_kernel": false
+      },
+      {
+        "op": "Transpose",
+        "share": 0.0326,
+        "int_kernel": false
+      },
+      {
+        "op": "FusedMatMul",
+        "share": 0.0211,
+        "int_kernel": false
+      },
+      {
+        "op": "MatMul",
+        "share": 0.02,
+        "int_kernel": false
+      },
+      {
+        "op": "QuickGelu",
+        "share": 0.0128,
+        "int_kernel": false
+      },
+      {
+        "op": "LayerNormalization",
+        "share": 0.0107,
+        "int_kernel": false
+      },
+      {
+        "op": "Softmax",
+        "share": 0.0075,
+        "int_kernel": false
+      },
+      {
+        "op": "Conv",
+        "share": 0.0074,
+        "int_kernel": false
+      },
+      {
+        "op": "Reshape",
+        "share": 0.0072,
+        "int_kernel": false
+      },
+      {
+        "op": "Split",
+        "share": 0.0063,
+        "int_kernel": false
+      },
+      {
+        "op": "Add",
+        "share": 0.0059,
+        "int_kernel": false
+      },
+      {
+        "op": "Squeeze",
+        "share": 0.002,
+        "int_kernel": false
+      }
+    ],
+    "profile": "profile_A0.json",
+    "profile_runs": 30,
+    "threads": 4
+  },
+  "A1": {
+    "model_path": "/mnt/d/halio_data/models/a1_dynamic.onnx",
+    "file_ops": {
+      "Conv": 1,
+      "Reshape": 109,
+      "Transpose": 97,
+      "Concat": 1,
+      "Add": 73,
+      "LayerNormalization": 26,
+      "DynamicQuantizeLinear": 49,
+      "Mul": 146,
+      "MatMulInteger": 49,
+      "Cast": 49,
+      "Squeeze": 12,
+      "Gather": 37,
+      "MatMul": 24,
+      "Softmax": 12,
+      "Sigmoid": 12
+    },
+    "runtime_ops": {
+      "Conv": 1,
+      "ReorderOutput": 1,
+      "Reshape": 109,
+      "Transpose": 85,
+      "Concat": 1,
+      "Add": 24,
+      "LayerNormalization": 25,
+      "DynamicQuantizeMatMul": 49,
+      "Squeeze": 48,
+      "Split": 12,
+      "FusedMatMul": 12,
+      "Softmax": 12,
+      "MatMul": 12,
+      "QuickGelu": 12,
+      "SkipLayerNormalization": 1,
+      "Gather": 1
+    },
+    "runtime_matmul_split": {
+      "MatMul": {
+        "weight": 0,
+        "activation": 12
+      }
+    },
+    "compute_nodes_int": 49,
+    "compute_nodes_float": 25,
+    "quantized_op_ratio": 0.6622,
+    "int_kernel_time_share": 0.6755,
+    "patch_embed_conv_quantized": false,
+    "qdq_left_at_runtime": 0,
+    "top_ops_by_time": [
+      {
+        "op": "DynamicQuantizeMatMul",
+        "share": 0.6755,
+        "int_kernel": true
+      },
+      {
+        "op": "Transpose",
+        "share": 0.077,
+        "int_kernel": false
+      },
+      {
+        "op": "FusedMatMul",
+        "share": 0.0544,
+        "int_kernel": false
+      },
+      {
+        "op": "MatMul",
+        "share": 0.0502,
+        "int_kernel": false
+      },
+      {
+        "op": "QuickGelu",
+        "share": 0.0321,
+        "int_kernel": false
+      },
+      {
+        "op": "LayerNormalization",
+        "share": 0.0264,
+        "int_kernel": false
+      },
+      {
+        "op": "Softmax",
+        "share": 0.0194,
+        "int_kernel": false
+      },
+      {
+        "op": "Conv",
+        "share": 0.0187,
+        "int_kernel": false
+      },
+      {
+        "op": "Split",
+        "share": 0.0145,
+        "int_kernel": false
+      },
+      {
+        "op": "Add",
+        "share": 0.0145,
+        "int_kernel": false
+      },
+      {
+        "op": "Reshape",
+        "share": 0.0098,
+        "int_kernel": false
+      },
+      {
+        "op": "Squeeze",
+        "share": 0.005,
+        "int_kernel": false
+      }
+    ],
+    "profile": "profile_A1.json",
+    "profile_runs": 30,
+    "threads": 4
+  },
+  "A2": {
+    "model_path": "/mnt/d/halio_data/models/a2_static_minmax.onnx",
+    "file_ops": {
+      "DequantizeLinear": 655,
+      "QuantizeLinear": 490,
+      "Conv": 1,
+      "Reshape": 109,
+      "Transpose": 97,
+      "Concat": 1,
+      "Add": 61,
+      "LayerNormalization": 26,
+      "MatMul": 61,
+      "Squeeze": 12,
+      "Gather": 37,
+      "Mul": 48,
+      "Softmax": 12,
+      "Gemm": 12,
+      "Sigmoid": 12
+    },
+    "runtime_ops": {
+      "QuantizeLinear": 27,
+      "Transpose": 99,
+      "QLinearConv": 1,
+      "Reshape": 109,
+      "QLinearConcat": 1,
+      "QLinearAdd": 61,
+      "DequantizeLinear": 79,
+      "LayerNormalization": 26,
+      "QLinearMatMul": 61,
+      "Squeeze": 48,
+      "Split": 12,
+      "QLinearMul": 48,
+      "QLinearSoftmax": 12,
+      "QGemm": 12,
+      "QLinearSigmoid": 12,
+      "Gather": 1
+    },
+    "runtime_matmul_split": {
+      "QLinearMatMul": {
+        "weight": 61,
+        "activation": 0
+      }
+    },
+    "compute_nodes_int": 74,
+    "compute_nodes_float": 0,
+    "quantized_op_ratio": 1.0,
+    "int_kernel_time_share": 0.8599,
+    "patch_embed_conv_quantized": true,
+    "qdq_left_at_runtime": 106,
+    "top_ops_by_time": [
+      {
+        "op": "QLinearMatMul",
+        "share": 0.5773,
+        "int_kernel": true
+      },
+      {
+        "op": "QLinearAdd",
+        "share": 0.0738,
+        "int_kernel": true
+      },
+      {
+        "op": "QLinearSoftmax",
+        "share": 0.0736,
+        "int_kernel": true
+      },
+      {
+        "op": "QGemm",
+        "share": 0.0632,
+        "int_kernel": true
+      },
+      {
+        "op": "Transpose",
+        "share": 0.0613,
+        "int_kernel": false
+      },
+      {
+        "op": "QLinearMul",
+        "share": 0.0494,
+        "int_kernel": true
+      },
+      {
+        "op": "LayerNormalization",
+        "share": 0.0261,
+        "int_kernel": false
+      },
+      {
+        "op": "DequantizeLinear",
+        "share": 0.0193,
+        "int_kernel": false
+      },
+      {
+        "op": "QuantizeLinear",
+        "share": 0.0137,
+        "int_kernel": false
+      },
+      {
+        "op": "QLinearSigmoid",
+        "share": 0.0125,
+        "int_kernel": true
+      },
+      {
+        "op": "QLinearConv",
+        "share": 0.0097,
+        "int_kernel": true
+      },
+      {
+        "op": "Reshape",
+        "share": 0.0087,
+        "int_kernel": false
+      }
+    ],
+    "profile": "profile_A2.json",
+    "profile_runs": 30,
+    "threads": 4
+  },
+  "A2m": {
+    "model_path": "/mnt/d/halio_data/models/a2m_minmax.onnx",
+    "file_ops": {
+      "Conv": 1,
+      "DequantizeLinear": 159,
+      "Reshape": 109,
+      "Transpose": 97,
+      "Concat": 1,
+      "Add": 61,
+      "LayerNormalization": 26,
+      "QuantizeLinear": 98,
+      "MatMul": 61,
+      "Squeeze": 12,
+      "Gather": 37,
+      "Mul": 48,
+      "Softmax": 12,
+      "Gemm": 12,
+      "Sigmoid": 12
+    },
+    "runtime_ops": {
+      "Conv": 1,
+      "ReorderOutput": 1,
+      "Reshape": 109,
+      "Transpose": 85,
+      "Concat": 1,
+      "Add": 60,
+      "LayerNormalization": 25,
+      "QuantizeLinear": 49,
+      "QLinearMatMul": 37,
+      "DequantizeLinear": 49,
+      "Squeeze": 48,
+      "Split": 12,
+      "FusedMatMul": 12,
+      "Softmax": 12,
+      "MatMul": 12,
+      "QGemm": 12,
+      "QuickGelu": 12,
+      "SkipLayerNormalization": 1,
+      "Gather": 1
+    },
+    "runtime_matmul_split": {
+      "QLinearMatMul": {
+        "weight": 37,
+        "activation": 0
+      },
+      "MatMul": {
+        "weight": 0,
+        "activation": 12
+      }
+    },
+    "compute_nodes_int": 49,
+    "compute_nodes_float": 25,
+    "quantized_op_ratio": 0.6622,
+    "int_kernel_time_share": 0.5825,
+    "patch_embed_conv_quantized": false,
+    "qdq_left_at_runtime": 98,
+    "top_ops_by_time": [
+      {
+        "op": "QLinearMatMul",
+        "share": 0.523,
+        "int_kernel": true
+      },
+      {
+        "op": "DequantizeLinear",
+        "share": 0.0628,
+        "int_kernel": false
+      },
+      {
+        "op": "Transpose",
+        "share": 0.0606,
+        "int_kernel": false
+      },
+      {
+        "op": "QGemm",
+        "share": 0.0595,
+        "int_kernel": true
+      },
+      {
+        "op": "Add",
+        "share": 0.0496,
+        "int_kernel": false
+      },
+      {
+        "op": "FusedMatMul",
+        "share": 0.0494,
+        "int_kernel": false
+      },
+      {
+        "op": "MatMul",
+        "share": 0.0445,
+        "int_kernel": false
+      },
+      {
+        "op": "QuantizeLinear",
+        "share": 0.0332,
+        "int_kernel": false
+      },
+      {
+        "op": "QuickGelu",
+        "share": 0.0271,
+        "int_kernel": false
+      },
+      {
+        "op": "LayerNormalization",
+        "share": 0.0249,
+        "int_kernel": false
+      },
+      {
+        "op": "Softmax",
+        "share": 0.018,
+        "int_kernel": false
+      },
+      {
+        "op": "Conv",
+        "share": 0.0176,
+        "int_kernel": false
+      }
+    ],
+    "profile": "profile_A2m.json",
+    "profile_runs": 30,
+    "threads": 4
+  },
+  "S-c67-fc2": {
+    "model_path": "/mnt/d/halio_data/models/sens/S-c67-fc2.onnx",
+    "file_ops": {
+      "Conv": 1,
+      "DequantizeLinear": 153,
+      "Reshape": 109,
+      "Transpose": 97,
+      "Concat": 1,
+      "Add": 61,
+      "LayerNormalization": 26,
+      "QuantizeLinear": 94,
+      "MatMul": 61,
+      "Squeeze": 12,
+      "Gather": 37,
+      "Mul": 48,
+      "Softmax": 12,
+      "Gemm": 12,
+      "Sigmoid": 12
+    },
+    "runtime_ops": {
+      "Conv": 1,
+      "ReorderOutput": 1,
+      "Reshape": 113,
+      "Transpose": 85,
+      "Concat": 1,
+      "Add": 58,
+      "LayerNormalization": 25,
+      "QuantizeLinear": 47,
+      "QLinearMatMul": 35,
+      "DequantizeLinear": 47,
+      "Squeeze": 48,
+      "Split": 12,
+      "FusedMatMul": 12,
+      "Softmax": 12,
+      "MatMul": 12,
+      "QGemm": 12,
+      "QuickGelu": 12,
+      "Gemm": 2,
+      "SkipLayerNormalization": 1,
+      "Gather": 1
+    },
+    "runtime_matmul_split": {
+      "QLinearMatMul": {
+        "weight": 35,
+        "activation": 0
+      },
+      "MatMul": {
+        "weight": 0,
+        "activation": 12
+      }
+    },
+    "compute_nodes_int": 47,
+    "compute_nodes_float": 27,
+    "quantized_op_ratio": 0.6351,
+    "int_kernel_time_share": 0.5083,
+    "patch_embed_conv_quantized": false,
+    "qdq_left_at_runtime": 94,
+    "top_ops_by_time": [
+      {
+        "op": "QLinearMatMul",
+        "share": 0.4521,
+        "int_kernel": true
+      },
+      {
+        "op": "Gemm",
+        "share": 0.104,
+        "int_kernel": false
+      },
+      {
+        "op": "Transpose",
+        "share": 0.0577,
+        "int_kernel": false
+      },
+      {
+        "op": "DequantizeLinear",
+        "share": 0.0571,
+        "int_kernel": false
+      },
+      {
+        "op": "QGemm",
+        "share": 0.0562,
+        "int_kernel": true
+      },
+      {
+        "op": "Add",
+        "share": 0.0466,
+        "int_kernel": false
+      },
+      {
+        "op": "FusedMatMul",
+        "share": 0.0462,
+        "int_kernel": false
+      },
+      {
+        "op": "MatMul",
+        "share": 0.0421,
+        "int_kernel": false
+      },
+      {
+        "op": "QuantizeLinear",
+        "share": 0.027,
+        "int_kernel": false
+      },
+      {
+        "op": "QuickGelu",
+        "share": 0.0255,
+        "int_kernel": false
+      },
+      {
+        "op": "LayerNormalization",
+        "share": 0.0229,
+        "int_kernel": false
+      },
+      {
+        "op": "Softmax",
+        "share": 0.0169,
+        "int_kernel": false
+      }
+    ],
+    "profile": "profile_S-c67-fc2.json",
+    "profile_runs": 30,
+    "threads": 4
+  },
+  "S-c567-fc2": {
+    "model_path": "/mnt/d/halio_data/models/sens/S-c567-fc2.onnx",
+    "file_ops": {
+      "Conv": 1,
+      "DequantizeLinear": 150,
+      "Reshape": 109,
+      "Transpose": 97,
+      "Concat": 1,
+      "Add": 61,
+      "LayerNormalization": 26,
+      "QuantizeLinear": 92,
+      "MatMul": 61,
+      "Squeeze": 12,
+      "Gather": 37,
+      "Mul": 48,
+      "Softmax": 12,
+      "Gemm": 12,
+      "Sigmoid": 12
+    },
+    "runtime_ops": {
+      "Conv": 1,
+      "ReorderOutput": 1,
+      "Reshape": 115,
+      "Transpose": 85,
+      "Concat": 1,
+      "Add": 57,
+      "LayerNormalization": 25,
+      "QuantizeLinear": 46,
+      "QLinearMatMul": 34,
+      "DequantizeLinear": 46,
+      "Squeeze": 48,
+      "Split": 12,
+      "FusedMatMul": 12,
+      "Softmax": 12,
+      "MatMul": 12,
+      "QGemm": 12,
+      "QuickGelu": 12,
+      "Gemm": 3,
+      "SkipLayerNormalization": 1,
+      "Gather": 1
+    },
+    "runtime_matmul_split": {
+      "QLinearMatMul": {
+        "weight": 34,
+        "activation": 0
+      },
+      "MatMul": {
+        "weight": 0,
+        "activation": 12
+      }
+    },
+    "compute_nodes_int": 46,
+    "compute_nodes_float": 28,
+    "quantized_op_ratio": 0.6216,
+    "int_kernel_time_share": 0.4805,
+    "patch_embed_conv_quantized": false,
+    "qdq_left_at_runtime": 92,
+    "top_ops_by_time": [
+      {
+        "op": "QLinearMatMul",
+        "share": 0.4262,
+        "int_kernel": true
+      },
+      {
+        "op": "Gemm",
+        "share": 0.1508,
+        "int_kernel": false
+      },
+      {
+        "op": "Transpose",
+        "share": 0.0551,
+        "int_kernel": false
+      },
+      {
+        "op": "QGemm",
+        "share": 0.0544,
+        "int_kernel": true
+      },
+      {
+        "op": "DequantizeLinear",
+        "share": 0.0539,
+        "int_kernel": false
+      },
+      {
+        "op": "FusedMatMul",
+        "share": 0.0437,
+        "int_kernel": false
+      },
+      {
+        "op": "Add",
+        "share": 0.0424,
+        "int_kernel": false
+      },
+      {
+        "op": "MatMul",
+        "share": 0.0409,
+        "int_kernel": false
+      },
+      {
+        "op": "QuantizeLinear",
+        "share": 0.0261,
+        "int_kernel": false
+      },
+      {
+        "op": "QuickGelu",
+        "share": 0.0252,
+        "int_kernel": false
+      },
+      {
+        "op": "LayerNormalization",
+        "share": 0.0223,
+        "int_kernel": false
+      },
+      {
+        "op": "Softmax",
+        "share": 0.0164,
+        "int_kernel": false
+      }
+    ],
+    "profile": "profile_S-c567-fc2.json",
+    "profile_runs": 30,
+    "threads": 4
+  },
+  "S-c67-pc": {
+    "model_path": "/mnt/d/halio_data/models/imp/c67_pc.onnx",
+    "file_ops": {
+      "Conv": 1,
+      "DequantizeLinear": 153,
+      "Reshape": 109,
+      "Transpose": 97,
+      "Concat": 1,
+      "Add": 61,
+      "LayerNormalization": 26,
+      "QuantizeLinear": 94,
+      "MatMul": 61,
+      "Squeeze": 12,
+      "Gather": 37,
+      "Mul": 48,
+      "Softmax": 12,
+      "Gemm": 12,
+      "Sigmoid": 12
+    },
+    "runtime_ops": {
+      "Conv": 1,
+      "ReorderOutput": 1,
+      "Reshape": 113,
+      "Transpose": 85,
+      "Concat": 1,
+      "Add": 58,
+      "LayerNormalization": 25,
+      "QuantizeLinear": 47,
+      "QLinearMatMul": 35,
+      "DequantizeLinear": 47,
+      "Squeeze": 48,
+      "Split": 12,
+      "FusedMatMul": 12,
+      "Softmax": 12,
+      "MatMul": 12,
+      "QGemm": 12,
+      "QuickGelu": 12,
+      "Gemm": 2,
+      "SkipLayerNormalization": 1,
+      "Gather": 1
+    },
+    "runtime_matmul_split": {
+      "QLinearMatMul": {
+        "weight": 35,
+        "activation": 0
+      },
+      "MatMul": {
+        "weight": 0,
+        "activation": 12
+      }
+    },
+    "compute_nodes_int": 47,
+    "compute_nodes_float": 27,
+    "quantized_op_ratio": 0.6351,
+    "int_kernel_time_share": 0.517,
+    "patch_embed_conv_quantized": false,
+    "qdq_left_at_runtime": 94,
+    "top_ops_by_time": [
+      {
+        "op": "QLinearMatMul",
+        "share": 0.459,
+        "int_kernel": true
+      },
+      {
+        "op": "Gemm",
+        "share": 0.1033,
+        "int_kernel": false
+      },
+      {
+        "op": "QGemm",
+        "share": 0.058,
+        "int_kernel": true
+      },
+      {
+        "op": "Transpose",
+        "share": 0.0574,
+        "int_kernel": false
+      },
+      {
+        "op": "DequantizeLinear",
+        "share": 0.0565,
+        "int_kernel": false
+      },
+      {
+        "op": "FusedMatMul",
+        "share": 0.0449,
+        "int_kernel": false
+      },
+      {
+        "op": "Add",
+        "share": 0.0445,
+        "int_kernel": false
+      },
+      {
+        "op": "MatMul",
+        "share": 0.0413,
+        "int_kernel": false
+      },
+      {
+        "op": "QuantizeLinear",
+        "share": 0.0275,
+        "int_kernel": false
+      },
+      {
+        "op": "QuickGelu",
+        "share": 0.0246,
+        "int_kernel": false
+      },
+      {
+        "op": "LayerNormalization",
+        "share": 0.0226,
+        "int_kernel": false
+      },
+      {
+        "op": "Softmax",
+        "share": 0.0161,
+        "int_kernel": false
+      }
+    ],
+    "profile": "profile_S-c67-pc.json",
+    "profile_runs": 30,
+    "threads": 4
+  },
+  "S-c67-pc-qop": {
+    "model_path": "/mnt/d/halio_data/models/imp/c67_pc_qop.onnx",
+    "file_ops": {
+      "Conv": 1,
+      "Reshape": 109,
+      "Transpose": 97,
+      "Concat": 1,
+      "Add": 61,
+      "LayerNormalization": 26,
+      "QuantizeLinear": 47,
+      "QLinearMatMul": 35,
+      "DequantizeLinear": 47,
+      "Squeeze": 12,
+      "Gather": 37,
+      "Mul": 48,
+      "MatMul": 26,
+      "Softmax": 12,
+      "QGemm": 12,
+      "Sigmoid": 12
+    },
+    "runtime_ops": {
+      "Conv": 1,
+      "ReorderOutput": 1,
+      "Reshape": 113,
+      "Transpose": 85,
+      "Concat": 1,
+      "Add": 58,
+      "LayerNormalization": 25,
+      "QuantizeLinear": 47,
+      "QLinearMatMul": 35,
+      "DequantizeLinear": 47,
+      "Squeeze": 48,
+      "Split": 12,
+      "FusedMatMul": 12,
+      "Softmax": 12,
+      "MatMul": 12,
+      "QGemm": 12,
+      "QuickGelu": 12,
+      "Gemm": 2,
+      "SkipLayerNormalization": 1,
+      "Gather": 1
+    },
+    "runtime_matmul_split": {
+      "QLinearMatMul": {
+        "weight": 35,
+        "activation": 0
+      },
+      "MatMul": {
+        "weight": 0,
+        "activation": 12
+      }
+    },
+    "compute_nodes_int": 47,
+    "compute_nodes_float": 27,
+    "quantized_op_ratio": 0.6351,
+    "int_kernel_time_share": 0.5163,
+    "patch_embed_conv_quantized": false,
+    "qdq_left_at_runtime": 94,
+    "top_ops_by_time": [
+      {
+        "op": "QLinearMatMul",
+        "share": 0.4598,
+        "int_kernel": true
+      },
+      {
+        "op": "Gemm",
+        "share": 0.1026,
+        "int_kernel": false
+      },
+      {
+        "op": "QGemm",
+        "share": 0.0566,
+        "int_kernel": true
+      },
+      {
+        "op": "Transpose",
+        "share": 0.056,
+        "int_kernel": false
+      },
+      {
+        "op": "DequantizeLinear",
+        "share": 0.0557,
+        "int_kernel": false
+      },
+      {
+        "op": "FusedMatMul",
+        "share": 0.0459,
+        "int_kernel": false
+      },
+      {
+        "op": "Add",
+        "share": 0.0456,
+        "int_kernel": false
+      },
+      {
+        "op": "MatMul",
+        "share": 0.0423,
+        "int_kernel": false
+      },
+      {
+        "op": "QuantizeLinear",
+        "share": 0.0272,
+        "int_kernel": false
+      },
+      {
+        "op": "QuickGelu",
+        "share": 0.0251,
+        "int_kernel": false
+      },
+      {
+        "op": "LayerNormalization",
+        "share": 0.0227,
+        "int_kernel": false
+      },
+      {
+        "op": "Softmax",
+        "share": 0.0169,
+        "int_kernel": false
+      }
+    ],
+    "profile": "profile_S-c67-pc-qop.json",
+    "profile_runs": 30,
+    "threads": 4
+  },
+  "SPL-b567-k32": {
+    "model_path": "/mnt/d/halio_data/models/imp/SPL-b567-k32.onnx",
+    "file_ops": {
+      "DequantizeLinear": 159,
+      "Conv": 1,
+      "Reshape": 109,
+      "Transpose": 97,
+      "Concat": 1,
+      "Add": 64,
+      "LayerNormalization": 26,
+      "QuantizeLinear": 98,
+      "MatMul": 64,
+      "Squeeze": 12,
+      "Gather": 43,
+      "Mul": 48,
+      "Softmax": 12,
+      "Gemm": 12,
+      "Sigmoid": 12
+    },
+    "runtime_ops": {
+      "Conv": 1,
+      "ReorderOutput": 1,
+      "Reshape": 109,
+      "Transpose": 85,
+      "Concat": 1,
+      "Add": 63,
+      "LayerNormalization": 25,
+      "QuantizeLinear": 49,
+      "QLinearMatMul": 37,
+      "DequantizeLinear": 49,
+      "Squeeze": 48,
+      "Split": 12,
+      "FusedMatMul": 12,
+      "Softmax": 12,
+      "MatMul": 15,
+      "QGemm": 12,
+      "QuickGelu": 12,
+      "Gather": 7,
+      "SkipLayerNormalization": 1
+    },
+    "runtime_matmul_split": {
+      "QLinearMatMul": {
+        "weight": 37,
+        "activation": 0
+      },
+      "MatMul": {
+        "weight": 3,
+        "activation": 12
+      }
+    },
+    "compute_nodes_int": 49,
+    "compute_nodes_float": 28,
+    "quantized_op_ratio": 0.6364,
+    "int_kernel_time_share": 0.5633,
+    "patch_embed_conv_quantized": false,
+    "qdq_left_at_runtime": 98,
+    "top_ops_by_time": [
+      {
+        "op": "QLinearMatMul",
+        "share": 0.5037,
+        "int_kernel": true
+      },
+      {
+        "op": "QGemm",
+        "share": 0.0596,
+        "int_kernel": true
+      },
+      {
+        "op": "Transpose",
+        "share": 0.0585,
+        "int_kernel": false
+      },
+      {
+        "op": "DequantizeLinear",
+        "share": 0.0579,
+        "int_kernel": false
+      },
+      {
+        "op": "Add",
+        "share": 0.049,
+        "int_kernel": false
+      },
+      {
+        "op": "FusedMatMul",
+        "share": 0.0478,
+        "int_kernel": false
+      },
+      {
+        "op": "MatMul",
+        "share": 0.046,
+        "int_kernel": false
+      },
+      {
+        "op": "Gather",
+        "share": 0.0377,
+        "int_kernel": false
+      },
+      {
+        "op": "QuantizeLinear",
+        "share": 0.0299,
+        "int_kernel": false
+      },
+      {
+        "op": "QuickGelu",
+        "share": 0.0263,
+        "int_kernel": false
+      },
+      {
+        "op": "LayerNormalization",
+        "share": 0.0225,
+        "int_kernel": false
+      },
+      {
+        "op": "Softmax",
+        "share": 0.0169,
+        "int_kernel": false
+      }
+    ],
+    "profile": "profile_SPL-b567-k32.json",
+    "profile_runs": 30,
+    "threads": 4
+  },
+  "A1-c67-pc": {
+    "model_path": "/mnt/d/halio_data/models/imp/a1_c67_pc.onnx",
+    "file_ops": {
+      "Conv": 1,
+      "Reshape": 109,
+      "Transpose": 97,
+      "Concat": 1,
+      "Add": 73,
+      "LayerNormalization": 26,
+      "DynamicQuantizeLinear": 47,
+      "Mul": 142,
+      "MatMulInteger": 47,
+      "Cast": 47,
+      "Squeeze": 12,
+      "Gather": 37,
+      "MatMul": 26,
+      "Softmax": 12,
+      "Sigmoid": 12
+    },
+    "runtime_ops": {
+      "Conv": 1,
+      "ReorderOutput": 1,
+      "Reshape": 113,
+      "Transpose": 85,
+      "Concat": 1,
+      "Add": 24,
+      "LayerNormalization": 25,
+      "DynamicQuantizeMatMul": 47,
+      "Squeeze": 48,
+      "Split": 12,
+      "FusedMatMul": 12,
+      "Softmax": 12,
+      "MatMul": 12,
+      "QuickGelu": 12,
+      "Gemm": 2,
+      "SkipLayerNormalization": 1,
+      "Gather": 1
+    },
+    "runtime_matmul_split": {
+      "MatMul": {
+        "weight": 0,
+        "activation": 12
+      }
+    },
+    "compute_nodes_int": 47,
+    "compute_nodes_float": 27,
+    "quantized_op_ratio": 0.6351,
+    "int_kernel_time_share": 0.5947,
+    "patch_embed_conv_quantized": false,
+    "qdq_left_at_runtime": 0,
+    "top_ops_by_time": [
+      {
+        "op": "DynamicQuantizeMatMul",
+        "share": 0.5947,
+        "int_kernel": true
+      },
+      {
+        "op": "Gemm",
+        "share": 0.1121,
+        "int_kernel": false
+      },
+      {
+        "op": "Transpose",
+        "share": 0.0701,
+        "int_kernel": false
+      },
+      {
+        "op": "FusedMatMul",
+        "share": 0.0488,
+        "int_kernel": false
+      },
+      {
+        "op": "MatMul",
+        "share": 0.0453,
+        "int_kernel": false
+      },
+      {
+        "op": "QuickGelu",
+        "share": 0.0278,
+        "int_kernel": false
+      },
+      {
+        "op": "LayerNormalization",
+        "share": 0.0243,
+        "int_kernel": false
+      },
+      {
+        "op": "Softmax",
+        "share": 0.0183,
+        "int_kernel": false
+      },
+      {
+        "op": "Conv",
+        "share": 0.0166,
+        "int_kernel": false
+      },
+      {
+        "op": "Split",
+        "share": 0.0133,
+        "int_kernel": false
+      },
+      {
+        "op": "Add",
+        "share": 0.0127,
+        "int_kernel": false
+      },
+      {
+        "op": "Reshape",
+        "share": 0.009,
+        "int_kernel": false
+      }
+    ],
+    "profile": "profile_A1-c67-pc.json",
+    "profile_runs": 30,
+    "threads": 4
+  }
+}

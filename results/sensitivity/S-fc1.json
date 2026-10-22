@@ -1,0 +1,21 @@
+{
+  "code": "S-fc1",
+  "spec": "kind:fc1",
+  "n_nodes": 12,
+  "nodes": [
+    "/transformer/resblocks.0/mlp/c_fc/MatMul",
+    "/transformer/resblocks.1/mlp/c_fc/MatMul",
+    "/transformer/resblocks.2/mlp/c_fc/MatMul",
+    "/transformer/resblocks.3/mlp/c_fc/MatMul",
+    "/transformer/resblocks.4/mlp/c_fc/MatMul",
+    "/transformer/resblocks.5/mlp/c_fc/MatMul",
+    "/transformer/resblocks.6/mlp/c_fc/MatMul",
+    "/transformer/resblocks.7/mlp/c_fc/MatMul",
+    "/transformer/resblocks.8/mlp/c_fc/MatMul",
+    "/transformer/resblocks.9/mlp/c_fc/MatMul",
+    "/transformer/resblocks.10/mlp/c_fc/MatMul",
+    "/transformer/resblocks.11/mlp/c_fc/MatMul"
+  ],
+  "base": "A2m",
+  "timestamp": "2026-10-06T19:32:24+0900"
+}

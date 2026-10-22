@@ -1,0 +1,106 @@
+{
+  "timestamp": "2026-10-17T22:47:47+0900",
+  "net": "clip_vit_b_16_image_encoder",
+  "hw_arch": "hailo10h",
+  "args": {
+    "onnx": "official",
+    "hw_arch": "hailo10h",
+    "calib_list": "splits/calib_coco_64_s1.txt",
+    "eval_n": 300,
+    "compile": false,
+    "tag": "coco64_s1_fc2b7",
+    "fc2_16bit_blocks": "7",
+    "fc2_precision": "a16_w16",
+    "from_har": "",
+    "save_preds": false
+  },
+  "stages": {
+    "import": {
+      "ok": true,
+      "seconds": 6.6
+    },
+    "onnx": {
+      "ok": true,
+      "seconds": 2.1
+    },
+    "parse": {
+      "ok": true,
+      "seconds": 14.7
+    },
+    "model_script": {
+      "ok": true,
+      "seconds": 0.1
+    },
+    "optimize": {
+      "ok": true,
+      "seconds": 228.4
+    },
+    "emulator_eval": {
+      "ok": true,
+      "seconds": 200.6
+    }
+  },
+  "env": {
+    "os": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "kernel": "6.18.33.2-microsoft-standard-WSL2",
+    "is_wsl": true,
+    "python": "3.10.12",
+    "cpu": {
+      "model": "x86_64",
+      "flags": [
+        "avx2",
+        "avx_vnni",
+        "fma",
+        "sse4_2"
+      ],
+      "model_name": "Intel(R) Core(TM) i9-14900KF",
+      "logical_cpus": 16
+    },
+    "mem_total_gb": 23.5,
+    "versions": {
+      "numpy": "1.26.4",
+      "onnx": "1.17.0",
+      "onnxruntime": "1.18.0",
+      "torch": "2.9.1+cpu",
+      "open_clip": null,
+      "PIL": "12.3.0"
+    },
+    "git_commit": "",
+    "store_dir": "/mnt/d/halio_data"
+  },
+  "dfc_version": "5.4.0",
+  "tensorflow": "2.19.1",
+  "tf_gpus": [],
+  "onnx": {
+    "path": "/mnt/d/halio_data/hailo/official/clip_vit_b_16.onnx",
+    "size_mb": 344.84,
+    "sha256": "a77e071877284bf78ba38ad9a7769536dd3ebf55e06b15234f72f63d80155111"
+  },
+  "alls_source": "hailo_model_zoo-5.4.0-py3-none-any.whl: cfg/alls/generic/clip_vit_b_16_image_encoder.alls",
+  "fc2_16bit": {
+    "blocks": [
+      7
+    ],
+    "layers": [
+      "conv33"
+    ],
+    "resolved_by": "shape 3072->768 (graph order)",
+    "alls_line": "quantization_param([conv33], precision_mode=a16_w16)"
+  },
+  "calib": {
+    "list": "calib_coco_64_s1.txt",
+    "n": 64,
+    "sha256": "4a87249c06d821a8d6b76d2f6c650043444a5ef79fbdaeff86a5a4d2adb2ff27",
+    "input": "uint8 0~255 NHWC (정규화는 네트워크 안)"
+  },
+  "emulator_eval": {
+    "n": 300,
+    "eval_set": "val 일부(간이)",
+    "mean_cosine_fp_vs_quantized": 0.9263933300971985,
+    "min_cosine_fp_vs_quantized": 0.8270368576049805,
+    "top1_fp_H0": 0.7,
+    "top1_quantized_H1": 0.6666666666666666,
+    "agree_fp_vs_quantized": 0.75,
+    "std_err_pp": 2.721655269759087
+  }
+}

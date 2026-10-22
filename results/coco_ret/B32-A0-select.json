@@ -1,0 +1,13 @@
+{
+  "code": "B32-A0",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.3857914416285833,
+  "R@5": 0.6640631491483174,
+  "R@10": 0.7749896136269214,
+  "median_rank": 2.0,
+  "timestamp": "2026-10-20T01:52:25+0900",
+  "model": "/mnt/d/halio_data/models_b32/clip_vitb16_image_fp32.onnx",
+  "backend": "onnxruntime-cpu"
+}

@@ -1,0 +1,70 @@
+quick 목록 564 장, 캡션 2820 개
+== 빠른 재현 시작 2026-10-20 01:24:28 / 큰 파일: /mnt/d/halio_quickcheck
+== 1/5 데이터 (CIFAR-100 + COCO 564장)
+[cifar] 이미 있음: /mnt/d/halio_quickcheck/data/cifar-100-python
+[quick] 100/564
+[quick] 200/564
+[quick] 300/564
+[quick] 400/564
+[quick] 500/564
+[quick] COCO 사진 564장 준비 (새로 받음 564장): /mnt/d/halio_quickcheck/data/coco/val2017
+== 2/5 분할 파일 sha256 확인
+   분할 일치
+== 3/5 FP32 ONNX export + P1 게이트
+[export] clip_vitb16_image_fp32.onnx: 344.88 MB, opset 17, 노드 996 -> 489개 (상수 폴딩)
+[P1] 최대 절대 오차 1.03e-05 (기준 1e-04), 최소 코사인 1.000000 (기준 0.9999) -> 통과
+[text] text_emb_cifar100.npy: (100, 512)
+== 4/5 양자화 (SPL-b567-k32)
+[prep] clip_vitb16_image_fp32.prep.onnx 생성 (symbolic+onnx shape inference (ORT optimization skipped))
+[split] 블록 5: hot [112, 278, 343, 385, 457, 665, 737, 762, 873, 924, 956, 966, 1124, 1167, 1202, 1297, 1357, 1541, 1729, 1862, 1906, 1979, 2256, 2333, 2388, 2417, 2463, 2524, 2562, 2645, 2838, 2873] (|x| ['5.8', '4.2', '4.1', '3.5', '3.9', '3.8', '3.6', '4.5', '4.0', '9.6', '3.8', '4.0', '3.7', '3.7', '3.6', '3.6', '4.7', '17.4', '3.8', '4.1', '3.8', '5.2', '16.1', '4.7', '3.6', '4.0', '3.6', '3.8', '14.9', '3.7', '3.7', '3.6']) -> 나머지 최대 3.5 (분리 전 17.4)
+[split] 블록 6: hot [19, 95, 112, 186, 196, 290, 337, 391, 424, 514, 944, 959, 1105, 1300, 1484, 1546, 1651, 1710, 1721, 1728, 1744, 1778, 2202, 2212, 2238, 2450, 2518, 2600, 2823, 2928, 2984, 3051] (|x| ['8.7', '6.0', '5.3', '4.1', '4.2', '4.3', '4.0', '4.0', '4.0', '4.1', '5.0', '4.3', '4.2', '4.1', '5.8', '4.1', '3.9', '26.5', '4.6', '4.2', '4.2', '4.0', '3.9', '25.4', '4.3', '4.1', '4.9', '5.2', '4.5', '5.0', '4.5', '25.6']) -> 나머지 최대 3.9 (분리 전 26.5)
+[split] 블록 7: hot [48, 244, 246, 558, 747, 753, 1026, 1078, 1101, 1362, 1435, 1612, 1661, 1830, 1906, 1929, 1991, 2078, 2093, 2348, 2423, 2629, 2663, 2681, 2704, 2786, 2915, 2922, 2975, 2992, 3015, 3033] (|x| ['4.9', '4.7', '4.6', '4.7', '4.6', '4.8', '5.8', '4.4', '4.3', '4.3', '42.3', '4.6', '5.6', '4.4', '4.4', '4.9', '4.3', '40.7', '31.1', '4.3', '4.9', '28.1', '4.4', '4.8', '4.8', '4.7', '4.3', '17.6', '4.3', '4.3', '4.5', '5.4']) -> 나머지 최대 4.3 (분리 전 42.3)
+[split] 저장 split_SPL-b567-k32.fp32.onnx, 원본 대비 최소 코사인 0.9999999
+[quant] 가중치 MatMul 만 양자화: 49개 (A1 동적은 49개)
+[quant] SPL-b567-k32.onnx: 89.82 MB (static, minmax, per-channel, 제외 3개)
+== 5/5 정확도 (COCO-confirm 앞 500장, CIFAR-100 test 앞 2,000장)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[coco-ret] confirm: 캡션 2500개 임베딩 (29s)
+  500/500 (36s)
+[coco-ret] RPQ-A0 (confirm, 이미지 500 / 캡션 2500): R@1 63.12%  R@5 88.36%  R@10 95.68%
+[eval] RPQ-A0-test2000-test: /mnt/d/halio_quickcheck/models/clip_vitb16_image_fp32.onnx / test 2000장
+  500/2000  (34s)
+  1000/2000  (68s)
+  1500/2000  (102s)
+  2000/2000  (135s)
+[eval] RPQ-A0-test2000-test: top-1 69.00% (표준오차 ±1.03%p, n=2000)
+  500/500 (19s)
+[coco-ret] RPQ-SPL-b567-k32 (confirm, 이미지 500 / 캡션 2500): R@1 62.72%  R@5 88.00%  R@10 95.80%
+[eval] RPQ-SPL-b567-k32-test2000-test: /mnt/d/halio_quickcheck/models/imp/SPL-b567-k32.onnx / test 2000장
+  500/2000  (13s)
+  1000/2000  (27s)
+  1500/2000  (43s)
+  2000/2000  (57s)
+[eval] RPQ-SPL-b567-k32-test2000-test: top-1 69.05% (표준오차 ±1.03%p, n=2000)
+Traceback (most recent call last):
+  File "/mnt/c/Users/PC00/Desktop/dongchan/halio project/repro/check_expected.py", line 6, in <module>
+    R = Path("results"); E = json.loads(Path("repro/EXPECTED_QUICK.json" if QUICK else "repro/EXPECTED.json").read_text())
+  File "/usr/lib/python3.10/pathlib.py", line 1134, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+FileNotFoundError: [Errno 2] No such file or directory: 'repro/EXPECTED_QUICK.json'
+(첫 실행: 기대값 파일이 아직 없어 비교 단계 실패는 정상)
+[교차] A0: 빠른 재현 R@1 0.6312 / 저장 결과로 계산 0.6312 | test2000 0.6900 / 0.6900
+[교차] SPL-b567-k32: 빠른 재현 R@1 0.6272 / 저장 결과로 계산 0.6272 | test2000 0.6905 / 0.6905
+EXPECTED_QUICK 작성
+구성             항목                          제출값      재현값  판정
+A0             COCO-confirm R@1         63.12%   63.12%  일치
+A0             COCO-confirm R@5         88.36%   88.36%  일치
+A0             COCO-confirm R@10        95.68%   95.68%  일치
+A0             CIFAR-100 test top-1     69.00%   69.00%  일치
+SPL-b567-k32   COCO-confirm R@1         62.72%   62.72%  일치
+SPL-b567-k32   COCO-confirm R@5         88.00%   88.00%  일치
+SPL-b567-k32   COCO-confirm R@10        95.80%   95.80%  일치
+SPL-b567-k32   CIFAR-100 test top-1     69.05%   69.05%  일치
+
+(빠른 재현: 속도 측정 없음. 갤러리 500장이라 R@K 는 보고서 값보다 높다 — 기대값도 같은 조건)
+
+종합: 정확도 재현 성공
+rc=0

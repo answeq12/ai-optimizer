@@ -1,0 +1,14 @@
+{
+  "run_id": "RPV-A0-test",
+  "top1_acc": 0.6801,
+  "std_err": 0.0046643755209030925,
+  "n": 10000,
+  "agree_with_fp32": 1.0,
+  "mean_cosine_to_fp32": 1.0,
+  "min_cosine_to_fp32": 0.9999996423721313,
+  "mcnemar_vs_fp32": {
+    "a_only": 0,
+    "b_only": 0,
+    "p_value": 1.0
+  }
+}

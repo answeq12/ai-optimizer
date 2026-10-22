@@ -1,0 +1,13 @@
+{
+  "code": "R160-A1-c67-pc",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.37582052347320316,
+  "R@5": 0.6472787702534275,
+  "R@10": 0.7607810552555048,
+  "median_rank": 3.0,
+  "timestamp": "2026-10-16T11:03:39+0900",
+  "model": "/mnt/d/halio_data/models/res/r160_a1_c67_pc.onnx",
+  "backend": "onnxruntime-cpu"
+}

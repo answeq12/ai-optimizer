@@ -1,0 +1,95 @@
+{
+  "timestamp": "2026-10-14T16:48:22+0900",
+  "onnx": {
+    "path": "/mnt/d/halio_data/hailo/text/official/clip_text_encoder_vitb_16_sim.onnx",
+    "size_mb": 151.58,
+    "sha256": "61927a791e937dcb7884c02d4f924c57ed9bfd403f54bd336cbd30700e518465"
+  },
+  "inspect": {
+    "inputs": [
+      {
+        "name": "onnx::Add_150",
+        "elem_type": 1,
+        "shape": [
+          "batch_size",
+          77,
+          512
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "onnx::Cast_1713",
+        "elem_type": 1,
+        "shape": [
+          "unk__287",
+          77,
+          512
+        ]
+      }
+    ],
+    "n_nodes": 576,
+    "start": {
+      "name": "Add_1",
+      "found": true,
+      "op": "Add",
+      "inputs": [
+        "onnx::Add_150",
+        "positional_embedding"
+      ],
+      "outputs": [
+        "onnx::Transpose_151"
+      ],
+      "inputs_const": [
+        false,
+        true
+      ],
+      "input_producers": [
+        "graph_input/initializer",
+        "graph_input/initializer"
+      ]
+    },
+    "end": {
+      "name": "Add_1515",
+      "found": true,
+      "op": "Add",
+      "inputs": [
+        "onnx::Add_1712",
+        "ln_final.bias"
+      ],
+      "outputs": [
+        "onnx::Cast_1713"
+      ],
+      "inputs_const": [
+        false,
+        true
+      ],
+      "input_producers": [
+        "Mul",
+        "graph_input/initializer"
+      ]
+    },
+    "ops_after_end": []
+  },
+  "captions": {
+    "calib_source": "splits/coco_ret_exclude.txt 이미지의 captions_val2017",
+    "n_calib": 946,
+    "check_source": "select 캡션 500개 (일정 간격, 간이 확인용)"
+  },
+  "host_post_vs_open_clip": {
+    "min_cos": 0.9999998807907104,
+    "mean_cos": 1.0
+  },
+  "ln_final_in_graph": true,
+  "hailo_input": {
+    "onnx_input": "float 77x512",
+    "end_vs_open_clip_min_cos_by_candidate": {
+      "tok": 0.9999999403953552,
+      "tok_plus_pos": 0.8609013557434082
+    },
+    "choice": "tok",
+    "verified": true
+  },
+  "prep_npz": "/mnt/d/halio_data/hailo/text/prep.npz",
+  "seconds": 34.9
+}

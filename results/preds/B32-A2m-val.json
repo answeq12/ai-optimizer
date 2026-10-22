@@ -1,0 +1,14 @@
+{
+  "run_id": "B32-A2m-val",
+  "top1_acc": 0.6539,
+  "std_err": 0.00475725540621901,
+  "n": 10000,
+  "agree_with_fp32": 0.6582,
+  "mean_cosine_to_fp32": 0.007715349551290274,
+  "min_cosine_to_fp32": -0.10669022798538208,
+  "mcnemar_vs_fp32": {
+    "a_only": 1206,
+    "b_only": 865,
+    "p_value": 7.002889616782193e-14
+  }
+}

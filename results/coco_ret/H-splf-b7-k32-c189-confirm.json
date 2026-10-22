@@ -1,0 +1,16 @@
+{
+  "code": "H-splf-b7-k32-c189",
+  "split": "confirm",
+  "n_images": 2406,
+  "n_captions": 12033,
+  "R@1": 0.39757333998171696,
+  "R@5": 0.6632593700656528,
+  "R@10": 0.7752015291282307,
+  "median_rank": 2.0,
+  "timestamp": "2026-10-18T19:57:00+0900",
+  "har": "/mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.splf_b7_k32_c189.quantized.har",
+  "backend": "hailo-dfc-emulator",
+  "input": "uint8 0~255 NHWC",
+  "context": "sdk_quantized",
+  "seconds": 927
+}

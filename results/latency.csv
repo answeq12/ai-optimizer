@@ -1,0 +1,10 @@
+run_id,config_code,backend,model_name,model_path,quant_mode,calib_method,per_channel,reduce_range,excluded_nodes,calib_source,calib_size,calib_seed,eval_set,eval_n,top1_acc,recall_at_1,recall_at_5,latency_p50_ms,latency_p95_ms,n_threads,max_rss_mb,model_size_mb,quantized_op_ratio,env_hash,timestamp,repeat_idx
+A0-bench,A0,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/clip_vitb16_image_fp32.onnx,,,,,,,,,,,,,,63.707,66.227,4,515.6,344.88,,934e571a17,2026-10-05T21:04:24+0900,0
+A2-bench,A2,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/a2_static_minmax.onnx,,,,,,,,,,,,,,24.289,25.52,4,208.0,86.86,,934e571a17,2026-10-05T21:04:32+0900,0
+A1-bench,A1,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/a1_dynamic.onnx,,,,,,,,,,,,,,23.814,25.43,4,194.8,89.0,,934e571a17,2026-10-05T21:04:40+0900,0
+A2-bench,A2,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/a2_static_minmax.onnx,,,,,,,,,,,,,,24.008,26.175,4,208.1,86.86,,934e571a17,2026-10-05T21:04:49+0900,1
+A1-bench,A1,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/a1_dynamic.onnx,,,,,,,,,,,,,,23.622,26.361,4,197.1,89.0,,934e571a17,2026-10-05T21:04:57+0900,1
+A0-bench,A0,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/clip_vitb16_image_fp32.onnx,,,,,,,,,,,,,,64.258,66.522,4,544.8,344.88,,934e571a17,2026-10-05T21:05:20+0900,1
+A0-bench,A0,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/clip_vitb16_image_fp32.onnx,,,,,,,,,,,,,,64.3,69.572,4,483.7,344.88,,934e571a17,2026-10-05T21:05:42+0900,2
+A1-bench,A1,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/a1_dynamic.onnx,,,,,,,,,,,,,,24.103,25.306,4,197.1,89.0,,934e571a17,2026-10-05T21:05:50+0900,2
+A2-bench,A2,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/a2_static_minmax.onnx,,,,,,,,,,,,,,24.279,25.473,4,165.2,86.86,,934e571a17,2026-10-05T21:05:59+0900,2

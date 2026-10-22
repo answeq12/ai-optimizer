@@ -1,0 +1,16 @@
+{
+  "code": "H-fc2b7",
+  "split": "confirm",
+  "n_images": 2406,
+  "n_captions": 12033,
+  "R@1": 0.39807196875259704,
+  "R@5": 0.6591041303083188,
+  "R@10": 0.7700490318291365,
+  "median_rank": 2.0,
+  "timestamp": "2026-10-17T22:47:42+0900",
+  "har": "/mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.coco64_fc2b7.quantized.har",
+  "backend": "hailo-dfc-emulator",
+  "input": "uint8 0~255 NHWC",
+  "context": "sdk_quantized",
+  "seconds": 883
+}

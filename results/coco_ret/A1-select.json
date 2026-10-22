@@ -1,0 +1,13 @@
+{
+  "code": "A1",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.3932696302451184,
+  "R@5": 0.6685500623182384,
+  "R@10": 0.7794765267968425,
+  "median_rank": 2.0,
+  "timestamp": "2026-10-13T21:35:53+0900",
+  "model": "/mnt/d/halio_data/models/a1_dynamic.onnx",
+  "backend": "onnxruntime-cpu"
+}

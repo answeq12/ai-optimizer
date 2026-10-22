@@ -1,0 +1,14 @@
+{
+  "run_id": "S-b6-fc2-val",
+  "top1_acc": 0.6108,
+  "std_err": 0.004875688259107631,
+  "n": 10000,
+  "agree_with_fp32": 0.7156,
+  "mean_cosine_to_fp32": 0.9179871082305908,
+  "min_cosine_to_fp32": 0.745240330696106,
+  "mcnemar_vs_fp32": {
+    "a_only": 1193,
+    "b_only": 421,
+    "p_value": 1.9178919896079722e-85
+  }
+}

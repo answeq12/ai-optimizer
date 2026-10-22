@@ -1,0 +1,8 @@
+# PyTorch 는 CPU 전용판을 먼저 따로 설치한다 (README 참조):
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+# 설치가 끝나면 `pip freeze > requirements.lock.txt` 로 실제 버전을 고정해 함께 제출한다.
+open_clip_torch>=2.24
+onnx>=1.15
+onnxruntime>=1.17
+numpy>=1.24
+pillow>=10.0

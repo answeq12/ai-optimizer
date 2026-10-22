@@ -1,0 +1,13 @@
+{
+  "code": "B32-SPL",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.37997507270461156,
+  "R@5": 0.6553385957623598,
+  "R@10": 0.7703365184877441,
+  "median_rank": 3.0,
+  "timestamp": "2026-10-20T02:22:56+0900",
+  "model": "/mnt/d/halio_data/models_b32/imp/SPL.onnx",
+  "backend": "onnxruntime-cpu"
+}

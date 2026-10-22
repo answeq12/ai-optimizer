@@ -1,0 +1,14 @@
+{
+  "run_id": "RPV-DA-A0-test",
+  "top1_acc": 0.6759,
+  "std_err": 0.0046803759464384915,
+  "n": 10000,
+  "agree_with_fp32": 0.8249,
+  "mean_cosine_to_fp32": 0.9455878734588623,
+  "min_cosine_to_fp32": 0.8652224540710449,
+  "mcnemar_vs_fp32": {
+    "a_only": 502,
+    "b_only": 460,
+    "p_value": 0.1861752935230912
+  }
+}

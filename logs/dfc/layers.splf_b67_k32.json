@@ -1,0 +1,5707 @@
+[
+ {
+  "name": "const_input1",
+  "type": "const_input",
+  "original_names": [
+   "onnx::Concat_1540"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    1,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    1,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "const_input2",
+  "type": "const_input",
+  "original_names": [
+   "Add_4_input"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "input_layer1",
+  "type": "input_layer",
+  "original_names": [
+   "input.1"
+  ],
+  "in": [
+   [
+    -1,
+    224,
+    224,
+    3
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    224,
+    224,
+    3
+   ]
+  ]
+ },
+ {
+  "name": "conv1",
+  "type": "conv",
+  "original_names": [
+   "Conv_0"
+  ],
+  "in": [
+   [
+    -1,
+    224,
+    224,
+    3
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    14,
+    14,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "format_conversion1",
+  "type": "format_conversion",
+  "original_names": [
+   "Reshape_1",
+   "Transpose_2"
+  ],
+  "in": [
+   [
+    -1,
+    14,
+    14,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    196,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "concat1",
+  "type": "concat",
+  "original_names": [
+   "Concat_3"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    1,
+    768
+   ],
+   [
+    -1,
+    1,
+    196,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add1",
+  "type": "ew_add",
+  "original_names": [
+   "Add_4",
+   "Cast_5"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization1",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_6",
+   "Sub_7",
+   "Pow_9",
+   "ReduceMean_10",
+   "Add_12",
+   "Sqrt_13",
+   "Div_14"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization1",
+  "type": "normalization",
+  "original_names": [
+   "Mul_15",
+   "Add_16",
+   "Cast_17",
+   "Transpose_18",
+   "Cast_19"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization2",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_20",
+   "Sub_21",
+   "Pow_23",
+   "ReduceMean_24",
+   "Add_26",
+   "Sqrt_27",
+   "Div_28"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization2",
+  "type": "normalization",
+  "original_names": [
+   "Mul_29",
+   "Add_30",
+   "Cast_31"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv2",
+  "type": "conv",
+  "original_names": [
+   "MatMul_32",
+   "Add_33"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ]
+ },
+ {
+  "name": "feature_splitter1",
+  "type": "feature_splitter",
+  "original_names": [
+   "Slice_44",
+   "Reshape_51",
+   "Transpose_52",
+   "Slice_47",
+   "Reshape_53",
+   "Transpose_58",
+   "Slice_50",
+   "Reshape_54",
+   "Transpose_55"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "mul_and_add1",
+  "type": "normalization",
+  "original_names": [
+   "Div_57"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "matmul1",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_59"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "softmax1",
+  "type": "softmax",
+  "original_names": [
+   "Softmax_60"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "matmul2",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_61",
+   "Transpose_62",
+   "Reshape_63"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv3",
+  "type": "conv",
+  "original_names": [
+   "MatMul_64",
+   "Add_65"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add2",
+  "type": "ew_add",
+  "original_names": [
+   "Add_66",
+   "Cast_67"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization3",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_68",
+   "Sub_69",
+   "Pow_71",
+   "ReduceMean_72",
+   "Add_74",
+   "Sqrt_75",
+   "Div_76"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization3",
+  "type": "normalization",
+  "original_names": [
+   "Mul_77",
+   "Add_78",
+   "Cast_79"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv4",
+  "type": "conv",
+  "original_names": [
+   "MatMul_80",
+   "Add_81",
+   "Mul_83",
+   "Sigmoid_84",
+   "Mul_85"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    3072
+   ]
+  ]
+ },
+ {
+  "name": "conv5",
+  "type": "conv",
+  "original_names": [
+   "MatMul_86",
+   "Add_87"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    3072
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add3",
+  "type": "ew_add",
+  "original_names": [
+   "Add_88",
+   "Cast_89"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization4",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_90",
+   "Sub_91",
+   "Pow_93",
+   "ReduceMean_94",
+   "Add_96",
+   "Sqrt_97",
+   "Div_98"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization4",
+  "type": "normalization",
+  "original_names": [
+   "Mul_99",
+   "Add_100",
+   "Cast_101"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv6",
+  "type": "conv",
+  "original_names": [
+   "MatMul_102",
+   "Add_103"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ]
+ },
+ {
+  "name": "feature_splitter2",
+  "type": "feature_splitter",
+  "original_names": [
+   "Slice_114",
+   "Reshape_121",
+   "Transpose_122",
+   "Slice_117",
+   "Reshape_123",
+   "Transpose_128",
+   "Slice_120",
+   "Reshape_124",
+   "Transpose_125"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "mul_and_add2",
+  "type": "normalization",
+  "original_names": [
+   "Div_127"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "matmul3",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_129"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "softmax2",
+  "type": "softmax",
+  "original_names": [
+   "Softmax_130"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "matmul4",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_131",
+   "Transpose_132",
+   "Reshape_133"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv7",
+  "type": "conv",
+  "original_names": [
+   "MatMul_134",
+   "Add_135"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add4",
+  "type": "ew_add",
+  "original_names": [
+   "Add_136",
+   "Cast_137"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization5",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_138",
+   "Sub_139",
+   "Pow_141",
+   "ReduceMean_142",
+   "Add_144",
+   "Sqrt_145",
+   "Div_146"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization5",
+  "type": "normalization",
+  "original_names": [
+   "Mul_147",
+   "Add_148",
+   "Cast_149"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv8",
+  "type": "conv",
+  "original_names": [
+   "MatMul_150",
+   "Add_151",
+   "Mul_153",
+   "Sigmoid_154",
+   "Mul_155"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    3072
+   ]
+  ]
+ },
+ {
+  "name": "conv9",
+  "type": "conv",
+  "original_names": [
+   "MatMul_156",
+   "Add_157"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    3072
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add5",
+  "type": "ew_add",
+  "original_names": [
+   "Add_158",
+   "Cast_159"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization6",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_160",
+   "Sub_161",
+   "Pow_163",
+   "ReduceMean_164",
+   "Add_166",
+   "Sqrt_167",
+   "Div_168"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization6",
+  "type": "normalization",
+  "original_names": [
+   "Mul_169",
+   "Add_170",
+   "Cast_171"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv10",
+  "type": "conv",
+  "original_names": [
+   "MatMul_172",
+   "Add_173"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ]
+ },
+ {
+  "name": "feature_splitter3",
+  "type": "feature_splitter",
+  "original_names": [
+   "Slice_184",
+   "Reshape_191",
+   "Transpose_192",
+   "Slice_187",
+   "Reshape_193",
+   "Transpose_198",
+   "Slice_190",
+   "Reshape_194",
+   "Transpose_195"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "mul_and_add3",
+  "type": "normalization",
+  "original_names": [
+   "Div_197"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "matmul5",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_199"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "softmax3",
+  "type": "softmax",
+  "original_names": [
+   "Softmax_200"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "matmul6",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_201",
+   "Transpose_202",
+   "Reshape_203"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv11",
+  "type": "conv",
+  "original_names": [
+   "MatMul_204",
+   "Add_205"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add6",
+  "type": "ew_add",
+  "original_names": [
+   "Add_206",
+   "Cast_207"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization7",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_208",
+   "Sub_209",
+   "Pow_211",
+   "ReduceMean_212",
+   "Add_214",
+   "Sqrt_215",
+   "Div_216"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization7",
+  "type": "normalization",
+  "original_names": [
+   "Mul_217",
+   "Add_218",
+   "Cast_219"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv12",
+  "type": "conv",
+  "original_names": [
+   "MatMul_220",
+   "Add_221",
+   "Mul_223",
+   "Sigmoid_224",
+   "Mul_225"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    3072
+   ]
+  ]
+ },
+ {
+  "name": "conv13",
+  "type": "conv",
+  "original_names": [
+   "MatMul_226",
+   "Add_227"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    3072
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add7",
+  "type": "ew_add",
+  "original_names": [
+   "Add_228",
+   "Cast_229"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization8",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_230",
+   "Sub_231",
+   "Pow_233",
+   "ReduceMean_234",
+   "Add_236",
+   "Sqrt_237",
+   "Div_238"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization8",
+  "type": "normalization",
+  "original_names": [
+   "Mul_239",
+   "Add_240",
+   "Cast_241"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv14",
+  "type": "conv",
+  "original_names": [
+   "MatMul_242",
+   "Add_243"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ]
+ },
+ {
+  "name": "feature_splitter4",
+  "type": "feature_splitter",
+  "original_names": [
+   "Slice_254",
+   "Reshape_261",
+   "Transpose_262",
+   "Slice_257",
+   "Reshape_263",
+   "Transpose_268",
+   "Slice_260",
+   "Reshape_264",
+   "Transpose_265"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "mul_and_add4",
+  "type": "normalization",
+  "original_names": [
+   "Div_267"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "matmul7",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_269"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "softmax4",
+  "type": "softmax",
+  "original_names": [
+   "Softmax_270"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "matmul8",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_271",
+   "Transpose_272",
+   "Reshape_273"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv15",
+  "type": "conv",
+  "original_names": [
+   "MatMul_274",
+   "Add_275"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add8",
+  "type": "ew_add",
+  "original_names": [
+   "Add_276",
+   "Cast_277"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization9",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_278",
+   "Sub_279",
+   "Pow_281",
+   "ReduceMean_282",
+   "Add_284",
+   "Sqrt_285",
+   "Div_286"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization9",
+  "type": "normalization",
+  "original_names": [
+   "Mul_287",
+   "Add_288",
+   "Cast_289"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv16",
+  "type": "conv",
+  "original_names": [
+   "MatMul_290",
+   "Add_291",
+   "Mul_293",
+   "Sigmoid_294",
+   "Mul_295"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    3072
+   ]
+  ]
+ },
+ {
+  "name": "conv17",
+  "type": "conv",
+  "original_names": [
+   "MatMul_296",
+   "Add_297"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    3072
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add9",
+  "type": "ew_add",
+  "original_names": [
+   "Add_298",
+   "Cast_299"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization10",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_300",
+   "Sub_301",
+   "Pow_303",
+   "ReduceMean_304",
+   "Add_306",
+   "Sqrt_307",
+   "Div_308"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization10",
+  "type": "normalization",
+  "original_names": [
+   "Mul_309",
+   "Add_310",
+   "Cast_311"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv18",
+  "type": "conv",
+  "original_names": [
+   "MatMul_312",
+   "Add_313"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ]
+ },
+ {
+  "name": "feature_splitter5",
+  "type": "feature_splitter",
+  "original_names": [
+   "Slice_324",
+   "Reshape_331",
+   "Transpose_332",
+   "Slice_327",
+   "Reshape_333",
+   "Transpose_338",
+   "Slice_330",
+   "Reshape_334",
+   "Transpose_335"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "mul_and_add5",
+  "type": "normalization",
+  "original_names": [
+   "Div_337"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "matmul9",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_339"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "softmax5",
+  "type": "softmax",
+  "original_names": [
+   "Softmax_340"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "matmul10",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_341",
+   "Transpose_342",
+   "Reshape_343"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv19",
+  "type": "conv",
+  "original_names": [
+   "MatMul_344",
+   "Add_345"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add10",
+  "type": "ew_add",
+  "original_names": [
+   "Add_346",
+   "Cast_347"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization11",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_348",
+   "Sub_349",
+   "Pow_351",
+   "ReduceMean_352",
+   "Add_354",
+   "Sqrt_355",
+   "Div_356"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization11",
+  "type": "normalization",
+  "original_names": [
+   "Mul_357",
+   "Add_358",
+   "Cast_359"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv20",
+  "type": "conv",
+  "original_names": [
+   "MatMul_360",
+   "Add_361",
+   "Mul_363",
+   "Sigmoid_364",
+   "Mul_365"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    3072
+   ]
+  ]
+ },
+ {
+  "name": "conv21",
+  "type": "conv",
+  "original_names": [
+   "MatMul_366",
+   "Add_367"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    3072
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add11",
+  "type": "ew_add",
+  "original_names": [
+   "Add_368",
+   "Cast_369"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization12",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_370",
+   "Sub_371",
+   "Pow_373",
+   "ReduceMean_374",
+   "Add_376",
+   "Sqrt_377",
+   "Div_378"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization12",
+  "type": "normalization",
+  "original_names": [
+   "Mul_379",
+   "Add_380",
+   "Cast_381"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv22",
+  "type": "conv",
+  "original_names": [
+   "MatMul_382",
+   "Add_383"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ]
+ },
+ {
+  "name": "feature_splitter6",
+  "type": "feature_splitter",
+  "original_names": [
+   "Slice_394",
+   "Reshape_401",
+   "Transpose_402",
+   "Slice_397",
+   "Reshape_403",
+   "Transpose_408",
+   "Slice_400",
+   "Reshape_404",
+   "Transpose_405"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "mul_and_add6",
+  "type": "normalization",
+  "original_names": [
+   "Div_407"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "matmul11",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_409"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "softmax6",
+  "type": "softmax",
+  "original_names": [
+   "Softmax_410"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "matmul12",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_411",
+   "Transpose_412",
+   "Reshape_413"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv23",
+  "type": "conv",
+  "original_names": [
+   "MatMul_414",
+   "Add_415"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add12",
+  "type": "ew_add",
+  "original_names": [
+   "Add_416",
+   "Cast_417"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization13",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_418",
+   "Sub_419",
+   "Pow_421",
+   "ReduceMean_422",
+   "Add_424",
+   "Sqrt_425",
+   "Div_426"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization13",
+  "type": "normalization",
+  "original_names": [
+   "Mul_427",
+   "Add_428",
+   "Cast_429"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv24",
+  "type": "conv",
+  "original_names": [
+   "MatMul_430",
+   "Add_431",
+   "Mul_433",
+   "Sigmoid_434",
+   "Mul_435"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    3072
+   ]
+  ]
+ },
+ {
+  "name": "conv25",
+  "type": "conv",
+  "original_names": [
+   "MatMul_436",
+   "Add_437"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    3072
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add13",
+  "type": "ew_add",
+  "original_names": [
+   "Add_438",
+   "Cast_439"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization14",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_440",
+   "Sub_441",
+   "Pow_443",
+   "ReduceMean_444",
+   "Add_446",
+   "Sqrt_447",
+   "Div_448"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization14",
+  "type": "normalization",
+  "original_names": [
+   "Mul_449",
+   "Add_450",
+   "Cast_451"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv26",
+  "type": "conv",
+  "original_names": [
+   "MatMul_452",
+   "Add_453"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ]
+ },
+ {
+  "name": "feature_splitter7",
+  "type": "feature_splitter",
+  "original_names": [
+   "Slice_464",
+   "Reshape_471",
+   "Transpose_472",
+   "Slice_467",
+   "Reshape_473",
+   "Transpose_478",
+   "Slice_470",
+   "Reshape_474",
+   "Transpose_475"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "mul_and_add7",
+  "type": "normalization",
+  "original_names": [
+   "Div_477"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "matmul13",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_479"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "softmax7",
+  "type": "softmax",
+  "original_names": [
+   "Softmax_480"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "matmul14",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_481",
+   "Transpose_482",
+   "Reshape_483"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv27",
+  "type": "conv",
+  "original_names": [
+   "MatMul_484",
+   "Add_485"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add14",
+  "type": "ew_add",
+  "original_names": [
+   "Add_486",
+   "Cast_487"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization15",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_488",
+   "Sub_489",
+   "Pow_491",
+   "ReduceMean_492",
+   "Add_494",
+   "Sqrt_495",
+   "Div_496"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization15",
+  "type": "normalization",
+  "original_names": [
+   "Mul_497",
+   "Add_498",
+   "Cast_499"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv28",
+  "type": "conv",
+  "original_names": [
+   "SPL_b6_MatMul1_hot",
+   "Add_501_hot",
+   "Mul_503_hot",
+   "Sigmoid_504_hot",
+   "Mul_505_hot"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    32
+   ]
+  ]
+ },
+ {
+  "name": "conv29",
+  "type": "conv",
+  "original_names": [
+   "SPL_b6_MatMul1_rest",
+   "Add_501_rest",
+   "Mul_503_rest",
+   "Sigmoid_504_rest",
+   "Mul_505_rest"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    3040
+   ]
+  ]
+ },
+ {
+  "name": "conv30",
+  "type": "conv",
+  "original_names": [
+   "SPL_b6_MatMul_hot"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    32
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv31",
+  "type": "conv",
+  "original_names": [
+   "SPL_b6_MatMul_rest"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    3040
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add15",
+  "type": "ew_add",
+  "original_names": [
+   "SPL_b6_Add_merge"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "mul_and_add8",
+  "type": "normalization",
+  "original_names": [
+   "Add_507"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add16",
+  "type": "ew_add",
+  "original_names": [
+   "Add_508",
+   "Cast_509"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization16",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_510",
+   "Sub_511",
+   "Pow_513",
+   "ReduceMean_514",
+   "Add_516",
+   "Sqrt_517",
+   "Div_518"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization16",
+  "type": "normalization",
+  "original_names": [
+   "Mul_519",
+   "Add_520",
+   "Cast_521"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv32",
+  "type": "conv",
+  "original_names": [
+   "MatMul_522",
+   "Add_523"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ]
+ },
+ {
+  "name": "feature_splitter8",
+  "type": "feature_splitter",
+  "original_names": [
+   "Slice_534",
+   "Reshape_541",
+   "Transpose_542",
+   "Slice_537",
+   "Reshape_543",
+   "Transpose_548",
+   "Slice_540",
+   "Reshape_544",
+   "Transpose_545"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "mul_and_add9",
+  "type": "normalization",
+  "original_names": [
+   "Div_547"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "matmul15",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_549"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "softmax8",
+  "type": "softmax",
+  "original_names": [
+   "Softmax_550"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "matmul16",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_551",
+   "Transpose_552",
+   "Reshape_553"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv33",
+  "type": "conv",
+  "original_names": [
+   "MatMul_554",
+   "Add_555"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add17",
+  "type": "ew_add",
+  "original_names": [
+   "Add_556",
+   "Cast_557"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization17",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_558",
+   "Sub_559",
+   "Pow_561",
+   "ReduceMean_562",
+   "Add_564",
+   "Sqrt_565",
+   "Div_566"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization17",
+  "type": "normalization",
+  "original_names": [
+   "Mul_567",
+   "Add_568",
+   "Cast_569"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv34",
+  "type": "conv",
+  "original_names": [
+   "SPL_b7_MatMul1_hot",
+   "Add_571_hot",
+   "Mul_573_hot",
+   "Sigmoid_574_hot",
+   "Mul_575_hot"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    32
+   ]
+  ]
+ },
+ {
+  "name": "conv35",
+  "type": "conv",
+  "original_names": [
+   "SPL_b7_MatMul1_rest",
+   "Add_571_rest",
+   "Mul_573_rest",
+   "Sigmoid_574_rest",
+   "Mul_575_rest"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    3040
+   ]
+  ]
+ },
+ {
+  "name": "conv36",
+  "type": "conv",
+  "original_names": [
+   "SPL_b7_MatMul_hot"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    32
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv37",
+  "type": "conv",
+  "original_names": [
+   "SPL_b7_MatMul_rest"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    3040
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add18",
+  "type": "ew_add",
+  "original_names": [
+   "SPL_b7_Add_merge"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "mul_and_add10",
+  "type": "normalization",
+  "original_names": [
+   "Add_577"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add19",
+  "type": "ew_add",
+  "original_names": [
+   "Add_578",
+   "Cast_579"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization18",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_580",
+   "Sub_581",
+   "Pow_583",
+   "ReduceMean_584",
+   "Add_586",
+   "Sqrt_587",
+   "Div_588"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization18",
+  "type": "normalization",
+  "original_names": [
+   "Mul_589",
+   "Add_590",
+   "Cast_591"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv38",
+  "type": "conv",
+  "original_names": [
+   "MatMul_592",
+   "Add_593"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ]
+ },
+ {
+  "name": "feature_splitter9",
+  "type": "feature_splitter",
+  "original_names": [
+   "Slice_604",
+   "Reshape_611",
+   "Transpose_612",
+   "Slice_607",
+   "Reshape_613",
+   "Transpose_618",
+   "Slice_610",
+   "Reshape_614",
+   "Transpose_615"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "mul_and_add11",
+  "type": "normalization",
+  "original_names": [
+   "Div_617"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "matmul17",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_619"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "softmax9",
+  "type": "softmax",
+  "original_names": [
+   "Softmax_620"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "matmul18",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_621",
+   "Transpose_622",
+   "Reshape_623"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv39",
+  "type": "conv",
+  "original_names": [
+   "MatMul_624",
+   "Add_625"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add20",
+  "type": "ew_add",
+  "original_names": [
+   "Add_626",
+   "Cast_627"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization19",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_628",
+   "Sub_629",
+   "Pow_631",
+   "ReduceMean_632",
+   "Add_634",
+   "Sqrt_635",
+   "Div_636"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization19",
+  "type": "normalization",
+  "original_names": [
+   "Mul_637",
+   "Add_638",
+   "Cast_639"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv40",
+  "type": "conv",
+  "original_names": [
+   "MatMul_640",
+   "Add_641",
+   "Mul_643",
+   "Sigmoid_644",
+   "Mul_645"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    3072
+   ]
+  ]
+ },
+ {
+  "name": "conv41",
+  "type": "conv",
+  "original_names": [
+   "MatMul_646",
+   "Add_647"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    3072
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add21",
+  "type": "ew_add",
+  "original_names": [
+   "Add_648",
+   "Cast_649"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization20",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_650",
+   "Sub_651",
+   "Pow_653",
+   "ReduceMean_654",
+   "Add_656",
+   "Sqrt_657",
+   "Div_658"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization20",
+  "type": "normalization",
+  "original_names": [
+   "Mul_659",
+   "Add_660",
+   "Cast_661"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv42",
+  "type": "conv",
+  "original_names": [
+   "MatMul_662",
+   "Add_663"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ]
+ },
+ {
+  "name": "feature_splitter10",
+  "type": "feature_splitter",
+  "original_names": [
+   "Slice_674",
+   "Reshape_681",
+   "Transpose_682",
+   "Slice_677",
+   "Reshape_683",
+   "Transpose_688",
+   "Slice_680",
+   "Reshape_684",
+   "Transpose_685"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "mul_and_add12",
+  "type": "normalization",
+  "original_names": [
+   "Div_687"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "matmul19",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_689"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "softmax10",
+  "type": "softmax",
+  "original_names": [
+   "Softmax_690"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "matmul20",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_691",
+   "Transpose_692",
+   "Reshape_693"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv43",
+  "type": "conv",
+  "original_names": [
+   "MatMul_694",
+   "Add_695"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add22",
+  "type": "ew_add",
+  "original_names": [
+   "Add_696",
+   "Cast_697"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization21",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_698",
+   "Sub_699",
+   "Pow_701",
+   "ReduceMean_702",
+   "Add_704",
+   "Sqrt_705",
+   "Div_706"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization21",
+  "type": "normalization",
+  "original_names": [
+   "Mul_707",
+   "Add_708",
+   "Cast_709"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv44",
+  "type": "conv",
+  "original_names": [
+   "MatMul_710",
+   "Add_711",
+   "Mul_713",
+   "Sigmoid_714",
+   "Mul_715"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    3072
+   ]
+  ]
+ },
+ {
+  "name": "conv45",
+  "type": "conv",
+  "original_names": [
+   "MatMul_716",
+   "Add_717"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    3072
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add23",
+  "type": "ew_add",
+  "original_names": [
+   "Add_718",
+   "Cast_719"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization22",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_720",
+   "Sub_721",
+   "Pow_723",
+   "ReduceMean_724",
+   "Add_726",
+   "Sqrt_727",
+   "Div_728"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization22",
+  "type": "normalization",
+  "original_names": [
+   "Mul_729",
+   "Add_730",
+   "Cast_731"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv46",
+  "type": "conv",
+  "original_names": [
+   "MatMul_732",
+   "Add_733"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ]
+ },
+ {
+  "name": "feature_splitter11",
+  "type": "feature_splitter",
+  "original_names": [
+   "Slice_744",
+   "Reshape_751",
+   "Transpose_752",
+   "Slice_747",
+   "Reshape_753",
+   "Transpose_758",
+   "Slice_750",
+   "Reshape_754",
+   "Transpose_755"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "mul_and_add13",
+  "type": "normalization",
+  "original_names": [
+   "Div_757"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "matmul21",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_759"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "softmax11",
+  "type": "softmax",
+  "original_names": [
+   "Softmax_760"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "matmul22",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_761",
+   "Transpose_762",
+   "Reshape_763"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv47",
+  "type": "conv",
+  "original_names": [
+   "MatMul_764",
+   "Add_765"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add24",
+  "type": "ew_add",
+  "original_names": [
+   "Add_766",
+   "Cast_767"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization23",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_768",
+   "Sub_769",
+   "Pow_771",
+   "ReduceMean_772",
+   "Add_774",
+   "Sqrt_775",
+   "Div_776"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization23",
+  "type": "normalization",
+  "original_names": [
+   "Mul_777",
+   "Add_778",
+   "Cast_779"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv48",
+  "type": "conv",
+  "original_names": [
+   "MatMul_780",
+   "Add_781",
+   "Mul_783",
+   "Sigmoid_784",
+   "Mul_785"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    3072
+   ]
+  ]
+ },
+ {
+  "name": "conv49",
+  "type": "conv",
+  "original_names": [
+   "MatMul_786",
+   "Add_787"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    3072
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add25",
+  "type": "ew_add",
+  "original_names": [
+   "Add_788",
+   "Cast_789"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization24",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_790",
+   "Sub_791",
+   "Pow_793",
+   "ReduceMean_794",
+   "Add_796",
+   "Sqrt_797",
+   "Div_798"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization24",
+  "type": "normalization",
+  "original_names": [
+   "Mul_799",
+   "Add_800",
+   "Cast_801"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv50",
+  "type": "conv",
+  "original_names": [
+   "MatMul_802",
+   "Add_803"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ]
+ },
+ {
+  "name": "feature_splitter12",
+  "type": "feature_splitter",
+  "original_names": [
+   "Slice_814",
+   "Reshape_821",
+   "Transpose_822",
+   "Slice_817",
+   "Reshape_823",
+   "Transpose_828",
+   "Slice_820",
+   "Reshape_824",
+   "Transpose_825"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2304
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "mul_and_add14",
+  "type": "normalization",
+  "original_names": [
+   "Div_827"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "matmul23",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_829"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "softmax12",
+  "type": "softmax",
+  "original_names": [
+   "Softmax_830"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ]
+  ]
+ },
+ {
+  "name": "matmul24",
+  "type": "matmul",
+  "original_names": [
+   "MatMul_831",
+   "Transpose_832",
+   "Reshape_833"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    2364
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv51",
+  "type": "conv",
+  "original_names": [
+   "MatMul_834",
+   "Add_835"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add26",
+  "type": "ew_add",
+  "original_names": [
+   "Add_836",
+   "Cast_837"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization25",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_838",
+   "Sub_839",
+   "Pow_841",
+   "ReduceMean_842",
+   "Add_844",
+   "Sqrt_845",
+   "Div_846"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization25",
+  "type": "normalization",
+  "original_names": [
+   "Mul_847",
+   "Add_848",
+   "Cast_849"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv52",
+  "type": "conv",
+  "original_names": [
+   "MatMul_850",
+   "Add_851",
+   "Mul_853",
+   "Sigmoid_854",
+   "Mul_855"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    3072
+   ]
+  ]
+ },
+ {
+  "name": "conv53",
+  "type": "conv",
+  "original_names": [
+   "MatMul_856",
+   "Add_857"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    3072
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "ew_add27",
+  "type": "ew_add",
+  "original_names": [
+   "Add_858",
+   "Transpose_859"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ],
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "slice1",
+  "type": "slice",
+  "original_names": [
+   "Gather_861",
+   "Cast_862"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    197,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    1,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "layer_normalization26",
+  "type": "layer_normalization",
+  "original_names": [
+   "ReduceMean_863",
+   "Sub_864",
+   "Pow_866",
+   "ReduceMean_867",
+   "Add_869",
+   "Sqrt_870",
+   "Div_871"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    1,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    1,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "normalization26",
+  "type": "normalization",
+  "original_names": [
+   "Mul_872",
+   "Add_873",
+   "Cast_874"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    1,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    1,
+    768
+   ]
+  ]
+ },
+ {
+  "name": "conv54",
+  "type": "conv",
+  "original_names": [
+   "MatMul_875"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    1,
+    768
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    1,
+    512
+   ]
+  ]
+ },
+ {
+  "name": "output_layer1",
+  "type": "output_layer",
+  "original_names": [
+   "1534"
+  ],
+  "in": [
+   [
+    -1,
+    1,
+    1,
+    512
+   ]
+  ],
+  "out": [
+   [
+    -1,
+    1,
+    1,
+    512
+   ]
+  ]
+ }
+]

@@ -1,0 +1,13 @@
+{
+  "code": "S-c67-pc-attn",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.39252181138346487,
+  "R@5": 0.6640631491483174,
+  "R@10": 0.777233070211882,
+  "median_rank": 2.0,
+  "timestamp": "2026-10-13T21:57:47+0900",
+  "model": "/mnt/d/halio_data/models/imp/c67_pc_attn.onnx",
+  "backend": "onnxruntime-cpu"
+}

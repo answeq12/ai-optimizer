@@ -1,0 +1,73 @@
+== 모드: selftest / 시각: 2026-10-07 02:24:32 / 로그: logs/run_20261007_022432_selftest.log
+== 시스템: Ubuntu 22.04.5 LTS / 커널 6.18.33.2-microsoft-standard-WSL2
+== CPU: Intel(R) Core(TM) i9-14900KF / 논리 코어 16 / 메모리 23GB
+== 디스크 여유: 홈 948G, 이 폴더 8.1G, D 드라이브 1.3T
+== 시스템 파이썬: Python 3.10.12 / WSL 사용자: answeq12
+== 버전: torch 2.14.1+cpu, onnx 1.23.1, onnxruntime 1.23.2, numpy 2.2.6, open_clip 3.3.0
+== SELFTEST 작업 폴더: /tmp/halio_selftest.qbDJtl (끝나면 지워도 된다)
+== 큰 파일 저장 위치: /tmp/halio_selftest.qbDJtl
+== SELFTEST: 가짜 데이터 + 무작위 가중치. 결과 수치는 무의미합니다.
+가짜 데이터 생성 완료: /tmp/halio_selftest.qbDJtl/data
+== 2/8 검증셋 분리
+[split] 생성: val.txt
+[split] 생성: calib_cifar_64_s0.txt
+[split] 생성: calib_coco_64_s0.txt
+[split] 생성: calib_cifar_64_s1.txt
+[split] 생성: calib_coco_64_s1.txt
+[split] 생성: calib_cifar_64_s2.txt
+[split] 생성: calib_coco_64_s2.txt
+[split] 검증셋 10000장 (클래스당 100), CIFAR 캘리브레이션 목록과의 교집합 0 확인
+[split] 재실행 시 동일한 목록이 재현됨을 확인
+== 3/8 ONNX export + P1 게이트 (PyTorch 와 출력 일치)
+WARNING:root:No pretrained weights loaded for model 'ViT-B-16'. Model initialized randomly.
+[export] clip_vitb16_image_fp32.onnx: 344.58 MB, opset 17, 노드 1069 -> 489개 (상수 폴딩)
+[P1] 최대 절대 오차 5.01e-06 (기준 1e-04), 최소 코사인 1.000000 (기준 0.9999) -> 통과
+[text] text_emb_cifar100.npy: (100, 512)
+== 4/8 양자화: A1 동적, A2 정적 기본 (MinMax, per-tensor, COCO 64장)
+[prep] clip_vitb16_image_fp32.prep.onnx 생성 (symbolic+onnx shape inference (ORT optimization skipped))
+[quant] a1_dynamic.onnx: 88.7 MB (dynamic, 제외 1개)
+[quant] a2_static_minmax.onnx: 86.79 MB (static, minmax)
+== 5/8 정확도 평가 (검증셋)
+[eval] A0-val: /tmp/halio_selftest.qbDJtl/models/clip_vitb16_image_fp32.onnx / val 30장
+[eval] A0-val: top-1 0.00% (표준오차 ±0.00%p, n=30)
+[eval] A1-val: /tmp/halio_selftest.qbDJtl/models/a1_dynamic.onnx / val 30장
+[eval] A1-val: top-1 0.00% (표준오차 ±0.00%p, n=30), FP32 대비 일치율 100.00%, 평균 코사인 0.9999
+[eval] A2-val: /tmp/halio_selftest.qbDJtl/models/a2_static_minmax.onnx / val 30장
+[eval] A2-val: top-1 0.00% (표준오차 ±0.00%p, n=30), FP32 대비 일치율 83.33%, 평균 코사인 0.9934
+== 6/8 연산자 커버리지 + 프로파일링
+[0;93m2026-10-07 02:25:11.192673162 [W:onnxruntime:, inference_session.cc:2473 Initialize] Serializing optimized model with Graph Optimization level greater than ORT_ENABLE_EXTENDED and the NchwcTransformer enabled. The generated model may contain hardware specific optimizations, and should only be used in the same environment the model was optimized in.[m
+[0;93m2026-10-07 02:25:14.166664491 [W:onnxruntime:, inference_session.cc:2473 Initialize] Serializing optimized model with Graph Optimization level greater than ORT_ENABLE_EXTENDED and the NchwcTransformer enabled. The generated model may contain hardware specific optimizations, and should only be used in the same environment the model was optimized in.[m
+[0;93m2026-10-07 02:25:15.174527973 [W:onnxruntime:, inference_session.cc:2473 Initialize] Serializing optimized model with Graph Optimization level greater than ORT_ENABLE_EXTENDED and the NchwcTransformer enabled. The generated model may contain hardware specific optimizations, and should only be used in the same environment the model was optimized in.[m
+[cov] A0: 정수 연산 비율 0.0%, 정수 커널 시간 0.0%, patch embed Conv 양자화 아니오
+[cov] A1: 정수 연산 비율 66.2%, 정수 커널 시간 67.8%, patch embed Conv 양자화 아니오
+[cov] A2: 정수 연산 비율 100.0%, 정수 커널 시간 86.0%, patch embed Conv 양자화 예
+[cov] 저장: /tmp/halio_selftest.qbDJtl/results/coverage.md
+== 7/8 속도·메모리 측정 (다른 프로그램을 끄고 실행할 것)
+[bench] 반복 1/1, 순서 ['A0', 'A2', 'A1']
+  A0: p50 60.74 ms, p95 63.42 ms, Max RSS 535 MB
+  A2: p50 23.49 ms, p95 24.27 ms, Max RSS 203 MB
+  A1: p50 22.93 ms, p95 23.78 ms, Max RSS 213 MB
+[bench] 저장: /tmp/halio_selftest.qbDJtl/results/latency_summary.json
+== 8/8 첫 비교표
+# 첫 비교표 (파일럿)
+
+| 구성 | top-1 | Δ vs FP32 | FP32 대비 일치율 | p50 (ms) | p95 (ms) | Max RSS (MB) | 파일 (MB) | 정수 연산 비율 |
+|---|---|---|---|---|---|---|---|---|
+| A0 FP32 | 0.00% | — | — | 60.74 | 63.42 | 535 | 344.6 | 0.0% |
+| A1 동적 INT8 | 0.00% | +0.00%p | 100.00% | 22.93 | 23.78 | 213 | 88.7 | 66.2% |
+| A2 정적 INT8 기본 | 0.00% | +0.00%p | 83.33% | 23.49 | 24.27 | 203 | 86.8 | 100.0% |
+
+- 평가셋: CIFAR-100 val 30장. top-1 표준오차 약 ±0.00%p. 이 크기 이내의 차이만으로 방향을 확정하지 않는다
+- A1 vs FP32 짝지은 비교: FP32만 정답 0장, A1만 정답 0장, McNemar p=1
+- A2 vs FP32 짝지은 비교: FP32만 정답 0장, A2만 정답 0장, McNemar p=1
+- 속도·메모리: 배치 1, 스레드 4, 워밍업 3회 제외 후 20회, 1회 반복의 중앙값. 측정 환경 Intel(R) Core(TM) i9-14900KF / WSL=True / env 934e571a17
+- A1: p50 기준 FP32 대비 2.65배 빠름, 파일 크기 3.88배 작음
+- A2: p50 기준 FP32 대비 2.59배 빠름, 파일 크기 3.97배 작음
+- **경고: 가짜 데이터로 만든 표입니다. 수치는 무의미합니다.**
+
+이 표로 말할 수 없는 것: Hailo 에서의 개선량(양자화기가 다르다), 제조사 설정 대비 우위, 다른 도메인에서의 성능, 최종 점수 전망.
+
+[table] 저장: /tmp/halio_selftest.qbDJtl/results/first_table.md
+
+== 점검 통과. 환경은 정상입니다. (위 표의 수치는 가짜 데이터라 무의미합니다)
+== 로그: logs/run_20261007_022432_selftest.log

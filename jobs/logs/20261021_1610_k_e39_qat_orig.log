@@ -1,0 +1,6 @@
+[qat] 블록 7 출력 텐서: /transformer/resblocks.7/Add_1_output_0
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[qat] FP32 ONNX 블록7 = torch front: 최대 오차 1.12e-03
+블록 7 텐서가 맞지 않음
+rc=1

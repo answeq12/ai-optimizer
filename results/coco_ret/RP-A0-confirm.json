@@ -1,0 +1,13 @@
+{
+  "code": "RP-A0",
+  "split": "confirm",
+  "n_images": 2406,
+  "n_captions": 12033,
+  "R@1": 0.4179340147926535,
+  "R@5": 0.6808775866367489,
+  "R@10": 0.7853403141361257,
+  "median_rank": 2.0,
+  "timestamp": "2026-10-18T21:25:52+0900",
+  "model": "/mnt/d/halio_repro_test/models/clip_vitb16_image_fp32.onnx",
+  "backend": "onnxruntime-cpu"
+}

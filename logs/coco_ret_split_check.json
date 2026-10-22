@@ -1,0 +1,100 @@
+{
+ "files": {
+  "exclude": {
+   "n": 189,
+   "sha256": "9d962716216c4cccd69e66049ef3a87fa8303ea7071ef246f7f0fce8b4c31aa8",
+   "mtime": "2026-10-13 12:30:42"
+  },
+  "select": {
+   "n": 2405,
+   "sha256": "6d8e9e4b0239a6a7756f77425d4983929b529af5848a3bd7dbf781710a3ffbe6",
+   "mtime": "2026-10-13 12:21:58"
+  },
+  "confirm": {
+   "n": 2406,
+   "sha256": "e1bcdba1112a80fbaab3f3919738d9a57fce06038a668a5ae68e66f94fe2ae68",
+   "mtime": "2026-10-13 12:21:58"
+  }
+ },
+ "pairwise_overlap": {
+  "exclude&select": 0,
+  "exclude&confirm": 0,
+  "select&confirm": 0
+ },
+ "total": 5000,
+ "first_eval_npz_mtime": "2026-10-13 12:30:43",
+ "select_confirm_written_before_first_eval": true,
+ "dfc_calibration_runs": [
+  {
+   "log": "smoke_20261005_221247.json",
+   "calib_list": "calib_coco_64_s0.txt",
+   "n": 64,
+   "sha256_matches_current_file": true,
+   "source": "coco",
+   "overlap_with_select": 0,
+   "overlap_with_confirm": 0,
+   "all_in_exclude": true
+  },
+  {
+   "log": "smoke_20261006_153323.json",
+   "calib_list": "calib_coco_64_s0.txt",
+   "n": 64,
+   "sha256_matches_current_file": true,
+   "source": "coco",
+   "overlap_with_select": 0,
+   "overlap_with_confirm": 0,
+   "all_in_exclude": true
+  },
+  {
+   "log": "smoke_20261006_164816.cifar64_s0.json",
+   "calib_list": "calib_cifar_64_s0.txt",
+   "n": 64,
+   "sha256_matches_current_file": true,
+   "source": "cifar_train",
+   "overlap_with_select": 0,
+   "overlap_with_confirm": 0,
+   "all_in_exclude": null
+  },
+  {
+   "log": "smoke_20261006_222139.coco64_fc2b567.json",
+   "calib_list": "calib_coco_64_s0.txt",
+   "n": 64,
+   "sha256_matches_current_file": true,
+   "source": "coco",
+   "overlap_with_select": 0,
+   "overlap_with_confirm": 0,
+   "all_in_exclude": true
+  },
+  {
+   "log": "smoke_20261006_235116.coco64_fc2b67.json",
+   "calib_list": "calib_coco_64_s0.txt",
+   "n": 64,
+   "sha256_matches_current_file": true,
+   "source": "coco",
+   "overlap_with_select": 0,
+   "overlap_with_confirm": 0,
+   "all_in_exclude": true
+  },
+  {
+   "log": "smoke_20261007_004017.cifar64_fc2b567.json",
+   "calib_list": "calib_cifar_64_s0.txt",
+   "n": 64,
+   "sha256_matches_current_file": true,
+   "source": "cifar_train",
+   "overlap_with_select": 0,
+   "overlap_with_confirm": 0,
+   "all_in_exclude": null
+  },
+  {
+   "log": "smoke_20261007_021906.coco64_fc2b67_a16w8.json",
+   "calib_list": "calib_coco_64_s0.txt",
+   "n": 64,
+   "sha256_matches_current_file": true,
+   "source": "coco",
+   "overlap_with_select": 0,
+   "overlap_with_confirm": 0,
+   "all_in_exclude": true
+  }
+ ],
+ "checked_at": "2026-10-13 12:30:43"
+}

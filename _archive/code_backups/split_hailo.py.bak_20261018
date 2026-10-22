@@ -1,0 +1,256 @@
+"""Hailo-10H 용 '이상치 채널 격리' (fc2 를 8비트 큰 층 + 16비트 작은 층으로 나눔). DFC 환경(~/venvs/hailo).
+
+  python -m dfc.split_hailo --blocks 7 --k 32 --tag spl_b7_k32          # parse -> optimize -> compile
+
+배경: 정확도 손실은 fc2(블록 5~7) 입력의 몇 개 채널(이상치)에서 온다. 지금 Hailo 후보(H-fc2b7)는 fc2 층 '전체'를
+16비트로 올려서 컨텍스트가 13 -> 14 로 늘었다. 여기서는 16비트로 계산할 부분을 이상치 채널 k 개로만 줄인다.
+1) Hailo 공식 ONNX 에서 fc2 입력 채널별 |x| 최댓값(COCO 캘리브 64 s0) -> 상위 k 개 = hot
+2) fc1 출력 채널 순서를 바꿔 hot 을 맨 뒤로 모은다 (fc1 가중치 열·편향, fc2 가중치 행을 같은 순서로 재배열 -> 수학적으로 동일.
+   그 사이의 QuickGELU 는 원소별 연산이라 순서와 무관)
+3) fc2 를 Slice(앞 3072-k) @ W_rest + Slice(뒤 k) @ W_hot 으로 나눈다 (연속 구간이라 고정 그래프 그대로)
+4) 원본 ONNX 와 출력 코사인 ≥ 0.99999 확인 (ORT)
+5) 공식 모델 스크립트 + 작은 층(hot)만 a16_w16 -> optimize(COCO 64 s0) -> compile
+결과: <STORE>/hailo/clip_vit_b_16_image_encoder.<tag>.{onnx,parsed.har,quantized.har,compiled.har,hailo10h.hef}, logs/dfc/split_<tag>.json
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sys
+import time
+import traceback
+from pathlib import Path
+
+import numpy as np
+
+from src import common as C
+from dfc.smoke_test import official_onnx, zoo_read, zoo_wheel, hn_layers, NET, HAILO_DIR, LOG_DIR
+
+
+def find_mlp(m):
+    """그래프 순서대로 (fc1 MatMul, fc1 bias Add, fc2 MatMul) 12쌍. 가중치 모양 [768,3072] / [3072,768] 로 찾는다."""
+    from onnx import numpy_helper
+    inits = {i.name: i for i in m.graph.initializer}
+    shp = {k: tuple(v.dims) for k, v in inits.items()}
+    fc1 = [n for n in m.graph.node if n.op_type == "MatMul" and any(shp.get(i) == (768, 3072) for i in n.input)]
+    fc2 = [n for n in m.graph.node if n.op_type == "MatMul" and any(shp.get(i) == (3072, 768) for i in n.input)]
+    if len(fc1) != 12 or len(fc2) != 12:
+        raise RuntimeError(f"fc1/fc2 를 12개씩 찾지 못했습니다: {len(fc1)}, {len(fc2)}")
+    cons = {}
+    for n in m.graph.node:
+        for i in n.input:
+            cons.setdefault(i, []).append(n)
+    out = []
+    for a, b in zip(fc1, fc2):
+        bias = next((c for c in cons.get(a.output[0], []) if c.op_type == "Add"
+                     and any(shp.get(i) == (3072,) for i in c.input)), None)
+        if bias is None:
+            raise RuntimeError(f"{a.name} 뒤의 편향 Add 를 찾지 못했습니다")
+        out.append((a, bias, b))
+    return out, inits
+
+
+def build(src: Path, dst: Path, blocks: list[int], k: int, calib: Path, split_fc1: bool = False) -> dict:
+    import onnx
+    import onnxruntime as ort
+    from onnx import helper, numpy_helper, TensorProto
+    m = onnx.load(str(src))
+    mlps, inits = find_mlp(m)
+    winput = lambda n: next(i for i in n.input if i in inits)
+    xinput = lambda n: next(i for i in n.input if i not in inits)
+    # 1) hot 채널: fc2 입력 |x| 채널별 최댓값
+    probe = onnx.load(str(src))
+    tn = [xinput(mlps[b][2]) for b in blocks]
+    for t in tn:
+        probe.graph.output.append(helper.make_tensor_value_info(t, TensorProto.FLOAT, None))
+    so = ort.SessionOptions(); so.graph_optimization_level = ort.GraphOptimizationLevel.ORT_DISABLE_ALL
+    sess = ort.InferenceSession(probe.SerializeToString(), so, providers=["CPUExecutionProvider"])
+    iname = sess.get_inputs()[0].name
+    xs = C.load_calib_images(calib)                       # 정규화된 NCHW (공식 ONNX 입력과 같은 규약)
+    cm = {t: None for t in tn}
+    rank = {}
+    for i in range(len(xs)):
+        for t, a in zip(tn, sess.run(tn, {iname: xs[i:i + 1]})):
+            rank[t] = a.ndim
+            c = np.abs(a.reshape(-1, a.shape[-1])).max(axis=0)
+            cm[t] = c if cm[t] is None else np.maximum(cm[t], c)
+    rec, new_nodes, add_inits = [], [], []
+    plan = {}
+    for b in blocks:
+        f1, bias, f2 = mlps[b]
+        x = xinput(f2); c = cm[x]
+        hot = np.sort(np.argsort(-c)[:k]); rest = np.setdiff1d(np.arange(3072), hot)
+        perm = np.concatenate([rest, hot])
+        plan[f2.name] = (b, f1, bias, f2, perm, hot, c)
+    for b, f1, bias, f2, perm, hot, c in plan.values():
+        w1n, bn, w2n = winput(f1), next(i for i in bias.input if i in inits), winput(f2)
+        W1 = numpy_helper.to_array(inits[w1n]); B1 = numpy_helper.to_array(inits[bn]); W2 = numpy_helper.to_array(inits[w2n])
+        inits[w1n].CopyFrom(numpy_helper.from_array(W1[:, perm].astype(np.float32), w1n))
+        inits[bn].CopyFrom(numpy_helper.from_array(B1[perm].astype(np.float32), bn))
+        W2p = W2[perm, :].astype(np.float32)
+        p = f"SPL_b{b}"
+        ax = rank[xinput(f2)] - 1
+        add_inits += [numpy_helper.from_array(W2p[:3072 - k], f"{p}_W_rest"), numpy_helper.from_array(W2p[3072 - k:], f"{p}_W_hot"),
+                      numpy_helper.from_array(np.array([0], np.int64), f"{p}_s0"), numpy_helper.from_array(np.array([3072 - k], np.int64), f"{p}_e0"),
+                      numpy_helper.from_array(np.array([3072 - k], np.int64), f"{p}_s1"), numpy_helper.from_array(np.array([3072], np.int64), f"{p}_e1"),
+                      numpy_helper.from_array(np.array([ax], np.int64), f"{p}_ax")]
+        rec.append({"block": b, "fc1": f1.name, "fc2": f2.name, "k": k, "hot_channels": hot.tolist(),
+                    "hot_absmax_top8": [round(float(v), 2) for v in np.sort(c[hot])[::-1][:8]],
+                    "rest_absmax": round(float(c[np.setdiff1d(np.arange(3072), hot)].max()), 2),
+                    "absmax_before": round(float(c.max()), 2), "slice_axis": int(ax)})
+    drop, fc1_repl = set(), {}
+    if split_fc1:
+        # fc1(+편향+QuickGELU)도 rest/hot 두 갈래로: GELU 출력이 처음부터 별도 텐서가 되어 hot 갈래만 16비트로 남는다
+        cons = {}
+        for n in m.graph.node:
+            for i in n.input:
+                cons.setdefault(i, []).append(n)
+        for b, f1, bias, f2, perm, hot, c in plan.values():
+            p = f"SPL_b{b}"; xg = xinput(f2)
+            chain, front, seen = [bias], [bias.output[0]], set()
+            while front:
+                t = front.pop()
+                if t == xg: continue
+                for nd in cons.get(t, []):
+                    if nd.name in seen or nd is f2: continue
+                    seen.add(nd.name); chain.append(nd); front += list(nd.output)
+            order = {nd.name: i for i, nd in enumerate(m.graph.node)}
+            chain.sort(key=lambda nd: order[nd.name])                 # ONNX 는 위상 순서 필요
+            if xg not in {o for nd in chain for o in nd.output}:
+                raise RuntimeError(f"블록 {b}: fc1 편향~fc2 입력 사이 노드를 찾지 못했습니다")
+            if any(nd.op_type not in ("Add", "Mul", "Sigmoid", "Cast", "Div", "Erf") for nd in chain):
+                raise RuntimeError(f"블록 {b}: 원소별이 아닌 노드: {[nd.op_type for nd in chain]}")
+            w1n, bn = winput(f1), next(i for i in bias.input if i in inits)
+            W1p = numpy_helper.to_array(inits[w1n]); B1p = numpy_helper.to_array(inits[bn])   # 이미 perm 적용됨
+            add_inits += [numpy_helper.from_array(W1p[:, :3072 - k].copy(), f"{p}_W1_rest"), numpy_helper.from_array(W1p[:, 3072 - k:].copy(), f"{p}_W1_hot"),
+                          numpy_helper.from_array(B1p[:3072 - k].copy(), f"{p}_B1_rest"), numpy_helper.from_array(B1p[3072 - k:].copy(), f"{p}_B1_hot")]
+            nodes = []
+            for br in ("rest", "hot"):
+                ren = {f1.output[0]: f"{p}_h1_{br}"}
+                nodes.append(helper.make_node("MatMul", [xinput(f1), f"{p}_W1_{br}"], [ren[f1.output[0]]], name=f"{p}_MatMul1_{br}"))
+                for nd in chain:
+                    ins = [ren.get(i, f"{p}_B1_{br}" if (nd is bias and i == bn) else i) for i in nd.input]
+                    outs = []
+                    for o in nd.output:
+                        ren[o] = f"{p}_x_{br}" if o == xg else f"{o}_{br}"; outs.append(ren[o])
+                    nodes.append(helper.make_node(nd.op_type, ins, outs, name=f"{nd.name}_{br}", **{at.name: helper.get_attribute_value(at) for at in nd.attribute}))
+            drop |= {f1.name} | {nd.name for nd in chain}
+            fc1_repl[f2.name] = nodes                                  # fc2 자리에 넣는다 (상수 노드 등 의존이 모두 앞에 있음)
+    for n in m.graph.node:
+        if n.name in drop:
+            continue
+        if n.name not in plan:
+            new_nodes.append(n); continue
+        new_nodes += fc1_repl.get(n.name, [])
+        b = plan[n.name][0]; p = f"SPL_b{b}"; x = xinput(n)
+        if not split_fc1:
+            new_nodes += [
+                helper.make_node("Slice", [x, f"{p}_s0", f"{p}_e0", f"{p}_ax"], [f"{p}_x_rest"], name=f"{p}_Slice_rest"),
+                helper.make_node("Slice", [x, f"{p}_s1", f"{p}_e1", f"{p}_ax"], [f"{p}_x_hot"], name=f"{p}_Slice_hot")]
+        new_nodes += [
+            helper.make_node("MatMul", [f"{p}_x_rest", f"{p}_W_rest"], [f"{p}_y_rest"], name=f"{p}_MatMul_rest"),
+            helper.make_node("MatMul", [f"{p}_x_hot", f"{p}_W_hot"], [f"{p}_y_hot"], name=f"{p}_MatMul_hot"),
+            helper.make_node("Add", [f"{p}_y_rest", f"{p}_y_hot"], list(n.output), name=f"{p}_Add_merge")]
+    del m.graph.node[:]; m.graph.node.extend(new_nodes)
+    m.graph.initializer.extend(add_inits)
+    used = {i for nd in m.graph.node for i in nd.input}
+    keep = [i for i in m.graph.initializer if i.name in used]
+    del m.graph.initializer[:]; m.graph.initializer.extend(keep)
+    onnx.checker.check_model(m)
+    onnx.save(m, str(dst))
+    s0 = ort.InferenceSession(str(src), providers=["CPUExecutionProvider"])
+    s1 = ort.InferenceSession(str(dst), providers=["CPUExecutionProvider"])
+    cos = []
+    for i in range(8):
+        a = s0.run(None, {iname: xs[i:i + 1]})[0].ravel(); bb = s1.run(None, {iname: xs[i:i + 1]})[0].ravel()
+        cos.append(float(a @ bb / np.linalg.norm(a) / np.linalg.norm(bb)))
+    if min(cos) < 0.99999:
+        raise RuntimeError(f"재배열·분할 모델 출력이 원본과 다릅니다 (최소 코사인 {min(cos):.6f})")
+    return {"layers": rec, "equivalence_min_cosine": min(cos), "onnx": str(dst), "size_mb": C.size_mb(dst)}
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--blocks", required=True)
+    ap.add_argument("--k", type=int, default=32)
+    ap.add_argument("--tag", required=True)
+    ap.add_argument("--hw-arch", default="hailo10h")
+    ap.add_argument("--calib-list", default=str(C.SPLITS / "calib_coco_64_s0.txt"))
+    ap.add_argument("--skip-compile", action="store_true")
+    ap.add_argument("--split-fc1", action="store_true", help="fc1+GELU 도 rest/hot 으로 분할 (3차)")
+    a = ap.parse_args()
+    blocks = [int(x) for x in a.blocks.split(",")]
+    SFX = f".{a.tag}"
+    log = LOG_DIR / f"split_{a.tag}.json"
+    rec = {"timestamp": C.now(), "args": vars(a), "stages": {}}
+
+    def save():
+        log.write_text(json.dumps(rec, indent=1, ensure_ascii=False, default=str))
+
+    def stage(name, fn):
+        print(f"[spl] ▶ {name}", flush=True); t0 = time.time()
+        try:
+            out = fn(); rec["stages"][name] = {"ok": True, "seconds": round(time.time() - t0, 1)}; save()
+            print(f"[spl] ✔ {name} ({rec['stages'][name]['seconds']}s)", flush=True); return out
+        except Exception as e:
+            rec["stages"][name] = {"ok": False, "seconds": round(time.time() - t0, 1), "error": f"{type(e).__name__}: {e}"[:3000],
+                                   "traceback": traceback.format_exc()[-6000:]}
+            rec["failed_stage"] = name; save()
+            print(f"[spl] ✘ {name}: {type(e).__name__}: {str(e)[:800]}", flush=True); sys.exit(1)
+
+    src = official_onnx()
+    dst = HAILO_DIR / f"{NET}{SFX}.onnx"
+    info = stage("build_onnx", lambda: build(src, dst, blocks, a.k, Path(a.calib_list), a.split_fc1))
+    rec["build"] = info
+    for L in info["layers"]:
+        print(f"[spl] 블록 {L['block']}: hot {len(L['hot_channels'])}개, |x| 최대 {L['absmax_before']} -> 나머지 최대 {L['rest_absmax']}", flush=True)
+
+    from hailo_sdk_client import ClientRunner
+    def do_parse():
+        r = ClientRunner(hw_arch=a.hw_arch)
+        r.translate_onnx_model(str(dst), NET)
+        r.save_har(str(HAILO_DIR / f"{NET}{SFX}.parsed.har")); return r
+    runner = stage("parse", do_parse)
+
+    def do_script():
+        layers = hn_layers(runner)
+        hot = [nm.split("/")[-1] for nm, L in layers.items()
+               if any(re.match(r"SPL_b\d+_MatMul1?_hot", o) for o in L.get("original_names", []))]
+        if len(hot) != len(blocks) * (2 if a.split_fc1 else 1):
+            raise RuntimeError(f"hot 작은 층을 HN 에서 찾지 못했습니다: {hot}")
+        slices = [(nm.split("/")[-1], L.get("original_names", [])) for nm, L in layers.items() if L.get("type") == "slice"]
+        cls = [n for n, o in slices if not any(str(x).startswith("SPL_") for x in o)]
+        alls = zoo_read(f"cfg/alls/generic/{NET}.alls")
+        if "[slice1]" in alls and cls and cls[0] != "slice1":
+            alls = alls.replace("[slice1]", f"[{cls[0]}]")          # 새 Slice 때문에 번호가 밀린 경우 원래 CLS slice 로 고정
+        alls = alls.rstrip("\n") + f"\nquantization_param([{', '.join(hot)}], precision_mode=a16_w16)\n"
+        (LOG_DIR / f"{NET}{SFX}.alls").write_text(alls)
+        rec["alls"] = {"hot_16bit_layers": hot, "slice_layers": slices, "cls_slice": cls[:1],
+                       "source": f"{zoo_wheel().name}: cfg/alls/generic/{NET}.alls + hot a16_w16"}
+        (LOG_DIR / f"layers{SFX}.json").write_text(json.dumps(
+            [{"name": nm.split("/")[-1], "type": L.get("type"), "original_names": L.get("original_names"),
+              "in": L.get("input_shapes"), "out": L.get("output_shapes")} for nm, L in layers.items()], indent=1, default=str))
+        runner.load_model_script(alls)
+    stage("model_script", do_script)
+
+    def do_opt():
+        calib = C.load_calib_images_uint8(Path(a.calib_list)).astype(np.float32)
+        rec["calib"] = {"list": Path(a.calib_list).name, "n": int(len(calib)), "sha256": C.sha256_file(a.calib_list)}
+        runner.optimize(calib)
+        runner.save_har(str(HAILO_DIR / f"{NET}{SFX}.quantized.har"))
+    stage("optimize", do_opt)
+
+    if not a.skip_compile:
+        def do_compile():
+            hef = runner.compile()
+            hp = HAILO_DIR / f"{NET}{SFX}.{a.hw_arch}.hef"; hp.write_bytes(hef)
+            runner.save_har(str(HAILO_DIR / f"{NET}{SFX}.compiled.har"))
+            rec["hef"] = {"path": str(hp), "size_mb": C.size_mb(hp), "sha256": C.sha256_file(hp)}
+        stage("compile", do_compile)
+    save()
+    print("[spl] 끝:", {k: v["ok"] for k, v in rec["stages"].items()}, flush=True)
+
+
+if __name__ == "__main__":
+    main()

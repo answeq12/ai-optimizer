@@ -1,0 +1,153 @@
+== 풀린 파일 387개, 위치 /home/answeq12/halio_zipcheck/halio_project
+total 0
+drwxrwxrwx 1 answeq12 answeq12 4096 Oct 18 22:19 .
+drwxrwxrwx 1 answeq12 answeq12 4096 Oct 18 22:19 ..
+lrwxrwxrwx 1 answeq12 answeq12   29 Oct 18 22:19 cache -> /mnt/d/halio_repro_test/cache
+lrwxrwxrwx 1 answeq12 answeq12   28 Oct 18 22:19 data -> /mnt/d/halio_repro_test/data
+== 1) SELFTEST
+✘ SELFTEST 실패
+== SELFTEST 작업 폴더: /tmp/halio_selftest.LjaH9D (끝나면 지워도 된다)
+/tmp/halio_selftest.LjaH9D/run_pilot.sh: line 22: python: command not found
+== 2) reproduce.sh (zip 코드, 새 모델 폴더)
+== 재현 시작 2026-10-18 22:19:06 / 큰 파일: /mnt/d/halio_zipcheck / 로그: logs/reproduce_20261018_2219.log
+   python 3.10.12 | torch 2.14.1+cpu | ORT 1.23.2 | numpy 2.2.6 | open_clip 3.3.0
+== 1/7 데이터 다운로드 (CIFAR-100, COCO val2017, COCO 캡션)
+[cifar] 이미 있음: /mnt/d/halio_zipcheck/data/cifar-100-python
+[coco] 이미 있음: /mnt/d/halio_zipcheck/data/coco/val2017
+== 2/7 분할 재생성 → 제출본과 sha256 비교
+[split] 검증셋 10000장 (클래스당 100), CIFAR 캘리브레이션 목록과의 교집합 0 확인
+[split] 재실행 시 동일한 목록이 재현됨을 확인
+[coco-ret] 전체 5000장, 캘리브레이션 제외 189장 (calib_coco_* 합집합 189장) -> select 2405 / confirm 2406. 교집합 0 확인
+   분할 일치: 제출본과 같은 사진 목록
+== 3/7 FP32 ONNX export + P1 게이트 (PyTorch 와 출력 일치 확인)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[export] clip_vitb16_image_fp32.onnx: 344.88 MB, opset 17, 노드 996 -> 489개 (상수 폴딩)
+[P1] 최대 절대 오차 1.03e-05 (기준 1e-04), 최소 코사인 1.000000 (기준 0.9999) -> 통과
+[text] text_emb_cifar100.npy: (100, 512)
+   P1: {'random_init': False, 'model': 'ViT-B-16', 'pretrained': 'openai', 'timestamp': '2026-10-18T22:19:30+0900'}
+== 4/7 양자화
+[prep] clip_vitb16_image_fp32.prep.onnx 생성 (symbolic+onnx shape inference (ORT optimization skipped))
+[quant] a1_dynamic.onnx: 89.0 MB (dynamic, 제외 1개)
+[split] 블록 5: hot [112, 278, 343, 385, 457, 665, 737, 762, 873, 924, 956, 966, 1124, 1167, 1202, 1297, 1357, 1541, 1729, 1862, 1906, 1979, 2256, 2333, 2388, 2417, 2463, 2524, 2562, 2645, 2838, 2873] (|x| ['5.8', '4.2', '4.1', '3.5', '3.9', '3.8', '3.6', '4.5', '4.0', '9.6', '3.8', '4.0', '3.7', '3.7', '3.6', '3.6', '4.7', '17.4', '3.8', '4.1', '3.8', '5.2', '16.1', '4.7', '3.6', '4.0', '3.6', '3.8', '14.9', '3.7', '3.7', '3.6']) -> 나머지 최대 3.5 (분리 전 17.4)
+[split] 블록 6: hot [19, 95, 112, 186, 196, 290, 337, 391, 424, 514, 944, 959, 1105, 1300, 1484, 1546, 1651, 1710, 1721, 1728, 1744, 1778, 2202, 2212, 2238, 2450, 2518, 2600, 2823, 2928, 2984, 3051] (|x| ['8.7', '6.0', '5.3', '4.1', '4.2', '4.3', '4.0', '4.0', '4.0', '4.1', '5.0', '4.3', '4.2', '4.1', '5.8', '4.1', '3.9', '26.5', '4.6', '4.2', '4.2', '4.0', '3.9', '25.4', '4.3', '4.1', '4.9', '5.2', '4.5', '5.0', '4.5', '25.6']) -> 나머지 최대 3.9 (분리 전 26.5)
+[split] 블록 7: hot [48, 244, 246, 558, 747, 753, 1026, 1078, 1101, 1362, 1435, 1612, 1661, 1830, 1906, 1929, 1991, 2078, 2093, 2348, 2423, 2629, 2663, 2681, 2704, 2786, 2915, 2922, 2975, 2992, 3015, 3033] (|x| ['4.9', '4.7', '4.6', '4.7', '4.6', '4.8', '5.8', '4.4', '4.3', '4.3', '42.3', '4.6', '5.6', '4.4', '4.4', '4.9', '4.3', '40.7', '31.1', '4.3', '4.9', '28.1', '4.4', '4.8', '4.8', '4.7', '4.3', '17.6', '4.3', '4.3', '4.5', '5.4']) -> 나머지 최대 4.3 (분리 전 42.3)
+[split] 저장 split_SPL-b567-k32.fp32.onnx, 원본 대비 최소 코사인 0.9999999
+[quant] 가중치 MatMul 만 양자화: 49개 (A1 동적은 49개)
+[quant] SPL-b567-k32.onnx: 89.82 MB (static, minmax, per-channel, 제외 3개)
+== 5/7 정확도: COCO-confirm 검색 + CIFAR-100 test
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[coco-ret] select: 캡션 12035개 임베딩 (170s)
+[coco-ret] confirm: 캡션 12033개 임베딩 (144s)
+  500/2406 (36s)
+  1000/2406 (72s)
+  1500/2406 (109s)
+  2000/2406 (145s)
+[coco-ret] RP-A0 (confirm, 이미지 2406 / 캡션 12033): R@1 41.79%  R@5 68.09%  R@10 78.53%
+[eval] RP-A0-test: /mnt/d/halio_zipcheck/models/clip_vitb16_image_fp32.onnx / test 10000장
+  500/10000  (34s)
+  1000/10000  (67s)
+  1500/10000  (100s)
+  2000/10000  (134s)
+  2500/10000  (168s)
+  3000/10000  (201s)
+  3500/10000  (234s)
+  4000/10000  (268s)
+  4500/10000  (301s)
+  5000/10000  (335s)
+  5500/10000  (370s)
+  6000/10000  (404s)
+  6500/10000  (438s)
+  7000/10000  (471s)
+  7500/10000  (505s)
+  8000/10000  (539s)
+  8500/10000  (572s)
+  9000/10000  (605s)
+  9500/10000  (638s)
+  10000/10000  (671s)
+[eval] RP-A0-test: top-1 68.01% (표준오차 ±0.47%p, n=10000)
+  500/2406 (15s)
+  1000/2406 (31s)
+  1500/2406 (46s)
+  2000/2406 (63s)
+[coco-ret] RP-A1 (confirm, 이미지 2406 / 캡션 12033): R@1 40.31%  R@5 66.63%  R@10 77.62%
+[eval] RP-A1-test: /mnt/d/halio_zipcheck/models/a1_dynamic.onnx / test 10000장
+  500/10000  (12s)
+  1000/10000  (26s)
+  1500/10000  (38s)
+  2000/10000  (52s)
+  2500/10000  (64s)
+  3000/10000  (75s)
+  3500/10000  (90s)
+  4000/10000  (102s)
+  4500/10000  (114s)
+  5000/10000  (129s)
+  5500/10000  (140s)
+  6000/10000  (154s)
+  6500/10000  (166s)
+  7000/10000  (178s)
+  7500/10000  (192s)
+  8000/10000  (203s)
+  8500/10000  (216s)
+  9000/10000  (230s)
+  9500/10000  (242s)
+  10000/10000  (254s)
+[eval] RP-A1-test: top-1 63.93% (표준오차 ±0.48%p, n=10000)
+  500/2406 (17s)
+  1000/2406 (35s)
+  1500/2406 (52s)
+  2000/2406 (71s)
+[coco-ret] RP-SPL-b567-k32 (confirm, 이미지 2406 / 캡션 12033): R@1 40.84%  R@5 66.78%  R@10 77.91%
+[eval] RP-SPL-b567-k32-test: /mnt/d/halio_zipcheck/models/imp/SPL-b567-k32.onnx / test 10000장
+  500/10000  (16s)
+  1000/10000  (30s)
+  1500/10000  (44s)
+  2000/10000  (61s)
+  2500/10000  (74s)
+  3000/10000  (91s)
+  3500/10000  (105s)
+  4000/10000  (121s)
+  4500/10000  (136s)
+  5000/10000  (150s)
+  5500/10000  (166s)
+  6000/10000  (180s)
+  6500/10000  (195s)
+  7000/10000  (209s)
+  7500/10000  (225s)
+  8000/10000  (239s)
+  8500/10000  (253s)
+  9000/10000  (269s)
+  9500/10000  (284s)
+  10000/10000  (300s)
+[eval] RP-SPL-b567-k32-test: top-1 68.66% (표준오차 ±0.46%p, n=10000)
+# COCO 텍스트→이미지 검색 (confirm, 갤러리 2406장 / 질의 캡션 12033개)
+
+자체 COCO val2017 분할. 이미지별 성적(캡션 hit@K 평균)의 평균. 95% CI = 이미지 단위 짝지은 bootstrap 2000회.
+비열등 = FP32(RP-A0) 대비 R@1 차이의 CI 하한 ≥ −2.0%p (선택 규칙 초안, 값은 팀이 확정).
+
+| 구성 | R@1 [95% CI] | R@5 | R@10 | R@1 차이 vs RP-A0 [95% CI] | R@5 차이 | R@10 차이 | 비열등(−2.0%p) |
+|---|---|---|---|---|---|---|---|
+| RP-A0 | 41.80% [40.42%, 43.23%] | 68.10% | 78.54% | +0.00 [+0.00, +0.00] | +0.00 [+0.00, +0.00] | +0.00 [+0.00, +0.00] | — |
+| RP-A1 | 40.32% [38.95%, 41.71%] | 66.64% | 77.63% | -1.48 [-2.18, -0.78] | -1.46 [-2.09, -0.91] | -0.92 [-1.49, -0.36] | 아니오 |
+| RP-SPL-b567-k32 | 40.85% [39.43%, 42.26%] | 66.80% | 77.92% | -0.96 [-1.56, -0.35] | -1.30 [-1.87, -0.73] | -0.62 [-1.09, -0.15] | 예 |
+
+- 텍스트 인코더는 FP32 고정, 이미지 인코더만 구성별로 다르다. 차이 단위는 %p
+- 자체 분할 결과라 공개 COCO 1K/5K 검색 수치와 직접 비교하지 않는다
+== 6/7 속도 측정 생략 (SKIP_BENCH=1)
+== 7/7 기대값과 비교
+구성             항목                          제출값      재현값  판정
+A0             COCO-confirm R@1         41.79%   41.79%  일치
+A0             COCO-confirm R@5         68.09%   68.09%  일치
+A0             COCO-confirm R@10        78.53%   78.53%  일치
+A0             CIFAR-100 test top-1     68.01%   68.01%  일치
+SPL-b567-k32   COCO-confirm R@1         40.84%   40.84%  일치
+SPL-b567-k32   COCO-confirm R@5         66.78%   66.78%  일치
+SPL-b567-k32   COCO-confirm R@10        77.91%   77.91%  일치
+SPL-b567-k32   CIFAR-100 test top-1     68.66%   68.66%  일치
+
+속도: results/latency_repro.csv 없음 (SKIP_BENCH=1 이었거나 측정 실패)
+
+종합: 정확도 재현 성공
+== 끝 2026-10-18 22:51:40 / 로그: logs/reproduce_20261018_2219.log
+rc=0

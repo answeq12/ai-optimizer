@@ -1,0 +1,35 @@
+== 측정 시작 2026-10-06 22:08:00  (다른 프로그램을 켜지 마세요)
+[bench] 반복 1/3, 순서 ['S-c67-fc2', 'A2m', 'A1', 'A0', 'S-c567-fc2', 'S-b7-fc2']
+  S-c67-fc2: p50 28.69 ms, p95 30.14 ms, Max RSS 248 MB
+  A2m: p50 26.25 ms, p95 27.57 ms, Max RSS 235 MB
+  A1: p50 23.61 ms, p95 25.77 ms, Max RSS 209 MB
+  A0: p50 65.42 ms, p95 71.57 ms, Max RSS 499 MB
+  S-c567-fc2: p50 29.43 ms, p95 31.66 ms, Max RSS 211 MB
+  S-b7-fc2: p50 27.18 ms, p95 29.09 ms, Max RSS 243 MB
+[bench] 반복 2/3, 순서 ['S-c67-fc2', 'A0', 'A1', 'S-c567-fc2', 'A2m', 'S-b7-fc2']
+  S-c67-fc2: p50 28.34 ms, p95 29.57 ms, Max RSS 248 MB
+  A0: p50 63.48 ms, p95 66.82 ms, Max RSS 525 MB
+  A1: p50 24.08 ms, p95 25.54 ms, Max RSS 206 MB
+  S-c567-fc2: p50 29.09 ms, p95 30.36 ms, Max RSS 250 MB
+  A2m: p50 26.05 ms, p95 27.16 ms, Max RSS 235 MB
+  S-b7-fc2: p50 27.35 ms, p95 28.90 ms, Max RSS 200 MB
+[bench] 반복 3/3, 순서 ['S-c567-fc2', 'S-b7-fc2', 'A0', 'A2m', 'A1', 'S-c67-fc2']
+  S-c567-fc2: p50 29.14 ms, p95 31.46 ms, Max RSS 213 MB
+  S-b7-fc2: p50 26.75 ms, p95 28.10 ms, Max RSS 243 MB
+  A0: p50 63.05 ms, p95 65.38 ms, Max RSS 479 MB
+  A2m: p50 25.54 ms, p95 26.45 ms, Max RSS 233 MB
+  A1: p50 23.82 ms, p95 25.43 ms, Max RSS 209 MB
+  S-c67-fc2: p50 28.84 ms, p95 30.16 ms, Max RSS 246 MB
+[bench] 저장: /mnt/c/Users/PC00/Desktop/dongchan/halio project/results/latency_summary.json
+== 연산자 커버리지
+[0;93m2026-10-06 22:11:52.725992840 [W:onnxruntime:, inference_session.cc:2473 Initialize] Serializing optimized model with Graph Optimization level greater than ORT_ENABLE_EXTENDED and the NchwcTransformer enabled. The generated model may contain hardware specific optimizations, and should only be used in the same environment the model was optimized in.[m
+[0;93m2026-10-06 22:12:56.229088814 [W:onnxruntime:, inference_session.cc:2473 Initialize] Serializing optimized model with Graph Optimization level greater than ORT_ENABLE_EXTENDED and the NchwcTransformer enabled. The generated model may contain hardware specific optimizations, and should only be used in the same environment the model was optimized in.[m
+[0;93m2026-10-06 22:14:13.017339110 [W:onnxruntime:, inference_session.cc:2473 Initialize] Serializing optimized model with Graph Optimization level greater than ORT_ENABLE_EXTENDED and the NchwcTransformer enabled. The generated model may contain hardware specific optimizations, and should only be used in the same environment the model was optimized in.[m
+[0;93m2026-10-06 22:15:33.803307915 [W:onnxruntime:, inference_session.cc:2473 Initialize] Serializing optimized model with Graph Optimization level greater than ORT_ENABLE_EXTENDED and the NchwcTransformer enabled. The generated model may contain hardware specific optimizations, and should only be used in the same environment the model was optimized in.[m
+[cov] A1: 정수 연산 비율 66.2%, 정수 커널 시간 67.5%, patch embed Conv 양자화 아니오
+[cov] A2m: 정수 연산 비율 66.2%, 정수 커널 시간 58.2%, patch embed Conv 양자화 아니오
+[cov] S-c67-fc2: 정수 연산 비율 63.5%, 정수 커널 시간 50.8%, patch embed Conv 양자화 아니오
+[cov] S-c567-fc2: 정수 연산 비율 62.2%, 정수 커널 시간 48.0%, patch embed Conv 양자화 아니오
+[cov] 저장: /mnt/c/Users/PC00/Desktop/dongchan/halio project/results/coverage.md
+== 끝 2026-10-06 22:17:00. 결과: results/latency_summary.json, results/all_runs.md, results/coverage.md
+rc=0

@@ -1,0 +1,14 @@
+{
+  "run_id": "R160-A1-c67-pc-val",
+  "top1_acc": 0.6771,
+  "std_err": 0.004675848479153276,
+  "n": 10000,
+  "agree_with_fp32": 0.7692,
+  "mean_cosine_to_fp32": 0.9597931504249573,
+  "min_cosine_to_fp32": 0.7404035329818726,
+  "mcnemar_vs_fp32": {
+    "a_only": 736,
+    "b_only": 627,
+    "p_value": 0.003425888588703633
+  }
+}

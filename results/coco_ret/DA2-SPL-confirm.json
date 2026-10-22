@@ -1,0 +1,13 @@
+{
+  "code": "DA2-SPL",
+  "split": "confirm",
+  "n_images": 2406,
+  "n_captions": 12033,
+  "R@1": 0.5464971328845675,
+  "R@5": 0.8055347793567689,
+  "R@10": 0.8876423169616887,
+  "median_rank": 1.0,
+  "timestamp": "2026-10-21T18:07:16+0900",
+  "model": "/mnt/d/halio_data/models_da2/imp/SPL-b567-k32.onnx",
+  "backend": "onnxruntime-cpu"
+}

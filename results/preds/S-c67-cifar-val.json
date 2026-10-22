@@ -1,0 +1,14 @@
+{
+  "run_id": "S-c67-cifar-val",
+  "top1_acc": 0.6796,
+  "std_err": 0.004666303033451643,
+  "n": 10000,
+  "agree_with_fp32": 0.8225,
+  "mean_cosine_to_fp32": 0.9652024507522583,
+  "min_cosine_to_fp32": 0.8593835830688477,
+  "mcnemar_vs_fp32": {
+    "a_only": 546,
+    "b_only": 462,
+    "p_value": 0.008909218118452796
+  }
+}

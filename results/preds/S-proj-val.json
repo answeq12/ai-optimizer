@@ -1,0 +1,14 @@
+{
+  "run_id": "S-proj-val",
+  "top1_acc": 0.5359,
+  "std_err": 0.004987095246734315,
+  "n": 10000,
+  "agree_with_fp32": 0.6164,
+  "mean_cosine_to_fp32": 0.8949570059776306,
+  "min_cosine_to_fp32": 0.6903576254844666,
+  "mcnemar_vs_fp32": {
+    "a_only": 1901,
+    "b_only": 380,
+    "p_value": 2.0884149526775375e-242
+  }
+}

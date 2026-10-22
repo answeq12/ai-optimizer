@@ -1,0 +1,13 @@
+{
+  "code": "QAT-SPL",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.41595346904860825,
+  "R@5": 0.6835064395513086,
+  "R@10": 0.7929372663066058,
+  "median_rank": 2.0,
+  "timestamp": "2026-10-21T05:07:36+0900",
+  "model": "/mnt/d/halio_data/models_qat_orig/imp/SPL-b567-k32.onnx",
+  "backend": "onnxruntime-cpu"
+}

@@ -1,0 +1,14 @@
+{
+  "run_id": "RM-n2-s9-val",
+  "top1_acc": 0.4191,
+  "std_err": 0.004934117854287633,
+  "n": 10000,
+  "agree_with_fp32": 0.4851,
+  "mean_cosine_to_fp32": 0.8658605217933655,
+  "min_cosine_to_fp32": 0.7211973667144775,
+  "mcnemar_vs_fp32": {
+    "a_only": 3053,
+    "b_only": 364,
+    "p_value": 0.0
+  }
+}

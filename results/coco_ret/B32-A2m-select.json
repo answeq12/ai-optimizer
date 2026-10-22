@@ -1,0 +1,13 @@
+{
+  "code": "B32-A2m",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.3708350643955131,
+  "R@5": 0.652513502285002,
+  "R@10": 0.7657665143331949,
+  "median_rank": 3.0,
+  "timestamp": "2026-10-20T01:54:50+0900",
+  "model": "/mnt/d/halio_data/models_b32/a2m.onnx",
+  "backend": "onnxruntime-cpu"
+}

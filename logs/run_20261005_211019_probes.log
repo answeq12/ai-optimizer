@@ -1,0 +1,7 @@
+== 모드: probes / 시각: 2026-10-05 21:10:19 / 로그: logs/run_20261005_211019_probes.log
+== 시스템: Ubuntu 22.04.5 LTS / 커널 6.18.33.2-microsoft-standard-WSL2
+== CPU: Intel(R) Core(TM) i9-14900KF / 논리 코어 16 / 메모리 23GB
+== 디스크 여유: 홈 953G, 이 폴더 23G, D 드라이브 1.3T
+== 시스템 파이썬: Python 3.10.12 / WSL 사용자: answeq12
+== 버전: torch 2.14.1+cpu, onnx 1.23.1, onnxruntime 1.23.2, numpy 2.2.6, open_clip 3.3.0
+== 회복 탐침 (기준: A2 = MinMax, per-tensor, COCO 64장 s0)

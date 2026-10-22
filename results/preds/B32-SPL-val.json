@@ -1,0 +1,14 @@
+{
+  "run_id": "B32-SPL-val",
+  "top1_acc": 0.6582,
+  "std_err": 0.004743129346749886,
+  "n": 10000,
+  "agree_with_fp32": 0.6636,
+  "mean_cosine_to_fp32": 0.009304771199822426,
+  "min_cosine_to_fp32": -0.10009898990392685,
+  "mcnemar_vs_fp32": {
+    "a_only": 1178,
+    "b_only": 880,
+    "p_value": 5.451507062108158e-11
+  }
+}

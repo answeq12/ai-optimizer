@@ -1,0 +1,13 @@
+{
+  "code": "R160-A0",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.3781470710427919,
+  "R@5": 0.6506855006231824,
+  "R@10": 0.7675945159950145,
+  "median_rank": 3.0,
+  "timestamp": "2026-10-16T11:02:51+0900",
+  "model": "/mnt/d/halio_data/models/res/clip_vitb16_image_fp32_r160.onnx",
+  "backend": "onnxruntime-cpu"
+}

@@ -1,0 +1,13 @@
+{
+  "code": "RPV-A1",
+  "split": "confirm",
+  "n_images": 2406,
+  "n_captions": 12033,
+  "R@1": 0.4031413612565445,
+  "R@5": 0.6662511426909332,
+  "R@10": 0.7761987866699909,
+  "median_rank": 2.0,
+  "timestamp": "2026-10-20T16:27:13+0900",
+  "model": "/mnt/d/halio_fullcheck/models/a1_dynamic.onnx",
+  "backend": "onnxruntime-cpu"
+}

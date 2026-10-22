@@ -1,0 +1,14 @@
+{
+  "run_id": "P-ent-val",
+  "top1_acc": 0.0201,
+  "std_err": 0.00140342402715644,
+  "n": 10000,
+  "agree_with_fp32": 0.021,
+  "mean_cosine_to_fp32": 0.4757097661495209,
+  "min_cosine_to_fp32": 0.17655697464942932,
+  "mcnemar_vs_fp32": {
+    "a_only": 6720,
+    "b_only": 41,
+    "p_value": 0.0
+  }
+}

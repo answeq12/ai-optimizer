@@ -1,0 +1,78 @@
+"""해상도(토큰 수) 축소 실험용 ONNX export. 학습 없음.
+
+  python -m src.export_res --size 192          # -> <MODELS>/res/clip_vitb16_image_fp32_r192.onnx
+
+- 같은 OpenAI CLIP ViT-B/16 가중치. 위치 임베딩(14x14 격자)만 bicubic 보간으로 새 격자(size/16)에 맞춘다
+  (open_clip 이 다른 해상도로 불러올 때 쓰는 방식과 같은 보간: bicubic, antialias, align_corners=False)
+- 패치 토큰 수: 224 -> 196(+CLS), 192 -> 144, 176 -> 121, 160 -> 100. 선형층 연산량은 토큰 수에 비례
+- 그래프 정리·P1 게이트는 원본 export(src/export_onnx.py)와 같은 함수와 기준을 쓴다
+  (PyTorch 동일 해상도 대비 최대 오차 1e-4, 코사인 0.9999). P1 은 'export 가 맞는가'를 보는 것이고 정확도 손실은 따로 잰다
+- 평가할 때는 HALIO_IMAGE_SIZE=<size> 로 전처리 크기를 맞춘다 (src/common.py)
+결과: <MODELS>/res/clip_vitb16_image_fp32_r<size>.onnx (+ .json)
+"""
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+
+import numpy as np
+from PIL import Image
+
+from . import common as C
+from . import export_onnx as E
+
+OUT_DIR = C.MODELS / "res"
+
+
+def resize_pos_embed(model, size: int) -> dict:
+    import torch
+    import torch.nn.functional as F
+    v = model.visual
+    pe = v.positional_embedding.detach()                # [1+g*g, D]
+    g0 = int(round((pe.shape[0] - 1) ** 0.5))
+    g1 = size // 16
+    if size % 16:
+        raise SystemExit("크기는 16의 배수여야 합니다 (패치 16x16)")
+    cls, grid = pe[:1], pe[1:].reshape(1, g0, g0, -1).permute(0, 3, 1, 2)
+    grid = F.interpolate(grid, size=(g1, g1), mode="bicubic", antialias=True, align_corners=False)
+    new = torch.cat([cls, grid.permute(0, 2, 3, 1).reshape(g1 * g1, -1)], 0)
+    v.positional_embedding = torch.nn.Parameter(new)
+    for attr, val in (("grid_size", (g1, g1)), ("image_size", (size, size))):
+        if hasattr(v, attr):
+            setattr(v, attr, val)
+    return {"grid_from": g0, "grid_to": g1, "tokens": 1 + g1 * g1,
+            "interp": "bicubic, antialias=True, align_corners=False (CLS 토큰은 그대로)"}
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--size", type=int, required=True)
+    a = ap.parse_args()
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    out = OUT_DIR / f"clip_vitb16_image_fp32_r{a.size}.onnx"
+    raw = OUT_DIR / f"clip_vitb16_image_fp32_r{a.size}.raw.onnx"
+    model, _ = E.load_model(C.PRETRAINED)
+    info = {"size": a.size, **resize_pos_embed(model, a.size)}
+    C.IMAGE_SIZE = a.size                                # export() 의 더미 입력 크기
+    info.update(E.export(model, raw))
+    info.update(E.fold_constants(raw, out))
+    # P1: COCO 제외 목록(캘리브 전용, 평가에 안 쓰는 사진) 20장으로 PyTorch 와 비교
+    files = [ln.strip() for ln in (C.SPLITS / "coco_ret_exclude.txt").read_text().split("\n")[1:] if ln.strip()][:E.PARITY_N]
+    x = np.stack([C.preprocess(Image.open(C.COCO_DIR / f), a.size) for f in files]).astype(np.float32)
+    info["p1"] = E.parity(model, out, x)
+    info["out"] = str(out)
+    out.with_suffix(".json").write_text(json.dumps(info, indent=2, ensure_ascii=False, default=str))
+    print(f"[res] r{a.size}: 토큰 {info['tokens']}, 노드 {info['nodes']}, {info['size_mb']} MB, "
+          f"P1 최대오차 {info['p1']['max_abs_err']:.2e} / 최소코사인 {info['p1']['min_cosine']:.6f} "
+          f"-> {'통과' if info['p1']['passed'] else '실패'}")
+    try:
+        raw.unlink()
+    except OSError:
+        pass
+    if not info["p1"]["passed"]:
+        raise SystemExit("P1 게이트 실패: export 결과가 PyTorch 와 다릅니다")
+
+
+if __name__ == "__main__":
+    main()

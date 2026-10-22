@@ -1,0 +1,10 @@
+[nocaps] parquet: ['data/validation-00000-of-00003-55b5edbf01d47b39.parquet', 'data/validation-00001-of-00003-44f6cbdc2de0413a.parquet', 'data/validation-00002-of-00003-9ac41c0db1646ae3.parquet']
+[nocaps] 열: ['image', 'image_coco_url', 'image_date_captured', 'image_file_name', 'image_height', 'image_width', 'image_id', 'image_license', 'image_open_images_id', 'annotations_ids', 'annotations_captions'] 1500
+[nocaps] 열: ['image', 'image_coco_url', 'image_date_captured', 'image_file_name', 'image_height', 'image_width', 'image_id', 'image_license', 'image_open_images_id', 'annotations_ids', 'annotations_captions'] 1500
+[nocaps] 열: ['image', 'image_coco_url', 'image_date_captured', 'image_file_name', 'image_height', 'image_width', 'image_id', 'image_license', 'image_open_images_id', 'annotations_ids', 'annotations_captions'] 1500
+[nocaps] 공식 주석 실패 https://s3.amazonaws.com/nocaps/nocaps_val_4500_captions.json: <HTTPError 403: 'Forbidden'>
+[nocaps] 공식 주석 실패 https://nocaps.s3.amazonaws.com/nocaps_val_4500_captions.json: <HTTPError 403: 'Forbidden'>
+[nocaps] 사진 4500, 캡션 45000, 묶음 Counter({None: 4500})
+[nocaps] 캡션 임베딩 45000개 → nocaps_text.npy
+1.4G	/mnt/d/halio_data/data/nocaps
+rc=0

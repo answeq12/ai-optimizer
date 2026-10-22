@@ -1,0 +1,13 @@
+{
+  "code": "RM-n1-s10",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.39626090569173245,
+  "R@5": 0.6786040714582467,
+  "R@10": 0.791607810552555,
+  "median_rank": 2.0,
+  "timestamp": "2026-10-18T13:00:57+0900",
+  "model": "/mnt/d/halio_data/models/rm/clip_vitb16_rm_n1_s10.onnx",
+  "backend": "onnxruntime-cpu"
+}

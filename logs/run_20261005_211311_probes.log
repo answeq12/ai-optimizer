@@ -1,0 +1,453 @@
+== 모드: probes / 시각: 2026-10-05 21:13:11 / 로그: logs/run_20261005_211311_probes.log
+== 시스템: Ubuntu 22.04.5 LTS / 커널 6.18.33.2-microsoft-standard-WSL2
+== CPU: Intel(R) Core(TM) i9-14900KF / 논리 코어 16 / 메모리 23GB
+== 디스크 여유: 홈 953G, 이 폴더 23G, D 드라이브 1.3T
+== 시스템 파이썬: Python 3.10.12 / WSL 사용자: answeq12
+== 버전: torch 2.14.1+cpu, onnx 1.23.1, onnxruntime 1.23.2, numpy 2.2.6, open_clip 3.3.0
+== 회복 탐침 (기준: A2 = MinMax, per-tensor, COCO 64장 s0)
+WARNING:root:Axis 1 is out-of-range for weight 'ln_pre.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.0.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.0.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.1.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.1.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.2.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.2.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.3.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.3.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.4.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.4.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.5.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.5.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.6.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.6.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.7.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.7.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.8.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.8.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.9.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.9.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.10.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.10.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.11.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.11.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'ln_post.weight' with rank 1
+[quant] p_pc.onnx: 87.35 MB (static, minmax, per-channel)
+[eval] P-pc-val: /mnt/d/halio_data/models/p_pc.onnx / val 10000장
+  500/10000  (12s)
+  1000/10000  (26s)
+  1500/10000  (39s)
+  2000/10000  (52s)
+  2500/10000  (66s)
+  3000/10000  (78s)
+  3500/10000  (92s)
+  4000/10000  (105s)
+  4500/10000  (117s)
+  5000/10000  (131s)
+  5500/10000  (143s)
+  6000/10000  (157s)
+  6500/10000  (170s)
+  7000/10000  (183s)
+  7500/10000  (196s)
+  8000/10000  (209s)
+  8500/10000  (221s)
+  9000/10000  (235s)
+  9500/10000  (247s)
+  10000/10000  (261s)
+[eval] P-pc-val: top-1 2.12% (표준오차 ±0.14%p, n=10000), FP32 대비 일치율 2.24%, 평균 코사인 0.4816
+WARNING:root:Axis 1 is out-of-range for weight 'ln_pre.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.0.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.0.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.1.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.1.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.2.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.2.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.3.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.3.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.4.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.4.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.5.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.5.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.6.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.6.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.7.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.7.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.8.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.8.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.9.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.9.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.10.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.10.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.11.ln_1.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'transformer.resblocks.11.ln_2.weight' with rank 1
+WARNING:root:Axis 1 is out-of-range for weight 'ln_post.weight' with rank 1
+[quant] p_pc_rr.onnx: 87.35 MB (static, minmax, per-channel)
+[eval] P-pc-rr-val: /mnt/d/halio_data/models/p_pc_rr.onnx / val 10000장
+  500/10000  (14s)
+  1000/10000  (26s)
+  1500/10000  (39s)
+  2000/10000  (52s)
+  2500/10000  (66s)
+  3000/10000  (81s)
+  3500/10000  (94s)
+  4000/10000  (108s)
+  4500/10000  (121s)
+  5000/10000  (134s)
+  5500/10000  (147s)
+  6000/10000  (160s)
+  6500/10000  (173s)
+  7000/10000  (186s)
+  7500/10000  (199s)
+  8000/10000  (212s)
+  8500/10000  (225s)
+  9000/10000  (239s)
+  9500/10000  (252s)
+  10000/10000  (264s)
+[eval] P-pc-rr-val: top-1 2.00% (표준오차 ±0.14%p, n=10000), FP32 대비 일치율 2.03%, 평균 코사인 0.4796
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Finding optimal threshold for each tensor using 'percentile' algorithm ...
+Number of tensors : 490
+Number of histogram bins : 2048
+Percentile : (0.09999999999999432,99.9)
+[quant] p_pct999.onnx: 86.86 MB (static, percentile(99.9))
+[eval] P-pct-val: /mnt/d/halio_data/models/p_pct999.onnx / val 10000장
+  500/10000  (13s)
+  1000/10000  (26s)
+  1500/10000  (39s)
+  2000/10000  (51s)
+  2500/10000  (64s)
+  3000/10000  (77s)
+  3500/10000  (89s)
+  4000/10000  (102s)
+  4500/10000  (114s)
+  5000/10000  (127s)
+  5500/10000  (140s)
+  6000/10000  (152s)
+  6500/10000  (165s)
+  7000/10000  (178s)
+  7500/10000  (191s)
+  8000/10000  (203s)
+  8500/10000  (216s)
+  9000/10000  (229s)
+  9500/10000  (242s)
+  10000/10000  (254s)
+[eval] P-pct-val: top-1 4.77% (표준오차 ±0.21%p, n=10000), FP32 대비 일치율 4.74%, 평균 코사인 0.5137
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Finding optimal threshold for each tensor using 'entropy' algorithm ...
+Number of tensors : 490
+Number of histogram bins : 128 (The number may increase depends on the data it collects)
+Number of quantized bins : 128
+[quant] p_entropy.onnx: 86.86 MB (static, entropy)
+[eval] P-ent-val: /mnt/d/halio_data/models/p_entropy.onnx / val 10000장
+  500/10000  (13s)
+  1000/10000  (26s)
+  1500/10000  (38s)
+  2000/10000  (51s)
+  2500/10000  (64s)
+  3000/10000  (77s)
+  3500/10000  (90s)
+  4000/10000  (103s)
+  4500/10000  (116s)
+  5000/10000  (128s)
+  5500/10000  (140s)
+  6000/10000  (153s)
+  6500/10000  (165s)
+  7000/10000  (178s)
+  7500/10000  (191s)
+  8000/10000  (203s)
+  8500/10000  (217s)
+  9000/10000  (229s)
+  9500/10000  (242s)
+  10000/10000  (255s)
+[eval] P-ent-val: top-1 2.01% (표준오차 ±0.14%p, n=10000), FP32 대비 일치율 2.10%, 평균 코사인 0.4757
+[quant] p_ln.onnx: 86.88 MB (static, minmax, 제외 26개)
+[eval] P-ln-val: /mnt/d/halio_data/models/p_ln.onnx / val 10000장
+  500/10000  (13s)
+  1000/10000  (26s)
+  1500/10000  (39s)
+  2000/10000  (52s)
+  2500/10000  (65s)
+  3000/10000  (78s)
+  3500/10000  (90s)
+  4000/10000  (103s)
+  4500/10000  (116s)
+  5000/10000  (128s)
+  5500/10000  (142s)
+  6000/10000  (154s)
+  6500/10000  (167s)
+  7000/10000  (180s)
+  7500/10000  (193s)
+  8000/10000  (205s)
+  8500/10000  (218s)
+  9000/10000  (231s)
+  9500/10000  (244s)
+  10000/10000  (256s)
+[eval] P-ln-val: top-1 1.93% (표준오차 ±0.14%p, n=10000), FP32 대비 일치율 1.98%, 평균 코사인 0.4783
+[quant] p_add.onnx: 86.86 MB (static, minmax, 제외 24개)
+[eval] P-add-val: /mnt/d/halio_data/models/p_add.onnx / val 10000장
+  500/10000  (12s)
+  1000/10000  (25s)
+  1500/10000  (38s)
+  2000/10000  (50s)
+  2500/10000  (63s)
+  3000/10000  (76s)
+  3500/10000  (88s)
+  4000/10000  (102s)
+  4500/10000  (114s)
+  5000/10000  (127s)
+  5500/10000  (140s)
+  6000/10000  (153s)
+  6500/10000  (166s)
+  7000/10000  (178s)
+  7500/10000  (191s)
+  8000/10000  (204s)
+  8500/10000  (216s)
+  9000/10000  (229s)
+  9500/10000  (242s)
+  10000/10000  (255s)
+[eval] P-add-val: top-1 2.09% (표준오차 ±0.14%p, n=10000), FP32 대비 일치율 2.23%, 평균 코사인 0.4776
+[quant] p_pe.onnx: 88.62 MB (static, minmax, 제외 1개)
+[eval] P-pe-val: /mnt/d/halio_data/models/p_pe.onnx / val 10000장
+  500/10000  (13s)
+  1000/10000  (26s)
+  1500/10000  (39s)
+  2000/10000  (52s)
+  2500/10000  (65s)
+  3000/10000  (78s)
+  3500/10000  (91s)
+  4000/10000  (104s)
+  4500/10000  (117s)
+  5000/10000  (131s)
+  5500/10000  (143s)
+  6000/10000  (157s)
+  6500/10000  (170s)
+  7000/10000  (183s)
+  7500/10000  (196s)
+  8000/10000  (209s)
+  8500/10000  (223s)
+  9000/10000  (236s)
+  9500/10000  (249s)
+  10000/10000  (262s)
+[eval] P-pe-val: top-1 1.92% (표준오차 ±0.14%p, n=10000), FP32 대비 일치율 1.99%, 평균 코사인 0.4845
+== 캘리브레이션 도메인 A/B (A: COCO, B: CIFAR-100 train. 각 3묶음, 나머지 조건 동일)
+[quant] ab_coco_s1.onnx: 86.86 MB (static, minmax)
+[eval] AB-coco-s1-val: /mnt/d/halio_data/models/ab_coco_s1.onnx / val 10000장
+  500/10000  (13s)
+  1000/10000  (26s)
+  1500/10000  (39s)
+  2000/10000  (52s)
+  2500/10000  (65s)
+  3000/10000  (78s)
+  3500/10000  (91s)
+  4000/10000  (103s)
+  4500/10000  (116s)
+  5000/10000  (129s)
+  5500/10000  (141s)
+  6000/10000  (155s)
+  6500/10000  (167s)
+  7000/10000  (180s)
+  7500/10000  (193s)
+  8000/10000  (205s)
+  8500/10000  (218s)
+  9000/10000  (231s)
+  9500/10000  (244s)
+  10000/10000  (257s)
+[eval] AB-coco-s1-val: top-1 1.66% (표준오차 ±0.13%p, n=10000), FP32 대비 일치율 1.81%, 평균 코사인 0.4692
+[quant] ab_coco_s2.onnx: 86.86 MB (static, minmax)
+[eval] AB-coco-s2-val: /mnt/d/halio_data/models/ab_coco_s2.onnx / val 10000장
+  500/10000  (14s)
+  1000/10000  (26s)
+  1500/10000  (40s)
+  2000/10000  (52s)
+  2500/10000  (64s)
+  3000/10000  (78s)
+  3500/10000  (90s)
+  4000/10000  (103s)
+  4500/10000  (116s)
+  5000/10000  (128s)
+  5500/10000  (142s)
+  6000/10000  (154s)
+  6500/10000  (167s)
+  7000/10000  (181s)
+  7500/10000  (193s)
+  8000/10000  (206s)
+  8500/10000  (218s)
+  9000/10000  (231s)
+  9500/10000  (244s)
+  10000/10000  (256s)
+[eval] AB-coco-s2-val: top-1 1.64% (표준오차 ±0.13%p, n=10000), FP32 대비 일치율 1.81%, 평균 코사인 0.4600
+[quant] ab_cifar_s0.onnx: 86.86 MB (static, minmax)
+[eval] AB-cifar-s0-val: /mnt/d/halio_data/models/ab_cifar_s0.onnx / val 10000장
+  500/10000  (12s)
+  1000/10000  (25s)
+  1500/10000  (38s)
+  2000/10000  (51s)
+  2500/10000  (64s)
+  3000/10000  (77s)
+  3500/10000  (89s)
+  4000/10000  (103s)
+  4500/10000  (116s)
+  5000/10000  (129s)
+  5500/10000  (142s)
+  6000/10000  (154s)
+  6500/10000  (168s)
+  7000/10000  (180s)
+  7500/10000  (192s)
+  8000/10000  (206s)
+  8500/10000  (218s)
+  9000/10000  (232s)
+  9500/10000  (245s)
+  10000/10000  (257s)
+[eval] AB-cifar-s0-val: top-1 1.46% (표준오차 ±0.12%p, n=10000), FP32 대비 일치율 1.57%, 평균 코사인 0.4643
+[quant] ab_cifar_s1.onnx: 86.86 MB (static, minmax)
+[eval] AB-cifar-s1-val: /mnt/d/halio_data/models/ab_cifar_s1.onnx / val 10000장
+  500/10000  (12s)
+  1000/10000  (26s)
+  1500/10000  (38s)
+  2000/10000  (51s)
+  2500/10000  (64s)
+  3000/10000  (76s)
+  3500/10000  (90s)
+  4000/10000  (102s)
+  4500/10000  (114s)
+  5000/10000  (128s)
+  5500/10000  (140s)
+  6000/10000  (154s)
+  6500/10000  (166s)
+  7000/10000  (178s)
+  7500/10000  (192s)
+  8000/10000  (205s)
+  8500/10000  (217s)
+  9000/10000  (231s)
+  9500/10000  (243s)
+  10000/10000  (257s)
+[eval] AB-cifar-s1-val: top-1 1.73% (표준오차 ±0.13%p, n=10000), FP32 대비 일치율 1.66%, 평균 코사인 0.4941
+[quant] ab_cifar_s2.onnx: 86.86 MB (static, minmax)
+[eval] AB-cifar-s2-val: /mnt/d/halio_data/models/ab_cifar_s2.onnx / val 10000장
+  500/10000  (14s)
+  1000/10000  (26s)
+  1500/10000  (39s)
+  2000/10000  (52s)
+  2500/10000  (65s)
+  3000/10000  (77s)
+  3500/10000  (90s)
+  4000/10000  (103s)
+  4500/10000  (116s)
+  5000/10000  (128s)
+  5500/10000  (141s)
+  6000/10000  (154s)
+  6500/10000  (167s)
+  7000/10000  (180s)
+  7500/10000  (193s)
+  8000/10000  (205s)
+  8500/10000  (218s)
+  9000/10000  (231s)
+  9500/10000  (243s)
+  10000/10000  (257s)
+[eval] AB-cifar-s2-val: top-1 1.67% (표준오차 ±0.13%p, n=10000), FP32 대비 일치율 1.84%, 평균 코사인 0.4635
+# 전체 구성 (val)
+
+| 구성 | top-1 | Δ vs FP32 | FP32 대비 일치율 | p50 (ms) | p95 (ms) | Max RSS (MB) | 파일 (MB) | 정수 연산 비율 |
+|---|---|---|---|---|---|---|---|---|
+| A0 FP32 | 68.80% | — | — | 64.26 | 66.52 | 516 | 344.9 | 0.0% |
+| A1 동적 INT8 | 65.02% | -3.78%p | 81.46% | 23.81 | 25.43 | 197 | 89.0 | 66.2% |
+| A2 정적 INT8 기본 | 2.09% | -66.71%p | 2.23% | 24.28 | 25.52 | 208 | 86.9 | 100.0% |
+| P-pc | 2.12% | -66.68%p | 2.24% | - | - | - | - | - |
+| P-pc-rr | 2.00% | -66.80%p | 2.03% | - | - | - | - | - |
+| P-pct | 4.77% | -64.03%p | 4.74% | - | - | - | - | - |
+| P-ent | 2.01% | -66.79%p | 2.10% | - | - | - | - | - |
+| P-ln | 1.93% | -66.87%p | 1.98% | - | - | - | - | - |
+| P-add | 2.09% | -66.71%p | 2.23% | - | - | - | - | - |
+| P-pe | 1.92% | -66.88%p | 1.99% | - | - | - | - | - |
+| AB-coco-s1 | 1.66% | -67.14%p | 1.81% | - | - | - | - | - |
+| AB-coco-s2 | 1.64% | -67.16%p | 1.81% | - | - | - | - | - |
+| AB-cifar-s0 | 1.46% | -67.34%p | 1.57% | - | - | - | - | - |
+| AB-cifar-s1 | 1.73% | -67.07%p | 1.66% | - | - | - | - | - |
+| AB-cifar-s2 | 1.67% | -67.13%p | 1.84% | - | - | - | - | - |
+
+- 평가셋: CIFAR-100 val 10000장. top-1 표준오차 약 ±0.46%p. 이 크기 이내의 차이만으로 방향을 확정하지 않는다
+- A1 vs FP32 짝지은 비교: FP32만 정답 708장, A1만 정답 330장, McNemar p=2.55e-32
+- A2 vs FP32 짝지은 비교: FP32만 정답 6716장, A2만 정답 45장, McNemar p=0
+- P-pc vs FP32 짝지은 비교: FP32만 정답 6713장, P-pc만 정답 45장, McNemar p=0
+- P-pc-rr vs FP32 짝지은 비교: FP32만 정답 6715장, P-pc-rr만 정답 35장, McNemar p=0
+- P-pct vs FP32 짝지은 비교: FP32만 정답 6484장, P-pct만 정답 81장, McNemar p=0
+- P-ent vs FP32 짝지은 비교: FP32만 정답 6720장, P-ent만 정답 41장, McNemar p=0
+- P-ln vs FP32 짝지은 비교: FP32만 정답 6734장, P-ln만 정답 47장, McNemar p=0
+- P-add vs FP32 짝지은 비교: FP32만 정답 6716장, P-add만 정답 45장, McNemar p=0
+- P-pe vs FP32 짝지은 비교: FP32만 정답 6729장, P-pe만 정답 41장, McNemar p=0
+- AB-coco-s1 vs FP32 짝지은 비교: FP32만 정답 6750장, AB-coco-s1만 정답 36장, McNemar p=0
+- AB-coco-s2 vs FP32 짝지은 비교: FP32만 정답 6751장, AB-coco-s2만 정답 35장, McNemar p=0
+- AB-cifar-s0 vs FP32 짝지은 비교: FP32만 정답 6770장, AB-cifar-s0만 정답 36장, McNemar p=0
+- AB-cifar-s1 vs FP32 짝지은 비교: FP32만 정답 6750장, AB-cifar-s1만 정답 43장, McNemar p=0
+- AB-cifar-s2 vs FP32 짝지은 비교: FP32만 정답 6743장, AB-cifar-s2만 정답 30장, McNemar p=0
+- 속도·메모리: 배치 1, 스레드 4, 워밍업 20회 제외 후 300회, 3회 반복의 중앙값. 측정 환경 Intel(R) Core(TM) i9-14900KF / WSL=True / env 934e571a17
+- A1: p50 기준 FP32 대비 2.70배 빠름, 파일 크기 3.88배 작음
+- A2: p50 기준 FP32 대비 2.65배 빠름, 파일 크기 3.97배 작음
+
+이 표로 말할 수 없는 것: Hailo 에서의 개선량(양자화기가 다르다), 제조사 설정 대비 우위, 다른 도메인에서의 성능, 최종 점수 전망.
+
+[table] 저장: /mnt/c/Users/PC00/Desktop/dongchan/halio project/results/all_runs.md
+
+== 완료. 결과: results/all_runs.md
+== 로그: logs/run_20261005_211311_probes.log

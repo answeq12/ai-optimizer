@@ -1,0 +1,31 @@
+CPU:  Intel(R) Core(TM) i9-14900KF / 부하 0.00 0.58 3.57 / 2026-10-21 05:31:45
+[bench] 반복 1/3, 순서 ['SPL-b567-k32', 'A1', 'A0', 'DA-SPL', 'QAT-SPL']
+  SPL-b567-k32: p50 28.16 ms, p95 29.58 ms, Max RSS 234 MB
+  A1: p50 22.77 ms, p95 24.07 ms, Max RSS 195 MB
+  A0: p50 63.69 ms, p95 66.02 ms, Max RSS 500 MB
+  DA-SPL: p50 27.72 ms, p95 28.86 ms, Max RSS 200 MB
+  QAT-SPL: p50 27.95 ms, p95 28.94 ms, Max RSS 211 MB
+[bench] 반복 2/3, 순서 ['A0', 'SPL-b567-k32', 'A1', 'QAT-SPL', 'DA-SPL']
+  A0: p50 63.97 ms, p95 65.56 ms, Max RSS 482 MB
+  SPL-b567-k32: p50 28.18 ms, p95 29.41 ms, Max RSS 198 MB
+  A1: p50 24.15 ms, p95 25.30 ms, Max RSS 211 MB
+  QAT-SPL: p50 28.15 ms, p95 29.09 ms, Max RSS 235 MB
+  DA-SPL: p50 27.79 ms, p95 28.73 ms, Max RSS 232 MB
+[bench] 반복 3/3, 순서 ['A1', 'A0', 'DA-SPL', 'SPL-b567-k32', 'QAT-SPL']
+  A1: p50 24.15 ms, p95 25.03 ms, Max RSS 211 MB
+  A0: p50 63.22 ms, p95 65.29 ms, Max RSS 475 MB
+  DA-SPL: p50 27.64 ms, p95 28.94 ms, Max RSS 232 MB
+  SPL-b567-k32: p50 27.64 ms, p95 29.13 ms, Max RSS 239 MB
+  QAT-SPL: p50 27.53 ms, p95 29.11 ms, Max RSS 235 MB
+[bench] 저장: /mnt/c/Users/PC00/Desktop/dongchan/halio project/results/latency_summary.json
+끝 부하 3.47 2.00 3.60 / 2026-10-21 05:34:54
+# E40 속도·메모리 (PC00, 4스레드·배치 1, 3반복 중앙값)
+
+| 구성 | p50 ms | p95 ms | FP32 대비 | 최대 메모리 MB | 크기 MB |
+|---|---|---|---|---|---|
+| A0 | 63.69 | 65.56 | 1.00배 | 482 | 344.9 |
+| A1 | 24.15 | 25.03 | 2.64배 | 211 | 89.0 |
+| SPL-b567-k32 | 28.16 | 29.41 | 2.26배 | 234 | 89.8 |
+| QAT-SPL | 27.95 | 29.09 | 2.28배 | 234 | 89.8 |
+| DA-SPL | 27.72 | 28.86 | 2.30배 | 232 | 89.8 |
+rc=0

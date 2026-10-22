@@ -1,0 +1,14 @@
+{
+  "run_id": "I4-all-val",
+  "top1_acc": 0.6394,
+  "std_err": 0.004801745932470814,
+  "n": 10000,
+  "agree_with_fp32": 0.7577,
+  "mean_cosine_to_fp32": 0.9514775276184082,
+  "min_cosine_to_fp32": 0.8007210493087769,
+  "mcnemar_vs_fp32": {
+    "a_only": 928,
+    "b_only": 442,
+    "p_value": 4.763756718629403e-40
+  }
+}

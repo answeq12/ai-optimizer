@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+# 파일럿 P1~P3.5 를 한 번에 돌려 첫 비교표(results/first_table.md)를 만든다.
+#
+#   bash run_pilot.sh                 # 정식 실행 (데이터·가중치를 내려받는다)
+#   THREADS=8 bash run_pilot.sh       # 측정 스레드 수 변경 (기본 4)
+#   SELFTEST=1 bash run_pilot.sh      # 다운로드 없이 가짜 데이터로 코드만 검증 (수치 무의미)
+#
+# 단계마다 이미 끝난 산출물이 있으면 건너뛴다. 처음부터 다시 하려면 해당 파일을 지운다.
+set -euo pipefail
+cd "$(dirname "$0")"
+
+THREADS=${THREADS:-4}
+SELFTEST=${SELFTEST:-0}
+
+# 새 터미널에서 바로 실행해도 되게: python 이 없으면 파이썬 환경을 켠다 (reproduce.sh 와 같은 방식)
+VENV=${VENV:-$HOME/venvs/halio}
+if ! command -v python >/dev/null 2>&1; then
+  [ -f "$VENV/bin/activate" ] || { echo "파이썬 환경이 없습니다: $VENV  (docs/06_재현가이드.md 3단계)"; exit 1; }
+  source "$VENV/bin/activate"
+fi
+
+# SELFTEST 는 임시 폴더에 코드를 복사해 그 안에서만 돈다. 진짜 split·결과·모델을 건드리지 않는다.
+if [ "$SELFTEST" = "1" ] && [ -z "${SELFTEST_INNER:-}" ]; then
+  T=$(mktemp -d /tmp/halio_selftest.XXXXXX)
+  cp -r src tests run_pilot.sh "$T"/
+  echo "== SELFTEST 작업 폴더: $T (끝나면 지워도 된다)"
+  SELFTEST_INNER=1 HALIO_DATA_DIR="$T" THREADS="$THREADS" exec bash "$T/run_pilot.sh"
+fi
+M=$(python -m src.common models-dir)
+echo "== 큰 파일 저장 위치: $(python -m src.common store-dir)"
+
+EXPORT_ARGS=(); EVAL_ARGS=(); BENCH_ARGS=()
+if [ "$SELFTEST" = "1" ]; then
+  echo "== SELFTEST: 가짜 데이터 + 무작위 가중치. 결과 수치는 무의미합니다."
+  [ -d "$(python -m src.common data-dir)/cifar-100-python" ] || python -m tests.make_fake_data
+  EXPORT_ARGS=(--random-init); EVAL_ARGS=(--limit 30); BENCH_ARGS=(--repeats 1 --warmup 3 --runs 20)
+else
+  if [ -f "$(python -m src.common data-dir)/FAKE_DATA" ]; then
+    echo "데이터 폴더에 가짜 데이터가 있습니다. 지우고 다시 실행하세요: $(python -m src.common data-dir)"; exit 1
+  fi
+  echo "== 1/8 데이터 다운로드"
+  python -m src.download_data
+fi
+
+echo "== 2/8 검증셋 분리"
+python -m src.split_val
+
+echo "== 3/8 ONNX export + P1 게이트 (PyTorch 와 출력 일치)"
+[ -f "$M/clip_vitb16_image_fp32.onnx" ] && [ -f logs/p1_parity.json ] || python -m src.export_onnx "${EXPORT_ARGS[@]}"
+
+echo "== 4/8 양자화: A1 동적, A2 정적 기본 (MinMax, per-tensor, COCO 64장)"
+[ -f "$M/a1_dynamic.onnx" ] || python -m src.quantize_ort --mode dynamic --out "$M/a1_dynamic.onnx"
+[ -f "$M/a2_static_minmax.onnx" ] || python -m src.quantize_ort --mode static \
+    --calib-list splits/calib_coco_64_s0.txt --out "$M/a2_static_minmax.onnx"
+
+echo "== 5/8 정확도 평가 (검증셋)"
+ev() {  # 코드 모델파일 양자화방식
+  [ -f "results/preds/$1-val.json" ] && { echo "  $1: 이미 평가함"; return; }
+  local meta=(); [ -f "${2%.onnx}.json" ] && meta=(--meta "${2%.onnx}.json")
+  python -m src.evaluate --model "$2" --code "$1" --quant-mode "$3" --threads "$THREADS" \
+      "${meta[@]}" "${EVAL_ARGS[@]}"
+}
+ev A0 "$M/clip_vitb16_image_fp32.onnx" fp32
+ev A1 "$M/a1_dynamic.onnx" dynamic
+ev A2 "$M/a2_static_minmax.onnx" static
+
+MODELS=(A0="$M/clip_vitb16_image_fp32.onnx" A1="$M/a1_dynamic.onnx" A2="$M/a2_static_minmax.onnx")
+
+echo "== 6/8 연산자 커버리지 + 프로파일링"
+python -m src.coverage --threads "$THREADS" --models "${MODELS[@]}"
+
+echo "== 7/8 속도·메모리 측정 (다른 프로그램을 끄고 실행할 것)"
+python -m src.benchmark --threads "$THREADS" --models "${MODELS[@]}" "${BENCH_ARGS[@]}"
+
+echo "== 8/8 첫 비교표"
+python -m src.make_table

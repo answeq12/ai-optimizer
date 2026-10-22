@@ -1,0 +1,13 @@
+{
+  "code": "A2",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.0014956377233070212,
+  "R@5": 0.0076443705857914416,
+  "R@10": 0.0142085583714167,
+  "median_rank": 763.0,
+  "timestamp": "2026-10-13T21:39:22+0900",
+  "model": "/mnt/d/halio_data/models/a2_static_minmax.onnx",
+  "backend": "onnxruntime-cpu"
+}

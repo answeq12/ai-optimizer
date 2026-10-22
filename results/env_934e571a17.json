@@ -1,0 +1,28 @@
+{
+  "os": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+  "kernel": "6.18.33.2-microsoft-standard-WSL2",
+  "is_wsl": true,
+  "python": "3.10.12",
+  "cpu": {
+    "model": "x86_64",
+    "flags": [
+      "avx2",
+      "avx_vnni",
+      "fma",
+      "sse4_2"
+    ],
+    "model_name": "Intel(R) Core(TM) i9-14900KF",
+    "logical_cpus": 16
+  },
+  "mem_total_gb": 23.5,
+  "versions": {
+    "numpy": "2.2.6",
+    "onnx": "1.23.1",
+    "onnxruntime": "1.23.2",
+    "torch": "2.14.1+cpu",
+    "open_clip": "3.3.0",
+    "PIL": "12.3.0"
+  },
+  "git_commit": "",
+  "store_dir": "/mnt/d/halio_data"
+}

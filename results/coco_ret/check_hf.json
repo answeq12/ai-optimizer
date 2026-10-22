@@ -1,0 +1,9 @@
+{
+  "image_onnx_vs_hf_min_cos": 0.9999998807907104,
+  "image_mean_cos": 0.9999999880790711,
+  "text_openclip_vs_hf_min_cos": 0.9999998807907104,
+  "text_mean_cos": 0.9999999761581421,
+  "pass": true,
+  "n": 20,
+  "timestamp": "2026-10-13T23:41:16+0900"
+}

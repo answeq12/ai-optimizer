@@ -1,0 +1,13 @@
+{
+  "code": "RPQ-SPL-b567-k32",
+  "split": "confirm",
+  "n_images": 500,
+  "n_captions": 2500,
+  "R@1": 0.6272,
+  "R@5": 0.88,
+  "R@10": 0.958,
+  "median_rank": 1.0,
+  "timestamp": "2026-10-20T15:59:53+0900",
+  "model": "/mnt/d/halio_quickcheck2/models/imp/SPL-b567-k32.onnx",
+  "backend": "onnxruntime-cpu"
+}

@@ -1,0 +1,44 @@
+== DFC 설치·스모크 (smoke) / 2026-10-07 04:33:35 / 로그: logs/dfc/setup_20261007_043335.log
+== 시스템: Ubuntu 22.04.5 LTS / Python 3.10.12
+== 디스크 여유: 홈 946G, C 드라이브 7.0G / WSL 사용자: answeq12
+NVIDIA GeForce RTX 5070, 591.86, 12227 MiB
+== DFC 휠: hailo_dataflow_compiler-5.4.0-py3-none-linux_x86_64.whl
+== 설치 확인
+Hailo Dataflow Compiler v5.4.0
+2026-10-07 04:33:38.756564: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-10-07 04:33:38.757243: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2026-10-07 04:33:38.759014: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2026-10-07 04:33:38.763690: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:467] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1791315218.771803 1369416 cuda_dnn.cc:8579] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1791315218.773992 1369416 cuda_blas.cc:1407] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+W0000 00:00:1791315218.780296 1369416 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1791315218.780318 1369416 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1791315218.780320 1369416 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+W0000 00:00:1791315218.780321 1369416 computation_placer.cc:177] computation placer already registered. Please check linkage and avoid linking the same target more than once.
+2026-10-07 04:33:38.782288: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+== 버전: tensorflow 2.19.1, torch 2.9.1+cpu, numpy 1.26.4, onnx 1.17.0, onnxruntime 1.18.0
+== 스모크 테스트 시작
+[dfc] ▶ import
+[dfc] ✔ import (5.1s)
+[dfc] DFC 5.4.0, TensorFlow GPU: []
+[dfc] ▶ load_har
+[info] Hailo HW architecture: hailo10h
+[dfc] ✔ load_har (69.7s)
+[dfc] ▶ emulator_eval
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1791315305.313110 1369465 service.cc:152] XLA service 0x63a2de038260 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+I0000 00:00:1791315305.313137 1369465 service.cc:160]   StreamExecutor device (0): Host, Default Version
+I0000 00:00:1791315306.191546 1369465 device_compiler.h:188] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+[dfc] ✔ emulator_eval (2065.2s)
+
+== DFC 스모크 테스트 요약
+  import         성공  5.1s
+  load_har       성공  69.7s
+  emulator_eval  성공  2065.2s
+  에뮬레이터 정확도(5000장, 간이): FP 68.7% -> 양자화 68.3%, 일치율 80.4%
+  FP 대비 양자화 임베딩 코사인: 평균 0.9500, 최소 0.8256
+  로그: /mnt/c/Users/PC00/Desktop/dongchan/halio project/logs/dfc/smoke_20261007_043340.coco64_fc2b67.json
+  주의: 300장 간이 평가의 표준오차는 약 ±2.7%p 다. 굴러가는지 확인하는 용도이며 결론 수치가 아니다.
+== 완료. 로그: logs/dfc/setup_20261007_043335.log

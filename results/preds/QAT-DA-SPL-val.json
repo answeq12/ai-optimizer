@@ -1,0 +1,14 @@
+{
+  "run_id": "QAT-DA-SPL-val",
+  "top1_acc": 0.6885,
+  "std_err": 0.004631066291902978,
+  "n": 10000,
+  "agree_with_fp32": 0.7927,
+  "mean_cosine_to_fp32": 0.9140689373016357,
+  "min_cosine_to_fp32": 0.8004165291786194,
+  "mcnemar_vs_fp32": {
+    "a_only": 587,
+    "b_only": 592,
+    "p_value": 0.9072675853695374
+  }
+}

@@ -1,0 +1,9 @@
+run_id,config_code,backend,model_name,model_path,quant_mode,calib_method,per_channel,reduce_range,excluded_nodes,calib_source,calib_size,calib_seed,eval_set,eval_n,top1_acc,recall_at_1,recall_at_5,latency_p50_ms,latency_p95_ms,n_threads,max_rss_mb,model_size_mb,quantized_op_ratio,env_hash,timestamp,repeat_idx
+RP-A0-test,RP-A0,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_repro_test/models/clip_vitb16_image_fp32.onnx,fp32,,,,,,,,test,10000,0.6801,,,,,4,,344.88,,934e571a17,2026-10-18T21:37:19+0900,0
+RP-A1-test,RP-A1,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_repro_test/models/a1_dynamic.onnx,dynamic,,,,,,,,test,10000,0.6393,,,,,4,,89.0,,934e571a17,2026-10-18T21:42:55+0900,0
+RP-SPL-b567-k32-test,RP-SPL-b567-k32,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_repro_test/models/imp/SPL-b567-k32.onnx,static,,,,,,,,test,10000,0.6866,,,,,4,,89.82,,934e571a17,2026-10-18T21:49:23+0900,0
+RPV-A0-test,RPV-A0,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_fullcheck/models/clip_vitb16_image_fp32.onnx,fp32,,,,,,,,test,10000,0.6801,,,,,4,,344.88,,934e571a17,2026-10-20T16:26:00+0900,0
+RPV-A1-test,RPV-A1,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_fullcheck/models/a1_dynamic.onnx,dynamic,,,,,,,,test,10000,0.6393,,,,,4,,89.0,,934e571a17,2026-10-20T16:31:27+0900,0
+RPV-SPL-b567-k32-test,RPV-SPL-b567-k32,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_fullcheck/models/imp/SPL-b567-k32.onnx,static,,,,,,,,test,10000,0.6866,,,,,4,,89.82,,934e571a17,2026-10-20T16:37:44+0900,0
+RPV-DA-A0-test,RPV-DA-A0,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_fullcheck/models_da/clip_vitb16_image_fp32.onnx,fp32,,,,,,,,test,10000,0.6759,,,,,4,,344.88,,934e571a17,2026-10-20T16:51:39+0900,0
+RPV-DA-SPL-test,RPV-DA-SPL,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_fullcheck/models_da/imp/SPL-b567-k32.onnx,static,,,,,,,,test,10000,0.677,,,,,4,,89.82,,934e571a17,2026-10-20T16:57:59+0900,0

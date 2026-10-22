@@ -1,0 +1,21 @@
+{
+  "code": "S-qkv",
+  "spec": "kind:qkv",
+  "n_nodes": 12,
+  "nodes": [
+    "/transformer/resblocks.0/attn/MatMul",
+    "/transformer/resblocks.1/attn/MatMul",
+    "/transformer/resblocks.2/attn/MatMul",
+    "/transformer/resblocks.3/attn/MatMul",
+    "/transformer/resblocks.4/attn/MatMul",
+    "/transformer/resblocks.5/attn/MatMul",
+    "/transformer/resblocks.6/attn/MatMul",
+    "/transformer/resblocks.7/attn/MatMul",
+    "/transformer/resblocks.8/attn/MatMul",
+    "/transformer/resblocks.9/attn/MatMul",
+    "/transformer/resblocks.10/attn/MatMul",
+    "/transformer/resblocks.11/attn/MatMul"
+  ],
+  "base": "A2m",
+  "timestamp": "2026-10-06T19:19:31+0900"
+}

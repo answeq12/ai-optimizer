@@ -1,0 +1,4 @@
+/transformer/resblocks.4/mlp/c_proj/MatMul
+/transformer/resblocks.5/mlp/c_proj/MatMul
+/transformer/resblocks.6/mlp/c_proj/MatMul
+/transformer/resblocks.7/mlp/c_proj/MatMul

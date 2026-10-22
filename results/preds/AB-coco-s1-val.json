@@ -1,0 +1,14 @@
+{
+  "run_id": "AB-coco-s1-val",
+  "top1_acc": 0.0166,
+  "std_err": 0.0012776713192366807,
+  "n": 10000,
+  "agree_with_fp32": 0.0181,
+  "mean_cosine_to_fp32": 0.46921801567077637,
+  "min_cosine_to_fp32": 0.20651529729366302,
+  "mcnemar_vs_fp32": {
+    "a_only": 6750,
+    "b_only": 36,
+    "p_value": 0.0
+  }
+}

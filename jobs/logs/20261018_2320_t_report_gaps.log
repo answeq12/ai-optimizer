@@ -1,0 +1,163 @@
+{'file': '/mnt/d/halio_data/models/clip_vitb16_image_fp32.onnx', 'size_mb': 344.878723, 'params_m': 86.192732, 'gmac': 17.56345344, 'gflops': 35.12690688, 'gmac_by_op': {'Conv': 0.115605504, 'MatMul': 16.053504, 'Gemm': 1.394343936}, 'nodes_shape_unknown': 0, 'name': 'A0 FP32 (baseline)'}
+{'file': '/mnt/d/halio_data/models/imp/split_SPL-b567-k32.fp32.onnx', 'size_mb': 344.990181, 'params_m': 86.201948, 'gmac': 17.56345344, 'gflops': 35.12690688, 'gmac_by_op': {'Conv': 0.115605504, 'MatMul': 16.053504, 'Gemm': 1.394343936}, 'nodes_shape_unknown': 0, 'name': 'SPL-b567-k32 FP32 분할 그래프 (연산량 계산용)'}
+{'file': '/mnt/d/halio_data/models/imp/SPL-b567-k32.onnx', 'size_mb': 89.821463, 'name': 'SPL-b567-k32 INT8 (최종, 파일 크기)'}
+{'file': '/mnt/d/halio_data/models/a1_dynamic.onnx', 'size_mb': 88.996633, 'name': 'A1 동적 INT8 (파일 크기)'}
+# 모델 통계 (파라미터 수·연산량·파일 크기)
+
+생성 2026-10-18T23:16:49+0900. 그래프 분석만, 측정 아님
+
+| 모델 | 파일 크기 (MB) | 파라미터 (M) | GMAC | GFLOPs (=2xGMAC) |
+|---|---|---|---|---|
+| A0 FP32 (baseline) | 344.9 | 86.19 | 17.56 | 35.13 |
+| SPL-b567-k32 FP32 분할 그래프 (연산량 계산용) | 345.0 | 86.20 | 17.56 | 35.13 |
+| SPL-b567-k32 INT8 (최종, 파일 크기) | 89.8 | — | — | — |
+| A1 동적 INT8 (파일 크기) | 89.0 | — | — | — |
+
+- 입력 1장(224x224), 배치 1. MatMul/Gemm/Conv 만 셈 (원소 단위 연산 제외)
+- 양자화는 파라미터 수와 MAC 수를 바꾸지 않는다. INT8 최종 모델의 파라미터·연산량은 FP32 분할 그래프 행과 같다
+- 파라미터 수는 ONNX initializer 원소 수 합 (상수 텐서 포함이라 공식 86M 과 소폭 다를 수 있음)
+## ORT 최종: SPL-b567-k32 vs A0
+| 캡션: 숫자·개수 표현 | 1822 | 843 | 43.91 | 44.02 | +0.20 [-1.44, +1.76] |
+| 캡션: 글자·표지판 표현 | 417 | 155 | 42.45 | 40.53 | -2.18 [-5.69, +1.24] |
+| 캡션: 전체 | 12033 | 2406 | 41.79 | 40.84 | -0.96 [-1.54, -0.37] |
+| 객체 16개 이상 | 1665 | 333 | 38.74 | 36.04 | -2.70 [-4.38, -1.02] |
+| 가장 큰 객체 < 사진의 10% | 4836 | 967 | 36.68 | 35.28 | -1.41 [-2.42, -0.41] |
+## ORT 보호 없는 정적 INT8: A2m vs A0
+| 캡션: 숫자·개수 표현 | 1822 | 843 | 43.91 | 37.10 | -8.03 [-10.63, -5.58] |
+| 캡션: 글자·표지판 표현 | 417 | 155 | 42.45 | 38.37 | -4.51 [-9.03, +0.08] |
+| 캡션: 전체 | 12033 | 2406 | 41.79 | 34.90 | -6.89 [-7.94, -5.82] |
+| 객체 16개 이상 | 1665 | 333 | 38.74 | 29.67 | -9.07 [-12.67, -5.76] |
+| 가장 큰 객체 < 사진의 10% | 4836 | 967 | 36.68 | 29.20 | -7.49 [-9.25, -5.71] |
+## Hailo 동결: H-splf-b7-k32 vs H-FP
+| 캡션: 숫자·개수 표현 | 1822 | 843 | 43.91 | 40.01 | -3.47 [-5.44, -1.43] |
+| 캡션: 글자·표지판 표현 | 417 | 155 | 42.45 | 42.69 | +0.11 [-5.06, +5.14] |
+| 캡션: 전체 | 12033 | 2406 | 41.79 | 38.76 | -3.03 [-3.79, -2.15] |
+| 객체 16개 이상 | 1665 | 333 | 38.74 | 35.38 | -3.36 [-5.65, -1.14] |
+| 가장 큰 객체 < 사진의 10% | 4836 | 967 | 36.68 | 33.73 | -2.96 [-4.16, -1.72] |
+## Hailo 공식: H-official vs H-FP
+| 캡션: 숫자·개수 표현 | 1822 | 843 | 43.91 | 40.83 | -3.46 [-5.56, -1.33] |
+| 캡션: 글자·표지판 표현 | 417 | 155 | 42.45 | 41.97 | -0.26 [-4.52, +4.11] |
+| 캡션: 전체 | 12033 | 2406 | 41.79 | 38.64 | -3.16 [-4.05, -2.24] |
+| 객체 16개 이상 | 1665 | 333 | 38.74 | 33.93 | -4.80 [-7.09, -2.28] |
+| 가장 큰 객체 < 사진의 10% | 4836 | 967 | 36.68 | 34.53 | -2.15 [-3.48, -0.62] |
+## 읽는 법
+1980672000 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.cifar64_fc2b567.compiled.har
+87773184 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.cifar64_fc2b567.hailo10h.hef
+1964134400 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.cifar64_s0.compiled.har
+79736832 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.cifar64_s0.hailo10h.hef
+1980282880 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.coco64_fc2b567.compiled.har
+87355392 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.coco64_fc2b567.hailo10h.hef
+1975367680 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.coco64_fc2b67.compiled.har
+84774912 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.coco64_fc2b67.hailo10h.hef
+1969971200 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.coco64_fc2b7.compiled.har
+82030592 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.coco64_fc2b7.hailo10h.hef
+1963735040 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.compiled.har
+79302656 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.hailo10h.hef
+1965557760 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.spl_b567_k32.compiled.har
+80015360 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.spl_b567_k32.hailo10h.hef
+1964974080 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.spl_b67_k32.compiled.har
+79904768 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.spl_b67_k32.hailo10h.hef
+1964451840 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.spl_b7_k32.compiled.har
+79572992 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.spl_b7_k32.hailo10h.hef
+1965568000 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.splf_b67_k32.compiled.har
+80068608 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.splf_b67_k32.hailo10h.hef
+1964625920 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.splf_b7_k32.compiled.har
+79634432 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.splf_b7_k32.hailo10h.hef
+[info] Hailo HW architecture: hailo10h
+[info] Hailo HW architecture: hailo10h
+[info] Hailo HW architecture: hailo10h
+# Hailo-10H 호환성 확인: CPU 로 넘어가는 층이 있나
+
+- 파싱 호출: `translate_onnx_model(onnx, NET)` — start/end 노드를 지정하지 않음 (ONNX 전체를 변환)
+
+## H-official (공식)
+
+- HAR: `clip_vit_b_16_image_encoder.compiled.har` 있음 / HEF: `clip_vit_b_16_image_encoder.hailo10h.hef` 있음 (79.3 MB)
+- 층 336개, 종류 17가지
+- 입력 층: {'clip_vit_b_16_image_encoder/input_layer1': [[-1, 224, 224, 3]]}
+- 출력 층: {'clip_vit_b_16_image_encoder/output_layer1': [[-1, 1, 1, 512]]}
+- 호스트/후처리로 보이는 층 종류: 없음
+- 정규화 층 존재(입력 정규화가 칩 안): 예
+
+| 층 종류 | 개수 |
+|---|---|
+| conv | 74 |
+| ew_sub | 38 |
+| reduce_sum | 38 |
+| ew_mult | 38 |
+| activation | 26 |
+| reduce_mean | 26 |
+| feature_multiplier | 26 |
+| ew_add | 25 |
+| matmul | 24 |
+| reduce_max | 12 |
+| const_input | 2 |
+| normalization | 2 |
+| input_layer | 1 |
+| space_to_depth | 1 |
+| concat | 1 |
+| slice | 1 |
+| output_layer | 1 |
+- hailortcli 없음 (HailoRT 미설치) → HEF 구조는 보드에서 본선 때 확인
+
+## H-splf-b7-k32 (동결)
+
+- HAR: `clip_vit_b_16_image_encoder.splf_b7_k32.compiled.har` 있음 / HEF: `clip_vit_b_16_image_encoder.splf_b7_k32.hailo10h.hef` 있음 (79.6 MB)
+- 층 339개, 종류 17가지
+- 입력 층: {'clip_vit_b_16_image_encoder/input_layer1': [[-1, 224, 224, 3]]}
+- 출력 층: {'clip_vit_b_16_image_encoder/output_layer1': [[-1, 1, 1, 512]]}
+- 호스트/후처리로 보이는 층 종류: 없음
+- 정규화 층 존재(입력 정규화가 칩 안): 예
+
+| 층 종류 | 개수 |
+|---|---|
+| conv | 76 |
+| ew_sub | 38 |
+| reduce_sum | 38 |
+| ew_mult | 38 |
+| activation | 26 |
+| ew_add | 26 |
+| reduce_mean | 26 |
+| feature_multiplier | 26 |
+| matmul | 24 |
+| reduce_max | 12 |
+| const_input | 2 |
+| normalization | 2 |
+| input_layer | 1 |
+| space_to_depth | 1 |
+| concat | 1 |
+| slice | 1 |
+| output_layer | 1 |
+- hailortcli 없음 (HailoRT 미설치) → HEF 구조는 보드에서 본선 때 확인
+
+## H-fc2b7 (참고)
+
+- HAR: `clip_vit_b_16_image_encoder.coco64_fc2b7.compiled.har` 있음 / HEF: `clip_vit_b_16_image_encoder.coco64_fc2b7.hailo10h.hef` 있음 (82.0 MB)
+- 층 335개, 종류 17가지
+- 입력 층: {'clip_vit_b_16_image_encoder/input_layer1': [[-1, 224, 224, 3]]}
+- 출력 층: {'clip_vit_b_16_image_encoder/output_layer1': [[-1, 1, 1, 512]]}
+- 호스트/후처리로 보이는 층 종류: 없음
+- 정규화 층 존재(입력 정규화가 칩 안): 예
+
+| 층 종류 | 개수 |
+|---|---|
+| conv | 74 |
+| ew_sub | 38 |
+| reduce_sum | 38 |
+| ew_mult | 38 |
+| activation | 26 |
+| reduce_mean | 26 |
+| feature_multiplier | 26 |
+| ew_add | 24 |
+| matmul | 24 |
+| reduce_max | 12 |
+| const_input | 2 |
+| normalization | 2 |
+| input_layer | 1 |
+| space_to_depth | 1 |
+| concat | 1 |
+| slice | 1 |
+| output_layer | 1 |
+- hailortcli 없음 (HailoRT 미설치) → HEF 구조는 보드에서 본선 때 확인
+
+rc=0

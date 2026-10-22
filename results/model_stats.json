@@ -1,0 +1,40 @@
+[
+  {
+    "file": "/mnt/d/halio_data/models/clip_vitb16_image_fp32.onnx",
+    "size_mb": 344.878723,
+    "params_m": 86.192732,
+    "gmac": 17.56345344,
+    "gflops": 35.12690688,
+    "gmac_by_op": {
+      "Conv": 0.115605504,
+      "MatMul": 16.053504,
+      "Gemm": 1.394343936
+    },
+    "nodes_shape_unknown": 0,
+    "name": "A0 FP32 (baseline)"
+  },
+  {
+    "file": "/mnt/d/halio_data/models/imp/split_SPL-b567-k32.fp32.onnx",
+    "size_mb": 344.990181,
+    "params_m": 86.201948,
+    "gmac": 17.56345344,
+    "gflops": 35.12690688,
+    "gmac_by_op": {
+      "Conv": 0.115605504,
+      "MatMul": 16.053504,
+      "Gemm": 1.394343936
+    },
+    "nodes_shape_unknown": 0,
+    "name": "SPL-b567-k32 FP32 분할 그래프 (연산량 계산용)"
+  },
+  {
+    "file": "/mnt/d/halio_data/models/imp/SPL-b567-k32.onnx",
+    "size_mb": 89.821463,
+    "name": "SPL-b567-k32 INT8 (최종, 파일 크기)"
+  },
+  {
+    "file": "/mnt/d/halio_data/models/a1_dynamic.onnx",
+    "size_mb": 88.996633,
+    "name": "A1 동적 INT8 (파일 크기)"
+  }
+]

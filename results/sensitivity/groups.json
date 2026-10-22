@@ -1,0 +1,545 @@
+{
+  "source": "clip_vitb16_image_fp32.prep.onnx",
+  "timestamp": "2026-10-06T21:38:41+0900",
+  "nodes": [
+    {
+      "name": "/transformer/resblocks.0/attn/MatMul",
+      "op": "MatMul",
+      "order": 0,
+      "block": 0,
+      "shape": [
+        768,
+        2304
+      ],
+      "kind": "qkv"
+    },
+    {
+      "name": "/transformer/resblocks.0/attn/Gemm",
+      "op": "Gemm",
+      "order": 1,
+      "block": 0,
+      "shape": [
+        768,
+        768
+      ],
+      "kind": "out"
+    },
+    {
+      "name": "/transformer/resblocks.0/mlp/c_fc/MatMul",
+      "op": "MatMul",
+      "order": 2,
+      "block": 0,
+      "shape": [
+        768,
+        3072
+      ],
+      "kind": "fc1"
+    },
+    {
+      "name": "/transformer/resblocks.0/mlp/c_proj/MatMul",
+      "op": "MatMul",
+      "order": 3,
+      "block": 0,
+      "shape": [
+        3072,
+        768
+      ],
+      "kind": "fc2"
+    },
+    {
+      "name": "/transformer/resblocks.1/attn/MatMul",
+      "op": "MatMul",
+      "order": 4,
+      "block": 1,
+      "shape": [
+        768,
+        2304
+      ],
+      "kind": "qkv"
+    },
+    {
+      "name": "/transformer/resblocks.1/attn/Gemm",
+      "op": "Gemm",
+      "order": 5,
+      "block": 1,
+      "shape": [
+        768,
+        768
+      ],
+      "kind": "out"
+    },
+    {
+      "name": "/transformer/resblocks.1/mlp/c_fc/MatMul",
+      "op": "MatMul",
+      "order": 6,
+      "block": 1,
+      "shape": [
+        768,
+        3072
+      ],
+      "kind": "fc1"
+    },
+    {
+      "name": "/transformer/resblocks.1/mlp/c_proj/MatMul",
+      "op": "MatMul",
+      "order": 7,
+      "block": 1,
+      "shape": [
+        3072,
+        768
+      ],
+      "kind": "fc2"
+    },
+    {
+      "name": "/transformer/resblocks.2/attn/MatMul",
+      "op": "MatMul",
+      "order": 8,
+      "block": 2,
+      "shape": [
+        768,
+        2304
+      ],
+      "kind": "qkv"
+    },
+    {
+      "name": "/transformer/resblocks.2/attn/Gemm",
+      "op": "Gemm",
+      "order": 9,
+      "block": 2,
+      "shape": [
+        768,
+        768
+      ],
+      "kind": "out"
+    },
+    {
+      "name": "/transformer/resblocks.2/mlp/c_fc/MatMul",
+      "op": "MatMul",
+      "order": 10,
+      "block": 2,
+      "shape": [
+        768,
+        3072
+      ],
+      "kind": "fc1"
+    },
+    {
+      "name": "/transformer/resblocks.2/mlp/c_proj/MatMul",
+      "op": "MatMul",
+      "order": 11,
+      "block": 2,
+      "shape": [
+        3072,
+        768
+      ],
+      "kind": "fc2"
+    },
+    {
+      "name": "/transformer/resblocks.3/attn/MatMul",
+      "op": "MatMul",
+      "order": 12,
+      "block": 3,
+      "shape": [
+        768,
+        2304
+      ],
+      "kind": "qkv"
+    },
+    {
+      "name": "/transformer/resblocks.3/attn/Gemm",
+      "op": "Gemm",
+      "order": 13,
+      "block": 3,
+      "shape": [
+        768,
+        768
+      ],
+      "kind": "out"
+    },
+    {
+      "name": "/transformer/resblocks.3/mlp/c_fc/MatMul",
+      "op": "MatMul",
+      "order": 14,
+      "block": 3,
+      "shape": [
+        768,
+        3072
+      ],
+      "kind": "fc1"
+    },
+    {
+      "name": "/transformer/resblocks.3/mlp/c_proj/MatMul",
+      "op": "MatMul",
+      "order": 15,
+      "block": 3,
+      "shape": [
+        3072,
+        768
+      ],
+      "kind": "fc2"
+    },
+    {
+      "name": "/transformer/resblocks.4/attn/MatMul",
+      "op": "MatMul",
+      "order": 16,
+      "block": 4,
+      "shape": [
+        768,
+        2304
+      ],
+      "kind": "qkv"
+    },
+    {
+      "name": "/transformer/resblocks.4/attn/Gemm",
+      "op": "Gemm",
+      "order": 17,
+      "block": 4,
+      "shape": [
+        768,
+        768
+      ],
+      "kind": "out"
+    },
+    {
+      "name": "/transformer/resblocks.4/mlp/c_fc/MatMul",
+      "op": "MatMul",
+      "order": 18,
+      "block": 4,
+      "shape": [
+        768,
+        3072
+      ],
+      "kind": "fc1"
+    },
+    {
+      "name": "/transformer/resblocks.4/mlp/c_proj/MatMul",
+      "op": "MatMul",
+      "order": 19,
+      "block": 4,
+      "shape": [
+        3072,
+        768
+      ],
+      "kind": "fc2"
+    },
+    {
+      "name": "/transformer/resblocks.5/attn/MatMul",
+      "op": "MatMul",
+      "order": 20,
+      "block": 5,
+      "shape": [
+        768,
+        2304
+      ],
+      "kind": "qkv"
+    },
+    {
+      "name": "/transformer/resblocks.5/attn/Gemm",
+      "op": "Gemm",
+      "order": 21,
+      "block": 5,
+      "shape": [
+        768,
+        768
+      ],
+      "kind": "out"
+    },
+    {
+      "name": "/transformer/resblocks.5/mlp/c_fc/MatMul",
+      "op": "MatMul",
+      "order": 22,
+      "block": 5,
+      "shape": [
+        768,
+        3072
+      ],
+      "kind": "fc1"
+    },
+    {
+      "name": "/transformer/resblocks.5/mlp/c_proj/MatMul",
+      "op": "MatMul",
+      "order": 23,
+      "block": 5,
+      "shape": [
+        3072,
+        768
+      ],
+      "kind": "fc2"
+    },
+    {
+      "name": "/transformer/resblocks.6/attn/MatMul",
+      "op": "MatMul",
+      "order": 24,
+      "block": 6,
+      "shape": [
+        768,
+        2304
+      ],
+      "kind": "qkv"
+    },
+    {
+      "name": "/transformer/resblocks.6/attn/Gemm",
+      "op": "Gemm",
+      "order": 25,
+      "block": 6,
+      "shape": [
+        768,
+        768
+      ],
+      "kind": "out"
+    },
+    {
+      "name": "/transformer/resblocks.6/mlp/c_fc/MatMul",
+      "op": "MatMul",
+      "order": 26,
+      "block": 6,
+      "shape": [
+        768,
+        3072
+      ],
+      "kind": "fc1"
+    },
+    {
+      "name": "/transformer/resblocks.6/mlp/c_proj/MatMul",
+      "op": "MatMul",
+      "order": 27,
+      "block": 6,
+      "shape": [
+        3072,
+        768
+      ],
+      "kind": "fc2"
+    },
+    {
+      "name": "/transformer/resblocks.7/attn/MatMul",
+      "op": "MatMul",
+      "order": 28,
+      "block": 7,
+      "shape": [
+        768,
+        2304
+      ],
+      "kind": "qkv"
+    },
+    {
+      "name": "/transformer/resblocks.7/attn/Gemm",
+      "op": "Gemm",
+      "order": 29,
+      "block": 7,
+      "shape": [
+        768,
+        768
+      ],
+      "kind": "out"
+    },
+    {
+      "name": "/transformer/resblocks.7/mlp/c_fc/MatMul",
+      "op": "MatMul",
+      "order": 30,
+      "block": 7,
+      "shape": [
+        768,
+        3072
+      ],
+      "kind": "fc1"
+    },
+    {
+      "name": "/transformer/resblocks.7/mlp/c_proj/MatMul",
+      "op": "MatMul",
+      "order": 31,
+      "block": 7,
+      "shape": [
+        3072,
+        768
+      ],
+      "kind": "fc2"
+    },
+    {
+      "name": "/transformer/resblocks.8/attn/MatMul",
+      "op": "MatMul",
+      "order": 32,
+      "block": 8,
+      "shape": [
+        768,
+        2304
+      ],
+      "kind": "qkv"
+    },
+    {
+      "name": "/transformer/resblocks.8/attn/Gemm",
+      "op": "Gemm",
+      "order": 33,
+      "block": 8,
+      "shape": [
+        768,
+        768
+      ],
+      "kind": "out"
+    },
+    {
+      "name": "/transformer/resblocks.8/mlp/c_fc/MatMul",
+      "op": "MatMul",
+      "order": 34,
+      "block": 8,
+      "shape": [
+        768,
+        3072
+      ],
+      "kind": "fc1"
+    },
+    {
+      "name": "/transformer/resblocks.8/mlp/c_proj/MatMul",
+      "op": "MatMul",
+      "order": 35,
+      "block": 8,
+      "shape": [
+        3072,
+        768
+      ],
+      "kind": "fc2"
+    },
+    {
+      "name": "/transformer/resblocks.9/attn/MatMul",
+      "op": "MatMul",
+      "order": 36,
+      "block": 9,
+      "shape": [
+        768,
+        2304
+      ],
+      "kind": "qkv"
+    },
+    {
+      "name": "/transformer/resblocks.9/attn/Gemm",
+      "op": "Gemm",
+      "order": 37,
+      "block": 9,
+      "shape": [
+        768,
+        768
+      ],
+      "kind": "out"
+    },
+    {
+      "name": "/transformer/resblocks.9/mlp/c_fc/MatMul",
+      "op": "MatMul",
+      "order": 38,
+      "block": 9,
+      "shape": [
+        768,
+        3072
+      ],
+      "kind": "fc1"
+    },
+    {
+      "name": "/transformer/resblocks.9/mlp/c_proj/MatMul",
+      "op": "MatMul",
+      "order": 39,
+      "block": 9,
+      "shape": [
+        3072,
+        768
+      ],
+      "kind": "fc2"
+    },
+    {
+      "name": "/transformer/resblocks.10/attn/MatMul",
+      "op": "MatMul",
+      "order": 40,
+      "block": 10,
+      "shape": [
+        768,
+        2304
+      ],
+      "kind": "qkv"
+    },
+    {
+      "name": "/transformer/resblocks.10/attn/Gemm",
+      "op": "Gemm",
+      "order": 41,
+      "block": 10,
+      "shape": [
+        768,
+        768
+      ],
+      "kind": "out"
+    },
+    {
+      "name": "/transformer/resblocks.10/mlp/c_fc/MatMul",
+      "op": "MatMul",
+      "order": 42,
+      "block": 10,
+      "shape": [
+        768,
+        3072
+      ],
+      "kind": "fc1"
+    },
+    {
+      "name": "/transformer/resblocks.10/mlp/c_proj/MatMul",
+      "op": "MatMul",
+      "order": 43,
+      "block": 10,
+      "shape": [
+        3072,
+        768
+      ],
+      "kind": "fc2"
+    },
+    {
+      "name": "/transformer/resblocks.11/attn/MatMul",
+      "op": "MatMul",
+      "order": 44,
+      "block": 11,
+      "shape": [
+        768,
+        2304
+      ],
+      "kind": "qkv"
+    },
+    {
+      "name": "/transformer/resblocks.11/attn/Gemm",
+      "op": "Gemm",
+      "order": 45,
+      "block": 11,
+      "shape": [
+        768,
+        768
+      ],
+      "kind": "out"
+    },
+    {
+      "name": "/transformer/resblocks.11/mlp/c_fc/MatMul",
+      "op": "MatMul",
+      "order": 46,
+      "block": 11,
+      "shape": [
+        768,
+        3072
+      ],
+      "kind": "fc1"
+    },
+    {
+      "name": "/transformer/resblocks.11/mlp/c_proj/MatMul",
+      "op": "MatMul",
+      "order": 47,
+      "block": 11,
+      "shape": [
+        3072,
+        768
+      ],
+      "kind": "fc2"
+    },
+    {
+      "name": "/MatMul",
+      "op": "MatMul",
+      "order": 48,
+      "block": null,
+      "shape": [
+        768,
+        512
+      ],
+      "kind": "proj"
+    }
+  ]
+}

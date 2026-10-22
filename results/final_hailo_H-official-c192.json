@@ -1,0 +1,11 @@
+{
+  "code": "H-official-c192",
+  "fp_code": "",
+  "har": "/mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.coco192_base.quantized.har",
+  "timestamp": "2026-10-18T14:31:21+0900",
+  "H-official-c192_coco_confirm": {
+    "R@1": 0.3863541926369152,
+    "R@5": 0.6483836117343971,
+    "R@10": 0.7624864954707886
+  }
+}

@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+# 환경 설치부터 실행까지 한 번에. Windows 에서 .bat 을 더블클릭하면 WSL 안에서 이 스크립트가 돈다.
+#
+#   bash setup_and_run.sh selftest   # 환경 설치 + 다운로드 없는 점검
+#   bash setup_and_run.sh pilot      # 정식 실행 (첫 비교표)
+#   bash setup_and_run.sh probes     # 회복 탐침 + 캘리브레이션 A/B
+#
+# 화면에 나오는 내용은 logs/run_<시각>_<모드>.log 에도 그대로 남는다.
+set -uo pipefail
+cd "$(dirname "$0")"
+MODE=${1:-selftest}
+VENV=${HALIO_VENV:-$HOME/venvs/halio}
+mkdir -p logs
+LOG="logs/run_$(date +%Y%m%d_%H%M%S)_${MODE}.log"
+exec > >(tee -a "$LOG") 2>&1
+
+fail() { echo; echo "!! 실패: $1"; echo "!! 로그: $LOG"; exit 1; }
+
+echo "== 모드: $MODE / 시각: $(date '+%F %T') / 로그: $LOG"
+echo "== 시스템: $( (lsb_release -ds 2>/dev/null || grep -m1 PRETTY_NAME /etc/os-release) | tr -d '\"') / 커널 $(uname -r)"
+echo "== CPU: $(grep -m1 'model name' /proc/cpuinfo | cut -d: -f2 | xargs) / 논리 코어 $(nproc) / 메모리 $(free -g | awk 'NR==2{print $2}')GB"
+echo "== 디스크 여유: 홈 $(df -h "$HOME" | awk 'NR==2{print $4}'), 이 폴더 $(df -h . | awk 'NR==2{print $4}')$( [ -d /mnt/d ] && echo ", D 드라이브 $(df -h /mnt/d | awk 'NR==2{print $4}')" )"
+
+echo "== 시스템 파이썬: $(python3 --version 2>&1 || echo 없음) / WSL 사용자: $(whoami)"
+
+source ./lib_venv.sh
+make_venv "$VENV" || fail "파이썬 환경을 만들지 못했습니다 (인터넷 연결 확인)"
+# shellcheck disable=SC1091
+source "$VENV/bin/activate" || fail "파이썬 환경을 켤 수 없습니다: $VENV"
+
+case "$(command -v python)" in "$VENV"/*) ;; *) fail "전용 환경의 파이썬이 아닙니다: $(command -v python)" ;; esac
+
+if ! python -c "import torch, torchvision, open_clip, onnx, onnxruntime, numpy, PIL" 2>/dev/null; then
+  echo "== 패키지 설치 (처음 한 번, 몇 분 걸립니다)"
+  pip install --upgrade pip || fail "pip 업그레이드 실패 (인터넷 연결 확인)"
+  pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu || fail "PyTorch(CPU) 설치 실패"
+  pip install -r requirements.txt || fail "requirements.txt 설치 실패"
+  python -c "import torch, torchvision, open_clip, onnx, onnxruntime, numpy, PIL" || fail "설치 후에도 패키지를 불러올 수 없습니다"
+fi
+pip freeze > requirements.lock.txt
+python - <<'PY'
+import torch, onnx, onnxruntime, numpy, open_clip
+print(f"== 버전: torch {torch.__version__}, onnx {onnx.__version__}, onnxruntime {onnxruntime.__version__}, "
+      f"numpy {numpy.__version__}, open_clip {open_clip.__version__}")
+PY
+
+case "$MODE" in
+  selftest)
+    SELFTEST=1 bash run_pilot.sh || fail "점검(SELFTEST) 중 오류"
+    echo; echo "== 점검 통과. 환경은 정상입니다. (위 표의 수치는 가짜 데이터라 무의미합니다)" ;;
+  pilot)
+    bash run_pilot.sh || fail "파일럿 실행 중 오류"
+    echo; echo "== 완료. 결과: results/first_table.md" ;;
+  probes)
+    bash run_probes.sh || fail "탐침 실행 중 오류"
+    echo; echo "== 완료. 결과: results/all_runs.md" ;;
+  a2fix)
+    bash run_a2fix.sh || fail "A2 재측정 중 오류"
+    echo; echo "== 완료. 결과: results/all_runs.md, results/coverage.md, results/latency_a2fix.csv" ;;
+  sens)
+    bash run_sensitivity.sh || fail "레이어 민감도 탐침 중 오류"
+    echo; echo "== 완료. 결과: results/sensitivity.md" ;;
+  sens2)
+    bash run_sensitivity.sh block || fail "레이어 민감도 2단계 중 오류"
+    echo; echo "== 완료. 결과: results/sensitivity.md" ;;
+  sens3)
+    bash run_sensitivity.sh combo || fail "레이어 민감도 3단계 중 오류"
+    echo; echo "== 완료. 결과: results/sensitivity.md" ;;
+  *) fail "알 수 없는 모드: $MODE (selftest / pilot / probes / a2fix / sens / sens2 / sens3)" ;;
+esac
+echo "== 로그: $LOG"

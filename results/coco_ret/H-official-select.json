@@ -1,0 +1,16 @@
+{
+  "code": "H-official",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.37939343581221435,
+  "R@5": 0.6486913169921064,
+  "R@10": 0.7614457831325301,
+  "median_rank": 3.0,
+  "timestamp": "2026-10-13T22:25:41+0900",
+  "har": "/mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.quantized.har",
+  "backend": "hailo-dfc-emulator",
+  "input": "uint8 0~255 NHWC",
+  "context": "SDK_QUANTIZED",
+  "seconds": 882
+}

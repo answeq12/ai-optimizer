@@ -1,0 +1,16 @@
+{
+  "code": "H-cifar",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.2368923971749065,
+  "R@5": 0.3832156211051101,
+  "R@10": 0.43888658080598253,
+  "median_rank": 33.0,
+  "timestamp": "2026-10-13T22:42:54+0900",
+  "har": "/mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.cifar64_s0.quantized.har",
+  "backend": "hailo-dfc-emulator",
+  "input": "uint8 0~255 NHWC",
+  "context": "SDK_QUANTIZED",
+  "seconds": 881
+}

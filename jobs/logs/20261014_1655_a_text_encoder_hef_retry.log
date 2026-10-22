@@ -1,0 +1,24 @@
+[text] ONNX 입력: [{'name': 'onnx::Add_150', 'elem_type': 1, 'shape': ['batch_size', 77, 512]}] 
+[text] 시작: {'name': 'Add_1', 'found': True, 'op': 'Add', 'inputs': ['onnx::Add_150', 'positional_embedding'], 'outputs': ['onnx::Transpose_151'], 'inputs_const': [False, True], 'input_producers': ['graph_input/initializer', 'graph_input/initializer']} 
+[text] 끝: {'name': 'Add_1515', 'found': True, 'op': 'Add', 'inputs': ['onnx::Add_1712', 'ln_final.bias'], 'outputs': ['onnx::Cast_1713'], 'inputs_const': [False, True], 'input_producers': ['Mul', 'graph_input/initializer']} 
+[text] 끝 뒤 연산: []
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/mnt/c/Users/PC00/Desktop/dongchan/halio project/src/text_hailo_prep.py", line 242, in <module>
+    main()
+  File "/mnt/c/Users/PC00/Desktop/dongchan/halio project/src/text_hailo_prep.py", line 175, in main
+    cal_tok, _, cal_te, cal_tr, _ = run_clip(cal_caps)
+  File "/mnt/c/Users/PC00/Desktop/dongchan/halio project/src/text_hailo_prep.py", line 167, in run_clip
+    e = model.encode_text(t).float().numpy()
+  File "/home/answeq12/venvs/halio/lib/python3.10/site-packages/open_clip/model.py", line 338, in encode_text
+    x = text_global_pool(x, text, self.text_pool_type, eos_token_id=getattr(self, "text_eos_id", None))
+  File "/home/answeq12/venvs/halio/lib/python3.10/site-packages/open_clip/transformer.py", line 934, in text_global_pool
+    pooled = x[torch.arange(x.shape[0], device=x.device), text.argmax(dim=-1)]
+AttributeError: 'tuple' object has no attribute 'shape'
+✘ 텍스트 준비 실패
+rc=1

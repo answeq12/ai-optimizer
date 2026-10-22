@@ -1,0 +1,14 @@
+{
+  "run_id": "S-c67-pc-attn-val",
+  "top1_acc": 0.6904,
+  "std_err": 0.0046232871422830744,
+  "n": 10000,
+  "agree_with_fp32": 0.8321,
+  "mean_cosine_to_fp32": 0.9594939351081848,
+  "min_cosine_to_fp32": 0.8028088808059692,
+  "mcnemar_vs_fp32": {
+    "a_only": 457,
+    "b_only": 481,
+    "p_value": 0.45268429616713124
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "run_id": "B32-S-b7-fc2-val",
+  "top1_acc": 0.6534,
+  "std_err": 0.004758870033947134,
+  "n": 10000,
+  "agree_with_fp32": 0.659,
+  "mean_cosine_to_fp32": 0.007810948882251978,
+  "min_cosine_to_fp32": -0.10511860996484756,
+  "mcnemar_vs_fp32": {
+    "a_only": 1215,
+    "b_only": 869,
+    "p_value": 3.605427925209404e-14
+  }
+}

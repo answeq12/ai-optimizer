@@ -1,0 +1,23 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[flickr] nlphuji 파일: ['.gitattributes', 'README.md', 'flickr_1k_test_image_text_retrieval.py', 'images_flickr_1k_test.zip', 'test_1k_flickr.csv']
+[flickr] _try_nlphuji 실패: ModuleNotFoundError("No module named 'pandas'")
+[flickr] clip-benchmark test tar: ['test/0.tar', 'test/1.tar', 'test/2.tar', 'test/3.tar', 'test/4.tar']
+[flickr] 1000장, 캡션 5000개 (_try_clipbench)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[flickr] 캡션 임베딩 5000개
+[flickr] A0: R@1 61.52%
+[flickr] SPL-b567-k32: R@1 59.94%
+[flickr] DA-A0: R@1 73.60%
+[flickr] DA-SPL: R@1 72.48%
+# Flickr30k 1K test 텍스트→이미지 (COCO 밖 확인, 갤러리 1000장 / 캡션 5000개)
+
+이미지 평균 R@K, 95% CI = 이미지 단위 짝지은 부트스트랩 2000회. 사후 추가 탐색 (E33 보조)
+
+| 구성 | R@1 | R@5 | R@10 | R@1 차이 vs A0 [95% CI] |
+|---|---|---|---|---|
+| A0 | 61.52% | 85.12% | 91.86% | +0.00 [+0.00, +0.00] |
+| SPL-b567-k32 | 59.94% | 84.50% | 90.62% | -1.58 [-2.66, -0.58] |
+| DA-A0 | 73.60% | 92.74% | 96.26% | +12.08 [+10.58, +13.62] |
+| DA-SPL | 72.48% | 92.44% | 96.20% | +10.96 [+9.40, +12.64] |
+rc=0

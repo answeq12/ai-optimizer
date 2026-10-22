@@ -1,0 +1,10 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[da-train] 사진 30000, 캡션 150077, 배치 128, 에폭 2 (468스텝), 온도 1/100.0, 학습 파라미터 28.7M
+[da-train] ep0 step 1/468 loss 1.1227 7947 ms/step, 경과 0.2분, 예상 남은 72분, 최대 메모리 11489 MB
+[da-train] ep0 step 2/468 loss 1.0778 7657 ms/step, 경과 0.3분, 예상 남은 66분, 최대 메모리 11764 MB
+[da-train] ep0 step 3/468 loss 1.0712 8949 ms/step, 경과 0.4분, 예상 남은 67분, 최대 메모리 11838 MB
+[da-train] ep0 step 20/468 loss 1.0430 8644 ms/step, 경과 2.7분, 예상 남은 60분, 최대 메모리 11874 MB
+[da-train] ep0 step 40/468 loss 0.9705 7356 ms/step, 경과 5.3분, 예상 남은 57분, 최대 메모리 13056 MB
+[da-train] ep0 step 60/468 loss 0.8735 7557 ms/step, 경과 7.9분, 예상 남은 54분, 최대 메모리 13089 MB
+[da-train] ep0 step 80/468 loss 0.7893 7551 ms/step, 경과 10.6분, 예상 남은 51분, 최대 메모리 14252 MB

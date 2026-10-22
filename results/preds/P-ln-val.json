@@ -1,0 +1,14 @@
+{
+  "run_id": "P-ln-val",
+  "top1_acc": 0.0193,
+  "std_err": 0.0013757728736968177,
+  "n": 10000,
+  "agree_with_fp32": 0.0198,
+  "mean_cosine_to_fp32": 0.4782770574092865,
+  "min_cosine_to_fp32": 0.2062690109014511,
+  "mcnemar_vs_fp32": {
+    "a_only": 6734,
+    "b_only": 47,
+    "p_value": 0.0
+  }
+}

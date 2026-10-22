@@ -1,0 +1,14 @@
+{
+  "run_id": "DA2-SPL-test",
+  "top1_acc": 0.6853,
+  "std_err": 0.004643962855148607,
+  "n": 10000,
+  "agree_with_fp32": 0.7951,
+  "mean_cosine_to_fp32": 0.9309057593345642,
+  "min_cosine_to_fp32": 0.8278523087501526,
+  "mcnemar_vs_fp32": {
+    "a_only": 563,
+    "b_only": 615,
+    "p_value": 0.13726479709822675
+  }
+}

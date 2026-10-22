@@ -1,0 +1,14 @@
+{
+  "run_id": "QAT-SPL-val",
+  "top1_acc": 0.7018,
+  "std_err": 0.0045746776935648705,
+  "n": 10000,
+  "agree_with_fp32": 0.8714,
+  "mean_cosine_to_fp32": 0.9719396233558655,
+  "min_cosine_to_fp32": 0.8340655565261841,
+  "mcnemar_vs_fp32": {
+    "a_only": 304,
+    "b_only": 442,
+    "p_value": 4.914244611810683e-07
+  }
+}

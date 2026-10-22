@@ -1,0 +1,6 @@
+2026-10-13 22:01:43,870 - INFO - nvidia_smi_gpu_selector.py:40 - No GPU chosen, selecting least used GPU. To select GPU explicitly please use CUDA_VISIBLE_DEVICES environment variable.
+2026-10-13 22:01:43,894 - INFO - nvidia_smi_gpu_selector.py:45 - Selected GPU: 0
+2026-10-13 22:01:43,906 - WARNING - nvidia_smi_gpu_selector.py:48 - GPU is already busy, GPU VRAM usage ratio is: 21.2%, it might cause slow down or failure in the optimization process
+2026-10-13 22:04:19,977 - INFO - nvidia_smi_gpu_selector.py:40 - No GPU chosen, selecting least used GPU. To select GPU explicitly please use CUDA_VISIBLE_DEVICES environment variable.
+2026-10-13 22:04:19,983 - INFO - nvidia_smi_gpu_selector.py:45 - Selected GPU: 0
+2026-10-13 22:04:19,984 - WARNING - nvidia_smi_gpu_selector.py:48 - GPU is already busy, GPU VRAM usage ratio is: 21.5%, it might cause slow down or failure in the optimization process

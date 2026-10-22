@@ -1,0 +1,14 @@
+{
+  "run_id": "R176-A0-val",
+  "top1_acc": 0.6876,
+  "std_err": 0.004634719408982598,
+  "n": 10000,
+  "agree_with_fp32": 0.8039,
+  "mean_cosine_to_fp32": 0.9730068445205688,
+  "min_cosine_to_fp32": 0.8494142293930054,
+  "mcnemar_vs_fp32": {
+    "a_only": 574,
+    "b_only": 570,
+    "p_value": 0.9293279294512591
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "code": "S-c67-pc",
+  "split": "confirm",
+  "n_images": 2406,
+  "n_captions": 12033,
+  "R@1": 0.4092911160973988,
+  "R@5": 0.6699908584725338,
+  "R@10": 0.7796060832710048,
+  "median_rank": 2.0,
+  "timestamp": "2026-10-18T20:07:12+0900",
+  "model": "/mnt/d/halio_data/models/imp/c67_pc.onnx",
+  "backend": "onnxruntime-cpu"
+}

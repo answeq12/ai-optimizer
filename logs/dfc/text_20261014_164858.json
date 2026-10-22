@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-10-14T16:48:58+0900",
+  "net": "clip_vit_b_16_text_encoder",
+  "hw_arch": "hailo10h",
+  "args": {
+    "hw_arch": "hailo10h",
+    "tag": "",
+    "no_finetune": false,
+    "skip_compile": false
+  },
+  "stages": {
+    "parse": {
+      "ok": true,
+      "seconds": 49.5
+    }
+  },
+  "onnx": {
+    "path": "/mnt/d/halio_data/hailo/text/official/clip_text_encoder_vitb_16_sim.onnx",
+    "size_mb": 151.58,
+    "sha256": "61927a791e937dcb7884c02d4f924c57ed9bfd403f54bd336cbd30700e518465"
+  },
+  "nodes": {
+    "start": "Add_1",
+    "end": "Add_1515"
+  },
+  "hailo_input": {
+    "onnx_input": "float 77x512",
+    "end_vs_open_clip_min_cos_by_candidate": {
+      "tok": 0.9999999403953552,
+      "tok_plus_pos": 0.8609013557434082
+    },
+    "choice": "tok",
+    "verified": true
+  }
+}

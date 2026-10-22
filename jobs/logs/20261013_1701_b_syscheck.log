@@ -1,0 +1,22 @@
+== 시각 2026-10-13 17:11:54
+== 부하(1/5/15분): 3.76 3.90 3.77  / 논리코어 16
+== 메모리
+               total        used        free      shared  buff/cache   available
+Mem:              23           0          21           0           1          22
+== CPU 상위 프로세스
+    PID %CPU %MEM     ELAPSED COMMAND
+      1  0.0  0.0    01:05:07 systemd
+      2  0.0  0.0    01:05:07 init-systemd(Ub
+      7  0.0  0.0    01:05:06 init
+     58  0.0  0.0    01:05:06 systemd-journal
+     82  0.0  0.0    01:05:06 systemd-udevd
+    102  0.0  0.0    01:05:06 systemd-resolve
+    103  0.0  0.0    01:05:06 systemd-timesyn
+== python 프로세스
+    194  0.0  0.0    01:05:06 /usr/bin/python3 /usr/bin/networkd-dispatcher --run-startup-triggers
+    232  0.0  0.0    01:05:06 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+== GPU
+utilization.gpu [%], memory.used [MiB], memory.total [MiB]
+3 %, 2386 MiB, 12227 MiB
+pid, process_name, used_gpu_memory [MiB]
+rc=0

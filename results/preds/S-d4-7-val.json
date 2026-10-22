@@ -1,0 +1,14 @@
+{
+  "run_id": "S-d4-7-val",
+  "top1_acc": 0.6916,
+  "std_err": 0.0046183269698019435,
+  "n": 10000,
+  "agree_with_fp32": 0.8587,
+  "mean_cosine_to_fp32": 0.9721618890762329,
+  "min_cosine_to_fp32": 0.8384998440742493,
+  "mcnemar_vs_fp32": {
+    "a_only": 383,
+    "b_only": 419,
+    "p_value": 0.2164732298185832
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "run_id": "P-add-val",
+  "top1_acc": 0.0209,
+  "std_err": 0.0014304960678030543,
+  "n": 10000,
+  "agree_with_fp32": 0.0223,
+  "mean_cosine_to_fp32": 0.47763529419898987,
+  "min_cosine_to_fp32": 0.19729456305503845,
+  "mcnemar_vs_fp32": {
+    "a_only": 6716,
+    "b_only": 45,
+    "p_value": 0.0
+  }
+}

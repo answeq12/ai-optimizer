@@ -1,0 +1,16 @@
+/transformer/resblocks.0/attn/MatMul
+/transformer/resblocks.0/attn/Gemm
+/transformer/resblocks.0/mlp/c_fc/MatMul
+/transformer/resblocks.0/mlp/c_proj/MatMul
+/transformer/resblocks.1/attn/MatMul
+/transformer/resblocks.1/attn/Gemm
+/transformer/resblocks.1/mlp/c_fc/MatMul
+/transformer/resblocks.1/mlp/c_proj/MatMul
+/transformer/resblocks.2/attn/MatMul
+/transformer/resblocks.2/attn/Gemm
+/transformer/resblocks.2/mlp/c_fc/MatMul
+/transformer/resblocks.2/mlp/c_proj/MatMul
+/transformer/resblocks.3/attn/MatMul
+/transformer/resblocks.3/attn/Gemm
+/transformer/resblocks.3/mlp/c_fc/MatMul
+/transformer/resblocks.3/mlp/c_proj/MatMul

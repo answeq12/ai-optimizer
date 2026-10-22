@@ -1,0 +1,13 @@
+{
+  "code": "DA2-A0",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.5544661404237641,
+  "R@5": 0.8173660157872871,
+  "R@10": 0.8924802658911508,
+  "median_rank": 1.0,
+  "timestamp": "2026-10-21T13:53:02+0900",
+  "model": "/mnt/d/halio_data/models_da2/clip_vitb16_image_fp32.onnx",
+  "backend": "onnxruntime-cpu"
+}

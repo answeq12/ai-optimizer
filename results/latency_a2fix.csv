@@ -1,0 +1,16 @@
+run_id,config_code,backend,model_name,model_path,quant_mode,calib_method,per_channel,reduce_range,excluded_nodes,calib_source,calib_size,calib_seed,eval_set,eval_n,top1_acc,recall_at_1,recall_at_5,latency_p50_ms,latency_p95_ms,n_threads,max_rss_mb,model_size_mb,quantized_op_ratio,env_hash,timestamp,repeat_idx
+A2m-bench,A2m,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/a2m_minmax.onnx,,,,,,,,,,,,,,25.56,27.095,4,237.4,89.03,,934e571a17,2026-10-06T16:26:58+0900,0
+A1-bench,A1,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/a1_dynamic.onnx,,,,,,,,,,,,,,23.476,24.835,4,202.4,89.0,,934e571a17,2026-10-06T16:27:06+0900,0
+A0-bench,A0,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/clip_vitb16_image_fp32.onnx,,,,,,,,,,,,,,62.828,64.714,4,452.2,344.88,,934e571a17,2026-10-06T16:27:30+0900,0
+A2m-pct-bench,A2m-pct,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/a2m_pct999.onnx,,,,,,,,,,,,,,26.007,27.153,4,198.2,89.03,,934e571a17,2026-10-06T16:27:39+0900,0
+A2m-pc-bench,A2m-pc,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/a2m_pc.onnx,,,,,,,,,,,,,,26.599,27.9,4,197.1,89.53,,934e571a17,2026-10-06T16:27:48+0900,0
+A0-bench,A0,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/clip_vitb16_image_fp32.onnx,,,,,,,,,,,,,,63.607,65.314,4,497.5,344.88,,934e571a17,2026-10-06T16:28:10+0900,1
+A2m-bench,A2m,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/a2m_minmax.onnx,,,,,,,,,,,,,,25.975,27.126,4,235.2,89.03,,934e571a17,2026-10-06T16:28:19+0900,1
+A1-bench,A1,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/a1_dynamic.onnx,,,,,,,,,,,,,,23.753,25.208,4,203.8,89.0,,934e571a17,2026-10-06T16:28:27+0900,1
+A2m-pc-bench,A2m-pc,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/a2m_pc.onnx,,,,,,,,,,,,,,26.049,27.369,4,236.1,89.53,,934e571a17,2026-10-06T16:28:36+0900,1
+A2m-pct-bench,A2m-pct,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/a2m_pct999.onnx,,,,,,,,,,,,,,25.462,27.079,4,230.8,89.03,,934e571a17,2026-10-06T16:28:45+0900,1
+A1-bench,A1,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/a1_dynamic.onnx,,,,,,,,,,,,,,23.401,24.489,4,206.1,89.0,,934e571a17,2026-10-06T16:28:53+0900,2
+A0-bench,A0,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/clip_vitb16_image_fp32.onnx,,,,,,,,,,,,,,63.002,64.924,4,483.6,344.88,,934e571a17,2026-10-06T16:29:15+0900,2
+A2m-pct-bench,A2m-pct,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/a2m_pct999.onnx,,,,,,,,,,,,,,25.387,26.56,4,192.5,89.03,,934e571a17,2026-10-06T16:29:24+0900,2
+A2m-bench,A2m,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/a2m_minmax.onnx,,,,,,,,,,,,,,25.353,26.727,4,237.5,89.03,,934e571a17,2026-10-06T16:29:33+0900,2
+A2m-pc-bench,A2m-pc,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_data/models/a2m_pc.onnx,,,,,,,,,,,,,,26.3,27.174,4,233.9,89.53,,934e571a17,2026-10-06T16:29:42+0900,2

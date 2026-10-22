@@ -1,0 +1,13 @@
+{
+  "code": "QAT-DA-FP32",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.543082675529705,
+  "R@5": 0.8082260074781886,
+  "R@10": 0.8865808059825508,
+  "median_rank": 1.0,
+  "timestamp": "2026-10-21T17:43:22+0900",
+  "model": "/mnt/d/halio_data/models_qat_da/clip_vitb16_image_fp32.onnx",
+  "backend": "onnxruntime-cpu"
+}

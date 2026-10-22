@@ -1,0 +1,10 @@
+{
+  "code": "B32-S-b3-fc2",
+  "spec": "block:3/fc2",
+  "n_nodes": 1,
+  "nodes": [
+    "/transformer/resblocks.3/mlp/c_proj/MatMul"
+  ],
+  "base": "A2m",
+  "timestamp": "2026-10-20T02:03:03+0900"
+}

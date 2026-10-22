@@ -1,0 +1,14 @@
+{
+  "run_id": "I4-ex67-val",
+  "top1_acc": 0.6464,
+  "std_err": 0.004780868540338669,
+  "n": 10000,
+  "agree_with_fp32": 0.7661,
+  "mean_cosine_to_fp32": 0.9529669880867004,
+  "min_cosine_to_fp32": 0.8113424777984619,
+  "mcnemar_vs_fp32": {
+    "a_only": 859,
+    "b_only": 443,
+    "p_value": 4.047054540257009e-31
+  }
+}

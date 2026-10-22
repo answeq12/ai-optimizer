@@ -1,0 +1,182 @@
+C 드라이브 여유 68G
+특징 저장 위치: /home/answeq12/halio_da_feat
+[da] 목록 30000장, 받을 사진 28000장
+[da] 1000/28000 (37s, 27.3장/s)
+[da] 2000/28000 (73s, 27.4장/s)
+[da] 3000/28000 (109s, 27.5장/s)
+[da] 4000/28000 (145s, 27.5장/s)
+[da] 5000/28000 (182s, 27.5장/s)
+[da] 6000/28000 (217s, 27.6장/s)
+[da] 7000/28000 (253s, 27.6장/s)
+[da] 8000/28000 (289s, 27.7장/s)
+[da] 9000/28000 (326s, 27.6장/s)
+[da] 10000/28000 (361s, 27.7장/s)
+[da] 11000/28000 (397s, 27.7장/s)
+[da] 12000/28000 (433s, 27.7장/s)
+[da] 13000/28000 (470s, 27.7장/s)
+[da] 14000/28000 (506s, 27.7장/s)
+[da] 15000/28000 (542s, 27.7장/s)
+[da] 16000/28000 (578s, 27.7장/s)
+[da] 17000/28000 (614s, 27.7장/s)
+[da] 18000/28000 (651s, 27.7장/s)
+[da] 19000/28000 (687s, 27.7장/s)
+[da] 20000/28000 (723s, 27.7장/s)
+[da] 21000/28000 (759s, 27.7장/s)
+[da] 22000/28000 (795s, 27.7장/s)
+[da] 23000/28000 (831s, 27.7장/s)
+[da] 24000/28000 (867s, 27.7장/s)
+[da] 25000/28000 (903s, 27.7장/s)
+[da] 26000/28000 (939s, 27.7장/s)
+[da] 27000/28000 (975s, 27.7장/s)
+[da] 28000/28000 (1011s, 27.7장/s)
+[da] 다운로드 28000장 1011s, 목록 전체 4.91 GB
+다운로드: 1081s
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[da] train_30000 32/30000 (2s, 20.5장/s)
+[da] train_30000 672/30000 (34s, 19.6장/s)
+[da] train_30000 1312/30000 (67s, 19.6장/s)
+[da] train_30000 1952/30000 (99s, 19.7장/s)
+[da] train_30000 2592/30000 (130s, 19.9장/s)
+[da] train_30000 3232/30000 (162s, 20.0장/s)
+[da] train_30000 3872/30000 (191s, 20.2장/s)
+[da] train_30000 4512/30000 (216s, 20.9장/s)
+[da] train_30000 5152/30000 (244s, 21.1장/s)
+[da] train_30000 5792/30000 (270s, 21.4장/s)
+[da] train_30000 6432/30000 (293s, 21.9장/s)
+[da] train_30000 7072/30000 (319s, 22.2장/s)
+[da] train_30000 7712/30000 (345s, 22.3장/s)
+[da] train_30000 8352/30000 (372s, 22.5장/s)
+[da] train_30000 8992/30000 (395s, 22.8장/s)
+[da] train_30000 9632/30000 (422s, 22.8장/s)
+[da] train_30000 10272/30000 (448s, 22.9장/s)
+[da] train_30000 10912/30000 (471s, 23.2장/s)
+[da] train_30000 11552/30000 (498s, 23.2장/s)
+[da] train_30000 12192/30000 (525s, 23.2장/s)
+[da] train_30000 12832/30000 (551s, 23.3장/s)
+[da] train_30000 13472/30000 (575s, 23.4장/s)
+[da] train_30000 14112/30000 (602s, 23.4장/s)
+[da] train_30000 14752/30000 (630s, 23.4장/s)
+[da] train_30000 15392/30000 (654s, 23.5장/s)
+[da] train_30000 16032/30000 (681s, 23.5장/s)
+[da] train_30000 16672/30000 (709s, 23.5장/s)
+[da] train_30000 17312/30000 (752s, 23.0장/s)
+[da] train_30000 17952/30000 (786s, 22.8장/s)
+[da] train_30000 18592/30000 (824s, 22.6장/s)
+[da] train_30000 19232/30000 (856s, 22.5장/s)
+[da] train_30000 19872/30000 (888s, 22.4장/s)
+[da] train_30000 20512/30000 (918s, 22.3장/s)
+[da] train_30000 21152/30000 (949s, 22.3장/s)
+[da] train_30000 21792/30000 (982s, 22.2장/s)
+[da] train_30000 22432/30000 (1011s, 22.2장/s)
+[da] train_30000 23072/30000 (1041s, 22.2장/s)
+[da] train_30000 23712/30000 (1075s, 22.1장/s)
+[da] train_30000 24352/30000 (1106s, 22.0장/s)
+[da] train_30000 24992/30000 (1136s, 22.0장/s)
+[da] train_30000 25632/30000 (1167s, 22.0장/s)
+[da] train_30000 26272/30000 (1194s, 22.0장/s)
+[da] train_30000 26912/30000 (1227s, 21.9장/s)
+[da] train_30000 27552/30000 (1259s, 21.9장/s)
+[da] train_30000 28192/30000 (1291s, 21.8장/s)
+[da] train_30000 28832/30000 (1322s, 21.8장/s)
+[da] train_30000 29472/30000 (1353s, 21.8장/s)
+[da] train_30000: 30000장 1381s (46.0 ms/장), 9.08 GB, 최대 메모리 22212 MB
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[da] select 32/2405 (4s, 7.2장/s)
+[da] select 672/2405 (47s, 14.3장/s)
+[da] select 1312/2405 (78s, 16.9장/s)
+[da] select 1952/2405 (105s, 18.5장/s)
+[da] select: 2405장 121s (50.4 ms/장), 0.73 GB, 최대 메모리 2508 MB
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[da] cifarval 32/10000 (2s, 20.9장/s)
+[da] cifarval 672/10000 (34s, 19.8장/s)
+[da] cifarval 1312/10000 (63s, 20.9장/s)
+[da] cifarval 1952/10000 (89s, 21.9장/s)
+[da] cifarval 2592/10000 (112s, 23.1장/s)
+[da] cifarval 3232/10000 (139s, 23.3장/s)
+[da] cifarval 3872/10000 (166s, 23.4장/s)
+[da] cifarval 4512/10000 (188s, 24.0장/s)
+[da] cifarval 5152/10000 (214s, 24.1장/s)
+[da] cifarval 5792/10000 (240s, 24.1장/s)
+[da] cifarval 6432/10000 (263s, 24.4장/s)
+[da] cifarval 7072/10000 (290s, 24.4장/s)
+[da] cifarval 7712/10000 (316s, 24.4장/s)
+[da] cifarval 8352/10000 (342s, 24.4장/s)
+[da] cifarval 8992/10000 (365s, 24.7장/s)
+[da] cifarval 9632/10000 (391s, 24.6장/s)
+[da] cifarval: 10000장 404s (40.4 ms/장), 3.03 GB, 최대 메모리 9464 MB
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[da] 캡션 256/150077 (3s)
+[da] 캡션 10496/150077 (128s)
+[da] 캡션 20736/150077 (257s)
+[da] 캡션 30976/150077 (382s)
+[da] 캡션 41216/150077 (511s)
+[da] 캡션 51456/150077 (636s)
+[da] 캡션 61696/150077 (765s)
+[da] 캡션 71936/150077 (889s)
+[da] 캡션 82176/150077 (1018s)
+[da] 캡션 92416/150077 (1143s)
+[da] 캡션 102656/150077 (1271s)
+[da] 캡션 112896/150077 (1396s)
+[da] 캡션 123136/150077 (1525s)
+[da] 캡션 133376/150077 (1650s)
+[da] 캡션 143616/150077 (1778s)
+[da] 캡션 150077개 (사진 30000장) 1858s
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[da-train] 사진 30000, 캡션 150077, 배치 128, 에폭 2 (468스텝), 온도 1/100.0, 학습 파라미터 28.7M
+[da-train] ep0 step 1/468 loss 0.5727 10676 ms/step, 경과 0.2분, 예상 남은 92분, 최대 메모리 11475 MB
+[da-train] ep0 step 2/468 loss 0.5996 7957 ms/step, 경과 0.3분, 예상 남은 77분, 최대 메모리 11797 MB
+[da-train] ep0 step 3/468 loss 0.5841 6567 ms/step, 경과 0.4분, 예상 남은 68분, 최대 메모리 11802 MB
+[da-train] ep0 step 20/468 loss 0.5529 10425 ms/step, 경과 2.6분, 예상 남은 59분, 최대 메모리 11838 MB
+[da-train] ep0 step 40/468 loss 0.5006 6746 ms/step, 경과 5.2분, 예상 남은 55분, 최대 메모리 13056 MB
+[da-train] ep0 step 60/468 loss 0.4814 6741 ms/step, 경과 7.6분, 예상 남은 52분, 최대 메모리 13056 MB
+[da-train] ep0 step 80/468 loss 0.3986 6747 ms/step, 경과 10.2분, 예상 남은 49분, 최대 메모리 14220 MB
+[da-train] ep0 step 100/468 loss 0.4243 10282 ms/step, 경과 12.8분, 예상 남은 47분, 최대 메모리 15356 MB
+[da-train] ep0 step 120/468 loss 0.4023 10396 ms/step, 경과 15.3분, 예상 남은 44분, 최대 메모리 15411 MB
+[da-train] ep0 step 140/468 loss 0.3830 6782 ms/step, 경과 17.8분, 예상 남은 42분, 최대 메모리 16570 MB
+[da-train] ep0 step 160/468 loss 0.3726 6757 ms/step, 경과 20.3분, 예상 남은 39분, 최대 메모리 16581 MB
+[da-train] ep0 step 180/468 loss 0.3731 6864 ms/step, 경과 22.8분, 예상 남은 37분, 최대 메모리 17780 MB
+[da-train] ep0 step 200/468 loss 0.3763 6820 ms/step, 경과 25.6분, 예상 남은 34분, 최대 메모리 18929 MB
+[da-train] ep0 step 220/468 loss 0.3509 6745 ms/step, 경과 28.1분, 예상 남은 32분, 최대 메모리 18951 MB
+[da-train] 에폭 1 저장
+[da-train] ep1 step 240/468 loss 0.3210 6667 ms/step, 경과 30.7분, 예상 남은 29분, 최대 메모리 19311 MB
+[da-train] ep1 step 260/468 loss 0.3459 10389 ms/step, 경과 33.2분, 예상 남은 27분, 최대 메모리 19311 MB
+[da-train] ep1 step 280/468 loss 0.3599 6673 ms/step, 경과 35.9분, 예상 남은 24분, 최대 메모리 19330 MB
+[da-train] ep1 step 300/468 loss 0.3449 6795 ms/step, 경과 38.4분, 예상 남은 22분, 최대 메모리 19345 MB
+[da-train] ep1 step 320/468 loss 0.3216 6698 ms/step, 경과 40.9분, 예상 남은 19분, 최대 메모리 19345 MB
+[da-train] ep1 step 340/468 loss 0.3450 10344 ms/step, 경과 43.5분, 예상 남은 16분, 최대 메모리 19347 MB
+[da-train] ep1 step 360/468 loss 0.3204 6629 ms/step, 경과 45.9분, 예상 남은 14분, 최대 메모리 19363 MB
+[da-train] ep1 step 380/468 loss 0.3015 6741 ms/step, 경과 48.5분, 예상 남은 11분, 최대 메모리 19363 MB
+[da-train] ep1 step 400/468 loss 0.3210 6633 ms/step, 경과 50.9분, 예상 남은 9분, 최대 메모리 19363 MB
+[da-train] ep1 step 420/468 loss 0.3021 6760 ms/step, 경과 53.4분, 예상 남은 6분, 최대 메모리 19363 MB
+[da-train] ep1 step 440/468 loss 0.3297 6699 ms/step, 경과 55.9분, 예상 남은 4분, 최대 메모리 19363 MB
+[da-train] ep1 step 460/468 loss 0.3152 10334 ms/step, 경과 58.5분, 예상 남은 1분, 최대 메모리 19363 MB
+[da-train] 에폭 2 저장
+[da-train] 완료 468스텝, 59.4분
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[da-sweep] α=0.0: select R@1 40.86 R@5 68.53 R@10 79.28 / CIFAR val 68.80
+[da-sweep] α=0.25: select R@1 47.20 R@5 74.15 R@10 84.15 / CIFAR val 69.60
+[da-sweep] α=0.5: select R@1 50.90 R@5 77.77 R@10 86.89 / CIFAR val 69.75
+[da-sweep] α=0.75: select R@1 53.05 R@5 79.88 R@10 88.10 / CIFAR val 69.22
+[da-sweep] α=1.0: select R@1 53.99 R@5 80.80 R@10 88.66 / CIFAR val 68.58
+# E33 도메인 적응: 섞는 비율 α 탐색 (COCO-select, CIFAR val)
+
+저장 특징(블록 7 출력 fp16) 위에서 뒤쪽만 계산. α=0 = 원본 모델. R@K 는 이미지 평균(비교표와 같은 방식).
+
+| α | select R@1 | R@5 | R@10 | CIFAR val | 규칙 |
+|---|---|---|---|---|---|
+| 0.0 | 40.86 | 68.53 | 79.28 | 68.80 | 원본 |
+| 0.25 | 47.20 | 74.15 | 84.15 | 69.60 |  |
+| 0.5 | 50.90 | 77.77 | 86.89 | 69.75 |  |
+| 0.75 | 53.05 | 79.88 | 88.10 | 69.22 |  |
+| 1.0 | 53.99 | 80.80 | 88.66 | 68.58 | **선택** |
+
+- 판단 ①: 선택 α 의 R@1 − α=0 = +13.13%p (기준 +2.0) → **통과**
+- 참고: 원본 ONNX 의 CIFAR val 68.80% (α=0 과 같아야 함, fp16 저장 영향만큼 차이 가능)
+- 사전 등록: docs/02 E33
+rc=0

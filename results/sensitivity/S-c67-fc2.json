@@ -1,0 +1,11 @@
+{
+  "code": "S-c67-fc2",
+  "spec": "blocks:6,7/fc2",
+  "n_nodes": 2,
+  "nodes": [
+    "/transformer/resblocks.6/mlp/c_proj/MatMul",
+    "/transformer/resblocks.7/mlp/c_proj/MatMul"
+  ],
+  "base": "A2m",
+  "timestamp": "2026-10-06T21:38:41+0900"
+}

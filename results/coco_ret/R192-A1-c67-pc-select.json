@@ -1,0 +1,13 @@
+{
+  "code": "R192-A1-c67-pc",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.39750727046115497,
+  "R@5": 0.6707104279185708,
+  "R@10": 0.7789779808890736,
+  "median_rank": 2.0,
+  "timestamp": "2026-10-16T10:37:56+0900",
+  "model": "/mnt/d/halio_data/models/res/r192_a1_c67_pc.onnx",
+  "backend": "onnxruntime-cpu"
+}

@@ -1,0 +1,114 @@
+{
+ "timestamp": "2026-10-17T23:26:42+0900",
+ "args": {
+  "blocks": "7",
+  "k": 32,
+  "tag": "splf_b7_k32_s1",
+  "hw_arch": "hailo10h",
+  "calib_list": "splits/calib_coco_64_s1.txt",
+  "skip_compile": true,
+  "split_fc1": true
+ },
+ "stages": {
+  "build_onnx": {
+   "ok": true,
+   "seconds": 10.0
+  },
+  "parse": {
+   "ok": true,
+   "seconds": 14.5
+  },
+  "model_script": {
+   "ok": true,
+   "seconds": 0.1
+  },
+  "optimize": {
+   "ok": true,
+   "seconds": 228.6
+  }
+ },
+ "build": {
+  "layers": [
+   {
+    "block": 7,
+    "fc1": "MatMul_570",
+    "fc2": "MatMul_576",
+    "k": 32,
+    "hot_channels": [
+     98,
+     130,
+     244,
+     471,
+     659,
+     676,
+     678,
+     725,
+     744,
+     753,
+     1026,
+     1163,
+     1362,
+     1435,
+     1525,
+     1605,
+     1661,
+     1852,
+     1906,
+     1929,
+     1991,
+     2078,
+     2093,
+     2301,
+     2629,
+     2681,
+     2704,
+     2754,
+     2892,
+     2922,
+     2950,
+     2970
+    ],
+    "hot_absmax_top8": [
+     42.14,
+     40.63,
+     29.67,
+     26.06,
+     17.59,
+     5.68,
+     5.54,
+     5.46
+    ],
+    "rest_absmax": 4.16,
+    "absmax_before": 42.14,
+    "slice_axis": 2
+   }
+  ],
+  "equivalence_min_cosine": 0.9999998807907104,
+  "onnx": "/mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.splf_b7_k32_s1.onnx",
+  "size_mb": 344.84
+ },
+ "alls": {
+  "hot_16bit_layers": [
+   "conv32",
+   "conv34"
+  ],
+  "slice_layers": [
+   [
+    "slice1",
+    [
+     "Gather_861",
+     "Cast_862"
+    ]
+   ]
+  ],
+  "cls_slice": [
+   "slice1"
+  ],
+  "source": "hailo_model_zoo-5.4.0-py3-none-any.whl: cfg/alls/generic/clip_vit_b_16_image_encoder.alls + hot a16_w16"
+ },
+ "calib": {
+  "list": "calib_coco_64_s1.txt",
+  "n": 64,
+  "sha256": "4a87249c06d821a8d6b76d2f6c650043444a5ef79fbdaeff86a5a4d2adb2ff27"
+ }
+}

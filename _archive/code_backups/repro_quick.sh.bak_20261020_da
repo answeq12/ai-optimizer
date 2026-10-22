@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# 빠른 재현 (약 20~40분, 다운로드 약 0.3 GB + CLIP 가중치). 전체 재현(reproduce.sh, 2~4시간)의 축소판
+#   CIFAR-100 + COCO 사진 564장만 받기 → 분할 sha256 확인 → FP32 export + P1 게이트 → 최종 구성 양자화(SPL-b567-k32)
+#   → COCO-confirm 앞 500장 검색 + CIFAR-100 test 앞 2,000장 → repro/EXPECTED_QUICK.json 과 비교
+# 사용법:  bash repro_quick.sh      (HALIO_DATA_DIR 로 저장 위치 지정 가능)
+# 주의: 갤러리가 500장이라 R@K 값은 보고서(2,406장)보다 높다. 비교 기준은 같은 조건으로 만든 기대값이다
+set -euo pipefail
+cd "$(dirname "$0")"
+export CUDA_VISIBLE_DEVICES=''
+export HALIO_QUICK_N=500
+THREADS=${THREADS:-4}
+VENV=${VENV:-$HOME/venvs/halio}
+[ -f "$VENV/bin/activate" ] || { echo "파이썬 환경이 없습니다: $VENV  (docs/06_재현가이드.md 3단계)"; exit 1; }
+source "$VENV/bin/activate"
+M=$(python -m src.common models-dir); mkdir -p "$M/imp" logs results
+LOG=logs/reproduce_quick_$(date +%Y%m%d_%H%M).log
+exec > >(tee -a "$LOG") 2>&1
+echo "== 빠른 재현 시작 $(date '+%F %T') / 큰 파일: $(python -m src.common store-dir)"
+echo "== 1/5 데이터 (CIFAR-100 + COCO 564장)"
+python -m src.quick_data
+echo "== 2/5 분할 파일 sha256 확인"
+(cd splits && sha256sum -c ../repro/SHA256SUMS_splits.txt --quiet) && echo "   분할 일치"
+echo "== 3/5 FP32 ONNX export + P1 게이트"
+[ -f logs/p1_parity.json ] && [ ! -f logs/p1_parity.submitted.json ] && cp logs/p1_parity.json logs/p1_parity.submitted.json
+[ -f "$M/clip_vitb16_image_fp32.onnx" ] || python -m src.export_onnx
+echo "== 4/5 양자화 (SPL-b567-k32)"
+CAL=splits/calib_coco_64_s0.txt
+F="$M/imp/split_SPL-b567-k32.fp32.onnx"
+[ -f "$F" ] || python -m src.split_outliers --blocks 5,6,7 --k 32 --calib-list $CAL --out "$F"
+[ -f "$M/imp/SPL-b567-k32.onnx" ] || python -m src.quantize_ort --mode static --weight-matmul-only --per-channel \
+    --src "$F" --exclude-nodes-file "$F.hot_nodes.txt" --calib-list $CAL --out "$M/imp/SPL-b567-k32.onnx"
+echo "== 5/5 정확도 (COCO-confirm 앞 500장, CIFAR-100 test 앞 2,000장)"
+python -m src.coco_retrieval text
+for c in "RPQ-A0 $M/clip_vitb16_image_fp32.onnx fp32" "RPQ-SPL-b567-k32 $M/imp/SPL-b567-k32.onnx static"; do
+  set -- $c
+  python -m src.coco_retrieval eval --model "$2" --code "$1" --split confirm --i-know-final --threads "$THREADS"
+  python -m src.evaluate --model "$2" --code "$1-test2000" --quant-mode "$3" --eval-set test --limit 2000 --i-know-final \
+      --threads "$THREADS" --out-csv results/accuracy_repro_quick.csv
+done
+python repro/check_expected.py --quick
+echo "== 끝 $(date '+%F %T') / 로그: $LOG"

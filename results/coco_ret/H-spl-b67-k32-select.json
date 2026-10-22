@@ -1,0 +1,16 @@
+{
+  "code": "H-spl-b67-k32",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.3960947237224761,
+  "R@5": 0.6698795180722892,
+  "R@10": 0.7806398005816368,
+  "median_rank": 2.0,
+  "timestamp": "2026-10-16T16:38:29+0900",
+  "har": "/mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.spl_b67_k32.quantized.har",
+  "backend": "hailo-dfc-emulator",
+  "input": "uint8 0~255 NHWC",
+  "context": "SDK_QUANTIZED",
+  "seconds": 939
+}

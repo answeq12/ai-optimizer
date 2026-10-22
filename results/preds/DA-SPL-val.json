@@ -1,0 +1,14 @@
+{
+  "run_id": "DA-SPL-val",
+  "top1_acc": 0.6855,
+  "std_err": 0.004643164330497037,
+  "n": 10000,
+  "agree_with_fp32": 0.7973,
+  "mean_cosine_to_fp32": 0.9229081869125366,
+  "min_cosine_to_fp32": 0.8116355538368225,
+  "mcnemar_vs_fp32": {
+    "a_only": 595,
+    "b_only": 570,
+    "p_value": 0.4819778593991101
+  }
+}

@@ -1,0 +1,197 @@
+== 모드: a2fix / 시각: 2026-10-06 16:11:44 / 로그: logs/run_20261006_161144_a2fix.log
+== 시스템: Ubuntu 22.04.5 LTS / 커널 6.18.33.2-microsoft-standard-WSL2
+== CPU: Intel(R) Core(TM) i9-14900KF / 논리 코어 16 / 메모리 23GB
+== 디스크 여유: 홈 948G, 이 폴더 17G, D 드라이브 1.3T
+== 시스템 파이썬: Python 3.10.12 / WSL 사용자: answeq12
+== 버전: torch 2.14.1+cpu, onnx 1.23.1, onnxruntime 1.23.2, numpy 2.2.6, open_clip 3.3.0
+== A2m: 정적 INT8, MinMax, per-tensor, COCO 64장 s0, 가중치 MatMul 만 (A1 과 같은 대상)
+[quant] 가중치 MatMul 만 양자화: 49개 (A1 동적은 49개)
+[quant] a2m_minmax.onnx: 89.03 MB (static, minmax)
+[eval] A2m-val: /mnt/d/halio_data/models/a2m_minmax.onnx / val 10000장
+  500/10000  (14s)
+  1000/10000  (27s)
+  1500/10000  (40s)
+  2000/10000  (54s)
+  2500/10000  (68s)
+  3000/10000  (81s)
+  3500/10000  (94s)
+  4000/10000  (108s)
+  4500/10000  (121s)
+  5000/10000  (135s)
+  5500/10000  (149s)
+  6000/10000  (162s)
+  6500/10000  (176s)
+  7000/10000  (189s)
+  7500/10000  (203s)
+  8000/10000  (217s)
+  8500/10000  (230s)
+  9000/10000  (244s)
+  9500/10000  (258s)
+  10000/10000  (271s)
+[eval] A2m-val: top-1 53.55% (표준오차 ±0.50%p, n=10000), FP32 대비 일치율 61.43%, 평균 코사인 0.8943
+== A2m 위에서 탐침 두 개 (대상을 맞춘 뒤에야 의미가 있다)
+[quant] 가중치 MatMul 만 양자화: 49개 (A1 동적은 49개)
+[quant] a2m_pc.onnx: 89.53 MB (static, minmax, per-channel)
+[eval] A2m-pc-val: /mnt/d/halio_data/models/a2m_pc.onnx / val 10000장
+  500/10000  (14s)
+  1000/10000  (28s)
+  1500/10000  (42s)
+  2000/10000  (56s)
+  2500/10000  (70s)
+  3000/10000  (85s)
+  3500/10000  (99s)
+  4000/10000  (112s)
+  4500/10000  (127s)
+  5000/10000  (140s)
+  5500/10000  (155s)
+  6000/10000  (168s)
+  6500/10000  (182s)
+  7000/10000  (196s)
+  7500/10000  (209s)
+  8000/10000  (224s)
+  8500/10000  (237s)
+  9000/10000  (252s)
+  9500/10000  (265s)
+  10000/10000  (279s)
+[eval] A2m-pc-val: top-1 56.34% (표준오차 ±0.50%p, n=10000), FP32 대비 일치율 65.02%, 평균 코사인 0.9040
+[quant] 가중치 MatMul 만 양자화: 49개 (A1 동적은 49개)
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Collecting tensor data and making histogram ...
+Finding optimal threshold for each tensor using 'percentile' algorithm ...
+Number of tensors : 170
+Number of histogram bins : 2048
+Percentile : (0.09999999999999432,99.9)
+[quant] a2m_pct999.onnx: 89.03 MB (static, percentile(99.9))
+[eval] A2m-pct-val: /mnt/d/halio_data/models/a2m_pct999.onnx / val 10000장
+  500/10000  (14s)
+  1000/10000  (28s)
+  1500/10000  (42s)
+  2000/10000  (55s)
+  2500/10000  (68s)
+  3000/10000  (82s)
+  3500/10000  (96s)
+  4000/10000  (110s)
+  4500/10000  (123s)
+  5000/10000  (137s)
+  5500/10000  (151s)
+  6000/10000  (164s)
+  6500/10000  (178s)
+  7000/10000  (191s)
+  7500/10000  (205s)
+  8000/10000  (218s)
+  8500/10000  (232s)
+  9000/10000  (246s)
+  9500/10000  (259s)
+  10000/10000  (273s)
+[eval] A2m-pct-val: top-1 14.90% (표준오차 ±0.36%p, n=10000), FP32 대비 일치율 15.37%, 평균 코사인 0.6388
+== 연산자 커버리지 (기대: A2m 의 행렬곱 정수/실수 = A1 과 같은 49 / 25)
+[0;93m2026-10-06 16:26:41.469031603 [W:onnxruntime:, inference_session.cc:2473 Initialize] Serializing optimized model with Graph Optimization level greater than ORT_ENABLE_EXTENDED and the NchwcTransformer enabled. The generated model may contain hardware specific optimizations, and should only be used in the same environment the model was optimized in.[m
+[0;93m2026-10-06 16:26:45.224224494 [W:onnxruntime:, inference_session.cc:2473 Initialize] Serializing optimized model with Graph Optimization level greater than ORT_ENABLE_EXTENDED and the NchwcTransformer enabled. The generated model may contain hardware specific optimizations, and should only be used in the same environment the model was optimized in.[m
+[cov] A1: 정수 연산 비율 66.2%, 정수 커널 시간 67.4%, patch embed Conv 양자화 아니오
+[cov] A2m: 정수 연산 비율 66.2%, 정수 커널 시간 58.7%, patch embed Conv 양자화 아니오
+[cov] 저장: /mnt/c/Users/PC00/Desktop/dongchan/halio project/results/coverage.md
+== 속도·메모리 (같은 세션에서 A0·A1 도 다시 재서 나란히 비교)
+[bench] 반복 1/3, 순서 ['A2m', 'A1', 'A0', 'A2m-pct', 'A2m-pc']
+  A2m: p50 25.56 ms, p95 27.09 ms, Max RSS 237 MB
+  A1: p50 23.48 ms, p95 24.83 ms, Max RSS 202 MB
+  A0: p50 62.83 ms, p95 64.71 ms, Max RSS 452 MB
+  A2m-pct: p50 26.01 ms, p95 27.15 ms, Max RSS 198 MB
+  A2m-pc: p50 26.60 ms, p95 27.90 ms, Max RSS 197 MB
+[bench] 반복 2/3, 순서 ['A0', 'A2m', 'A1', 'A2m-pc', 'A2m-pct']
+  A0: p50 63.61 ms, p95 65.31 ms, Max RSS 498 MB
+  A2m: p50 25.97 ms, p95 27.13 ms, Max RSS 235 MB
+  A1: p50 23.75 ms, p95 25.21 ms, Max RSS 204 MB
+  A2m-pc: p50 26.05 ms, p95 27.37 ms, Max RSS 236 MB
+  A2m-pct: p50 25.46 ms, p95 27.08 ms, Max RSS 231 MB
+[bench] 반복 3/3, 순서 ['A1', 'A0', 'A2m-pct', 'A2m', 'A2m-pc']
+  A1: p50 23.40 ms, p95 24.49 ms, Max RSS 206 MB
+  A0: p50 63.00 ms, p95 64.92 ms, Max RSS 484 MB
+  A2m-pct: p50 25.39 ms, p95 26.56 ms, Max RSS 192 MB
+  A2m: p50 25.35 ms, p95 26.73 ms, Max RSS 237 MB
+  A2m-pc: p50 26.30 ms, p95 27.17 ms, Max RSS 234 MB
+[bench] 저장: /mnt/c/Users/PC00/Desktop/dongchan/halio project/results/latency_summary.json
+# 전체 구성 (val)
+
+| 구성 | top-1 | Δ vs FP32 | FP32 대비 일치율 | p50 (ms) | p95 (ms) | Max RSS (MB) | 파일 (MB) | 정수 연산 비율 |
+|---|---|---|---|---|---|---|---|---|
+| A0 FP32 | 68.80% | — | — | 63.00 | 64.92 | 484 | 344.9 | 0.0% |
+| A1 동적 INT8 | 65.02% | -3.78%p | 81.46% | 23.48 | 24.83 | 204 | 89.0 | 66.2% |
+| A2 정적 INT8 기본 | 2.09% | -66.71%p | 2.23% | 24.28 | 25.52 | 208 | 86.9 | 100.0% |
+| P-pc | 2.12% | -66.68%p | 2.24% | - | - | - | - | - |
+| P-pc-rr | 2.00% | -66.80%p | 2.03% | - | - | - | - | - |
+| P-pct | 4.77% | -64.03%p | 4.74% | - | - | - | - | - |
+| P-ent | 2.01% | -66.79%p | 2.10% | - | - | - | - | - |
+| P-ln | 1.93% | -66.87%p | 1.98% | - | - | - | - | - |
+| P-add | 2.09% | -66.71%p | 2.23% | - | - | - | - | - |
+| P-pe | 1.92% | -66.88%p | 1.99% | - | - | - | - | - |
+| AB-coco-s1 | 1.66% | -67.14%p | 1.81% | - | - | - | - | - |
+| AB-coco-s2 | 1.64% | -67.16%p | 1.81% | - | - | - | - | - |
+| AB-cifar-s0 | 1.46% | -67.34%p | 1.57% | - | - | - | - | - |
+| AB-cifar-s1 | 1.73% | -67.07%p | 1.66% | - | - | - | - | - |
+| AB-cifar-s2 | 1.67% | -67.13%p | 1.84% | - | - | - | - | - |
+| A2m | 53.55% | -15.25%p | 61.43% | 25.56 | 27.09 | 237 | 89.0 | 66.2% |
+| A2m-pc | 56.34% | -12.46%p | 65.02% | 26.30 | 27.37 | 234 | 89.5 | - |
+| A2m-pct | 14.90% | -53.90%p | 15.37% | 25.46 | 27.08 | 198 | 89.0 | - |
+
+- 평가셋: CIFAR-100 val 10000장. top-1 표준오차 약 ±0.46%p. 이 크기 이내의 차이만으로 방향을 확정하지 않는다
+- A1 vs FP32 짝지은 비교: FP32만 정답 708장, A1만 정답 330장, McNemar p=2.55e-32
+- A2 vs FP32 짝지은 비교: FP32만 정답 6716장, A2만 정답 45장, McNemar p=0
+- P-pc vs FP32 짝지은 비교: FP32만 정답 6713장, P-pc만 정답 45장, McNemar p=0
+- P-pc-rr vs FP32 짝지은 비교: FP32만 정답 6715장, P-pc-rr만 정답 35장, McNemar p=0
+- P-pct vs FP32 짝지은 비교: FP32만 정답 6484장, P-pct만 정답 81장, McNemar p=0
+- P-ent vs FP32 짝지은 비교: FP32만 정답 6720장, P-ent만 정답 41장, McNemar p=0
+- P-ln vs FP32 짝지은 비교: FP32만 정답 6734장, P-ln만 정답 47장, McNemar p=0
+- P-add vs FP32 짝지은 비교: FP32만 정답 6716장, P-add만 정답 45장, McNemar p=0
+- P-pe vs FP32 짝지은 비교: FP32만 정답 6729장, P-pe만 정답 41장, McNemar p=0
+- AB-coco-s1 vs FP32 짝지은 비교: FP32만 정답 6750장, AB-coco-s1만 정답 36장, McNemar p=0
+- AB-coco-s2 vs FP32 짝지은 비교: FP32만 정답 6751장, AB-coco-s2만 정답 35장, McNemar p=0
+- AB-cifar-s0 vs FP32 짝지은 비교: FP32만 정답 6770장, AB-cifar-s0만 정답 36장, McNemar p=0
+- AB-cifar-s1 vs FP32 짝지은 비교: FP32만 정답 6750장, AB-cifar-s1만 정답 43장, McNemar p=0
+- AB-cifar-s2 vs FP32 짝지은 비교: FP32만 정답 6743장, AB-cifar-s2만 정답 30장, McNemar p=0
+- A2m vs FP32 짝지은 비교: FP32만 정답 1919장, A2m만 정답 394장, McNemar p=8.99e-240
+- A2m-pc vs FP32 짝지은 비교: FP32만 정답 1661장, A2m-pc만 정답 415장, McNemar p=7.37e-176
+- A2m-pct vs FP32 짝지은 비교: FP32만 정답 5546장, A2m-pct만 정답 156장, McNemar p=0
+- 속도·메모리: 배치 1, 스레드 4, 워밍업 20회 제외 후 300회, 3회 반복의 중앙값. 측정 환경 Intel(R) Core(TM) i9-14900KF / WSL=True / env 934e571a17
+- A1: p50 기준 FP32 대비 2.68배 빠름, 파일 크기 3.88배 작음
+- A2: p50 기준 FP32 대비 2.59배 빠름, 파일 크기 3.97배 작음
+- A2m: p50 기준 FP32 대비 2.46배 빠름, 파일 크기 3.87배 작음
+- A2m-pc: p50 기준 FP32 대비 2.40배 빠름, 파일 크기 3.85배 작음
+- A2m-pct: p50 기준 FP32 대비 2.47배 빠름, 파일 크기 3.87배 작음
+
+이 표로 말할 수 없는 것: Hailo 에서의 개선량(양자화기가 다르다), 제조사 설정 대비 우위, 다른 도메인에서의 성능, 최종 점수 전망.
+
+[table] 저장: /mnt/c/Users/PC00/Desktop/dongchan/halio project/results/all_runs.md
+== 끝. 확인할 파일: results/all_runs.md, results/coverage.md, results/latency_a2fix.csv
+
+== 완료. 결과: results/all_runs.md, results/coverage.md, results/latency_a2fix.csv
+== 로그: logs/run_20261006_161144_a2fix.log

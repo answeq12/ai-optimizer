@@ -1,0 +1,14 @@
+{
+  "run_id": "S-c4567-fc2-val",
+  "top1_acc": 0.6841,
+  "std_err": 0.004648733053209229,
+  "n": 10000,
+  "agree_with_fp32": 0.8447,
+  "mean_cosine_to_fp32": 0.9688271284103394,
+  "min_cosine_to_fp32": 0.838926374912262,
+  "mcnemar_vs_fp32": {
+    "a_only": 454,
+    "b_only": 415,
+    "p_value": 0.19734824252099054
+  }
+}

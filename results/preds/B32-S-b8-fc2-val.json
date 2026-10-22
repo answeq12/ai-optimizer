@@ -1,0 +1,14 @@
+{
+  "run_id": "B32-S-b8-fc2-val",
+  "top1_acc": 0.6535,
+  "std_err": 0.004758547572526727,
+  "n": 10000,
+  "agree_with_fp32": 0.6575,
+  "mean_cosine_to_fp32": 0.00718214176595211,
+  "min_cosine_to_fp32": -0.10436677932739258,
+  "mcnemar_vs_fp32": {
+    "a_only": 1220,
+    "b_only": 875,
+    "p_value": 4.9816602797914815e-14
+  }
+}

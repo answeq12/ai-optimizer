@@ -1,0 +1,97 @@
+{
+  "timestamp": "2026-10-07T02:19:06+0900",
+  "net": "clip_vit_b_16_image_encoder",
+  "hw_arch": "hailo10h",
+  "args": {
+    "onnx": "official",
+    "hw_arch": "hailo10h",
+    "calib_list": "splits/calib_coco_64_s0.txt",
+    "eval_n": 2000,
+    "compile": true,
+    "tag": "coco64_fc2b67_a16w8",
+    "fc2_16bit_blocks": "6,7",
+    "fc2_precision": "a16_w8",
+    "from_har": "",
+    "save_preds": true
+  },
+  "stages": {
+    "import": {
+      "ok": true,
+      "seconds": 5.5
+    },
+    "onnx": {
+      "ok": true,
+      "seconds": 10.7
+    },
+    "parse": {
+      "ok": true,
+      "seconds": 148.0
+    },
+    "model_script": {
+      "ok": true,
+      "seconds": 0.2
+    },
+    "optimize": {
+      "ok": false,
+      "seconds": 157.0,
+      "error": "ValueError: arange: cannot compute length",
+      "traceback": "Traceback (most recent call last):\n  File \"/mnt/c/Users/PC00/Desktop/dongchan/halio project/dfc/smoke_test.py\", line 177, in stage\n    out = fn()\n  File \"/mnt/c/Users/PC00/Desktop/dongchan/halio project/dfc/smoke_test.py\", line 261, in do_optimize\n    runner.optimize(calib)\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_sdk_common/states/states.py\", line 16, in wrapped_func\n    return func(self, *args, **kwargs)\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_sdk_client/runner/client_runner.py\", line 2277, in optimize\n    result = self._optimize(\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_sdk_common/states/states.py\", line 16, in wrapped_func\n    return func(self, *args, **kwargs)\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_sdk_client/runner/client_runner.py\", line 2085, in _optimize\n    checkpoint_info = self._sdk_backend.full_quantization(\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_sdk_client/sdk_backend/sdk_backend.py\", line 1345, in full_quantization\n    new_checkpoint_info = self._full_acceleras_run(\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_sdk_client/sdk_backend/sdk_backend.py\", line 1570, in _full_acceleras_run\n    new_checkpoint_info = self._optimization_flow_runner(optimization_flow, checkpoint_info)\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_sdk_client/sdk_backend/sdk_backend.py\", line 2183, in _optimization_flow_runner\n    optimization_flow.run()\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_model_optimization/tools/orchestator.py\", line 239, in wrapper\n    return func(self, *args, **kwargs)\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_model_optimization/flows/optimization_flow.py\", line 404, in run\n    step_func()\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_model_optimization/tools/subprocess_wrapper.py\", line 152, in parent_wrapper\n    func(self, *args, **kwargs)\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_model_optimization/flows/optimization_flow.py\", line 423, in step1\n    self.core_quantization()\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_model_optimization/flows/optimization_flow.py\", line 513, in core_quantization\n    self._create_hw_params()\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_model_optimization/flows/optimization_flow.py\", line 568, in _create_hw_params\n    algo.run()\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_model_optimization/algorithms/optimization_algorithm.py\", line 55, in run\n    return super().run()\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_model_optimization/algorithms/algorithm_base.py\", line 160, in run\n    self._run_int()\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_model_optimization/algorithms/create_hw_params/create_hw_params.py\", line 294, in _run_int\n    comp_to_retry = self._create_hw_params_component(matching_component_group)\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_model_optimization/algorithms/create_hw_params/create_hw_params.py\", line 100, in _create_hw_params_component\n    layer.create_hw_params(layer_clip_cfg, self.optimization_target, hw_shifts=hw_shifts)\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_model_optimization/acceleras/hailo_layers/hailo_conv_a16_mercury.py\", line 178, in create_hw_params\n    self.conv_high_sub_layer.elwa_op.create_hw_params()\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_model_optimization/acceleras/atomic_ops/element_wise_add_op.py\", line 65, in create_hw_params\n    self.elwa_feed_repeat = self._compute_feed_repeat()\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_model_optimization/acceleras/atomic_ops/element_wise_add_op.py\", line 119, in _compute_feed_repeat\n    _, feed_repeat_elwa = int_smallnum_factorize(\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_model_optimization/acceleras/utils/opt_utils.py\", line 76, in int_smallnum_factorize\n    return BaseDecompositionElement.int_smallnum_factorize(target, bits, maxsmallnum)\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_model_optimization/acceleras/lossy_elements/quant_element.py\", line 234, in int_smallnum_factorize\n    int_fac, smallnum = cls.a_b_factorize(np.abs(target), 2 ** (bits - 1) - 1, maxsmallnum)\n  File \"/home/answeq12/venvs/hailo/lib/python3.10/site-packages/hailo_model_optimization/acceleras/lossy_elements/quant_element.py\", line 248, in a_b_factorize\n    b_fac = np.arange(max(np.floor(target / max_a), 1), max_b + 1)\nValueError: arange: cannot compute length\n"
+    }
+  },
+  "env": {
+    "os": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "kernel": "6.18.33.2-microsoft-standard-WSL2",
+    "is_wsl": true,
+    "python": "3.10.12",
+    "cpu": {
+      "model": "x86_64",
+      "flags": [
+        "avx2",
+        "avx_vnni",
+        "fma",
+        "sse4_2"
+      ],
+      "model_name": "Intel(R) Core(TM) i9-14900KF",
+      "logical_cpus": 16
+    },
+    "mem_total_gb": 23.5,
+    "versions": {
+      "numpy": "1.26.4",
+      "onnx": "1.17.0",
+      "onnxruntime": "1.18.0",
+      "torch": "2.9.1+cpu",
+      "open_clip": null,
+      "PIL": "12.3.0"
+    },
+    "git_commit": "",
+    "store_dir": "/mnt/d/halio_data"
+  },
+  "dfc_version": "5.4.0",
+  "tensorflow": "2.19.1",
+  "tf_gpus": [],
+  "onnx": {
+    "path": "/mnt/d/halio_data/hailo/official/clip_vit_b_16.onnx",
+    "size_mb": 344.84,
+    "sha256": "a77e071877284bf78ba38ad9a7769536dd3ebf55e06b15234f72f63d80155111"
+  },
+  "alls_source": "hailo_model_zoo-5.4.0-py3-none-any.whl: cfg/alls/generic/clip_vit_b_16_image_encoder.alls",
+  "fc2_16bit": {
+    "blocks": [
+      6,
+      7
+    ],
+    "layers": [
+      "conv29",
+      "conv33"
+    ],
+    "resolved_by": "shape 3072->768 (graph order)",
+    "alls_line": "quantization_param([conv29, conv33], precision_mode=a16_w8)"
+  },
+  "calib": {
+    "list": "calib_coco_64_s0.txt",
+    "n": 64,
+    "sha256": "486acf8775d9013bbcdfaaa31580eadbbe86fed8bdb9d3acbed478555e8ba467",
+    "input": "uint8 0~255 NHWC (정규화는 네트워크 안)"
+  },
+  "failed_stage": "optimize"
+}

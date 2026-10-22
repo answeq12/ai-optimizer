@@ -1,0 +1,13 @@
+{
+  "code": "R176-A0",
+  "split": "select",
+  "n_images": 2405,
+  "n_captions": 12035,
+  "R@1": 0.39825508932280845,
+  "R@5": 0.6710427918570835,
+  "R@10": 0.7786456169505609,
+  "median_rank": 2.0,
+  "timestamp": "2026-10-16T10:50:54+0900",
+  "model": "/mnt/d/halio_data/models/res/clip_vitb16_image_fp32_r176.onnx",
+  "backend": "onnxruntime-cpu"
+}

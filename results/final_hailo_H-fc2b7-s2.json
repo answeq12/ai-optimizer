@@ -1,0 +1,11 @@
+{
+  "code": "H-fc2b7-s2",
+  "fp_code": "",
+  "har": "/mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.coco64_s2_fc2b7.quantized.har",
+  "timestamp": "2026-10-18T00:26:04+0900",
+  "H-fc2b7-s2_coco_confirm": {
+    "R@1": 0.4018947893293443,
+    "R@5": 0.668910496135627,
+    "R@10": 0.779522978475858
+  }
+}

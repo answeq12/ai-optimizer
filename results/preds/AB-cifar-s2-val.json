@@ -1,0 +1,14 @@
+{
+  "run_id": "AB-cifar-s2-val",
+  "top1_acc": 0.0167,
+  "std_err": 0.0012814487894566838,
+  "n": 10000,
+  "agree_with_fp32": 0.0184,
+  "mean_cosine_to_fp32": 0.4635166525840759,
+  "min_cosine_to_fp32": 0.1999678909778595,
+  "mcnemar_vs_fp32": {
+    "a_only": 6743,
+    "b_only": 30,
+    "p_value": 0.0
+  }
+}

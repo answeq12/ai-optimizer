@@ -1,0 +1,119 @@
+{
+  "timestamp": "2026-10-07T00:40:17+0900",
+  "net": "clip_vit_b_16_image_encoder",
+  "hw_arch": "hailo10h",
+  "args": {
+    "onnx": "official",
+    "hw_arch": "hailo10h",
+    "calib_list": "splits/calib_cifar_64_s0.txt",
+    "eval_n": 2000,
+    "compile": true,
+    "tag": "cifar64_fc2b567",
+    "fc2_16bit_blocks": "5,6,7",
+    "from_har": "",
+    "save_preds": true
+  },
+  "stages": {
+    "import": {
+      "ok": true,
+      "seconds": 4.5
+    },
+    "onnx": {
+      "ok": true,
+      "seconds": 2.1
+    },
+    "parse": {
+      "ok": true,
+      "seconds": 27.2
+    },
+    "model_script": {
+      "ok": true,
+      "seconds": 0.1
+    },
+    "optimize": {
+      "ok": true,
+      "seconds": 610.5
+    },
+    "emulator_eval": {
+      "ok": true,
+      "seconds": 844.3
+    },
+    "compile": {
+      "ok": true,
+      "seconds": 1449.9
+    }
+  },
+  "env": {
+    "os": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "kernel": "6.18.33.2-microsoft-standard-WSL2",
+    "is_wsl": true,
+    "python": "3.10.12",
+    "cpu": {
+      "model": "x86_64",
+      "flags": [
+        "avx2",
+        "avx_vnni",
+        "fma",
+        "sse4_2"
+      ],
+      "model_name": "Intel(R) Core(TM) i9-14900KF",
+      "logical_cpus": 16
+    },
+    "mem_total_gb": 23.5,
+    "versions": {
+      "numpy": "1.26.4",
+      "onnx": "1.17.0",
+      "onnxruntime": "1.18.0",
+      "torch": "2.9.1+cpu",
+      "open_clip": null,
+      "PIL": "12.3.0"
+    },
+    "git_commit": "",
+    "store_dir": "/mnt/d/halio_data"
+  },
+  "dfc_version": "5.4.0",
+  "tensorflow": "2.19.1",
+  "tf_gpus": [],
+  "onnx": {
+    "path": "/mnt/d/halio_data/hailo/official/clip_vit_b_16.onnx",
+    "size_mb": 344.84,
+    "sha256": "a77e071877284bf78ba38ad9a7769536dd3ebf55e06b15234f72f63d80155111"
+  },
+  "alls_source": "hailo_model_zoo-5.4.0-py3-none-any.whl: cfg/alls/generic/clip_vit_b_16_image_encoder.alls",
+  "fc2_16bit": {
+    "blocks": [
+      5,
+      6,
+      7
+    ],
+    "layers": [
+      "conv25",
+      "conv29",
+      "conv33"
+    ],
+    "resolved_by": "shape 3072->768 (graph order)",
+    "alls_line": "quantization_param([conv25, conv29, conv33], precision_mode=a16_w16)"
+  },
+  "calib": {
+    "list": "calib_cifar_64_s0.txt",
+    "n": 64,
+    "sha256": "5bb958190d5a5ea5dd3db92002d2b90e71b5a86b537cf39fd661eac351946c0e",
+    "input": "uint8 0~255 NHWC (정규화는 네트워크 안)"
+  },
+  "emulator_eval": {
+    "n": 2000,
+    "eval_set": "val 일부(간이)",
+    "mean_cosine_fp_vs_quantized": 0.9635757207870483,
+    "min_cosine_fp_vs_quantized": 0.8517299890518188,
+    "top1_fp_H0": 0.7045,
+    "top1_quantized_H1": 0.6885,
+    "agree_fp_vs_quantized": 0.8355,
+    "std_err_pp": 1.0355379037002943,
+    "preds_file": "/mnt/c/Users/PC00/Desktop/dongchan/halio project/logs/dfc/preds.cifar64_fc2b567_n2000.npz"
+  },
+  "hef": {
+    "path": "/mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.cifar64_fc2b567.hailo10h.hef",
+    "size_mb": 87.77,
+    "sha256": "13985b3633ea695a329cd85181dc1ebec9962554444f366ede6ba088a5af6b91"
+  }
+}

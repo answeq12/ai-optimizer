@@ -1,0 +1,8 @@
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 21630.21it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[coco-ret] 정합성: 이미지 최소 코사인 1.000000, 텍스트 최소 코사인 1.000000 -> 통과
+[coco-ret] stats_coco_select_64.txt (64장, 측정 전용 — 캘리브레이션에 쓰지 않음)
+calib_coco_64_s0.txt b4: max 7 / p99.9 1.16 / 44.1칸 / hot 35 | b5: max 17 / p99.9 1.24 / 18.0칸 / hot 4 | b6: max 26 / p99.9 1.28 / 12.2칸 / hot 3 | b7: max 42 / p99.9 1.49 / 8.9칸 / hot 4 | b8: max 9 / p99.9 2.07 / 57.9칸 / hot 204
+stats_coco_select_64.txt b4: max 7 / p99.9 1.19 / 43.7칸 / hot 24 | b5: max 18 / p99.9 1.21 / 17.2칸 / hot 4 | b6: max 26 / p99.9 1.27 / 12.3칸 / hot 3 | b7: max 42 / p99.9 1.47 / 8.8칸 / hot 4 | b8: max 10 / p99.9 2.11 / 54.2칸 / hot 128
+calib_cifar_64_s0.txt b4: max 8 / p99.9 1.33 / 40.4칸 / hot 8 | b5: max 18 / p99.9 1.25 / 17.6칸 / hot 4 | b6: max 24 / p99.9 1.13 / 11.8칸 / hot 3 | b7: max 42 / p99.9 1.33 / 8.1칸 / hot 4 | b8: max 9 / p99.9 1.85 / 50.7칸 / hot 51
+rc=0

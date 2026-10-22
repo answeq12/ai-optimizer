@@ -1,0 +1,16 @@
+{
+  "code": "H-official-c192",
+  "split": "confirm",
+  "n_images": 2406,
+  "n_captions": 12033,
+  "R@1": 0.3863541926369152,
+  "R@5": 0.6483836117343971,
+  "R@10": 0.7624864954707886,
+  "median_rank": 3.0,
+  "timestamp": "2026-10-18T14:46:48+0900",
+  "har": "/mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.coco192_base.quantized.har",
+  "backend": "hailo-dfc-emulator",
+  "input": "uint8 0~255 NHWC",
+  "context": "sdk_quantized",
+  "seconds": 882
+}

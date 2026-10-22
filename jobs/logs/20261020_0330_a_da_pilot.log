@@ -1,0 +1,40 @@
+== 디스크/메모리
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdd       1007G   11G  946G   2% /
+D:\             1.9T  757G  1.1T  41% /mnt/d
+               total        used        free      shared  buff/cache   available
+Mem:              23           0          22           0           0          22
+Swap:              8           0           7
+특징 저장 위치: /home/answeq12/halio_da_feat (홈 여유 946G)
+[da] 앞/뒤 나눔 = 원래 출력: 최대 오차 0.00e+00 -> 통과; fp16 저장 시 최소 코사인 1.000000; 블록7 출력 최대 |x| 86.0
+[da] 목록 2000장, 받을 사진 2000장
+[da] 1000/2000 (73s, 13.7장/s)
+[da] 2000/2000 (144s, 13.9장/s)
+[da] 다운로드 2000장 144s, 목록 전체 0.33 GB
+다운로드 2000장: 150s
+[da] train_2000 32/2000 (2s, 20.6장/s)
+[da] train_2000 672/2000 (33s, 20.4장/s)
+[da] train_2000 1312/2000 (63s, 21.0장/s)
+[da] train_2000 1952/2000 (86s, 22.6장/s)
+[da] train_2000: 2000장 88s (44.0 ms/장), 0.61 GB, 최대 메모리 2566 MB
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[da] 캡션 256/10006 (3s)
+[da] 캡션 10006개 (사진 2000장) 126s
+[da-train] 사진 2000, 캡션 10006, 배치 128, 에폭 2 (30스텝), 온도 1/100.0, 학습 파라미터 28.7M
+/mnt/c/Users/PC00/Desktop/dongchan/halio project/src/da_train.py:85: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  run_loss += float(loss); run_n += 1
+[da-train] ep0 step 1/30 loss 0.7946 7230 ms/step, 경과 0.1분, 예상 남은 4분, 최대 메모리 9380 MB
+[da-train] ep0 step 2/30 loss 0.4687 10692 ms/step, 경과 0.3분, 예상 남은 4분, 최대 메모리 9615 MB
+[da-train] ep0 step 3/30 loss 0.6368 7118 ms/step, 경과 0.4분, 예상 남은 4분, 최대 메모리 9748 MB
+[da-train] 에폭 1 저장
+[da-train] ep1 step 20/30 loss 0.5766 10655 ms/step, 경과 2.7분, 예상 남은 1분, 최대 메모리 9756 MB
+[da-train] 파일럿: {'steps': 30, 'sec_per_step': 7.971015000343323, 'est_epoch_min_30k': 31.086958501338962, 'maxrss_mb': 9772.28515625}
+== 파일럿 끝
+{
+  "steps": 30,
+  "sec_per_step": 7.971015000343323,
+  "est_epoch_min_30k": 31.086958501338962,
+  "maxrss_mb": 9772.28515625
+}rc=0

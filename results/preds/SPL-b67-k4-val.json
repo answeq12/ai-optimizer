@@ -1,0 +1,14 @@
+{
+  "run_id": "SPL-b67-k4-val",
+  "top1_acc": 0.6887,
+  "std_err": 0.004630251721019064,
+  "n": 10000,
+  "agree_with_fp32": 0.8448,
+  "mean_cosine_to_fp32": 0.9682552814483643,
+  "min_cosine_to_fp32": 0.8240721225738525,
+  "mcnemar_vs_fp32": {
+    "a_only": 436,
+    "b_only": 443,
+    "p_value": 0.8396379971933138
+  }
+}

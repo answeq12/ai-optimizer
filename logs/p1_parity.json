@@ -1,0 +1,54 @@
+{
+  "export": {
+    "exporter": "torchscript",
+    "opset": 17,
+    "torch": "2.14.1+cpu",
+    "onnx": "1.23.1",
+    "raw_nodes": 996,
+    "nodes": 489,
+    "size_mb": 344.88,
+    "sha256": "3b550b73938e2766a0ec6a96fcf75d2b20dffb6fe8860f3bc1ce89e6e212c125",
+    "onnxruntime": "1.23.2",
+    "graph_cleanup": "ORT_ENABLE_BASIC, MatMulAddFusion 비활성"
+  },
+  "parity": {
+    "n": 20,
+    "max_abs_err": 1.0251998901367188e-05,
+    "min_cosine": 0.9999998807907104,
+    "tol_max_abs": 0.0001,
+    "tol_cosine": 0.9999,
+    "passed": true
+  },
+  "random_init": false,
+  "model": "ViT-B-16",
+  "pretrained": "openai",
+  "env": {
+    "os": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "kernel": "6.18.33.2-microsoft-standard-WSL2",
+    "is_wsl": true,
+    "python": "3.10.12",
+    "cpu": {
+      "model": "x86_64",
+      "flags": [
+        "avx2",
+        "avx_vnni",
+        "fma",
+        "sse4_2"
+      ],
+      "model_name": "Intel(R) Core(TM) i9-14900KF",
+      "logical_cpus": 16
+    },
+    "mem_total_gb": 23.5,
+    "versions": {
+      "numpy": "2.2.6",
+      "onnx": "1.23.1",
+      "onnxruntime": "1.23.2",
+      "torch": "2.14.1+cpu",
+      "open_clip": "3.3.0",
+      "PIL": "12.3.0"
+    },
+    "git_commit": "",
+    "store_dir": "/mnt/d/halio_fullcheck"
+  },
+  "timestamp": "2026-10-20T16:05:25+0900"
+}

@@ -1,0 +1,14 @@
+{
+  "run_id": "SPL-b567-k32-val",
+  "top1_acc": 0.6947,
+  "std_err": 0.004605343743956579,
+  "n": 10000,
+  "agree_with_fp32": 0.8688,
+  "mean_cosine_to_fp32": 0.9739221930503845,
+  "min_cosine_to_fp32": 0.8583980798721313,
+  "mcnemar_vs_fp32": {
+    "a_only": 338,
+    "b_only": 405,
+    "p_value": 0.015408644583045243
+  }
+}

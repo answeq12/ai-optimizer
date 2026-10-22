@@ -1,0 +1,13 @@
+{
+  "code": "S-c67-fc2",
+  "split": "confirm",
+  "n_images": 2406,
+  "n_captions": 12033,
+  "R@1": 0.406133133881825,
+  "R@5": 0.6672484002326934,
+  "R@10": 0.7779439873680711,
+  "median_rank": 2.0,
+  "timestamp": "2026-10-18T20:05:43+0900",
+  "model": "/mnt/d/halio_data/models/sens/S-c67-fc2.onnx",
+  "backend": "onnxruntime-cpu"
+}

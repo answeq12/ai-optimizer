@@ -1,0 +1,18 @@
+{
+  "code": "H-official",
+  "fp_code": "H-FP",
+  "har": "/mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.quantized.har",
+  "timestamp": "2026-10-17T15:45:15+0900",
+  "H-official_coco_confirm": {
+    "R@1": 0.3863541926369152,
+    "R@5": 0.6483836117343971,
+    "R@10": 0.7624864954707886
+  },
+  "H-FP_coco_confirm": {
+    "R@1": 0.4179340147926535,
+    "R@5": 0.6808775866367489,
+    "R@10": 0.7853403141361257
+  },
+  "H-official_cifar_test_top1": 0.6196,
+  "H-FP_cifar_test_top1": 0.6801
+}

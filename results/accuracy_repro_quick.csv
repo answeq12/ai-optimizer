@@ -1,0 +1,7 @@
+run_id,config_code,backend,model_name,model_path,quant_mode,calib_method,per_channel,reduce_range,excluded_nodes,calib_source,calib_size,calib_seed,eval_set,eval_n,top1_acc,recall_at_1,recall_at_5,latency_p50_ms,latency_p95_ms,n_threads,max_rss_mb,model_size_mb,quantized_op_ratio,env_hash,timestamp,repeat_idx
+RPQ-A0-test2000-test,RPQ-A0-test2000,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_quickcheck/models/clip_vitb16_image_fp32.onnx,fp32,,,,,,,,test,2000,0.69,,,,,4,,344.88,,934e571a17,2026-10-20T01:39:29+0900,0
+RPQ-SPL-b567-k32-test2000-test,RPQ-SPL-b567-k32-test2000,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_quickcheck/models/imp/SPL-b567-k32.onnx,static,,,,,,,,test,2000,0.6905,,,,,4,,89.82,,934e571a17,2026-10-20T01:40:48+0900,0
+RPQ-A0-test2000-test,RPQ-A0-test2000,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_quickcheck2/models/clip_vitb16_image_fp32.onnx,fp32,,,,,,,,test,2000,0.69,,,,,4,,344.88,,934e571a17,2026-10-20T15:59:34+0900,0
+RPQ-SPL-b567-k32-test2000-test,RPQ-SPL-b567-k32-test2000,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_quickcheck2/models/imp/SPL-b567-k32.onnx,static,,,,,,,,test,2000,0.6905,,,,,4,,89.82,,934e571a17,2026-10-20T16:00:54+0900,0
+RPQ-DA-A0-test2000-test,RPQ-DA-A0-test2000,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_quickcheck2/models_da/clip_vitb16_image_fp32.onnx,fp32,,,,,,,,test,2000,0.6835,,,,,4,,344.88,,934e571a17,2026-10-20T16:03:43+0900,0
+RPQ-DA-SPL-test2000-test,RPQ-DA-SPL-test2000,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_quickcheck2/models_da/imp/SPL-b567-k32.onnx,static,,,,,,,,test,2000,0.683,,,,,4,,89.82,,934e571a17,2026-10-20T16:05:01+0900,0

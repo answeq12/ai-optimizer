@@ -1,0 +1,118 @@
+"""속도·메모리 측정. 정밀도 구성별로만 잰다(캘리브레이션 조건은 속도를 바꾸지 않는다).
+
+  python -m src.benchmark --models A0=models/clip_vitb16_image_fp32.onnx \
+      A1=models/a1_dynamic.onnx A2=models/a2_static_minmax.onnx
+
+프로토콜 (docs/PROTOCOL.md)
+- 구성마다 별도 프로세스. 워밍업 20회 제외 후 300회, p50·p95 보고 (p99 는 표본이 3개라 쓰지 않는다)
+- 배치 1, intra_op 스레드 수 고정, inter_op 1, 순차 실행
+- 전체를 3회 반복하고 매 반복마다 구성 순서를 무작위로 섞는다 (발열·순서 편향 제거)
+- 처음부터 끝까지 같은 PC 한 대에서만 잰다. 측정 중에는 다른 프로그램을 끈다
+
+결과: results/latency.csv (반복별 한 줄), results/latency_summary.json (구성별 중앙값·표준편차)
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import random
+import statistics
+import subprocess
+import sys
+from pathlib import Path
+
+from . import common as C
+
+BENCH_INPUT = C.MODELS / "bench_input.npy"
+
+
+def ensure_input() -> Path:
+    """측정용 고정 입력. 검증셋 첫 장을 전처리한 것 (실제 값 분포를 쓰기 위해)."""
+    if not BENCH_INPUT.exists():
+        import numpy as np
+        from PIL import Image
+        data, _ = C.load_cifar100("train")
+        idx = C.read_index_list(C.SPLITS / "val.txt")[0]
+        np.save(BENCH_INPUT, C.preprocess(Image.fromarray(data[idx]))[None])
+    return BENCH_INPUT
+
+
+def run_child(model: str, threads: int, warmup: int, runs: int) -> dict:
+    cmd = [sys.executable, "-m", "src.bench_child", "--model", model, "--input", str(BENCH_INPUT),
+           "--threads", str(threads), "--warmup", str(warmup), "--runs", str(runs)]
+    out = subprocess.run(cmd, capture_output=True, text=True, cwd=str(C.ROOT))
+    if out.returncode != 0:
+        sys.exit(f"측정 프로세스 실패 ({model}):\n{out.stderr[-2000:]}")
+    return json.loads(out.stdout.strip().split("\n")[-1])
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--models", nargs="+", required=True, help="코드=경로 형식. 예: A0=models/x.onnx")
+    ap.add_argument("--threads", type=int, default=C.DEFAULT_THREADS)
+    ap.add_argument("--repeats", type=int, default=3)
+    ap.add_argument("--warmup", type=int, default=C.WARMUP)
+    ap.add_argument("--runs", type=int, default=C.RUNS)
+    ap.add_argument("--seed", type=int, default=0, help="실행 순서 무작위화 시드")
+    ap.add_argument("--out-csv", default=str(C.RESULTS / "latency.csv"))
+    args = ap.parse_args()
+
+    C.ensure_dirs()
+    ensure_input()
+    models = dict(m.split("=", 1) for m in args.models)
+    for code, path in models.items():
+        if not Path(path).exists():
+            sys.exit(f"{code}: {path} 없음")
+    env = C.dump_env()
+    info = C.env_info()
+    if not info["is_wsl"]:
+        print("[bench] 참고: WSL 이 아닌 환경입니다. 보고서 수치는 지정한 측정 PC 에서만 재야 합니다.")
+    rnd = random.Random(args.seed)
+    per: dict[str, list[dict]] = {c: [] for c in models}
+    for rep in range(args.repeats):
+        order = list(models)
+        rnd.shuffle(order)
+        print(f"[bench] 반복 {rep+1}/{args.repeats}, 순서 {order}")
+        for code in order:
+            r = run_child(models[code], args.threads, args.warmup, args.runs)
+            per[code].append(r)
+            print(f"  {code}: p50 {r['p50_ms']:.2f} ms, p95 {r['p95_ms']:.2f} ms, "
+                  f"Max RSS {r['max_rss_mb']:.0f} MB")
+            C.append_row(args.out_csv, {
+                "run_id": f"{code}-bench", "config_code": code, "backend": "onnxruntime-cpu",
+                "model_name": C.MODEL_NAME, "model_path": models[code],
+                "latency_p50_ms": round(r["p50_ms"], 3), "latency_p95_ms": round(r["p95_ms"], 3),
+                "n_threads": args.threads, "max_rss_mb": round(r["max_rss_mb"], 1),
+                "model_size_mb": C.size_mb(models[code]),
+                "env_hash": env, "timestamp": C.now(), "repeat_idx": rep,
+            })
+
+    summary = {}
+    for code, rs in per.items():
+        p50 = [r["p50_ms"] for r in rs]
+        p95 = [r["p95_ms"] for r in rs]
+        rss = [r["max_rss_mb"] for r in rs]
+        summary[code] = {
+            "model_path": models[code], "model_size_mb": C.size_mb(models[code]),
+            "p50_ms": statistics.median(p50), "p95_ms": statistics.median(p95),
+            "p50_std": statistics.stdev(p50) if len(p50) > 1 else 0.0,
+            "p95_std": statistics.stdev(p95) if len(p95) > 1 else 0.0,
+            "max_rss_mb": statistics.median(rss),
+            "repeats": len(rs), "threads": args.threads, "warmup": args.warmup, "runs": args.runs,
+        }
+    out = {"env_hash": env, "is_wsl": info["is_wsl"], "cpu": info["cpu"], "timestamp": C.now(),
+           "configs": summary}
+    sp = C.RESULTS / "latency_summary.json"
+    prev = json.loads(sp.read_text()) if sp.exists() else {"configs": {}}
+    if prev.get("env_hash") not in (None, env):
+        print("[bench] 경고: 이전 측정과 환경이 다릅니다. 이전 요약을 덮어씁니다.")
+        prev = {"configs": {}}
+    prev_cfg = prev.get("configs", {})
+    prev_cfg.update(summary)
+    out["configs"] = prev_cfg
+    sp.write_text(json.dumps(out, indent=2, ensure_ascii=False))
+    print("[bench] 저장:", sp)
+
+
+if __name__ == "__main__":
+    main()

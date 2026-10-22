@@ -1,0 +1,58 @@
+[info] Current Time: 22:01:27, 10/13/26
+[info] CPU: Architecture: x86_64, Model: Intel(R) Core(TM) i9-14900KF, Number Of Cores: 16, Utilization: 0.0%
+[info] Memory: Total: 23GB, Available: 22GB
+[info] System info: OS: Linux, Kernel: 6.18.33.2-microsoft-standard-WSL2
+[info] Hailo DFC Version: 5.4.0
+[info] HailoRT Version: Not Installed
+[info] PCIe: No Hailo PCIe device was found
+[info] Running `hailo profiler --help`
+[info] No GPU chosen, selecting least used GPU. To select GPU explicitly please use CUDA_VISIBLE_DEVICES environment variable.
+[info] Selected GPU: 0
+[warning] GPU is already busy, GPU VRAM usage ratio is: 21.2%, it might cause slow down or failure in the optimization process
+usage: hailo profiler [-h] [--hef HEF]
+                      [--runtime-data RUNTIME_DATA | --collect-runtime-data]
+                      [--stream-fps STREAM_FPS] [--out-path OUT_PATH]
+                      [--csv CSV]
+                      har_path
+
+positional arguments:
+  har_path              Path to a HAR which contains the model description
+
+options:
+  -h, --help            show this help message and exit
+  --hef HEF             HEF path for profiling
+  --runtime-data RUNTIME_DATA
+                        Path to the runtime data from the hailort for the
+                        Runtime tab of the Model profiler
+  --collect-runtime-data
+                        Whether to run hailort locally to collect runtime data
+                        for the Runtime tab of the Model profiler
+  --stream-fps STREAM_FPS
+                        FPS used for power and bandwidth calculation
+  --out-path OUT_PATH   Output HTML path (default: <net_name>_<state>.html)
+  --csv CSV             Path to the CSV file that would be saved
+== official: /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.compiled.har
+-rwxrwxrwx 1 answeq12 answeq12 1963735040 Oct  6 15:55 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.compiled.har
+rc=0
+-rwxrwxrwx 1 answeq12 answeq12  225229 Oct 13 22:04 estimation.csv
+-rwxrwxrwx 1 answeq12 answeq12 9003745 Oct 13 22:04 official.html
+-rwxrwxrwx 1 answeq12 answeq12    1889 Oct 13 22:04 official.log
+== fc2b67: /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.coco64_fc2b67.compiled.har
+-rwxrwxrwx 1 answeq12 answeq12 1975367680 Oct  7 00:40 /mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.coco64_fc2b67.compiled.har
+rc=0
+-rwxrwxrwx 1 answeq12 answeq12  226679 Oct 13 22:06 estimation.csv
+-rwxrwxrwx 1 answeq12 answeq12 9499428 Oct 13 22:06 fc2b67.html
+-rwxrwxrwx 1 answeq12 answeq12    1899 Oct 13 22:06 fc2b67.log
+-rwxrwxrwx 1 answeq12 answeq12 9003745 Oct 13 22:04 official.html
+total 18324
+drwxrwxrwx 1 answeq12 answeq12    4096 Oct 13 22:06 .
+drwxrwxrwx 1 answeq12 answeq12    4096 Oct 13 22:01 ..
+-rwxrwxrwx 1 answeq12 answeq12     902 Oct 13 22:04 acceleras.log
+-rwxrwxrwx 1 answeq12 answeq12  226679 Oct 13 22:06 estimation.csv
+-rwxrwxrwx 1 answeq12 answeq12 9499428 Oct 13 22:06 fc2b67.html
+-rwxrwxrwx 1 answeq12 answeq12    1899 Oct 13 22:06 fc2b67.log
+-rwxrwxrwx 1 answeq12 answeq12    4232 Oct 13 22:06 hailo_sdk.client.log
+-rwxrwxrwx 1 answeq12 answeq12    1727 Oct 13 22:01 help.txt
+-rwxrwxrwx 1 answeq12 answeq12 9003745 Oct 13 22:04 official.html
+-rwxrwxrwx 1 answeq12 answeq12    1889 Oct 13 22:04 official.log
+rc=0

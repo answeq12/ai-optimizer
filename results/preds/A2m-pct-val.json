@@ -1,0 +1,14 @@
+{
+  "run_id": "A2m-pct-val",
+  "top1_acc": 0.149,
+  "std_err": 0.0035608847215263793,
+  "n": 10000,
+  "agree_with_fp32": 0.1537,
+  "mean_cosine_to_fp32": 0.6387927532196045,
+  "min_cosine_to_fp32": 0.44282642006874084,
+  "mcnemar_vs_fp32": {
+    "a_only": 5546,
+    "b_only": 156,
+    "p_value": 0.0
+  }
+}

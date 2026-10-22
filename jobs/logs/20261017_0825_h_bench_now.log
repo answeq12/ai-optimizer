@@ -1,0 +1,71 @@
+== 측정 시작 2026-10-17 08:24:34 / 부하 0.01 0.01 0.00
+A0=/mnt/d/halio_data/models/clip_vitb16_image_fp32.onnx
+A1=/mnt/d/halio_data/models/a1_dynamic.onnx
+S-c67-pc=/mnt/d/halio_data/models/imp/c67_pc.onnx
+SPL-b567-k32=/mnt/d/halio_data/models/imp/SPL-b567-k32.onnx
+A1-c67-pc=/mnt/d/halio_data/models/imp/a1_c67_pc.onnx
+R192-A0=/mnt/d/halio_data/models/res/clip_vitb16_image_fp32_r192.onnx
+R192-A1-c67-pc=/mnt/d/halio_data/models/res/r192_a1_c67_pc.onnx
+R176-A0=/mnt/d/halio_data/models/res/clip_vitb16_image_fp32_r176.onnx
+R176-A1-c67-pc=/mnt/d/halio_data/models/res/r176_a1_c67_pc.onnx
+R160-A0=/mnt/d/halio_data/models/res/clip_vitb16_image_fp32_r160.onnx
+R160-A1-c67-pc=/mnt/d/halio_data/models/res/r160_a1_c67_pc.onnx
+[bench] 반복 1/3, 순서 ['R176-A1-c67-pc', 'R160-A0', 'A1', 'S-c67-pc', 'R192-A0', 'SPL-b567-k32', 'R176-A0', 'A1-c67-pc', 'A0', 'R160-A1-c67-pc', 'R192-A1-c67-pc']
+  R176-A1-c67-pc: p50 15.67 ms, p95 16.46 ms, Max RSS 192 MB
+  R160-A0: p50 32.06 ms, p95 33.15 ms, Max RSS 494 MB
+  A1: p50 22.04 ms, p95 22.89 ms, Max RSS 199 MB
+  S-c67-pc: p50 26.06 ms, p95 27.12 ms, Max RSS 240 MB
+  R192-A0: p50 46.03 ms, p95 48.18 ms, Max RSS 501 MB
+  SPL-b567-k32: p50 25.22 ms, p95 26.36 ms, Max RSS 237 MB
+  R176-A0: p50 38.19 ms, p95 39.93 ms, Max RSS 476 MB
+  A1-c67-pc: p50 23.96 ms, p95 24.77 ms, Max RSS 204 MB
+  A0: p50 58.06 ms, p95 59.45 ms, Max RSS 518 MB
+  R160-A1-c67-pc: p50 13.26 ms, p95 21.22 ms, Max RSS 204 MB
+  R192-A1-c67-pc: p50 19.18 ms, p95 19.88 ms, Max RSS 211 MB
+[bench] 반복 2/3, 순서 ['R192-A0', 'A1-c67-pc', 'R160-A1-c67-pc', 'R192-A1-c67-pc', 'A0', 'A1', 'R176-A0', 'S-c67-pc', 'R176-A1-c67-pc', 'SPL-b567-k32', 'R160-A0']
+  R192-A0: p50 45.66 ms, p95 47.19 ms, Max RSS 501 MB
+  A1-c67-pc: p50 24.05 ms, p95 24.83 ms, Max RSS 205 MB
+  R160-A1-c67-pc: p50 13.20 ms, p95 13.96 ms, Max RSS 208 MB
+  R192-A1-c67-pc: p50 18.10 ms, p95 19.02 ms, Max RSS 202 MB
+  A0: p50 57.95 ms, p95 62.44 ms, Max RSS 516 MB
+  A1: p50 22.36 ms, p95 23.28 ms, Max RSS 195 MB
+  R176-A0: p50 38.33 ms, p95 40.07 ms, Max RSS 524 MB
+  S-c67-pc: p50 26.29 ms, p95 27.81 ms, Max RSS 247 MB
+  R176-A1-c67-pc: p50 15.66 ms, p95 16.17 ms, Max RSS 192 MB
+  SPL-b567-k32: p50 25.64 ms, p95 38.50 ms, Max RSS 232 MB
+  R160-A0: p50 32.09 ms, p95 33.64 ms, Max RSS 457 MB
+[bench] 반복 3/3, 순서 ['R176-A0', 'R192-A1-c67-pc', 'R176-A1-c67-pc', 'S-c67-pc', 'A0', 'R160-A1-c67-pc', 'SPL-b567-k32', 'R192-A0', 'R160-A0', 'A1', 'A1-c67-pc']
+  R176-A0: p50 38.55 ms, p95 39.74 ms, Max RSS 472 MB
+  R192-A1-c67-pc: p50 18.25 ms, p95 19.02 ms, Max RSS 194 MB
+  R176-A1-c67-pc: p50 15.61 ms, p95 16.32 ms, Max RSS 192 MB
+  S-c67-pc: p50 26.40 ms, p95 27.40 ms, Max RSS 244 MB
+  A0: p50 58.55 ms, p95 60.02 ms, Max RSS 461 MB
+  R160-A1-c67-pc: p50 13.37 ms, p95 13.97 ms, Max RSS 204 MB
+  SPL-b567-k32: p50 25.51 ms, p95 26.51 ms, Max RSS 199 MB
+  R192-A0: p50 46.67 ms, p95 48.08 ms, Max RSS 492 MB
+  R160-A0: p50 32.16 ms, p95 33.00 ms, Max RSS 481 MB
+  A1: p50 22.26 ms, p95 23.17 ms, Max RSS 198 MB
+  A1-c67-pc: p50 24.55 ms, p95 25.31 ms, Max RSS 204 MB
+[bench] 저장: /mnt/c/Users/PC00/Desktop/dongchan/halio project/results/latency_summary.json
+== 커버리지
+[0;93m2026-10-17 08:31:21.119566614 [W:onnxruntime:, inference_session.cc:2473 Initialize] Serializing optimized model with Graph Optimization level greater than ORT_ENABLE_EXTENDED and the NchwcTransformer enabled. The generated model may contain hardware specific optimizations, and should only be used in the same environment the model was optimized in.[m
+[0;93m2026-10-17 08:31:24.861618668 [W:onnxruntime:, inference_session.cc:2473 Initialize] Serializing optimized model with Graph Optimization level greater than ORT_ENABLE_EXTENDED and the NchwcTransformer enabled. The generated model may contain hardware specific optimizations, and should only be used in the same environment the model was optimized in.[m
+[cov] SPL-b567-k32: 정수 연산 비율 63.6%, 정수 커널 시간 56.3%, patch embed Conv 양자화 아니오
+[cov] A1-c67-pc: 정수 연산 비율 63.5%, 정수 커널 시간 59.5%, patch embed Conv 양자화 아니오
+[cov] 저장: /mnt/c/Users/PC00/Desktop/dongchan/halio project/results/coverage.md
+== 끝 2026-10-17 08:31:28 / 부하 4.01 2.88 1.31
+| A0 FP32 | 68.80% | — | — | 58.06 | 60.02 | 516 | 344.9 | 0.0% |
+| A1 동적 INT8 | 65.02% | -3.78%p | 81.46% | 22.26 | 23.17 | 198 | 89.0 | 66.2% |
+| S-c67-pc | 69.09% | +0.29%p | 85.44% | 26.29 | 27.40 | 244 | 103.7 | 63.5% |
+| S-c67-pc-qop | 69.09% | +0.29%p | 85.44% | 26.61 | 27.92 | 245 | 103.6 | 63.5% |
+| SPL-b567-k32 | 69.47% | +0.67%p | 86.88% | 25.51 | 26.51 | 232 | 89.8 | 63.6% |
+| S-c67-pc-attn | 69.04% | +0.24%p | 83.21% | - | - | - | - | - |
+| A1-c67 | 67.91% | -0.89%p | 87.93% | - | - | - | - | - |
+| A1-c67-pc | 68.68% | -0.12%p | 92.39% | 24.05 | 24.83 | 204 | 103.6 | 63.5% |
+| R192-A0 | 69.32% | +0.52%p | 82.32% | 46.03 | 48.08 | 501 | 344.7 | - |
+| R192-A1-c67-pc | 69.45% | +0.65%p | 81.54% | 18.25 | 19.02 | 202 | 103.4 | - |
+| R176-A0 | 68.76% | -0.04%p | 80.39% | 38.33 | 39.93 | 476 | 344.6 | - |
+| R176-A1-c67-pc | 68.71% | -0.09%p | 79.60% | 15.66 | 16.32 | 192 | 103.3 | - |
+| R160-A0 | 67.99% | -0.81%p | 77.49% | 32.09 | 33.15 | 481 | 344.6 | - |
+| R160-A1-c67-pc | 67.71% | -1.09%p | 76.92% | 13.26 | 13.97 | 204 | 103.3 | - |
+rc=0

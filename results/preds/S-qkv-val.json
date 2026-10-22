@@ -1,0 +1,14 @@
+{
+  "run_id": "S-qkv-val",
+  "top1_acc": 0.5429,
+  "std_err": 0.0049815619036603365,
+  "n": 10000,
+  "agree_with_fp32": 0.6233,
+  "mean_cosine_to_fp32": 0.8961268663406372,
+  "min_cosine_to_fp32": 0.6942622661590576,
+  "mcnemar_vs_fp32": {
+    "a_only": 1847,
+    "b_only": 396,
+    "p_value": 3.962290151966244e-223
+  }
+}

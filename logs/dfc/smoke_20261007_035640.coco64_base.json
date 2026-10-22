@@ -1,0 +1,78 @@
+{
+  "timestamp": "2026-10-07T03:56:40+0900",
+  "net": "clip_vit_b_16_image_encoder",
+  "hw_arch": "hailo10h",
+  "args": {
+    "onnx": "official",
+    "hw_arch": "hailo10h",
+    "calib_list": "/mnt/c/Users/PC00/Desktop/dongchan/halio project/splits/calib_coco_64_s0.txt",
+    "eval_n": 5000,
+    "compile": false,
+    "tag": "coco64_base",
+    "fc2_16bit_blocks": "",
+    "fc2_precision": "a16_w16",
+    "from_har": "/mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.quantized.har",
+    "save_preds": true
+  },
+  "stages": {
+    "import": {
+      "ok": true,
+      "seconds": 7.7
+    },
+    "load_har": {
+      "ok": true,
+      "seconds": 189.9
+    },
+    "emulator_eval": {
+      "ok": true,
+      "seconds": 2015.3
+    }
+  },
+  "env": {
+    "os": "Linux-6.18.33.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "kernel": "6.18.33.2-microsoft-standard-WSL2",
+    "is_wsl": true,
+    "python": "3.10.12",
+    "cpu": {
+      "model": "x86_64",
+      "flags": [
+        "avx2",
+        "avx_vnni",
+        "fma",
+        "sse4_2"
+      ],
+      "model_name": "Intel(R) Core(TM) i9-14900KF",
+      "logical_cpus": 16
+    },
+    "mem_total_gb": 23.5,
+    "versions": {
+      "numpy": "1.26.4",
+      "onnx": "1.17.0",
+      "onnxruntime": "1.18.0",
+      "torch": "2.9.1+cpu",
+      "open_clip": null,
+      "PIL": "12.3.0"
+    },
+    "git_commit": "",
+    "store_dir": "/mnt/d/halio_data"
+  },
+  "dfc_version": "5.4.0",
+  "tensorflow": "2.19.1",
+  "tf_gpus": [],
+  "from_har": {
+    "path": "/mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.quantized.har",
+    "size_mb": 1871.2,
+    "sha256": "b491177f40ce7f286e8dd28ecda4045c8727f964f4233fc0f8784fde9f94feae"
+  },
+  "emulator_eval": {
+    "n": 5000,
+    "eval_set": "val 일부(간이)",
+    "mean_cosine_fp_vs_quantized": 0.9260244965553284,
+    "min_cosine_fp_vs_quantized": 0.7432758808135986,
+    "top1_fp_H0": 0.6868,
+    "top1_quantized_H1": 0.6266,
+    "agree_fp_vs_quantized": 0.731,
+    "std_err_pp": 0.6840649676748547,
+    "preds_file": "/mnt/c/Users/PC00/Desktop/dongchan/halio project/logs/dfc/preds.coco64_base_n5000.npz"
+  }
+}

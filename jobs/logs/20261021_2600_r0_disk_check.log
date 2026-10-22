@@ -1,0 +1,36 @@
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdd       1007G   41G  915G   5% /
+D:\             1.9T  786G  1.1T  43% /mnt/d
+31G	/home/answeq12/halio_da_feat
+total 31844792
+drwxr-xr-x  2 answeq12 answeq12        4096 Oct 21 14:03 .
+drwxr-x--- 13 answeq12 answeq12        4096 Oct 21 03:05 ..
+-rw-r--r--  1 answeq12 answeq12  3025920000 Oct 20 04:03 cifarval.f16
+-rw-r--r--  1 answeq12 answeq12         150 Oct 20 04:03 cifarval.json
+-rw-r--r--  1 answeq12 answeq12  3025920000 Oct 21 14:03 noisy7_da_10000.f16
+-rw-r--r--  1 answeq12 answeq12         203 Oct 21 14:03 noisy7_da_10000.json
+-rw-r--r--  1 answeq12 answeq12  3025920000 Oct 21 04:26 noisy7_orig_10000.f16
+-rw-r--r--  1 answeq12 answeq12         200 Oct 21 04:26 noisy7_orig_10000.json
+-rw-r--r--  1 answeq12 answeq12   727733760 Oct 20 03:56 select.f16
+-rw-r--r--  1 answeq12 answeq12         146 Oct 20 03:56 select.json
+-rw-r--r--  1 answeq12 answeq12     7884800 Oct 21 11:53 tcifar.f16
+-rw-r--r--  1 answeq12 answeq12          55 Oct 21 11:53 tcifar.json
+-rw-r--r--  1 answeq12 answeq12         928 Oct 21 11:53 tcifar_eot.npy
+-rw-r--r--  1 answeq12 answeq12   605184000 Oct 20 03:05 train_2000.f16
+-rw-r--r--  1 answeq12 answeq12         144 Oct 20 03:05 train_2000.json
+-rw-r--r--  1 answeq12 answeq12    20492416 Oct 20 03:07 train_2000_text.npy
+-rw-r--r--  1 answeq12 answeq12       80176 Oct 20 03:07 train_2000_text_img.npy
+-rw-r--r--  1 answeq12 answeq12  9077760000 Oct 20 03:53 train_30000.f16
+-rw-r--r--  1 answeq12 answeq12         148 Oct 20 03:53 train_30000.json
+-rw-r--r--  1 answeq12 answeq12   307357824 Oct 20 04:34 train_30000_text.npy
+-rw-r--r--  1 answeq12 answeq12     1200744 Oct 20 04:34 train_30000_text_img.npy
+-rw-r--r--  1 answeq12 answeq12   948935680 Oct 21 11:53 tselect.f16
+-rw-r--r--  1 answeq12 answeq12          59 Oct 21 11:53 tselect.json
+-rw-r--r--  1 answeq12 answeq12       96408 Oct 21 11:53 tselect_eot.npy
+-rw-r--r--  1 answeq12 answeq12 11833271296 Oct 21 11:51 ttrain_30000.f16
+-rw-r--r--  1 answeq12 answeq12          61 Oct 21 11:51 ttrain_30000.json
+-rw-r--r--  1 answeq12 answeq12     1200744 Oct 21 11:51 ttrain_30000_eot.npy
+               total        used        free      shared  buff/cache   available
+Mem:              23           0          22           0           0          22
+Swap:              8           0           8
+rc=0

@@ -1,0 +1,14 @@
+{
+  "run_id": "A1-c67-pc-val",
+  "top1_acc": 0.6868,
+  "std_err": 0.00463794954694421,
+  "n": 10000,
+  "agree_with_fp32": 0.9239,
+  "mean_cosine_to_fp32": 0.9936251044273376,
+  "min_cosine_to_fp32": 0.9566159844398499,
+  "mcnemar_vs_fp32": {
+    "a_only": 212,
+    "b_only": 200,
+    "p_value": 0.5879195752427447
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "run_id": "R192-DA-A0-val",
+  "top1_acc": 0.6871,
+  "std_err": 0.00463674012642503,
+  "n": 10000,
+  "agree_with_fp32": 0.7657,
+  "mean_cosine_to_fp32": 0.9301843047142029,
+  "min_cosine_to_fp32": 0.8350840210914612,
+  "mcnemar_vs_fp32": {
+    "a_only": 683,
+    "b_only": 674,
+    "p_value": 0.8280856867221144
+  }
+}

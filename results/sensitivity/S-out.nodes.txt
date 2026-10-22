@@ -1,0 +1,12 @@
+/transformer/resblocks.0/attn/Gemm
+/transformer/resblocks.1/attn/Gemm
+/transformer/resblocks.2/attn/Gemm
+/transformer/resblocks.3/attn/Gemm
+/transformer/resblocks.4/attn/Gemm
+/transformer/resblocks.5/attn/Gemm
+/transformer/resblocks.6/attn/Gemm
+/transformer/resblocks.7/attn/Gemm
+/transformer/resblocks.8/attn/Gemm
+/transformer/resblocks.9/attn/Gemm
+/transformer/resblocks.10/attn/Gemm
+/transformer/resblocks.11/attn/Gemm
