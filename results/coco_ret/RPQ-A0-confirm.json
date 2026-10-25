@@ -7,7 +7,7 @@
   "R@5": 0.8836,
   "R@10": 0.9568,
   "median_rank": 1.0,
-  "timestamp": "2026-10-20T15:57:18+0900",
-  "model": "/mnt/d/halio_quickcheck2/models/clip_vitb16_image_fp32.onnx",
+  "timestamp": "2026-10-25T18:03:00+0900",
+  "model": "/mnt/d/halio_repro_quick_20261025/models/clip_vitb16_image_fp32.onnx",
   "backend": "onnxruntime-cpu"
 }

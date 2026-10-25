@@ -1,0 +1,14 @@
+{
+  "run_id": "RV-DA5-SPL-test",
+  "top1_acc": 0.6816,
+  "std_err": 0.004658555999448756,
+  "n": 10000,
+  "agree_with_fp32": 0.7844,
+  "mean_cosine_to_fp32": 0.9121388792991638,
+  "min_cosine_to_fp32": 0.7811443209648132,
+  "mcnemar_vs_fp32": {
+    "a_only": 603,
+    "b_only": 618,
+    "p_value": 0.6886913199086364
+  }
+}

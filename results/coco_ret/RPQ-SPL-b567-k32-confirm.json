@@ -7,7 +7,7 @@
   "R@5": 0.88,
   "R@10": 0.958,
   "median_rank": 1.0,
-  "timestamp": "2026-10-20T15:59:53+0900",
-  "model": "/mnt/d/halio_quickcheck2/models/imp/SPL-b567-k32.onnx",
+  "timestamp": "2026-10-25T18:05:57+0900",
+  "model": "/mnt/d/halio_repro_quick_20261025/models/imp/SPL-b567-k32.onnx",
   "backend": "onnxruntime-cpu"
 }

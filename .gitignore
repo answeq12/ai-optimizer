@@ -19,3 +19,9 @@ allocator.log
 logs/_prof_*
 logs/profile_*.json
 installers/
+
+# 작업 대기소 상태 파일 (커밋하지 않음)
+jobs/.heartbeat
+jobs/running.txt
+# 가중치 파일(.pt)은 어디에 있든 올리지 않는다 (Release 로 배포)
+*.pt

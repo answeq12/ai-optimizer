@@ -1,0 +1,14 @@
+{
+  "run_id": "DA5-A0-test",
+  "top1_acc": 0.6769,
+  "std_err": 0.004676605499718787,
+  "n": 10000,
+  "agree_with_fp32": 0.8139,
+  "mean_cosine_to_fp32": 0.9406374096870422,
+  "min_cosine_to_fp32": 0.860209584236145,
+  "mcnemar_vs_fp32": {
+    "a_only": 528,
+    "b_only": 496,
+    "p_value": 0.3326724106613801
+  }
+}

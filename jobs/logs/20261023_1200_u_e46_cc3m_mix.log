@@ -1,0 +1,384 @@
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdd       1007G   49G  908G   6% /
+C:\             912G  880G   33G  97% /mnt/c
+C 여유 33GB
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[cc3m] validation 샤드 0: 840장 (누적 840)
+[cc3m] validation 샤드 1: 832장 (누적 1672)
+[cc3m] validation 샤드 2: 849장 (누적 2521)
+[cc3m] validation: 2000장 확정 → cc3m_val_2k.txt
+[cc3m] train 샤드 0: 5046장 (누적 5046)
+[cc3m] train 샤드 1: 5046장 (누적 10092)
+[cc3m] train 샤드 2: 5046장 (누적 15138)
+[cc3m] train 샤드 3: 5046장 (누적 20184)
+[cc3m] train 샤드 4: 5046장 (누적 25230)
+[cc3m] train 샤드 5: 5046장 (누적 30276)
+[cc3m] train 샤드 6: 5046장 (누적 35322)
+[cc3m] train 샤드 7: 5046장 (누적 40368)
+[cc3m] train 샤드 8: 5046장 (누적 45414)
+[cc3m] train 샤드 9: 5046장 (누적 50460)
+[cc3m] train 샤드 10: 5046장 (누적 55506)
+[cc3m] train 샤드 11: 5046장 (누적 60552)
+[cc3m] train 샤드 12: 5046장 (누적 65598)
+[cc3m] train 샤드 13: 5046장 (누적 70644)
+[cc3m] train 샤드 14: 5046장 (누적 75690)
+[cc3m] train 샤드 15: 5046장 (누적 80736)
+[cc3m] train 샤드 16: 5046장 (누적 85782)
+[cc3m] train 샤드 17: 5046장 (누적 90828)
+[cc3m] train 샤드 18: 5046장 (누적 95874)
+[cc3m] train 샤드 19: 5046장 (누적 100920)
+[cc3m] train: 100000장 확정 → cc3m_train_100k.txt
+[cc3m] train/val 파일명 겹침 0개
+[da] cc3mval 1024/2000 (50s, 이번 실행 20.6장/s, 최대 메모리 1974 MB)
+[da] cc3mval 2000/2000 (97s, 이번 실행 20.7장/s, 최대 메모리 2317 MB)
+[da] cc3mval: 2000장 97s (48.3 ms/장), 0.61 GB, 최대 메모리 2317 MB
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[da] cc3m_100000 1024/100000 (54s, 이번 실행 18.9장/s, 최대 메모리 2004 MB)
+[da] cc3m_100000 2048/100000 (102s, 이번 실행 20.1장/s, 최대 메모리 2368 MB)
+[da] cc3m_100000 3072/100000 (150s, 이번 실행 20.5장/s, 최대 메모리 2666 MB)
+[da] cc3m_100000 4096/100000 (197s, 이번 실행 20.8장/s, 최대 메모리 3007 MB)
+[da] cc3m_100000 5120/100000 (247s, 이번 실행 20.8장/s, 최대 메모리 3303 MB)
+[da] cc3m_100000 6144/100000 (295s, 이번 실행 20.8장/s, 최대 메모리 3599 MB)
+[da] cc3m_100000 7168/100000 (344s, 이번 실행 20.8장/s, 최대 메모리 3896 MB)
+[da] cc3m_100000 8192/100000 (394s, 이번 실행 20.8장/s, 최대 메모리 4190 MB)
+[da] cc3m_100000 9216/100000 (444s, 이번 실행 20.8장/s, 최대 메모리 4487 MB)
+[da] cc3m_100000 10240/100000 (493s, 이번 실행 20.8장/s, 최대 메모리 4783 MB)
+[da] cc3m_100000 11264/100000 (544s, 이번 실행 20.7장/s, 최대 메모리 5080 MB)
+[da] cc3m_100000 12288/100000 (594s, 이번 실행 20.7장/s, 최대 메모리 5373 MB)
+[da] cc3m_100000 13312/100000 (643s, 이번 실행 20.7장/s, 최대 메모리 5674 MB)
+[da] cc3m_100000 14336/100000 (692s, 이번 실행 20.7장/s, 최대 메모리 5965 MB)
+[da] cc3m_100000 15360/100000 (741s, 이번 실행 20.7장/s, 최대 메모리 6261 MB)
+[da] cc3m_100000 16384/100000 (790s, 이번 실행 20.8장/s, 최대 메모리 6555 MB)
+[da] cc3m_100000 17408/100000 (839s, 이번 실행 20.7장/s, 최대 메모리 6851 MB)
+[da] cc3m_100000 18432/100000 (887s, 이번 실행 20.8장/s, 최대 메모리 7147 MB)
+[da] cc3m_100000 19456/100000 (935s, 이번 실행 20.8장/s, 최대 메모리 7443 MB)
+[da] cc3m_100000 20480/100000 (983s, 이번 실행 20.8장/s, 최대 메모리 7737 MB)
+[da] cc3m_100000 21504/100000 (1032s, 이번 실행 20.8장/s, 최대 메모리 8034 MB)
+[da] cc3m_100000 22528/100000 (1081s, 이번 실행 20.8장/s, 최대 메모리 8330 MB)
+[da] cc3m_100000 23552/100000 (1129s, 이번 실행 20.9장/s, 최대 메모리 8626 MB)
+[da] cc3m_100000 24576/100000 (1177s, 이번 실행 20.9장/s, 최대 메모리 8920 MB)
+[da] cc3m_100000 25600/100000 (1225s, 이번 실행 20.9장/s, 최대 메모리 9216 MB)
+[da] cc3m_100000 26624/100000 (1274s, 이번 실행 20.9장/s, 최대 메모리 9517 MB)
+[da] cc3m_100000 27648/100000 (1321s, 이번 실행 20.9장/s, 최대 메모리 9807 MB)
+[da] cc3m_100000 28672/100000 (1370s, 이번 실행 20.9장/s, 최대 메모리 10101 MB)
+[da] cc3m_100000 29696/100000 (1417s, 이번 실행 21.0장/s, 최대 메모리 10398 MB)
+[da] cc3m_100000 30720/100000 (1466s, 이번 실행 21.0장/s, 최대 메모리 10693 MB)
+[da] cc3m_100000 31744/100000 (1514s, 이번 실행 21.0장/s, 최대 메모리 10989 MB)
+[da] cc3m_100000 32768/100000 (1562s, 이번 실행 21.0장/s, 최대 메모리 11284 MB)
+[da] cc3m_100000 33792/100000 (1608s, 이번 실행 21.0장/s, 최대 메모리 11579 MB)
+[da] cc3m_100000 34816/100000 (1657s, 이번 실행 21.0장/s, 최대 메모리 11876 MB)
+[da] cc3m_100000 35840/100000 (1707s, 이번 실행 21.0장/s, 최대 메모리 12172 MB)
+[da] cc3m_100000 36864/100000 (1756s, 이번 실행 21.0장/s, 최대 메모리 12466 MB)
+[da] cc3m_100000 37888/100000 (1804s, 이번 실행 21.0장/s, 최대 메모리 12762 MB)
+[da] cc3m_100000 38912/100000 (1851s, 이번 실행 21.0장/s, 최대 메모리 13063 MB)
+[da] cc3m_100000 39936/100000 (1898s, 이번 실행 21.0장/s, 최대 메모리 13353 MB)
+[da] cc3m_100000 40960/100000 (1949s, 이번 실행 21.0장/s, 최대 메모리 13647 MB)
+[da] cc3m_100000 41984/100000 (1997s, 이번 실행 21.0장/s, 최대 메모리 13944 MB)
+[da] cc3m_100000 43008/100000 (2046s, 이번 실행 21.0장/s, 최대 메모리 14240 MB)
+[da] cc3m_100000 44032/100000 (2092s, 이번 실행 21.1장/s, 최대 메모리 14536 MB)
+[da] cc3m_100000 45056/100000 (2141s, 이번 실행 21.0장/s, 최대 메모리 14835 MB)
+[da] cc3m_100000 46080/100000 (2189s, 이번 실행 21.1장/s, 최대 메모리 15125 MB)
+[da] cc3m_100000 47104/100000 (2238s, 이번 실행 21.0장/s, 최대 메모리 15421 MB)
+[da] cc3m_100000 48128/100000 (2286s, 이번 실행 21.1장/s, 최대 메모리 15718 MB)
+[da] cc3m_100000 49152/100000 (2335s, 이번 실행 21.0장/s, 최대 메모리 16012 MB)
+[da] cc3m_100000 50176/100000 (2382s, 이번 실행 21.1장/s, 최대 메모리 16308 MB)
+[da] cc3m_100000 51200/100000 (2432s, 이번 실행 21.1장/s, 최대 메모리 16604 MB)
+[da] cc3m_100000 52224/100000 (2482s, 이번 실행 21.0장/s, 최대 메모리 16899 MB)
+[da] cc3m_100000 53248/100000 (2530s, 이번 실행 21.0장/s, 최대 메모리 17193 MB)
+[da] cc3m_100000 54272/100000 (2578s, 이번 실행 21.1장/s, 최대 메모리 17490 MB)
+[da] cc3m_100000 55296/100000 (2626s, 이번 실행 21.1장/s, 최대 메모리 17786 MB)
+[da] cc3m_100000 56320/100000 (2674s, 이번 실행 21.1장/s, 최대 메모리 18082 MB)
+[da] cc3m_100000 57344/100000 (2723s, 이번 실행 21.1장/s, 최대 메모리 18376 MB)
+[da] cc3m_100000 58368/100000 (2774s, 이번 실행 21.0장/s, 최대 메모리 18672 MB)
+[da] cc3m_100000 59392/100000 (2822s, 이번 실행 21.0장/s, 최대 메모리 18968 MB)
+[da] cc3m_100000 60416/100000 (2869s, 이번 실행 21.1장/s, 최대 메모리 19264 MB)
+[da] cc3m_100000 61440/100000 (2918s, 이번 실행 21.1장/s, 최대 메모리 19558 MB)
+[da] cc3m_100000 62464/100000 (2966s, 이번 실행 21.1장/s, 최대 메모리 19855 MB)
+[da] cc3m_100000 63488/100000 (3015s, 이번 실행 21.1장/s, 최대 메모리 20150 MB)
+[da] cc3m_100000 64512/100000 (3063s, 이번 실행 21.1장/s, 최대 메모리 20451 MB)
+[da] cc3m_100000 65536/100000 (3112s, 이번 실행 21.1장/s, 최대 메모리 20739 MB)
+[da] cc3m_100000 66560/100000 (3161s, 이번 실행 21.1장/s, 최대 메모리 21035 MB)
+[da] cc3m_100000 67584/100000 (3210s, 이번 실행 21.1장/s, 최대 메모리 21331 MB)
+[da] cc3m_100000 68608/100000 (3258s, 이번 실행 21.1장/s, 최대 메모리 21628 MB)
+[da] cc3m_100000 69632/100000 (3305s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 70656/100000 (3352s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 71680/100000 (3400s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 72704/100000 (3447s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 73728/100000 (3495s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 74752/100000 (3541s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 75776/100000 (3587s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 76800/100000 (3636s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 77824/100000 (3681s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 78848/100000 (3730s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 79872/100000 (3776s, 이번 실행 21.2장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 80896/100000 (3824s, 이번 실행 21.2장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 81920/100000 (3874s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 82944/100000 (3924s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 83968/100000 (3973s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 84992/100000 (4019s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 86016/100000 (4068s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 87040/100000 (4114s, 이번 실행 21.2장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 88064/100000 (4163s, 이번 실행 21.2장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 89088/100000 (4210s, 이번 실행 21.2장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 90112/100000 (4265s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 91136/100000 (4312s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 92160/100000 (4363s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 93184/100000 (4411s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 94208/100000 (4459s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 95232/100000 (4508s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 96256/100000 (4555s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 97280/100000 (4603s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 98304/100000 (4650s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 99328/100000 (4698s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000 100000/100000 (4729s, 이번 실행 21.1장/s, 최대 메모리 21714 MB)
+[da] cc3m_100000: 100000장 4729s (47.3 ms/장), 30.26 GB, 최대 메모리 21714 MB
+CC3M 저장 후 C 여유 44GB
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[cc3m] 검증 캡션 임베딩 2000개 (원본)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[cc3m] 검증 캡션 임베딩 2000개 (da3)
+[cc3m] A0: R@1 54.45%
+[cc3m] DA3-A0: R@1 58.40%
+[cc3m] DA3-SPL: R@1 57.50%
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[da-mix] COCO 118287 + CC3M 100000, 에폭 2 (3410스텝), 학습 파라미터 41.6M
+[da-mix] ep0 step 1/3410 loss 0.7789 (COCO 0.000 / CC3M 0.779) 28431 ms/step, 남은 2008분
+[da-mix] ep0 step 2/3410 loss 0.6824 (COCO 0.000 / CC3M 0.731) 11135 ms/step, 남은 1320분
+[da-mix] ep0 step 3/3410 loss 0.7969 (COCO 0.000 / CC3M 0.753) 10009 ms/step, 남은 1069분
+[da-mix] ep0 step 20/3410 loss 0.6631 (COCO 0.000 / CC3M 0.677) 9514 ms/step, 남은 637분
+[da-mix] ep0 step 40/3410 loss 0.5394 (COCO 0.467 / CC3M 0.643) 9599 ms/step, 남은 599분
+[da-mix] ep0 step 60/3410 loss 0.4775 (COCO 0.474 / CC3M 0.643) 9566 ms/step, 남은 582분
+[da-mix] ep0 step 80/3410 loss 0.4078 (COCO 0.447 / CC3M 0.643) 9596 ms/step, 남은 574분
+[da-mix] ep0 step 100/3410 loss 0.3982 (COCO 0.432 / CC3M 0.643) 9313 ms/step, 남은 567분
+[da-mix] ep0 step 120/3410 loss 0.3972 (COCO 0.424 / CC3M 0.643) 10534 ms/step, 남은 561분
+[da-mix] ep0 step 140/3410 loss 0.3673 (COCO 0.414 / CC3M 0.643) 10559 ms/step, 남은 555분
+[da-mix] ep0 step 160/3410 loss 0.3703 (COCO 0.407 / CC3M 0.643) 10970 ms/step, 남은 550분
+[da-mix] ep0 step 180/3410 loss 0.3667 (COCO 0.402 / CC3M 0.643) 10713 ms/step, 남은 546분
+[da-mix] ep0 step 200/3410 loss 0.3520 (COCO 0.396 / CC3M 0.643) 10687 ms/step, 남은 542분
+[da-mix] ep0 step 220/3410 loss 0.3064 (COCO 0.386 / CC3M 0.643) 9465 ms/step, 남은 537분
+[da-mix] ep0 step 240/3410 loss 0.5325 (COCO 0.386 / CC3M 0.601) 9868 ms/step, 남은 533분
+[da-mix] ep0 step 260/3410 loss 0.4329 (COCO 0.386 / CC3M 0.554) 9574 ms/step, 남은 530분
+[da-mix] ep0 step 280/3410 loss 0.4758 (COCO 0.386 / CC3M 0.537) 9689 ms/step, 남은 526분
+[da-mix] ep0 step 300/3410 loss 0.4032 (COCO 0.386 / CC3M 0.535) 9585 ms/step, 남은 522분
+[da-mix] ep0 step 320/3410 loss 0.4009 (COCO 0.385 / CC3M 0.533) 9647 ms/step, 남은 519분
+[da-mix] ep0 step 340/3410 loss 0.4408 (COCO 0.385 / CC3M 0.518) 9608 ms/step, 남은 515분
+[da-mix] ep0 step 360/3410 loss 0.3679 (COCO 0.382 / CC3M 0.513) 9429 ms/step, 남은 512분
+[da-mix] ep0 step 380/3410 loss 0.3226 (COCO 0.377 / CC3M 0.513) 9616 ms/step, 남은 509분
+[da-mix] ep0 step 400/3410 loss 0.3457 (COCO 0.375 / CC3M 0.513) 9116 ms/step, 남은 506분
+[da-mix] ep0 step 420/3410 loss 0.3193 (COCO 0.371 / CC3M 0.513) 9521 ms/step, 남은 503분
+[da-mix] ep0 step 440/3410 loss 0.3209 (COCO 0.368 / CC3M 0.513) 9739 ms/step, 남은 499분
+[da-mix] ep0 step 460/3410 loss 0.3079 (COCO 0.364 / CC3M 0.513) 9520 ms/step, 남은 496분
+[da-mix] ep0 step 480/3410 loss 0.3369 (COCO 0.363 / CC3M 0.513) 9551 ms/step, 남은 493분
+[da-mix] ep0 step 500/3410 loss 0.3366 (COCO 0.361 / CC3M 0.513) 9224 ms/step, 남은 489분
+[da-mix] ep0 step 520/3410 loss 0.3159 (COCO 0.359 / CC3M 0.513) 9360 ms/step, 남은 486분
+[da-mix] ep0 step 540/3410 loss 0.3205 (COCO 0.357 / CC3M 0.513) 9436 ms/step, 남은 482분
+[da-mix] ep0 step 560/3410 loss 0.5494 (COCO 0.357 / CC3M 0.518) 9263 ms/step, 남은 479분
+[da-mix] ep0 step 580/3410 loss 0.4416 (COCO 0.357 / CC3M 0.509) 9906 ms/step, 남은 476분
+[da-mix] ep0 step 600/3410 loss 0.4475 (COCO 0.357 / CC3M 0.502) 9829 ms/step, 남은 473분
+[da-mix] ep0 step 620/3410 loss 0.3127 (COCO 0.355 / CC3M 0.498) 9336 ms/step, 남은 470분
+[da-mix] ep0 step 640/3410 loss 0.3567 (COCO 0.355 / CC3M 0.498) 11351 ms/step, 남은 466분
+[da-mix] ep0 step 660/3410 loss 0.3031 (COCO 0.353 / CC3M 0.498) 9488 ms/step, 남은 462분
+[da-mix] ep0 step 680/3410 loss 0.3827 (COCO 0.353 / CC3M 0.494) 9218 ms/step, 남은 459분
+[da-mix] ep0 step 700/3410 loss 0.4031 (COCO 0.353 / CC3M 0.486) 9331 ms/step, 남은 455분
+[da-mix] ep0 step 720/3410 loss 0.3742 (COCO 0.353 / CC3M 0.486) 9343 ms/step, 남은 452분
+[da-mix] ep0 step 740/3410 loss 0.3319 (COCO 0.352 / CC3M 0.484) 9629 ms/step, 남은 448분
+[da-mix] ep0 step 760/3410 loss 0.4414 (COCO 0.352 / CC3M 0.481) 11672 ms/step, 남은 445분
+[da-mix] ep0 step 780/3410 loss 0.3666 (COCO 0.351 / CC3M 0.481) 11196 ms/step, 남은 442분
+[da-mix] ep0 step 800/3410 loss 0.3073 (COCO 0.349 / CC3M 0.481) 9581 ms/step, 남은 438분
+[da-mix] ep0 step 820/3410 loss 0.3097 (COCO 0.348 / CC3M 0.481) 9262 ms/step, 남은 435분
+[da-mix] ep0 step 840/3410 loss 0.2991 (COCO 0.346 / CC3M 0.481) 9555 ms/step, 남은 431분
+[da-mix] ep0 step 860/3410 loss 0.3123 (COCO 0.345 / CC3M 0.481) 9402 ms/step, 남은 428분
+[da-mix] ep0 step 880/3410 loss 0.4148 (COCO 0.345 / CC3M 0.476) 9123 ms/step, 남은 425분
+[da-mix] ep0 step 900/3410 loss 0.3940 (COCO 0.345 / CC3M 0.470) 9565 ms/step, 남은 422분
+[da-mix] ep0 step 920/3410 loss 0.4090 (COCO 0.345 / CC3M 0.466) 9635 ms/step, 남은 418분
+[da-mix] ep0 step 940/3410 loss 0.3208 (COCO 0.344 / CC3M 0.466) 9415 ms/step, 남은 415분
+[da-mix] ep0 step 960/3410 loss 0.3252 (COCO 0.343 / CC3M 0.466) 9202 ms/step, 남은 412분
+[da-mix] ep0 step 980/3410 loss 0.3086 (COCO 0.342 / CC3M 0.466) 9328 ms/step, 남은 409분
+[da-mix] ep0 step 1000/3410 loss 0.3496 (COCO 0.342 / CC3M 0.463) 9620 ms/step, 남은 405분
+[da-mix] ep0 step 1020/3410 loss 0.3740 (COCO 0.342 / CC3M 0.458) 11304 ms/step, 남은 402분
+[da-mix] ep0 step 1040/3410 loss 0.4218 (COCO 0.342 / CC3M 0.456) 11900 ms/step, 남은 399분
+[da-mix] ep0 step 1060/3410 loss 0.3973 (COCO 0.342 / CC3M 0.453) 11267 ms/step, 남은 396분
+[da-mix] ep0 step 1080/3410 loss 0.3979 (COCO 0.342 / CC3M 0.450) 9544 ms/step, 남은 392분
+[da-mix] ep0 step 1100/3410 loss 0.3817 (COCO 0.342 / CC3M 0.447) 8870 ms/step, 남은 389분
+[da-mix] ep0 step 1120/3410 loss 0.3476 (COCO 0.341 / CC3M 0.444) 9123 ms/step, 남은 385분
+[da-mix] ep0 step 1140/3410 loss 0.3237 (COCO 0.341 / CC3M 0.444) 9406 ms/step, 남은 382분
+[da-mix] ep0 step 1160/3410 loss 0.3501 (COCO 0.340 / CC3M 0.443) 9545 ms/step, 남은 379분
+[da-mix] ep0 step 1180/3410 loss 0.3680 (COCO 0.340 / CC3M 0.439) 9362 ms/step, 남은 375분
+[da-mix] ep0 step 1200/3410 loss 0.2995 (COCO 0.339 / CC3M 0.439) 11894 ms/step, 남은 372분
+[da-mix] ep0 step 1220/3410 loss 0.3410 (COCO 0.339 / CC3M 0.439) 11921 ms/step, 남은 369분
+[da-mix] ep0 step 1240/3410 loss 0.3921 (COCO 0.339 / CC3M 0.437) 11556 ms/step, 남은 365분
+[da-mix] ep0 step 1260/3410 loss 0.3823 (COCO 0.339 / CC3M 0.435) 9432 ms/step, 남은 362분
+[da-mix] ep0 step 1280/3410 loss 0.3699 (COCO 0.339 / CC3M 0.432) 9508 ms/step, 남은 359분
+[da-mix] ep0 step 1300/3410 loss 0.3925 (COCO 0.339 / CC3M 0.431) 9553 ms/step, 남은 355분
+[da-mix] ep0 step 1320/3410 loss 0.3295 (COCO 0.339 / CC3M 0.428) 9385 ms/step, 남은 352분
+[da-mix] ep0 step 1340/3410 loss 0.3483 (COCO 0.339 / CC3M 0.425) 9525 ms/step, 남은 349분
+[da-mix] ep0 step 1360/3410 loss 0.3246 (COCO 0.338 / CC3M 0.425) 9428 ms/step, 남은 345분
+[da-mix] ep0 step 1380/3410 loss 0.3355 (COCO 0.338 / CC3M 0.425) 9277 ms/step, 남은 342분
+[da-mix] ep0 step 1400/3410 loss 0.3475 (COCO 0.339 / CC3M 0.425) 12257 ms/step, 남은 339분
+[da-mix] ep0 step 1420/3410 loss 0.2948 (COCO 0.337 / CC3M 0.425) 11605 ms/step, 남은 335분
+[da-mix] ep0 step 1440/3410 loss 0.3123 (COCO 0.337 / CC3M 0.425) 11435 ms/step, 남은 332분
+[da-mix] ep0 step 1460/3410 loss 0.3834 (COCO 0.337 / CC3M 0.424) 9400 ms/step, 남은 329분
+[da-mix] ep0 step 1480/3410 loss 0.3757 (COCO 0.337 / CC3M 0.422) 8983 ms/step, 남은 325분
+[da-mix] ep0 step 1500/3410 loss 0.2916 (COCO 0.335 / CC3M 0.422) 8977 ms/step, 남은 322분
+[da-mix] ep0 step 1520/3410 loss 0.2990 (COCO 0.335 / CC3M 0.422) 9424 ms/step, 남은 318분
+[da-mix] ep0 step 1540/3410 loss 0.2922 (COCO 0.334 / CC3M 0.422) 11504 ms/step, 남은 315분
+[da-mix] ep0 step 1560/3410 loss 0.3788 (COCO 0.333 / CC3M 0.422) 11581 ms/step, 남은 312분
+[da-mix] ep0 step 1580/3410 loss 0.3403 (COCO 0.333 / CC3M 0.419) 9417 ms/step, 남은 308분
+[da-mix] ep0 step 1600/3410 loss 0.3444 (COCO 0.333 / CC3M 0.417) 9615 ms/step, 남은 305분
+[da-mix] ep0 step 1620/3410 loss 0.3466 (COCO 0.333 / CC3M 0.415) 10509 ms/step, 남은 302분
+[da-mix] ep0 step 1640/3410 loss 0.3652 (COCO 0.333 / CC3M 0.414) 10599 ms/step, 남은 298분
+[da-mix] ep0 step 1660/3410 loss 0.3170 (COCO 0.333 / CC3M 0.414) 9252 ms/step, 남은 295분
+[da-mix] ep0 step 1680/3410 loss 0.2828 (COCO 0.332 / CC3M 0.413) 9670 ms/step, 남은 292분
+[da-mix] ep0 step 1700/3410 loss 0.4007 (COCO 0.332 / CC3M 0.412) 9277 ms/step, 남은 289분
+[da-mix] 에폭 1 저장
+[da-mix] ep1 step 1720/3410 loss 0.2245 (COCO 0.225 / CC3M 0.000) 11364 ms/step, 남은 286분
+[da-mix] ep1 step 1740/3410 loss 0.2982 (COCO 0.267 / CC3M 0.000) 9279 ms/step, 남은 282분
+[da-mix] ep1 step 1760/3410 loss 0.2726 (COCO 0.269 / CC3M 0.000) 12824 ms/step, 남은 279분
+[da-mix] ep1 step 1780/3410 loss 0.2371 (COCO 0.264 / CC3M 0.240) 9272 ms/step, 남은 276분
+[da-mix] ep1 step 1800/3410 loss 0.2138 (COCO 0.264 / CC3M 0.223) 9161 ms/step, 남은 272분
+[da-mix] ep1 step 1820/3410 loss 0.2617 (COCO 0.263 / CC3M 0.225) 9192 ms/step, 남은 269분
+[da-mix] ep1 step 1840/3410 loss 0.2300 (COCO 0.260 / CC3M 0.223) 9256 ms/step, 남은 265분
+[da-mix] ep1 step 1860/3410 loss 0.2356 (COCO 0.260 / CC3M 0.227) 8905 ms/step, 남은 262분
+[da-mix] ep1 step 1880/3410 loss 0.2136 (COCO 0.260 / CC3M 0.224) 8866 ms/step, 남은 258분
+[da-mix] ep1 step 1900/3410 loss 0.2385 (COCO 0.261 / CC3M 0.225) 9264 ms/step, 남은 255분
+[da-mix] ep1 step 1920/3410 loss 0.2821 (COCO 0.264 / CC3M 0.225) 11615 ms/step, 남은 252분
+[da-mix] ep1 step 1940/3410 loss 0.2545 (COCO 0.266 / CC3M 0.225) 9172 ms/step, 남은 248분
+[da-mix] ep1 step 1960/3410 loss 0.2169 (COCO 0.266 / CC3M 0.224) 9406 ms/step, 남은 245분
+[da-mix] ep1 step 1980/3410 loss 0.2293 (COCO 0.266 / CC3M 0.225) 9230 ms/step, 남은 241분
+[da-mix] ep1 step 2000/3410 loss 0.2477 (COCO 0.267 / CC3M 0.224) 11697 ms/step, 남은 238분
+[da-mix] ep1 step 2020/3410 loss 0.2676 (COCO 0.267 / CC3M 0.224) 9080 ms/step, 남은 235분
+[da-mix] ep1 step 2040/3410 loss 0.2272 (COCO 0.267 / CC3M 0.224) 8928 ms/step, 남은 231분
+[da-mix] ep1 step 2060/3410 loss 0.2327 (COCO 0.267 / CC3M 0.225) 11693 ms/step, 남은 228분
+[da-mix] ep1 step 2080/3410 loss 0.2433 (COCO 0.267 / CC3M 0.226) 9124 ms/step, 남은 224분
+[da-mix] ep1 step 2100/3410 loss 0.2183 (COCO 0.267 / CC3M 0.226) 9245 ms/step, 남은 221분
+[da-mix] ep1 step 2120/3410 loss 0.2334 (COCO 0.267 / CC3M 0.226) 9317 ms/step, 남은 218분
+[da-mix] ep1 step 2140/3410 loss 0.2973 (COCO 0.271 / CC3M 0.226) 12289 ms/step, 남은 214분
+[da-mix] ep1 step 2160/3410 loss 0.2548 (COCO 0.271 / CC3M 0.226) 8948 ms/step, 남은 211분
+[da-mix] ep1 step 2180/3410 loss 0.2075 (COCO 0.271 / CC3M 0.225) 9028 ms/step, 남은 207분
+[da-mix] ep1 step 2200/3410 loss 0.2443 (COCO 0.270 / CC3M 0.224) 12064 ms/step, 남은 204분
+[da-mix] ep1 step 2220/3410 loss 0.2407 (COCO 0.267 / CC3M 0.224) 9005 ms/step, 남은 201분
+[da-mix] ep1 step 2240/3410 loss 0.2513 (COCO 0.266 / CC3M 0.224) 9013 ms/step, 남은 197분
+[da-mix] ep1 step 2260/3410 loss 0.2840 (COCO 0.268 / CC3M 0.224) 9083 ms/step, 남은 194분
+[da-mix] ep1 step 2280/3410 loss 0.2943 (COCO 0.269 / CC3M 0.224) 9081 ms/step, 남은 190분
+[da-mix] ep1 step 2300/3410 loss 0.1906 (COCO 0.269 / CC3M 0.222) 8970 ms/step, 남은 187분
+[da-mix] ep1 step 2320/3410 loss 0.2315 (COCO 0.270 / CC3M 0.221) 9009 ms/step, 남은 184분
+[da-mix] ep1 step 2340/3410 loss 0.2559 (COCO 0.269 / CC3M 0.221) 9469 ms/step, 남은 180분
+[da-mix] ep1 step 2360/3410 loss 0.2228 (COCO 0.269 / CC3M 0.220) 9284 ms/step, 남은 177분
+[da-mix] ep1 step 2380/3410 loss 0.2182 (COCO 0.269 / CC3M 0.220) 11935 ms/step, 남은 173분
+[da-mix] ep1 step 2400/3410 loss 0.2370 (COCO 0.269 / CC3M 0.221) 8990 ms/step, 남은 170분
+[da-mix] ep1 step 2420/3410 loss 0.2547 (COCO 0.270 / CC3M 0.221) 9048 ms/step, 남은 167분
+[da-mix] ep1 step 2440/3410 loss 0.2943 (COCO 0.271 / CC3M 0.221) 12096 ms/step, 남은 163분
+[da-mix] ep1 step 2460/3410 loss 0.2982 (COCO 0.273 / CC3M 0.221) 9264 ms/step, 남은 160분
+[da-mix] ep1 step 2480/3410 loss 0.2678 (COCO 0.272 / CC3M 0.221) 9117 ms/step, 남은 157분
+[da-mix] ep1 step 2500/3410 loss 0.2588 (COCO 0.272 / CC3M 0.221) 9399 ms/step, 남은 153분
+[da-mix] ep1 step 2520/3410 loss 0.2444 (COCO 0.270 / CC3M 0.221) 12011 ms/step, 남은 150분
+[da-mix] ep1 step 2540/3410 loss 0.2759 (COCO 0.271 / CC3M 0.221) 9119 ms/step, 남은 146분
+[da-mix] ep1 step 2560/3410 loss 0.2725 (COCO 0.271 / CC3M 0.221) 9024 ms/step, 남은 143분
+[da-mix] ep1 step 2580/3410 loss 0.2425 (COCO 0.271 / CC3M 0.221) 11863 ms/step, 남은 140분
+[da-mix] ep1 step 2600/3410 loss 0.2221 (COCO 0.271 / CC3M 0.221) 8889 ms/step, 남은 136분
+[da-mix] ep1 step 2620/3410 loss 0.2118 (COCO 0.271 / CC3M 0.220) 9175 ms/step, 남은 133분
+[da-mix] ep1 step 2640/3410 loss 0.2437 (COCO 0.272 / CC3M 0.220) 12442 ms/step, 남은 130분
+[da-mix] ep1 step 2660/3410 loss 0.2570 (COCO 0.271 / CC3M 0.220) 9266 ms/step, 남은 126분
+[da-mix] ep1 step 2680/3410 loss 0.2417 (COCO 0.270 / CC3M 0.220) 9153 ms/step, 남은 123분
+[da-mix] ep1 step 2700/3410 loss 0.2831 (COCO 0.270 / CC3M 0.221) 8695 ms/step, 남은 120분
+[da-mix] ep1 step 2720/3410 loss 0.3051 (COCO 0.270 / CC3M 0.224) 9387 ms/step, 남은 117분
+[da-mix] ep1 step 2740/3410 loss 0.2740 (COCO 0.270 / CC3M 0.226) 12149 ms/step, 남은 114분
+[da-mix] ep1 step 2760/3410 loss 0.2582 (COCO 0.269 / CC3M 0.226) 9321 ms/step, 남은 110분
+[da-mix] ep1 step 2780/3410 loss 0.2500 (COCO 0.269 / CC3M 0.226) 9109 ms/step, 남은 107분
+[da-mix] ep1 step 2800/3410 loss 0.2356 (COCO 0.269 / CC3M 0.227) 12517 ms/step, 남은 103분
+[da-mix] ep1 step 2820/3410 loss 0.2478 (COCO 0.269 / CC3M 0.228) 9028 ms/step, 남은 100분
+[da-mix] ep1 step 2840/3410 loss 0.2317 (COCO 0.268 / CC3M 0.228) 8877 ms/step, 남은 97분
+[da-mix] ep1 step 2860/3410 loss 0.2630 (COCO 0.268 / CC3M 0.228) 12206 ms/step, 남은 93분
+[da-mix] ep1 step 2880/3410 loss 0.2650 (COCO 0.268 / CC3M 0.228) 9072 ms/step, 남은 90분
+[da-mix] ep1 step 2900/3410 loss 0.2827 (COCO 0.269 / CC3M 0.228) 8908 ms/step, 남은 86분
+[da-mix] ep1 step 2920/3410 loss 0.2565 (COCO 0.268 / CC3M 0.228) 12041 ms/step, 남은 83분
+[da-mix] ep1 step 2940/3410 loss 0.2561 (COCO 0.268 / CC3M 0.228) 8859 ms/step, 남은 80분
+[da-mix] ep1 step 2960/3410 loss 0.2416 (COCO 0.268 / CC3M 0.227) 8897 ms/step, 남은 76분
+[da-mix] ep1 step 2980/3410 loss 0.2193 (COCO 0.268 / CC3M 0.227) 11829 ms/step, 남은 73분
+[da-mix] ep1 step 3000/3410 loss 0.2479 (COCO 0.268 / CC3M 0.227) 9200 ms/step, 남은 69분
+[da-mix] ep1 step 3020/3410 loss 0.2554 (COCO 0.267 / CC3M 0.227) 9407 ms/step, 남은 66분
+[da-mix] ep1 step 3040/3410 loss 0.2657 (COCO 0.267 / CC3M 0.227) 12483 ms/step, 남은 63분
+[da-mix] ep1 step 3060/3410 loss 0.2712 (COCO 0.267 / CC3M 0.227) 9046 ms/step, 남은 59분
+[da-mix] ep1 step 3080/3410 loss 0.2759 (COCO 0.268 / CC3M 0.227) 9042 ms/step, 남은 56분
+[da-mix] ep1 step 3100/3410 loss 0.1997 (COCO 0.268 / CC3M 0.226) 11854 ms/step, 남은 52분
+[da-mix] ep1 step 3120/3410 loss 0.2455 (COCO 0.267 / CC3M 0.226) 8973 ms/step, 남은 49분
+[da-mix] ep1 step 3140/3410 loss 0.2560 (COCO 0.267 / CC3M 0.226) 8848 ms/step, 남은 46분
+[da-mix] ep1 step 3160/3410 loss 0.2367 (COCO 0.267 / CC3M 0.227) 12361 ms/step, 남은 42분
+[da-mix] ep1 step 3180/3410 loss 0.2156 (COCO 0.267 / CC3M 0.226) 8871 ms/step, 남은 39분
+[da-mix] ep1 step 3200/3410 loss 0.2690 (COCO 0.267 / CC3M 0.226) 9185 ms/step, 남은 36분
+[da-mix] ep1 step 3220/3410 loss 0.2804 (COCO 0.268 / CC3M 0.226) 9147 ms/step, 남은 32분
+[da-mix] ep1 step 3240/3410 loss 0.2249 (COCO 0.268 / CC3M 0.226) 9106 ms/step, 남은 29분
+[da-mix] ep1 step 3260/3410 loss 0.2625 (COCO 0.268 / CC3M 0.227) 9205 ms/step, 남은 25분
+[da-mix] ep1 step 3280/3410 loss 0.2147 (COCO 0.268 / CC3M 0.227) 9099 ms/step, 남은 22분
+[da-mix] ep1 step 3300/3410 loss 0.2371 (COCO 0.268 / CC3M 0.227) 8998 ms/step, 남은 19분
+[da-mix] ep1 step 3320/3410 loss 0.2475 (COCO 0.268 / CC3M 0.228) 12463 ms/step, 남은 15분
+[da-mix] ep1 step 3340/3410 loss 0.2761 (COCO 0.268 / CC3M 0.228) 9109 ms/step, 남은 12분
+[da-mix] ep1 step 3360/3410 loss 0.2547 (COCO 0.268 / CC3M 0.228) 9083 ms/step, 남은 8분
+[da-mix] ep1 step 3380/3410 loss 0.2123 (COCO 0.268 / CC3M 0.228) 12966 ms/step, 남은 5분
+[da-mix] ep1 step 3400/3410 loss 0.2594 (COCO 0.268 / CC3M 0.228) 8776 ms/step, 남은 2분
+[da-mix] 에폭 2 저장
+[da-text-sweep] α=0.0: select R@1 40.86 R@5 68.53 / CIFAR val 68.80 / CC3M val R@1 54.45
+[da-text-sweep] α=0.25: select R@1 49.53 R@5 76.49 / CIFAR val 69.87 / CC3M val R@1 58.50
+[da-text-sweep] α=0.5: select R@1 54.18 R@5 80.57 / CIFAR val 69.80 / CC3M val R@1 60.85
+[da-text-sweep] α=0.75: select R@1 56.87 R@5 82.70 / CIFAR val 69.27 / CC3M val R@1 61.70
+[da-text-sweep] α=1.0: select R@1 57.78 R@5 83.55 / CIFAR val 68.38 / CC3M val R@1 62.05
+# e46: 이미지+텍스트 뒤쪽 4블록 학습, α 탐색 (COCO-select, CIFAR val)
+
+| α | select R@1 | R@5 | R@10 | CIFAR val |
+|---|---|---|---|---|
+| 0.0 | 40.86 | 68.53 | 79.27 | 68.80 |
+| 0.25 | 49.53 | 76.49 | 85.75 | 69.87 |
+| 0.5 | 54.18 | 80.57 | 88.69 | 69.80 |
+| 0.75 | 56.87 | 82.70 | 90.17 | 69.27 |
+| 1.0 | 57.78 | 83.55 | 90.96 | 68.38 |
+
+- 선택 α = 1.0 (CIFAR val −1%p 이내 중 select R@1 최고). 비교: E33 select R@1 53.99
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[da-text-export] P1 8.58e-06/1.000000 통과, 연산 구성 동일 True, 텍스트 임베딩(적응) 저장
+[prep] clip_vitb16_image_fp32.prep.onnx 생성 (symbolic+onnx shape inference (ORT optimization skipped))
+[split] 블록 5: hot [112, 278, 343, 385, 457, 665, 737, 762, 873, 924, 956, 966, 1124, 1167, 1202, 1297, 1357, 1541, 1729, 1862, 1906, 1979, 2256, 2333, 2388, 2417, 2463, 2524, 2562, 2645, 2838, 2873] (|x| ['5.8', '4.2', '4.1', '3.5', '3.9', '3.8', '3.6', '4.5', '4.0', '9.6', '3.8', '4.0', '3.7', '3.7', '3.6', '3.6', '4.7', '17.4', '3.8', '4.1', '3.8', '5.2', '16.1', '4.7', '3.6', '4.0', '3.6', '3.8', '14.9', '3.7', '3.7', '3.6']) -> 나머지 최대 3.5 (분리 전 17.4)
+[split] 블록 6: hot [19, 95, 112, 186, 196, 290, 337, 391, 424, 514, 944, 959, 1105, 1300, 1484, 1546, 1651, 1710, 1721, 1728, 1744, 1778, 2202, 2212, 2238, 2450, 2518, 2600, 2823, 2928, 2984, 3051] (|x| ['8.7', '6.0', '5.3', '4.1', '4.2', '4.3', '4.0', '4.0', '4.0', '4.1', '5.0', '4.3', '4.2', '4.1', '5.8', '4.1', '3.9', '26.5', '4.6', '4.2', '4.2', '4.0', '3.9', '25.4', '4.3', '4.1', '4.9', '5.2', '4.5', '5.0', '4.5', '25.6']) -> 나머지 최대 3.9 (분리 전 26.5)
+[split] 블록 7: hot [48, 244, 246, 558, 747, 753, 1026, 1078, 1101, 1362, 1435, 1612, 1661, 1830, 1906, 1929, 1991, 2078, 2093, 2348, 2423, 2629, 2663, 2681, 2704, 2786, 2915, 2922, 2975, 2992, 3015, 3033] (|x| ['4.9', '4.7', '4.6', '4.7', '4.6', '4.8', '5.8', '4.4', '4.3', '4.3', '42.3', '4.6', '5.6', '4.4', '4.4', '4.9', '4.3', '40.7', '31.1', '4.3', '4.9', '28.1', '4.4', '4.8', '4.8', '4.7', '4.3', '17.6', '4.3', '4.3', '4.5', '5.4']) -> 나머지 최대 4.3 (분리 전 42.3)
+[split] 저장 split_SPL-b567-k32.fp32.onnx, 원본 대비 최소 코사인 0.9999999
+[quant] 가중치 MatMul 만 양자화: 49개 (A1 동적은 49개)
+[quant] SPL-b567-k32.onnx: 89.82 MB (static, minmax, per-channel, 제외 3개)
+보호 노드 원본과 동일
+[eval] DA5-A0-val: top-1 68.38% (표준오차 ±0.46%p, n=10000), FP32 대비 일치율 81.36%, 평균 코사인 0.9408
+[coco-ret] DA5-A0 (select, 이미지 2405 / 캡션 12035): R@1 57.79%  R@5 83.55%  R@10 90.96%
+[eval] DA5-SPL-val: top-1 69.08% (표준오차 ±0.46%p, n=10000), FP32 대비 일치율 78.88%, 평균 코사인 0.9123
+[coco-ret] DA5-SPL (select, 이미지 2405 / 캡션 12035): R@1 57.11%  R@5 83.19%  R@10 90.68%
+# COCO 텍스트→이미지 검색 (select, 갤러리 2405장 / 질의 캡션 12035개)
+
+자체 COCO val2017 분할. 이미지별 성적(캡션 hit@K 평균)의 평균. 95% CI = 이미지 단위 짝지은 bootstrap 2000회.
+비열등 = FP32(DA3-SPL) 대비 R@1 차이의 CI 하한 ≥ −2.0%p (선택 규칙 초안, 값은 팀이 확정).
+
+| 구성 | R@1 [95% CI] | R@5 | R@10 | R@1 차이 vs DA3-SPL [95% CI] | R@5 차이 | R@10 차이 | 비열등(−2.0%p) |
+|---|---|---|---|---|---|---|---|
+| DA3-SPL | 57.21% [55.95%, 58.56%] | 82.98% | 90.50% | +0.00 [+0.00, +0.00] | +0.00 [+0.00, +0.00] | +0.00 [+0.00, +0.00] | — |
+| DA5-A0 | 57.78% [56.52%, 59.11%] | 83.55% | 90.96% | +0.57 [-0.12, +1.23] | +0.57 [+0.07, +1.05] | +0.46 [+0.05, +0.86] | 예 |
+| DA5-SPL | 57.11% [55.84%, 58.41%] | 83.19% | 90.68% | -0.11 [-0.77, +0.56] | +0.21 [-0.28, +0.68] | +0.18 [-0.24, +0.58] | 예 |
+
+- 텍스트 인코더는 FP32 고정, 이미지 인코더만 구성별로 다르다. 차이 단위는 %p
+- 자체 분할 결과라 공개 COCO 1K/5K 검색 수치와 직접 비교하지 않는다
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[cc3m] 검증 캡션 임베딩 2000개 (da5)
+[cc3m] DA5-A0: R@1 62.05%
+[cc3m] DA5-SPL: R@1 61.80%
+# CC3M validation 2K 텍스트→이미지 (COCO 밖 선택용 검증셋, 갤러리 2000장 / 캡션 2000개)
+
+이미지 평균 R@K, 95% CI = 이미지 단위 짝지은 부트스트랩 2000회. 시험셋 아님(E46 선택용)
+
+| 구성 | R@1 | R@5 | R@10 | R@1 차이 vs DA3-SPL [95% CI] |
+|---|---|---|---|---|
+| A0 | 54.45% | 75.95% | 82.70% | -3.05 [-4.65, -1.55] |
+| DA3-A0 | 58.40% | 80.05% | 86.10% | +0.90 [+0.00, +1.80] |
+| DA3-SPL | 57.50% | 79.65% | 85.65% | +0.00 [+0.00, +0.00] |
+| DA5-A0 | 62.05% | 84.50% | 90.20% | +4.55 [+3.00, +6.00] |
+| DA5-SPL | 61.80% | 84.45% | 89.80% | +4.30 [+2.70, +5.85] |
+rc=0

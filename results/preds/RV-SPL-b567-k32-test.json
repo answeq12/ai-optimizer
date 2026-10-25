@@ -1,0 +1,14 @@
+{
+  "run_id": "RV-SPL-b567-k32-test",
+  "top1_acc": 0.6866,
+  "std_err": 0.0046387545742364944,
+  "n": 10000,
+  "agree_with_fp32": 0.8686,
+  "mean_cosine_to_fp32": 0.9738943576812744,
+  "min_cosine_to_fp32": 0.8649967908859253,
+  "mcnemar_vs_fp32": {
+    "a_only": 315,
+    "b_only": 380,
+    "p_value": 0.015136905161144949
+  }
+}

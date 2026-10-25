@@ -1,0 +1,24 @@
+DA5-A0 quick {'R@1': 0.7768, 'R@5': 0.9616, 'R@10': 0.9868} | 전체 임베딩 앞 500장 {'R@1': 0.7768, 'R@5': 0.9616, 'R@10': 0.9868}
+DA5-SPL quick {'R@1': 0.7716, 'R@5': 0.9576, 'R@10': 0.9852} | 전체 임베딩 앞 500장 {'R@1': 0.7716, 'R@5': 0.9576, 'R@10': 0.9852}
+구성             항목                          제출값      재현값  판정
+A0             COCO-confirm R@1         63.12%   63.12%  일치
+A0             COCO-confirm R@5         88.36%   88.36%  일치
+A0             COCO-confirm R@10        95.68%   95.68%  일치
+A0             CIFAR-100 test top-1     69.00%   69.00%  일치
+SPL-b567-k32   COCO-confirm R@1         62.72%   62.72%  일치
+SPL-b567-k32   COCO-confirm R@5         88.00%   88.00%  일치
+SPL-b567-k32   COCO-confirm R@10        95.80%   95.80%  일치
+SPL-b567-k32   CIFAR-100 test top-1     69.05%   69.05%  일치
+DA5-A0         COCO-confirm R@1         77.68%   77.68%  일치
+DA5-A0         COCO-confirm R@5         96.16%   96.16%  일치
+DA5-A0         COCO-confirm R@10        98.68%   98.68%  일치
+DA5-A0         CIFAR-100 test top-1     68.65%   68.65%  일치
+DA5-SPL        COCO-confirm R@1         77.16%   77.16%  일치
+DA5-SPL        COCO-confirm R@5         95.76%   95.76%  일치
+DA5-SPL        COCO-confirm R@10        98.52%   98.52%  일치
+DA5-SPL        CIFAR-100 test top-1     68.40%   68.40%  일치
+
+(빠른 재현: 속도 측정 없음. 갤러리 500장이라 R@K 는 보고서 값보다 높다 — 기대값도 같은 조건)
+
+종합: 정확도 재현 성공
+rc=0

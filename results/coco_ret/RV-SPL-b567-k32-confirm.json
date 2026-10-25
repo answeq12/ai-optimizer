@@ -1,0 +1,13 @@
+{
+  "code": "RV-SPL-b567-k32",
+  "split": "confirm",
+  "n_images": 2406,
+  "n_captions": 12033,
+  "R@1": 0.4083769633507853,
+  "R@5": 0.6678301337987201,
+  "R@10": 0.7791074545001246,
+  "median_rank": 2.0,
+  "timestamp": "2026-10-25T17:11:19+0900",
+  "model": "/mnt/d/halio_repro_check_20261025/models/imp/SPL-b567-k32.onnx",
+  "backend": "onnxruntime-cpu"
+}

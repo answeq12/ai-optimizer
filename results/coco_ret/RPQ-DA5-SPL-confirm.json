@@ -1,0 +1,13 @@
+{
+  "code": "RPQ-DA5-SPL",
+  "split": "confirm",
+  "n_images": 500,
+  "n_captions": 2500,
+  "R@1": 0.7716,
+  "R@5": 0.9576,
+  "R@10": 0.9852,
+  "median_rank": 1.0,
+  "timestamp": "2026-10-25T18:10:52+0900",
+  "model": "/mnt/d/halio_repro_quick_20261025/models_da5/imp/SPL-b567-k32.onnx",
+  "backend": "onnxruntime-cpu"
+}

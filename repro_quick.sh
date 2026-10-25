@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # 빠른 재현 (약 20~40분, 다운로드 약 0.3 GB + CLIP 가중치). 전체 재현(reproduce.sh, 2~4시간)의 축소판
 #   CIFAR-100 + COCO 사진 564장만 받기 → 분할 sha256 확인 → FP32 export + P1 게이트 → 최종 구성 양자화(SPL-b567-k32)
-#   → 최종 구성 DA-SPL(repro/da_build.sh) → COCO-confirm 앞 500장 검색 + CIFAR-100 test 앞 2,000장 → repro/EXPECTED_QUICK.json 과 비교
+#   → 최종 구성 DA5-SPL(repro/da_build.sh) → COCO-confirm 앞 500장 검색 + CIFAR-100 test 앞 2,000장 → repro/EXPECTED_QUICK.json 과 비교
 # 사용법:  bash repro_quick.sh      (HALIO_DATA_DIR 로 저장 위치 지정 가능)
 # 주의: 갤러리가 500장이라 R@K 값은 보고서(2,406장)보다 높다. 비교 기준은 같은 조건으로 만든 기대값이다
 set -euo pipefail
@@ -32,9 +32,9 @@ F="$M/imp/split_SPL-b567-k32.fp32.onnx"
 echo "== 5/5 정확도 (COCO-confirm 앞 500장, CIFAR-100 test 앞 2,000장)"
 python -m src.coco_retrieval text
 bash repro/da_build.sh
-D=$(python -m src.common store-dir)/models_da
+D=$(python -m src.common store-dir)/models_da5
 for c in "RPQ-A0 $M/clip_vitb16_image_fp32.onnx fp32 models" "RPQ-SPL-b567-k32 $M/imp/SPL-b567-k32.onnx static models" \
-         "RPQ-DA-A0 $D/clip_vitb16_image_fp32.onnx fp32 models_da" "RPQ-DA-SPL $D/imp/SPL-b567-k32.onnx static models_da"; do
+         "RPQ-DA5-A0 $D/clip_vitb16_image_fp32.onnx fp32 models_da5" "RPQ-DA5-SPL $D/imp/SPL-b567-k32.onnx static models_da5"; do
   set -- $c
   HALIO_MODELS_SUBDIR=$4 python -m src.coco_retrieval eval --model "$2" --code "$1" --split confirm --i-know-final --threads "$THREADS"
   HALIO_MODELS_SUBDIR=$4 python -m src.evaluate --model "$2" --code "$1-test2000" --quant-mode "$3" --eval-set test --limit 2000 --i-know-final \

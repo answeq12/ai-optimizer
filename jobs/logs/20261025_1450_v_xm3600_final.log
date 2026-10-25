@@ -1,0 +1,50 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[xm3600] 캡션 임베딩 7200개 → xm3600_text.npy
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[xm3600] 캡션 임베딩 7200개 → xm3600_text_da2.npy
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+WARNING:huggingface_hub.utils._http:Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[xm3600] 캡션 임베딩 7200개 → xm3600_text_da3.npy
+[xm3600] 캡션 임베딩 7200개 → xm3600_text_da5.npy
+[xm3600] 사진 3600장, 캡션 7200개, NoCaps 겹침 43장 → 주 지표 3557장
+[xm3600] A0: R@1 주(3,557) 41.66% / 전체 41.65%
+[xm3600] SPL: R@1 주(3,557) 40.57% / 전체 40.53%
+[xm3600] DA2-SPL: R@1 주(3,557) 51.43% / 전체 51.40%
+[xm3600] DA3-SPL: R@1 주(3,557) 52.14% / 전체 52.19%
+[xm3600] DA5-A0: R@1 주(3,557) 52.45% / 전체 52.47%
+[xm3600] DA5-SPL: R@1 주(3,557) 51.71% / 전체 51.72%
+# XM3600 영어 텍스트→이미지 (E43 최종 시험셋, 한 번만 연다)
+
+이미지 평균 R@K, 95% CI = 이미지 단위 짝지은 부트스트랩 2000회
+
+## 주 지표: NoCaps 겹침 43장 제외 (갤러리 3557장 / 캡션 7114개)
+
+| 구성 | R@1 | R@5 | R@10 | R@1 차이 vs A0 [95% CI] |
+|---|---|---|---|---|
+| A0 | 41.66% | 68.13% | 76.69% | +0.00 [+0.00, +0.00] |
+| SPL | 40.57% | 66.64% | 75.82% | -1.10 [-1.79, -0.34] |
+| DA2-SPL | 51.43% | 77.58% | 85.27% | +9.77 [+8.73, +10.89] |
+| DA3-SPL | 52.14% | 78.41% | 85.44% | +10.47 [+9.42, +11.60] |
+| DA5-A0 | 52.45% | 78.46% | 85.49% | +10.78 [+9.71, +11.86] |
+| DA5-SPL | 51.71% | 78.35% | 85.34% | +10.05 [+9.02, +11.13] |
+
+## 보조: 전체 3,600장 (갤러리 3600장 / 캡션 7200개)
+
+| 구성 | R@1 | R@5 | R@10 | R@1 차이 vs A0 [95% CI] |
+|---|---|---|---|---|
+| A0 | 41.65% | 68.18% | 76.81% | +0.00 [+0.00, +0.00] |
+| SPL | 40.53% | 66.69% | 75.92% | -1.12 [-1.82, -0.42] |
+| DA2-SPL | 51.40% | 77.67% | 85.25% | +9.75 [+8.75, +10.83] |
+| DA3-SPL | 52.19% | 78.46% | 85.46% | +10.54 [+9.57, +11.65] |
+| DA5-A0 | 52.47% | 78.50% | 85.53% | +10.82 [+9.75, +11.88] |
+| DA5-SPL | 51.72% | 78.33% | 85.36% | +10.07 [+9.01, +11.14] |
+
+## 규칙 4 확인: DA5-SPL vs DA2-SPL (주 지표)
+
+| 구성 | R@1 | R@5 | R@10 | R@1 차이 vs DA2-SPL [95% CI] |
+|---|---|---|---|---|
+| DA2-SPL | 51.43% | 77.58% | 85.27% | +0.00 [+0.00, +0.00] |
+| DA5-SPL | 51.71% | 78.35% | 85.34% | +0.28 [-0.58, +1.14] |
+rc=0

@@ -68,10 +68,15 @@ def cmd_images(a):
     elif a.set == "select":
         files = D.read_list(C.SPLITS / "coco_ret_select.txt")
         items, fn = [str(C.COCO_DIR / f) for f in files], _prep_file
+    elif a.set in ("cc3m", "cc3mval"):                       # E46: CC3M 학습 10만장 / 검증 2천장
+        from . import cc3m_eval as K
+        lst, sub = (K.TRAIN_LIST, "train") if a.set == "cc3m" else (K.VAL_LIST, "val")
+        files = D.read_list(lst)
+        items, fn = [str(K.DIR / sub / f) for f in files], _prep_file
     elif a.set == "cifarval":
         imgs, _ = C.load_eval_set("val")
         items, fn = list(imgs), _prep_arr
-    name = f"{a.set}" + (f"_{a.n}" if a.set == "train" else "")
+    name = f"{a.set}" + (f"_{a.n}" if a.set == "train" else "") + (f"_{len(items)}" if a.set == "cc3m" else "")
     n = len(items)
     D.FEAT_DIR.mkdir(parents=True, exist_ok=True)
     mp = D.feat_path(name)
@@ -153,7 +158,7 @@ def main():
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("check")
     pi = sub.add_parser("images")
-    pi.add_argument("--set", required=True, choices=["train", "select", "cifarval"])
+    pi.add_argument("--set", required=True, choices=["train", "select", "cifarval", "cc3m", "cc3mval"])
     pi.add_argument("--n", type=int, default=30000)
     pi.add_argument("--batch", type=int, default=32)
     pi.add_argument("--threads", type=int, default=12)

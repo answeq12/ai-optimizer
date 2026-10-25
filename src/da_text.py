@@ -100,6 +100,19 @@ def _cache_texts(m, texts, name, bs=512, prefix=None):
     print(f"[da-text] {name}: {n}개 {time.time() - t0:.0f}s, {p.stat().st_size / 1e9:.2f} GB", flush=True)
 
 
+def train_caps(n):
+    """학습 사진 n장의 캡션 (사진 순서, 캡션 id 순) + 캡션→사진 번호 파일 확인/생성."""
+    from .da_data import captions
+    ann = captions(); files = D.read_list(D.train_list(n))[:n]
+    idx = {fn: k for k, fn in enumerate(files)}; fid = {im["id"]: im["file_name"] for im in ann["images"]}
+    caps = sorted((idx[fid[c["image_id"]]], c["id"], c["caption"].strip()) for c in ann["annotations"] if fid[c["image_id"]] in idx)
+    ci_p = D.FEAT_DIR / f"train_{n}_text_img.npy"
+    if not ci_p.exists():
+        np.save(ci_p, np.array([c[0] for c in caps], dtype=np.int64))
+    assert np.array_equal(np.load(ci_p), np.array([c[0] for c in caps])), "캡션 순서가 저장분과 다름"
+    return [c[2] for c in caps]
+
+
 def cmd_cache(n):
     import torch
     torch.set_num_threads(16)
@@ -132,7 +145,15 @@ def open_t(name):
 def cmd_train(a):
     import torch, torch.nn.functional as F
     torch.manual_seed(a.seed); torch.set_num_threads(16); rng = np.random.default_rng(a.seed)
-    feat, _ = D.open_feat(f"train_{a.n}"); TF, TE = open_t(f"ttrain_{a.n}")
+    feat, _ = D.open_feat(f"train_{a.n}")
+    if a.online_text:
+        # E37: 텍스트 앞부분 저장(46GB)이 C 드라이브를 넘쳐서, 토큰만 들고 매 스텝 블록 0~7 을 계산한다
+        texts = train_caps(a.n); T = tok(); TOK = np.empty((len(texts), 77), dtype=np.int32); t0 = time.time()
+        for s in range(0, len(texts), 8192):
+            TOK[s:s + 8192] = T(texts[s:s + 8192]).numpy()
+        print(f"[da-text] 캡션 {len(texts)}개 토큰화 {time.time() - t0:.0f}s (텍스트 앞부분은 매 스텝 계산)", flush=True)
+    else:
+        TF, TE = open_t(f"ttrain_{a.n}")
     cimg = np.load(D.FEAT_DIR / f"train_{a.n}_text_img.npy")
     start = np.searchsorted(cimg, np.arange(a.n)); cnt = np.bincount(cimg, minlength=a.n)
     m = D.load_clip()
@@ -157,10 +178,16 @@ def cmd_train(a):
             for b in range(0, len(perm) - a.batch + 1, a.batch):
                 ids = perm[b:b + a.batch]; g = s0 + ids; cap = start[g] + rng.integers(0, cnt[g])
                 o = np.argsort(cap); cs = cap[o]                       # memmap 은 정렬된 순서로 읽는다
-                tf = torch.from_numpy(np.asarray(TF[cs], dtype=np.float32)); inv = np.argsort(o)
+                inv = np.argsort(o)
                 ts = time.time()
+                if a.online_text:
+                    with torch.no_grad():
+                        tf, te = text_front(m, torch.from_numpy(TOK[cs].astype(np.int64)))
+                        tf = tf.half().float()                 # 저장분(fp16)과 같은 정밀도
+                else:
+                    tf = torch.from_numpy(np.asarray(TF[cs], dtype=np.float32)); te = torch.from_numpy(TE[cs])
                 img = F.normalize(it(X[ids]), dim=-1)
-                txt = F.normalize(tt(tf, torch.from_numpy(TE[cs])), dim=-1)[inv]
+                txt = F.normalize(tt(tf, te), dim=-1)[inv]
                 lg = scale * img @ txt.T; lab = torch.arange(len(ids))
                 loss = (F.cross_entropy(lg, lab) + F.cross_entropy(lg.T, lab)) / 2
                 opt.zero_grad(set_to_none=True); loss.backward(); opt.step(); sch.step(); step += 1
@@ -171,6 +198,58 @@ def cmd_train(a):
                     log.append({"step": step, "loss": rl / rn}); rl, rn = 0.0, 0
         torch.save({"img": D.tail_state(it), "txt": D.tail_state(tt)}, D.DA_DIR / f"da2_{a.tag}_ep{ep + 1}.pt")
         print(f"[da-text] 에폭 {ep + 1} 저장", flush=True)
+    (C.LOGS / f"da_text_log_{a.tag}.json").write_text(json.dumps({"args": vars(a), "minutes": (time.time() - t0) / 60, "log": log}, indent=2))
+
+
+def cmd_train_mix(a):
+    """E46: COCO train2017 전체 + CC3M 10만장. 같은 손실·lr·2에폭·배치 128, 텍스트 매 스텝 계산.
+    배치는 한 출처 안에서만 만든다(메모리맵 4,096장 묶음 단위로 섞음). 스텝 수는 두 출처 합."""
+    import torch, torch.nn.functional as F
+    from . import cc3m_eval as K
+    torch.manual_seed(a.seed); torch.set_num_threads(16); rng = np.random.default_rng(a.seed); T = tok()
+    def toks(texts):
+        out = np.empty((len(texts), 77), dtype=np.int32)
+        for s in range(0, len(texts), 8192): out[s:s + 8192] = T(texts[s:s + 8192]).numpy()
+        return out
+    n0 = a.n; f0, _ = D.open_feat(f"train_{n0}"); tok0 = toks(train_caps(n0))
+    c0 = np.load(D.FEAT_DIR / f"train_{n0}_text_img.npy")
+    files1 = D.read_list(K.TRAIN_LIST); caps1 = K.captions("train"); n1 = len(files1)
+    f1, _ = D.open_feat(f"cc3m_{n1}"); tok1 = toks([caps1[f] for f in files1])
+    S = [{"feat": f0, "tok": tok0, "start": np.searchsorted(c0, np.arange(n0)), "cnt": np.bincount(c0, minlength=n0), "n": n0},
+         {"feat": f1, "tok": tok1, "start": np.arange(n1), "cnt": np.ones(n1, dtype=np.int64), "n": n1}]
+    chunks = [(k, s0, min(src["n"], s0 + 4096)) for k, src in enumerate(S) for s0 in range(0, src["n"], 4096)]
+    per_ep = sum((s1 - s0) // a.batch for _, s0, s1 in chunks)
+    m = D.load_clip()
+    for p in m.parameters(): p.requires_grad_(False)
+    it, tt = D.make_tail(m.visual), make_text_tail(m)
+    params = list(it.parameters()) + list(tt.parameters())
+    for p in params: p.requires_grad_(True)
+    scale = float(m.logit_scale.exp()); total = per_ep * a.epochs
+    opt = torch.optim.AdamW(params, lr=a.lr, weight_decay=0.1, betas=(0.9, 0.98), eps=1e-6)
+    sch = torch.optim.lr_scheduler.LambdaLR(opt, lambda s: (s + 1) / 100 if s < 100 else 0.5 * (1 + math.cos(math.pi * (s - 100) / max(1, total - 100))))
+    it.train(); tt.train(); step, t0, log = 0, time.time(), []
+    print(f"[da-mix] COCO {n0} + CC3M {n1}, 에폭 {a.epochs} ({total}스텝), 학습 파라미터 {sum(p.numel() for p in params) / 1e6:.1f}M", flush=True)
+    for ep in range(a.epochs):
+        rl, rn = 0.0, 0; rs = [0.0, 0.0]; rc = [0, 0]
+        for ci in rng.permutation(len(chunks)):
+            k, s0, s1 = chunks[ci]; src = S[k]
+            X = torch.from_numpy(np.asarray(src["feat"][s0:s1], dtype=np.float32)); perm = rng.permutation(s1 - s0)
+            for b in range(0, len(perm) - a.batch + 1, a.batch):
+                ids = perm[b:b + a.batch]; g = s0 + ids; cap = src["start"][g] + rng.integers(0, src["cnt"][g])
+                ts = time.time()
+                with torch.no_grad():
+                    tf, te = text_front(m, torch.from_numpy(src["tok"][cap].astype(np.int64))); tf = tf.half().float()
+                img = F.normalize(it(X[ids]), dim=-1); txt = F.normalize(tt(tf, te), dim=-1)
+                lg = scale * img @ txt.T; lab = torch.arange(len(ids))
+                loss = (F.cross_entropy(lg, lab) + F.cross_entropy(lg.T, lab)) / 2
+                opt.zero_grad(set_to_none=True); loss.backward(); opt.step(); sch.step(); step += 1
+                rl += loss.item(); rn += 1; rs[k] += loss.item(); rc[k] += 1
+                if step % 20 == 0 or step <= 3:
+                    el = time.time() - t0
+                    print(f"[da-mix] ep{ep} step {step}/{total} loss {rl / rn:.4f} (COCO {rs[0] / max(1, rc[0]):.3f} / CC3M {rs[1] / max(1, rc[1]):.3f}) {(time.time() - ts) * 1000:.0f} ms/step, 남은 {el / step * (total - step) / 60:.0f}분", flush=True)
+                    log.append({"step": step, "loss": rl / rn}); rl, rn = 0.0, 0
+        torch.save({"img": D.tail_state(it), "txt": D.tail_state(tt)}, D.DA_DIR / f"da2_{a.tag}_ep{ep + 1}.pt")
+        print(f"[da-mix] 에폭 {ep + 1} 저장", flush=True)
     (C.LOGS / f"da_text_log_{a.tag}.json").write_text(json.dumps({"args": vars(a), "minutes": (time.time() - t0) / 60, "log": log}, indent=2))
 
 
@@ -191,6 +270,12 @@ def cmd_sweep(a):
                 e = tt(torch.from_numpy(np.asarray(T[s:s + 512], dtype=np.float32)), torch.from_numpy(E[s:s + 512])).numpy()
                 out.append(e / np.linalg.norm(e, axis=1, keepdims=True))
         return np.concatenate(out)
+    if a.cc3m:                                                 # E46: COCO 밖 선택용 검증(CC3M val 2K)
+        from . import cc3m_eval as K
+        fv, _ = D.open_feat("cc3mval"); _, img_v, caps_v = K.load_val()
+        with torch.no_grad():
+            parts = [text_front(m, tok()(caps_v[s:s + 256])) for s in range(0, len(caps_v), 256)]
+        TV = torch.cat([f for f, _ in parts]).half().float().numpy(); EV = torch.cat([e for _, e in parts]).numpy()
     rows = []
     for al in [0.0, 0.25, 0.5, 0.75, 1.0]:
         mix = lambda k: {x: (1 - al) * th0[k][x] + al * th1[k][x] for x in th0[k]}
@@ -199,9 +284,13 @@ def cmd_sweep(a):
         r = ranks(es, txs, img_of)
         row = {"alpha": al, **{f"R@{k}": float(per_image(r, img_of, nimg, k).mean() * 100) for k in (1, 5, 10)},
                "cifar_val": float((np.argmax(ec @ txc.T, 1) == lab).mean() * 100)}
-        rows.append(row); print(f"[da-text-sweep] α={al}: select R@1 {row['R@1']:.2f} R@5 {row['R@5']:.2f} / CIFAR val {row['cifar_val']:.2f}", flush=True)
+        if a.cc3m:
+            rv = ranks(embed(it, fv), temb(TV, EV), img_v); row["cc3m_val"] = float(per_image(rv, img_v, len(img_v), 1).mean() * 100)
+        rows.append(row); print(f"[da-text-sweep] α={al}: select R@1 {row['R@1']:.2f} R@5 {row['R@5']:.2f} / CIFAR val {row['cifar_val']:.2f}"
+                               + (f" / CC3M val R@1 {row['cc3m_val']:.2f}" if a.cc3m else ""), flush=True)
     base = rows[0]; ok = [r for r in rows[1:] if r["cifar_val"] >= base["cifar_val"] - 1.0]
-    best = max(ok, key=lambda r: r["R@1"]) if ok else None
+    key = (lambda r: (r["R@1"] + r["cc3m_val"]) / 2) if a.cc3m else (lambda r: r["R@1"])   # E46: COCO·CC3M 평균 (사전 등록)
+    best = max(ok, key=key) if ok else None
     res = {"ckpt": a.ckpt, "rows": rows, "chosen_alpha": best["alpha"] if best else None}
     (C.RESULTS / f"da_sweep_{a.tag}.json").write_text(json.dumps(res, indent=2))
     L = [f"# {a.tag}: 이미지+텍스트 뒤쪽 4블록 학습, α 탐색 (COCO-select, CIFAR val)", "", "| α | select R@1 | R@5 | R@10 | CIFAR val |", "|---|---|---|---|---|"]
@@ -230,7 +319,7 @@ def cmd_export(a):
     from .coco_retrieval import captions_for, text_path
     assert C.MODELS.name.startswith("models_da"), "HALIO_MODELS_SUBDIR=models_da2(또는 models_da3) 로 실행"
     C.ensure_dirs()
-    st = torch.load(D.DA_DIR / f"da2_chosen_{a.tag}.pt")
+    st = torch.load(a.weights if a.weights else D.DA_DIR / f"da2_chosen_{a.tag}.pt")   # 재현: --weights repro/weights/da5_chosen.pt
     m = D.load_clip(); it, tt = D.make_tail(m.visual), make_text_tail(m)
     it.load_state_dict(st["img"]); tt.load_state_dict(st["txt"]); m.eval()
     torch.save(full_text_state(m, tt), C.MODELS / "text_state.pt")
@@ -240,7 +329,8 @@ def cmd_export(a):
     names = C.cifar100_class_names(); np.save(C.TEXT_EMB, text_embeddings(m, tok(), names))
     shutil.copy2(C.STORE / "models" / "cifar100_classes.json", C.MODELS / "cifar100_classes.json")
     T = tok()
-    for split in ("select", "confirm"):
+    from .coco_retrieval import QUICK_N
+    for split in (("confirm",) if QUICK_N else ("select", "confirm")):     # 빠른 재현은 confirm 앞부분만
         _, _, caps = captions_for(split); out = []
         with torch.no_grad():
             for i in range(0, len(caps), 256):
@@ -259,5 +349,8 @@ if __name__ == "__main__":
     ap.add_argument("--n", type=int, default=30000); ap.add_argument("--tag", default="e36"); ap.add_argument("--epochs", type=int, default=2)
     ap.add_argument("--batch", type=int, default=128); ap.add_argument("--lr", type=float, default=1e-5); ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--ckpt", default="")
+    ap.add_argument("--weights", default="", help="export: 적응 가중치 파일을 직접 지정 (재현 패키지)")
+    ap.add_argument("--online-text", action="store_true", help="텍스트 앞부분을 저장하지 않고 매 스텝 계산 (E37)")
+    ap.add_argument("--cc3m", action="store_true", help="sweep 에 CC3M val R@1 추가, α 는 COCO·CC3M 평균으로 (E46)")
     a = ap.parse_args()
-    {"check": cmd_check, "cache": lambda: cmd_cache(a.n), "train": lambda: cmd_train(a), "sweep": lambda: cmd_sweep(a), "export": lambda: cmd_export(a)}[a.cmd]()
+    {"check": cmd_check, "cache": lambda: cmd_cache(a.n), "train": lambda: cmd_train(a), "train-mix": lambda: cmd_train_mix(a), "sweep": lambda: cmd_sweep(a), "export": lambda: cmd_export(a)}[a.cmd]()

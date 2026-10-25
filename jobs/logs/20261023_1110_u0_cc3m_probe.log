@@ -1,0 +1,68 @@
+파일 수 595
+기타 ['.gitattributes', 'README.md', '_info.json']
+train 576 ['cc3m-train-0000.tar', 'cc3m-train-0001.tar'] ['cc3m-train-0574.tar', 'cc3m-train-0575.tar']
+valid 16 ['cc3m-validation-0000.tar', 'cc3m-validation-0001.tar'] ['cc3m-validation-0014.tar', 'cc3m-validation-0015.tar']
+license other
+HTTP/2 200 
+content-length: 71987200
+---
+license: other
+license_name: conceptual-captions
+license_link: >-
+  https://github.com/google-research-datasets/conceptual-captions/blob/master/LICENSE
+task_categories:
+- image-to-text
+size_categories:
+- 1M<n<10M
+---
+
+# Dataset Card for Conceptual Captions (CC3M)
+
+## Table of Contents
+- [Dataset Description](#dataset-description)
+  - [Dataset Summary](#dataset-summary)
+- [Additional Information](#additional-information)
+  - [Dataset Curators](#dataset-curators)
+  - [Licensing Information](#licensing-information)
+  - [Citation Information](#citation-information)
+
+## Dataset Description
+
+- **Homepage:** [Conceptual Captions homepage](https://ai.google.com/research/ConceptualCaptions/)
+- **Repository:** [Conceptual Captions repository](https://github.com/google-research-datasets/conceptual-captions)
+- **Paper:** [Conceptual Captions: A Cleaned, Hypernymed, Image Alt-text Dataset For Automatic Image Captioning](https://www.aclweb.org/anthology/P18-1238/)
+- **Leaderboard:** [Conceptual Captions leaderboard](https://ai.google.com/research/ConceptualCaptions/competition?active_tab=leaderboard)https://ai.google.com/research/ConceptualCaptions/leaderboard?active_tab=leaderboard
+- **Point of Contact:** [Conceptual Captions e-mail](mailto:conceptual-captions@google.com)
+
+### Dataset Summary
+
+Conceptual Captions is a dataset consisting of ~3.3M images annotated with captions. In contrast with the curated style of other image caption annotations, Conceptual Caption images and their raw descriptions are harvested from the web, and therefore represent a wider variety of styles. More precisely, the raw descriptions are harvested from the Alt-text HTML attribute associated with web images. To arrive at the current version of the captions, we have developed an automatic pipeline that extracts, filters, and transforms candidate image/caption pairs, with the goal of achieving a balance of cleanliness, informativeness, fluency, and learnability of the resulting captions.
+
+### Usage
+
+This instance of Conceptual Captions is in [webdataset](https://github.com/webdataset/webdataset/commits/main) .tar format. It can be used with webdataset library or upcoming releases of Hugging Face `datasets`.
+
+...More Detail TBD
+
+### Data Splits
+
+This dataset was downloaded using img2dataset. Images resized on download if shortest edge > 512 to shortest edge = 512.
+
+#### Train
+* `cc3m-train-*.tar`
+* Downloaded on 2021/12/22
+* 576 shards, 2905954 (of 3318333) samples
+
+#### Validation
+* `cc3m-validation-*.tar`
+* Downloaded on 2023/12/13 (original validation set download in 2021 was corrupted)
+* 16 shards, 13443 (of 15840) samples
+
+## Additional Information
+
+### Dataset Curators
+
+Piyush Sharma, Nan Ding, Sebastian Goodman and Radu Soricut.
+
+### Licensing Information
+rc=0

@@ -1,0 +1,124 @@
+{
+ "timestamp": "2026-10-25T19:01:12+0900",
+ "args": {
+  "blocks": "7",
+  "k": 32,
+  "tag": "splf_b7_k32_da5",
+  "hw_arch": "hailo10h",
+  "calib_list": "/mnt/c/Users/PC00/Desktop/dongchan/halio project/splits/calib_coco_64_s0.txt",
+  "skip_compile": false,
+  "split_fc1": true,
+  "src_onnx": "/mnt/d/halio_data/hailo/official_da5.onnx"
+ },
+ "stages": {
+  "build_onnx": {
+   "ok": true,
+   "seconds": 10.3
+  },
+  "parse": {
+   "ok": true,
+   "seconds": 15.0
+  },
+  "model_script": {
+   "ok": true,
+   "seconds": 0.1
+  },
+  "optimize": {
+   "ok": true,
+   "seconds": 237.5
+  },
+  "compile": {
+   "ok": true,
+   "seconds": 920.0
+  }
+ },
+ "build": {
+  "layers": [
+   {
+    "block": 7,
+    "fc1": "MatMul_570",
+    "fc2": "MatMul_576",
+    "k": 32,
+    "hot_channels": [
+     48,
+     244,
+     246,
+     558,
+     747,
+     753,
+     1026,
+     1078,
+     1101,
+     1362,
+     1435,
+     1612,
+     1661,
+     1830,
+     1906,
+     1929,
+     1991,
+     2078,
+     2093,
+     2348,
+     2423,
+     2629,
+     2663,
+     2681,
+     2704,
+     2786,
+     2915,
+     2922,
+     2975,
+     2992,
+     3015,
+     3033
+    ],
+    "hot_absmax_top8": [
+     42.34,
+     40.66,
+     31.11,
+     28.13,
+     17.64,
+     5.8,
+     5.6,
+     5.44
+    ],
+    "rest_absmax": 4.27,
+    "absmax_before": 42.34,
+    "slice_axis": 2
+   }
+  ],
+  "equivalence_min_cosine": 0.9999999403953552,
+  "onnx": "/mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.splf_b7_k32_da5.onnx",
+  "size_mb": 344.84
+ },
+ "alls": {
+  "hot_16bit_layers": [
+   "conv32",
+   "conv34"
+  ],
+  "slice_layers": [
+   [
+    "slice1",
+    [
+     "Gather_861",
+     "Cast_862"
+    ]
+   ]
+  ],
+  "cls_slice": [
+   "slice1"
+  ],
+  "source": "hailo_model_zoo-5.4.0-py3-none-any.whl: cfg/alls/generic/clip_vit_b_16_image_encoder.alls + hot a16_w16"
+ },
+ "calib": {
+  "list": "calib_coco_64_s0.txt",
+  "n": 64,
+  "sha256": "486acf8775d9013bbcdfaaa31580eadbbe86fed8bdb9d3acbed478555e8ba467"
+ },
+ "hef": {
+  "path": "/mnt/d/halio_data/hailo/clip_vit_b_16_image_encoder.splf_b7_k32_da5.hailo10h.hef",
+  "size_mb": 79.63,
+  "sha256": "0e39b7c977411d0904ea041030e6ed977968655debd23ec960dabce5144baf10"
+ }
+}

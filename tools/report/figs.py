@@ -60,19 +60,21 @@ ax.set_xlim(-8.6,0.6); ax.set_ylim(-0.6,len(rows)-0.1)
 ax.set_xlabel("COCO-confirm R@1 차이 (%p, FP32 대비, 95% 범위)")
 ax.set_title("6·7번 fc2 보호 한 단계가 손실 대부분을 회복 (−6.89 → −1.18%p)",fontsize=10,loc="left",fontweight="bold")
 fig.tight_layout(); fig.savefig("fig3_ablation.png")
-# Fig4 decomposition
-labs=["원본 FP32\n(기준 모델)","원본 + SPL INT8","적응 FP32","적응 + SPL INT8\n(최종)"]
-coco=[41.80,40.85,54.36,53.50]; fl=[61.52,59.94,73.60,72.48]
+# Fig4 decomposition (DA5 final) — 4 평가셋
 import numpy as np
-x=np.arange(4); w=0.36
-fig,ax=plt.subplots(figsize=(6.6,2.9),dpi=200)
-cols=[DK,G,"#93c5fd",ACC]
-b1=ax.bar(x-w/2,coco,w,color=cols,edgecolor="white"); b2=ax.bar(x+w/2,fl,w,color=cols,alpha=0.55,edgecolor="white",hatch="//")
-for xi,v in zip(x-w/2,coco): ax.text(xi,v+1,f"{v:.1f}",ha="center",fontsize=7.5,color=DK)
-for xi,v in zip(x+w/2,fl): ax.text(xi,v+1,f"{v:.1f}",ha="center",fontsize=7.5,color=DK)
-ax.set_xticks(x,labs,fontsize=8); ax.set_ylim(0,85); ax.set_ylabel("텍스트→이미지 R@1 (%)")
 from matplotlib.patches import Patch
-ax.legend(handles=[Patch(color=G,label="COCO-confirm (자체 판정 분할)"),Patch(facecolor=G,alpha=0.55,hatch="//",label="Flickr30k 1K test (학습·선택에 안 씀)")],fontsize=7.5,loc="upper left",frameon=False)
-ax.set_title("도메인 적응 +12.6%p, 양자화 −0.9%p → 최종은 원본보다 +11.7%p (Flickr +11.0%p)",fontsize=9.5,loc="left",fontweight="bold")
+sets=["COCO-confirm","Flickr30k 1K","NoCaps val","XM3600 (최종 시험)"]
+vals={"원본 FP32 (기준)":[41.80,61.52,46.87,41.66],"원본 + SPL INT8":[40.85,59.94,45.69,40.57],
+      "적응 FP32":[57.36,75.36,61.74,52.45],"적응 + SPL INT8 (최종)":[56.97,74.38,60.95,51.71]}
+cols=[DK,G,"#93c5fd",ACC]
+x=np.arange(len(sets)); w=0.2
+fig,ax=plt.subplots(figsize=(6.8,3.0),dpi=200)
+for k,(lab,v) in enumerate(vals.items()):
+    xs=x+(k-1.5)*w; ax.bar(xs,v,w,color=cols[k],edgecolor="white",label=lab)
+    if k in (0,3):
+        for xi,vi in zip(xs,v): ax.text(xi,vi+1,f"{vi:.1f}",ha="center",fontsize=7,color=DK)
+ax.set_xticks(x,sets,fontsize=8); ax.set_ylim(0,88); ax.set_ylabel("텍스트→이미지 R@1 (%)")
+ax.legend(fontsize=7,ncol=4,loc="upper center",bbox_to_anchor=(0.5,1.02),frameon=False)
+ax.set_title("적응 +10.8~15.6%p, 양자화 손실 0.4~1.0%p → 최종은 4개 평가셋 모두 원본보다 +10~15%p",fontsize=9.5,loc="left",fontweight="bold",pad=16)
 fig.tight_layout(); fig.savefig("fig4_da.png")
 print("ok")

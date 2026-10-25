@@ -1,0 +1,13 @@
+{
+  "code": "RV-A0",
+  "split": "confirm",
+  "n_images": 2406,
+  "n_captions": 12033,
+  "R@1": 0.4179340147926535,
+  "R@5": 0.6808775866367489,
+  "R@10": 0.7853403141361257,
+  "median_rank": 2.0,
+  "timestamp": "2026-10-25T16:52:57+0900",
+  "model": "/mnt/d/halio_repro_check_20261025/models/clip_vitb16_image_fp32.onnx",
+  "backend": "onnxruntime-cpu"
+}

@@ -1,0 +1,23 @@
+{
+  "export": {
+    "exporter": "torchscript",
+    "opset": 17,
+    "torch": "2.14.1+cpu",
+    "onnx": "1.23.1",
+    "raw_nodes": 996,
+    "nodes": 489,
+    "size_mb": 344.88,
+    "sha256": "34695f7fe966833671d601bc9afc3171532e6c9d4edc94b7fcd5fce4c515fdd1",
+    "onnxruntime": "1.23.2",
+    "graph_cleanup": "ORT_ENABLE_BASIC, MatMulAddFusion \ube44\ud65c\uc131"
+  },
+  "parity": {
+    "n": 20,
+    "max_abs_err": 1.1444091796875e-05,
+    "min_cosine": 0.9999998807907104,
+    "tol_max_abs": 0.0001,
+    "tol_cosine": 0.9999,
+    "passed": true
+  },
+  "same_ops": true
+}

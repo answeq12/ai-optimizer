@@ -7,3 +7,8 @@ RPV-A1-test,RPV-A1,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_fullcheck/models/a1_dyn
 RPV-SPL-b567-k32-test,RPV-SPL-b567-k32,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_fullcheck/models/imp/SPL-b567-k32.onnx,static,,,,,,,,test,10000,0.6866,,,,,4,,89.82,,934e571a17,2026-10-20T16:37:44+0900,0
 RPV-DA-A0-test,RPV-DA-A0,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_fullcheck/models_da/clip_vitb16_image_fp32.onnx,fp32,,,,,,,,test,10000,0.6759,,,,,4,,344.88,,934e571a17,2026-10-20T16:51:39+0900,0
 RPV-DA-SPL-test,RPV-DA-SPL,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_fullcheck/models_da/imp/SPL-b567-k32.onnx,static,,,,,,,,test,10000,0.677,,,,,4,,89.82,,934e571a17,2026-10-20T16:57:59+0900,0
+RV-A0-test,RV-A0,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_repro_check_20261025/models/clip_vitb16_image_fp32.onnx,fp32,,,,,,,,test,10000,0.6801,,,,,4,,344.88,,934e571a17,2026-10-25T17:04:17+0900,0
+RV-A1-test,RV-A1,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_repro_check_20261025/models/a1_dynamic.onnx,dynamic,,,,,,,,test,10000,0.6393,,,,,4,,89.0,,934e571a17,2026-10-25T17:09:50+0900,0
+RV-SPL-b567-k32-test,RV-SPL-b567-k32,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_repro_check_20261025/models/imp/SPL-b567-k32.onnx,static,,,,,,,,test,10000,0.6866,,,,,4,,89.82,,934e571a17,2026-10-25T17:16:20+0900,0
+RV-DA5-A0-test,RV-DA5-A0,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_repro_check_20261025/models_da5/clip_vitb16_image_fp32.onnx,fp32,,,,,,,,test,10000,0.6769,,,,,4,,344.88,,934e571a17,2026-10-25T17:30:29+0900,0
+RV-DA5-SPL-test,RV-DA5-SPL,onnxruntime-cpu,ViT-B-16,/mnt/d/halio_repro_check_20261025/models_da5/imp/SPL-b567-k32.onnx,static,,,,,,,,test,10000,0.6816,,,,,4,,89.82,,934e571a17,2026-10-25T17:36:58+0900,0

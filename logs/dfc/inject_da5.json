@@ -1,0 +1,10 @@
+{
+ "official": "/mnt/d/halio_data/hailo/official/clip_vit_b_16.onnx",
+ "dst": "/mnt/d/halio_data/hailo/official_da5.onnx",
+ "changed": 51,
+ "replaced": 51,
+ "missing": [],
+ "min_cos_vs_ours_adapted": 0.9999998807907104,
+ "min_cos_official_unmodified_vs_ours_adapted": 0.8379744291305542,
+ "pass": true
+}

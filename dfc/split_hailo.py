@@ -180,6 +180,7 @@ def main() -> None:
     ap.add_argument("--calib-list", default=str(C.SPLITS / "calib_coco_64_s0.txt"))
     ap.add_argument("--skip-compile", action="store_true")
     ap.add_argument("--split-fc1", action="store_true", help="fc1+GELU 도 rest/hot 으로 분할 (3차)")
+    ap.add_argument("--src-onnx", default="", help="공식 ONNX 대신 쓸 ONNX (예: dfc.inject_da 로 만든 공식 형식 + 적응 가중치)")
     a = ap.parse_args()
     blocks = [int(x) for x in a.blocks.split(",")]
     SFX = f".{a.tag}"
@@ -200,7 +201,7 @@ def main() -> None:
             rec["failed_stage"] = name; save()
             print(f"[spl] ✘ {name}: {type(e).__name__}: {str(e)[:800]}", flush=True); sys.exit(1)
 
-    src = official_onnx()
+    src = Path(a.src_onnx) if a.src_onnx else official_onnx()
     dst = HAILO_DIR / f"{NET}{SFX}.onnx"
     info = stage("build_onnx", lambda: build(src, dst, blocks, a.k, Path(a.calib_list), a.split_fc1))
     rec["build"] = info

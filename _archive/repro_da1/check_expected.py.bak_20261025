@@ -1,0 +1,49 @@
+"""reproduce.sh 마지막 단계: 재현 결과(RP-*)를 repro/EXPECTED.json 과 비교해 표로 출력한다."""
+import csv, json, statistics, sys
+from pathlib import Path
+
+QUICK = "--quick" in sys.argv     # repro_quick.sh: confirm 앞 500장, CIFAR test 앞 2,000장
+R = Path("results"); E = json.loads(Path("repro/EXPECTED_QUICK.json" if QUICK else "repro/EXPECTED.json").read_text())
+PFX = "RPQ-" if QUICK else (sys.argv[sys.argv.index("--prefix") + 1] if "--prefix" in sys.argv else "RP-")
+tol = E["tolerance"]
+
+def judge(got, exp):
+    if got is None: return "없음"
+    d = abs(got - exp)
+    return "일치" if d <= tol["match"] else ("근접" if d <= tol["close"] else "불일치")
+
+rows, bad = [], 0
+for code, exp in E["accuracy"].items():
+    c = R / "coco_ret" / f"{PFX}{code}-confirm.json"
+    got = json.loads(c.read_text()) if c.exists() else {}
+    for k in ("R@1", "R@5", "R@10"):
+        g = got.get(k); j = judge(g, exp["confirm"][k]); bad += j in ("불일치", "없음")
+        rows.append((code, f"COCO-confirm {k}", exp["confirm"][k], g, j))
+    t = R / "preds" / (f"{PFX}{code}-test2000-test.json" if QUICK else f"{PFX}{code}-test.json")
+    g = json.loads(t.read_text()).get("top1_acc") if t.exists() else None
+    j = judge(g, exp["test_top1"]); bad += j in ("불일치", "없음")
+    rows.append((code, "CIFAR-100 test top-1", exp["test_top1"], g, j))
+
+print(f"{'구성':<14} {'항목':<22} {'제출값':>8} {'재현값':>8}  판정")
+for code, item, e, g, j in rows:
+    gs = f"{g*100:7.2f}%" if g is not None else "      —"
+    print(f"{code:<14} {item:<22} {e*100:7.2f}% {gs}  {j}")
+
+lat = R / "latency_repro.csv"
+if QUICK:
+    print("\n(빠른 재현: 속도 측정 없음. 갤러리 500장이라 R@K 는 보고서 값보다 높다 — 기대값도 같은 조건)")
+elif lat.exists():
+    p50 = {}
+    for r in csv.DictReader(lat.open()):
+        if r.get("latency_p50_ms"): p50.setdefault(r["config_code"], []).append(float(r["latency_p50_ms"]))
+    med = {k: statistics.median(v) for k, v in p50.items()}
+    print("\n속도 (이 PC, p50 ms, 반복의 중앙값) — 절대값은 CPU 마다 다름. FP32 대비 배율을 본다")
+    a0 = f"{PFX}A0"
+    for k in (a0, f"{PFX}A1", f"{PFX}SPL-b567-k32", f"{PFX}DA-SPL"):
+        if k in med:
+            print(f"  {k:<16} {med[k]:7.2f} ms   FP32 대비 {med[a0]/med[k]:.2f}배" if a0 in med else f"  {k} {med[k]:.2f} ms")
+    s = E["speed_pc00"]; print(f"  (참고: PC00 은 A0 {s['A0_p50_ms']} ms / SPL {s['SPL-b567-k32_p50_ms']} ms = {s['SPL_speedup_vs_A0']}배)")
+else:
+    print("\n속도: results/latency_repro.csv 없음 (SKIP_BENCH=1 이었거나 측정 실패)")
+
+print("\n종합:", "정확도 재현 성공" if bad == 0 else f"확인 필요 항목 {bad}개 (불일치·없음). logs/reproduce_*.log 를 보내 주세요")

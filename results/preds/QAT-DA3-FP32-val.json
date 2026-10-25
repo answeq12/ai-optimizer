@@ -1,0 +1,14 @@
+{
+  "run_id": "QAT-DA3-FP32-val",
+  "top1_acc": 0.6871,
+  "std_err": 0.00463674012642503,
+  "n": 10000,
+  "agree_with_fp32": 0.8255,
+  "mean_cosine_to_fp32": 0.942129373550415,
+  "min_cosine_to_fp32": 0.8616762161254883,
+  "mcnemar_vs_fp32": {
+    "a_only": 491,
+    "b_only": 482,
+    "p_value": 0.7976051810072661
+  }
+}

@@ -16,8 +16,11 @@ from PIL import Image
 from . import common as C
 from . import da_common as D
 
-INT8 = {"orig": C.STORE / "models" / "imp" / "SPL-b567-k32.onnx", "da": C.STORE / "models_da" / "imp" / "SPL-b567-k32.onnx"}
-FP32 = {"orig": C.STORE / "models" / "clip_vitb16_image_fp32.onnx", "da": C.STORE / "models_da" / "clip_vitb16_image_fp32.onnx"}
+# base → 모델 폴더 (da3/da4 = E37/E44: 이미지·텍스트 둘 다 적응. 텍스트는 FP32 그대로 두고 이미지 꼬리만 보정)
+MDIR = {"orig": "models", "da": "models_da", "da3": "models_da3", "da4": "models_da4"}
+CHOSEN = {"da3": "da2_chosen_e37.pt", "da4": "da2_chosen_e44.pt"}
+INT8 = {b: C.STORE / d / "imp" / "SPL-b567-k32.onnx" for b, d in MDIR.items()}
+FP32 = {b: C.STORE / d / "clip_vitb16_image_fp32.onnx" for b, d in MDIR.items()}
 
 
 def load_base(base):
@@ -25,6 +28,8 @@ def load_base(base):
     m = D.load_clip()
     if base == "da":
         D.make_tail(m.visual).load_state_dict(torch.load(D.DA_DIR / "da_tail_chosen.pt"))
+    elif base in CHOSEN:
+        D.make_tail(m.visual).load_state_dict(torch.load(D.DA_DIR / CHOSEN[base])["img"])
     return m
 
 
@@ -179,8 +184,9 @@ def cmd_export(base):
     info = export(m, C.RAW_ONNX); info.update(fold_constants(C.RAW_ONNX, C.FP32_ONNX))
     data, _ = C.load_cifar100("train"); val = C.read_index_list(C.SPLITS / "val.txt")[:20]
     par = parity(m, C.FP32_ONNX, np.stack([C.preprocess(Image.fromarray(data[i])) for i in val]))
-    src = C.STORE / "models"
-    for f in ["text_emb_cifar100.npy", "cifar100_classes.json"] + sorted(p.name for p in src.glob("coco_ret_text_*")):
+    src = C.STORE / ("models" if base in ("orig", "da") else MDIR[base])     # da3/da4: 적응 텍스트 임베딩·상태를 그대로 복사
+    extra = ["text_state.pt"] if (src / "text_state.pt").exists() else []
+    for f in ["text_emb_cifar100.npy", "cifar100_classes.json"] + extra + sorted(p.name for p in src.glob("coco_ret_text_*")):
         shutil.copy2(src / f, C.MODELS / f)
     ops = lambda p: collections.Counter(nd.op_type for nd in onnx.load(str(p), load_external_data=False).graph.node)
     same = ops(C.FP32_ONNX) == ops(src / C.FP32_ONNX.name)

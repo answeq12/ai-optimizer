@@ -39,7 +39,7 @@ elif lat.exists():
     med = {k: statistics.median(v) for k, v in p50.items()}
     print("\n속도 (이 PC, p50 ms, 반복의 중앙값) — 절대값은 CPU 마다 다름. FP32 대비 배율을 본다")
     a0 = f"{PFX}A0"
-    for k in (a0, f"{PFX}A1", f"{PFX}SPL-b567-k32", f"{PFX}DA-SPL"):
+    for k in (a0, f"{PFX}A1", f"{PFX}SPL-b567-k32", f"{PFX}DA5-SPL"):
         if k in med:
             print(f"  {k:<16} {med[k]:7.2f} ms   FP32 대비 {med[a0]/med[k]:.2f}배" if a0 in med else f"  {k} {med[k]:.2f} ms")
     s = E["speed_pc00"]; print(f"  (참고: PC00 은 A0 {s['A0_p50_ms']} ms / SPL {s['SPL-b567-k32_p50_ms']} ms = {s['SPL_speedup_vs_A0']}배)")

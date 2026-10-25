@@ -1,0 +1,1 @@
+{"experiment": "E46", "data": "COCO train2017 118,287 + CC3M 100,000", "alpha": 1.0, "ckpt": "da2_e46_ep2.pt", "keys": ["img", "txt"]}

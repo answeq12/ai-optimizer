@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # 재현 1단계: ORT(PC CPU) 최종 결과를 처음부터 다시 만든다. GPU 불필요.
 #   데이터 다운로드 → 분할 재생성·sha256 확인 → FP32 ONNX export + P1 게이트 → 양자화(A1, SPL-b567-k32)
-#   → 최종 구성 DA-SPL(도메인 적응 가중치 + 같은 SPL 처방, repro/da_build.sh)
+#   → 최종 구성 DA5-SPL(도메인 적응 가중치 + 같은 SPL 처방, repro/da_build.sh)
 #   → COCO-confirm 검색 + CIFAR-100 test → 속도 측정 → 기대값과 비교
 # 사용법:  bash reproduce.sh            (전부, 약 2~4시간. 대부분 다운로드와 평가)
 #          SKIP_BENCH=1 bash reproduce.sh  (속도 측정 생략, 정확도만)
 # 큰 파일 위치: 환경변수 HALIO_DATA_DIR (없으면 /mnt/d 가 보일 때 /mnt/d/halio_data, 아니면 이 폴더)
 # 재현 결과는 코드 이름 앞에 RP- 를 붙여 저장한다(원래 결과 파일을 덮어쓰지 않음). PFX=다른이름 으로 바꿀 수 있음
-#          DA_TRAIN=1 bash reproduce.sh  (적응 가중치를 받지 않고 직접 학습, 약 3시간 추가)
+#          DA_TRAIN=1 bash reproduce.sh  (적응 가중치를 받지 않고 직접 학습, CPU 약 15시간·디스크 약 90 GB 추가)
 set -euo pipefail
 cd "$(dirname "$0")"
 export CUDA_VISIBLE_DEVICES=''          # GPU 가 있어도 CPU 로만 (원 실험과 같은 조건)
@@ -54,25 +54,25 @@ F="$M/imp/split_SPL-b567-k32.fp32.onnx"
 [ -f "$M/imp/SPL-b567-k32.onnx" ] || python -m src.quantize_ort --mode static --weight-matmul-only --per-channel \
     --src "$F" --exclude-nodes-file "$F.hot_nodes.txt" --calib-list $CAL --out "$M/imp/SPL-b567-k32.onnx"
 
-echo "== 5/7 정확도: COCO-confirm 검색 + CIFAR-100 test (최종 구성 DA-SPL 포함)"
+echo "== 5/7 정확도: COCO-confirm 검색 + CIFAR-100 test (최종 구성 DA5-SPL 포함)"
 python -m src.coco_retrieval text
 bash repro/da_build.sh
-D=$(python -m src.common store-dir)/models_da
+D=$(python -m src.common store-dir)/models_da5
 for c in "$P-A0 $M/clip_vitb16_image_fp32.onnx fp32 models" "$P-A1 $M/a1_dynamic.onnx dynamic models" \
          "$P-SPL-b567-k32 $M/imp/SPL-b567-k32.onnx static models" \
-         "$P-DA-A0 $D/clip_vitb16_image_fp32.onnx fp32 models_da" "$P-DA-SPL $D/imp/SPL-b567-k32.onnx static models_da"; do
+         "$P-DA5-A0 $D/clip_vitb16_image_fp32.onnx fp32 models_da5" "$P-DA5-SPL $D/imp/SPL-b567-k32.onnx static models_da5"; do
   set -- $c
   [ -f "results/coco_ret/$1-confirm.json" ] || HALIO_MODELS_SUBDIR=$4 python -m src.coco_retrieval eval --model "$2" --code "$1" --split confirm --i-know-final
   [ -f "results/preds/$1-test.json" ] || HALIO_MODELS_SUBDIR=$4 python -m src.evaluate --model "$2" --code "$1" --quant-mode "$3" --eval-set test --i-know-final --threads "$THREADS" --out-csv results/accuracy_repro.csv
 done
-python -m src.coco_retrieval table --ref $P-A0 --codes $P-A0 $P-A1 $P-SPL-b567-k32 $P-DA-A0 $P-DA-SPL --split confirm --margin 2.0 --tag repro
+python -m src.coco_retrieval table --ref $P-A0 --codes $P-A0 $P-A1 $P-SPL-b567-k32 $P-DA5-A0 $P-DA5-SPL --split confirm --margin 2.0 --tag repro
 
 if [ "${SKIP_BENCH:-0}" != "1" ]; then
   echo "== 6/7 속도·메모리 (다른 프로그램을 끄세요. 부하가 낮아질 때까지 최대 30분 대기)"
   for i in $(seq 1 60); do l=$(cut -d' ' -f1 /proc/loadavg); awk "BEGIN{exit !($l < 2.0)}" && break; sleep 30; done
   echo "   CPU: $(grep -m1 'model name' /proc/cpuinfo | cut -d: -f2) / 부하 $(cut -d' ' -f1-3 /proc/loadavg)"
   python -m src.benchmark --threads "$THREADS" --out-csv results/latency_repro.csv \
-      --models $P-A0="$M/clip_vitb16_image_fp32.onnx" $P-A1="$M/a1_dynamic.onnx" $P-SPL-b567-k32="$M/imp/SPL-b567-k32.onnx" $P-DA-SPL="$D/imp/SPL-b567-k32.onnx"
+      --models $P-A0="$M/clip_vitb16_image_fp32.onnx" $P-A1="$M/a1_dynamic.onnx" $P-SPL-b567-k32="$M/imp/SPL-b567-k32.onnx" $P-DA5-SPL="$D/imp/SPL-b567-k32.onnx"
 else
   echo "== 6/7 속도 측정 생략 (SKIP_BENCH=1)"
 fi
