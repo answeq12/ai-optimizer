@@ -27,3 +27,7 @@ jobs/running.txt
 *.pt
 results/coco_ret/RP-*
 results/preds/RP-*
+# 팀원 이름·학번·연락처가 들어간 최종 보고서는 저장소에 올리지 않는다
+docs/report/*PCA*
+# 데이터셋 원본 사진은 이용 조건(Flickr30k 비상업, XM3600 CC BY) 때문에 올리지 않는다
+docs/samples/
